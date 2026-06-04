@@ -1,0 +1,6 @@
+{
+  "name": "Nigerian Christian Wedding Portal",
+  "description": "An elegant, streamlined wedding reservation and attendee management portal for Chidi and Adanna's Nigerian Christian wedding.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

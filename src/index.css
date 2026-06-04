@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-script: "Great Vibes", cursive;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+body {
+  background-color: #FAF4F0; /* Soft luxury beige cream background */
+  color: #1E293B; /* Slate 800 */
+  font-family: var(--font-sans);
+}
+
+/* Custom scrollbars for a premium True Love rose/gold wedding template */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF4F0;
+}
+::-webkit-scrollbar-thumb {
+  background: #BF3B52;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9E2B3E;
+}
+
+/* Elegant shadow for card layouts */
+.card-shadow {
+  box-shadow: 0 12px 35px -12px rgba(191, 59, 82, 0.15);
+}
+
+.gold-shadow {
+  box-shadow: 0 10px 25px -8px rgba(197, 168, 128, 0.25);
+}
+
+/* Perfect double gold border from True Love Style 1 */
+.double-gold-border {
+  border: 4px double #C29D70;
+}
+
+/* Decorative background paper texture */
+.wedding-paper {
+  background-color: #FFFFFF;
+  background-image: radial-gradient(#F3E9E2 1px, transparent 1px), radial-gradient(#F3E9E2 1px, #FFFFFF 1px);
+  background-size: 24px 24px;
+  background-position: 0 0, 12px 12px;
+}
+
+/* Beautiful Heartbeat Animations */
+@keyframes heart-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.15);
+  }
+  45% {
+    transform: scale(1.05);
+  }
+  60% {
+    transform: scale(1.2);
+  }
+}
+
+@keyframes spin-slow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.animate-heart-pulse {
+  animation: heart-pulse 1.4s infinite ease-in-out;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 12s infinite linear;
+}
+
+.animate-spin-reverse-slow {
+  animation: spin-slow 16s infinite linear reverse;
+}
+
+.animate-float-slow {
+  animation: float 4s infinite ease-in-out;
+}
+
+/* Elegant fade-in effect */
+.animate-fade-in {
+  animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Beautiful custom divider line */
+.ribbon-or-divider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.ribbon-or-divider::before,
+.ribbon-or-divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(to right, transparent, #C29D70 50%, transparent);
+}
