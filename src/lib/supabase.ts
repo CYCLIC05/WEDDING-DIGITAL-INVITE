@@ -1,8 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
-import dotenv from 'dotenv';
-
-// Ensure environment variables are loaded prior to examining them
-dotenv.config();
+import { createClient } from "@supabase/supabase-js";
 
 /**
  * Clean credentials of hidden non-printable/zero-width formatting characters (like ZWNJ, BOM, etc.)
@@ -12,25 +8,36 @@ export function cleanCredentials(val: string): string {
   return val.replace(/[\u200b-\u200d\u200e\u200f\ufeff\u202a-\u202e\u200c]/g, "").trim();
 }
 
-// Retrieve environment variables and trim whitespace
-const supabaseUrl = cleanCredentials(process.env.SUPABASE_URL || '');
-// In the backend, we prefer the Service Role Key to bypass Row-Level Security (RLS) safely.
-// In the client, the Anon Key is typically used.
-const supabaseKey = cleanCredentials(process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || '');
+// Check runtime execution context
+const isServer = typeof window === "undefined";
 
-// Ensure the URL is valid HTTP/HTTPS and not the default example placeholder
-const isValidUrl = /^https?:\/\//i.test(supabaseUrl) && !supabaseUrl.includes('your-project.supabase.co');
+// Select matching credential sets based on runtime architecture
+const supabaseUrl = cleanCredentials(
+  isServer
+    ? (process.env.SUPABASE_URL || "")
+    : (((import.meta as any).env.VITE_SUPABASE_URL as string) || "")
+);
+
+const supabaseKey = cleanCredentials(
+  isServer
+    ? (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || "")
+    : (((import.meta as any).env.VITE_SUPABASE_ANON_KEY as string) || "")
+);
+
+// Verify validity of target URL
+const isValidUrl = /^https?:\/\//i.test(supabaseUrl) && !supabaseUrl.includes("your-project.supabase.co");
 
 export const isSupabaseConfigured = Boolean(
-  isValidUrl && 
+  isValidUrl &&
   supabaseKey &&
-  !supabaseKey.includes('your-supabase-service-role-key') &&
-  !supabaseKey.includes('your-supabase-anon-key')
+  !supabaseKey.includes("your-supabase-service-role-key") &&
+  !supabaseKey.includes("your-supabase-anon-key")
 );
 
 /**
  * Supabase client instance.
- * Automatically initialized if valid credentials are provided in the environment.
+ * Server uses the Service Role Key to bypass RLS, ensuring high performance.
+ * Client uses Anon Key to restrict direct operations.
  */
 export const supabase = isSupabaseConfigured
   ? createClient(supabaseUrl, supabaseKey, {
@@ -41,8 +48,10 @@ export const supabase = isSupabaseConfigured
     })
   : null;
 
-if (!isSupabaseConfigured) {
-  console.log('⚠️ Supabase credentials not fully configured or invalid. Server will run on local JSON file fallback.');
-} else {
-  console.log('✅ Supabase Client initialized successfully.');
+if (isServer) {
+  if (!isSupabaseConfigured) {
+    console.log("ℹ️ Info: Supabase is unconfigured or using placeholder parameters. The application remains fully responsive using high-performance local JSON-based registry fallback.");
+  } else {
+    console.log("✅ Supabase Client initialized successfully in server context.");
+  }
 }

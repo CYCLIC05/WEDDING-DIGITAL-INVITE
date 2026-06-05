@@ -28,6 +28,10 @@ export default function App() {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    document.title = "The AJ's wedding ";
+  }, []);
+
   // Suppress HMR-related Vite logs/overlays if they happen
   useEffect(() => {
     const handleRejection = (event: PromiseRejectionEvent) => {

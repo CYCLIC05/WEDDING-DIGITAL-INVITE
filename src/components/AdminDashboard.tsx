@@ -63,8 +63,26 @@ export function AdminDashboard() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ passcode: codeToVerify })
       });
+
+      // Check the response before parsing
+      if (!res.ok) {
+        const text = await res.text(); // read as text first
+        console.log("Raw response:", text);  // see what's actually coming back
+        
+        let errorMessage = `HTTP ${res.status}: ${text}`;
+        try {
+          const parsed = JSON.parse(text);
+          if (parsed && parsed.error) {
+            errorMessage = parsed.error;
+          }
+        } catch (e) {}
+        setAuthError(errorMessage);
+        localStorage.removeItem("wedding_admin_passcode");
+        return;
+      }
+
       const data = await res.json();
-      if (res.ok && data.success) {
+      if (data.success) {
         setIsAuthorized(true);
         localStorage.setItem("wedding_admin_passcode", codeToVerify);
         setPasscode("");
@@ -100,8 +118,25 @@ export function AdminDashboard() {
     setListError("");
     try {
       const res = await fetch(`/api/rsvps?passcode=${currentCode}`);
+
+      // Check the response before parsing
+      if (!res.ok) {
+        const text = await res.text(); // read as text first
+        console.log("Raw response:", text);  // see what's actually coming back
+        
+        let errorMessage = `HTTP ${res.status}: ${text}`;
+        try {
+          const parsed = JSON.parse(text);
+          if (parsed && parsed.error) {
+            errorMessage = parsed.error;
+          }
+        } catch (e) {}
+        setListError(errorMessage);
+        return;
+      }
+
       const data = await res.json();
-      if (res.ok && data.success) {
+      if (data.success) {
         setRsvps(data.data);
       } else {
         setListError(data.error || "Failed to load RSVPs.");
@@ -132,11 +167,22 @@ export function AdminDashboard() {
         })
       });
 
-      const resData: RSVPResponse = await res.json();
-
+      // Check the response before parsing
       if (!res.ok) {
-        throw new Error(resData.error || "Execution state failed to complete.");
+        const text = await res.text(); // read as text first
+        console.log("Raw response:", text);  // see what's actually coming back
+        
+        let errorMessage = `HTTP ${res.status}: ${text}`;
+        try {
+          const parsed = JSON.parse(text);
+          if (parsed && parsed.error) {
+            errorMessage = parsed.error;
+          }
+        } catch (e) {}
+        throw new Error(errorMessage);
       }
+
+      const resData: RSVPResponse = await res.json();
 
       // If approved, trigger the Envelope Simulator for supreme designer UX feedback
       if (action === "approve" && resData.data) {
@@ -182,60 +228,57 @@ export function AdminDashboard() {
   });
 
   return (
-    <div className="bg-[#FAF9F6] min-h-screen py-12 px-4 md:px-8 max-w-7xl mx-auto">
+    <div className={`${!isAuthorized ? "bg-[#FAF9F6] min-h-[85vh] flex items-center justify-center p-4 md:p-8" : "bg-[#FAF9F6] min-h-screen py-12 px-4 md:px-8 max-w-7xl mx-auto"}`}>
       
       {!isAuthorized ? (
         /* Login Screen protected layout */
-        <div className="max-w-md mx-auto my-12 bg-white border border-amber-900/10 p-8 shadow-md rounded-xs">
-          <div className="text-center mb-8">
-            <div className="inline-flex p-3.5 bg-emerald-950/5 text-emerald-900 rounded-full mb-3 shadow-inner">
-              <Lock className="w-5.5 h-5.5 text-amber-700" />
+        <div className="w-full max-w-lg bg-white p-10 md:p-14 shadow-[0_25px_50px_rgba(0,0,0,0.06)] border border-rose-100 rounded-[6px]">
+          <div className="text-center mb-10 flex flex-col items-center">
+            <div className="inline-flex p-5.5 bg-rose-50 rounded-full mb-6">
+              <Lock className="w-8 h-8 text-[#BF3B52]" strokeWidth={1.5} />
             </div>
-            <h2 className="font-serif text-2xl text-emerald-950 font-bold tracking-tight">
+            <h2 className="font-serif text-[32px] md:text-4xl text-[#BF3B52] font-bold tracking-tight">
               Groom's Secure Portal
             </h2>
-            <p className="text-xs text-zinc-500 mt-2 font-mono">
-              Nigeria Union Admin System v1.5
-            </p>
           </div>
 
-          <form onSubmit={handleLoginSubmit} className="space-y-4">
+          <form onSubmit={handleLoginSubmit} className="space-y-6">
             {authError && (
-              <div className="p-3 bg-red-50 border-l-4 border-red-700 text-red-950 text-xs rounded-r-sm leading-relaxed">
+              <div className="p-3 bg-red-50 border-l-4 border-red-700 text-red-950 text-xs rounded-r-sm leading-relaxed animate-shake">
                 {authError}
               </div>
             )}
 
-            <div className="space-y-1.5">
-              <label htmlFor="passcode-input" className="block text-xs font-mono font-bold text-emerald-950 uppercase tracking-wider">
+            <div className="space-y-2">
+              <label htmlFor="passcode-input" className="block text-[12px] font-mono font-bold text-[#BF3B52] uppercase tracking-wider">
                 System Admin Secret Passcode
               </label>
               <input 
                 id="passcode-input"
                 type="password" 
                 required 
-                placeholder="Enter secret token e.g. ChidiAdanna2026"
+                placeholder="Enter secret token"
                 value={passcode}
                 onChange={(e) => setPasscode(e.target.value)}
-                className="w-full bg-zinc-50 border border-zinc-200 focus:border-emerald-800 focus:bg-white focus:outline-none px-4 py-3 text-sm rounded-xs"
+                className="w-full bg-white border border-[#BF3B52] focus:outline-none focus:ring-1 focus:ring-[#9E2B3E] px-4 py-3.5 text-base rounded-[4px] placeholder-zinc-400 font-sans tracking-wide"
               />
-              <p className="text-[10px] text-zinc-400 leading-normal">
-                Credentials fallback pass key mapping is configured inside the `.env.local` or `.env` system parameters. (Default is <strong>ChidiAdanna2026</strong>)
+              <p className="text-[11px] text-zinc-400 leading-relaxed font-sans mt-2.5">
+                Credentials pass key mapping is configured in the environment parameters. Please input the authorized secret passcode to unlock administrative privileges.
               </p>
             </div>
 
             <button 
               type="submit"
               disabled={verifying}
-              className="w-full py-3 bg-emerald-900 hover:bg-emerald-950 disabled:bg-emerald-900/60 duration-300 text-white font-mono text-xs uppercase font-bold tracking-widest transition-all rounded-xs flex items-center justify-center shadow-md"
+              className="w-full py-4 bg-[#BF3B52] hover:bg-[#9E2B3E] disabled:bg-[#BF3B52]/70 duration-300 text-white font-mono text-[13px] uppercase font-bold tracking-widest transition-all rounded-[4px] flex items-center justify-center shadow-md cursor-pointer"
             >
               {verifying ? (
                 <>
                   <Loader2 className="w-4 h-4 animate-spin mr-2" />
-                  Decoding Credentials...
+                  DECODING CREDENTIALS...
                 </>
               ) : (
-                "Unlock Registry Console"
+                "UNLOCK REGISTRY CONSOLE"
               )}
             </button>
           </form>

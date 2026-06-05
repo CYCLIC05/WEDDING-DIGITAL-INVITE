@@ -46,11 +46,24 @@ export function RSVPForm() {
         body: JSON.stringify(formData),
       });
 
-      const resData = await response.json();
-
+      // Check the response before parsing
       if (!response.ok) {
-        throw new Error(resData.error || "A submission error occurred.");
+        const text = await response.text(); // read as text first
+        console.log("Raw response:", text);  // see what's actually coming back
+        
+        let errorMessage = `HTTP ${response.status}: ${text}`;
+        try {
+          const parsed = JSON.parse(text);
+          if (parsed && parsed.error) {
+            errorMessage = parsed.error;
+          }
+        } catch (e) {
+          // not JSON, keep status text
+        }
+        throw new Error(errorMessage);
       }
+
+      const resData = await response.json();
 
       setSubmittedName(formData.name);
       setSuccess(true);
