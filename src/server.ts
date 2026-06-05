@@ -8,7 +8,7 @@ import morgan from "morgan";
 import rateLimit from "express-rate-limit";
 import { createServer as createViteServer } from "vite";
 import { Resend } from "resend";
-import { supabase, isSupabaseConfigured, cleanCredentials } from "./src/lib/supabase.ts";
+import { supabase, isSupabaseConfigured, cleanCredentials } from "./lib/supabase.ts";
 
 const LOCAL_DB_PATH = path.join(process.cwd(), "data", "rsvps.json");
 
