@@ -301,6 +301,93 @@ app.post("/api/rsvps", submitRSVPLimiter, async (req, res) => {
       await saveLocalRSVPs(localRSVPs);
     }
 
+    // Trigger RSVP Received Confirmation Emails (Guest + Admin notifications) via Resend API
+    try {
+      const guestEventLabels = dataRecord.events.map((e: string) => {
+        if (e === "traditional") return "Traditional Igbo Marriage (Igba Nkwu)";
+        if (e === "church") return "Church Holy Nuptials Ceremony";
+        if (e === "reception") return "Grand Marriage Wedding Gala Reception";
+        return e;
+      }).join(", ");
+
+      const guestEmailHtml = `
+        <div style="font-family: 'Georgia', serif; background-color: #FAF9F6; padding: 40px; text-align: center; border: 12px solid #BF3B52; outline: 3px double #B45309; max-width: 600px; margin: 20px auto; color: #4C0519; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+          <div style="text-align: center; margin-bottom: 24px;">
+            <img src="https://picsum.photos/seed/weddingrsvp/120/120?blur=1" style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid #B45309; object-fit: cover;" alt="Monogram" />
+            <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: #B45309; font-weight: bold; margin-top: 10px;">RSVP Received</div>
+          </div>
+          
+          <h2 style="font-size: 26px; color: #BF3B52; margin-top: 10px; margin-bottom: 4px; font-weight: normal;">Chidi &amp; Adanna</h2>
+          <p style="font-size: 13px; font-style: italic; color: #B45309; margin-top: 0; margin-bottom: 28px; letter-spacing: 1px;">- Holy Matrimony Selection -</p>
+          
+          <div style="background-color: #ffffff; padding: 28px; border: 1px solid rgba(180, 83, 9, 0.2); border-radius: 2px; text-align: left; margin: 20px 0; background-image: radial-gradient(#FAF9F6 1px, transparent 1px); background-size: 16px 16px;">
+            <p style="margin-top: 0; font-size: 12px; font-weight: bold; text-transform: uppercase; color: #B45309; letter-spacing: 2px; border-bottom: 1px solid rgba(180, 83, 9, 0.15); padding-bottom: 8px;">Registration Queue</p>
+            <p style="font-size: 18px; color: #4C0519; font-weight: bold; margin: 16px 0 8px 0;">Dear ${dataRecord.name},</p>
+            <p style="font-size: 14px; line-height: 1.6; color: #1F2937; margin-bottom: 16px;">
+              Thank you for submitting your RSVP registration for Chidi &amp; Adanna's Covenant Wedding. We are incredibly blessed by your warmth and support.
+            </p>
+            <p style="font-size: 14px; line-height: 1.6; color: #1F2937; margin-bottom: 16px;">
+              Your request has been successfully recorded in our Reservation Queue. Once we confirm table assignments and hospitality logistics, your official entry Gatepass and seat selection will be emailed to you.
+            </p>
+            
+            <div style="background-color: #FAF9F6; border-left: 4px solid #C29D70; padding: 14px; margin: 20px 0; border-radius: 2px;">
+              <p style="margin: 0; font-size: 12px; color: #4B5563; line-height: 1.5; font-family: sans-serif;">
+                <strong>Registered Email:</strong> ${dataRecord.email}<br />
+                <strong>WhatsApp Phone:</strong> ${dataRecord.phone}<br />
+                <strong>Events Selected:</strong> ${guestEventLabels}
+              </p>
+            </div>
+          </div>
+          
+          <p style="font-size: 12px; line-height: 1.6; color: #6B7280; text-align: center; margin-top: 30px;">
+            Host Venue: Nike Lake Resort, Enugu, Nigeria.<br />
+            No further action is required from you at this time.
+          </p>
+        </div>
+      `;
+
+      // 1. Dispatch confirmation to guest
+      await resend.emails.send({
+        from: "Royal Union <wedding@resend.dev>",
+        to: dataRecord.email,
+        subject: `✨ Chidi & Adanna's Web RSVP Registration Acknowledged`,
+        html: guestEmailHtml
+      });
+      console.log(`[Resend Guest RSVP Confirm OK] Dispatched registration email to guest: ${dataRecord.email}`);
+
+      // 2. Dispatch real-time alert to primary admin: amosushadrach@gmail.com
+      const adminEmailHtml = `
+        <div style="font-family: sans-serif; padding: 24px; border: 3px double #BF3B52; background-color: #FAF9F6; border-radius: 12px; max-width: 500px; margin: 20px auto; color: #1F2937;">
+          <h2 style="color: #BF3B52; margin-top: 0; font-size: 20px; border-bottom: 2px solid #BF3B52; padding-bottom: 8px;">New RSVP Registered 🎉</h2>
+          <p style="font-size: 14px;">A new guest has submitted an RSVP for Chidi &amp; Adanna's wedding:</p>
+          <div style="background-color: white; padding: 16px; border: 1px solid #E5E7EB; border-radius: 8px; margin: 16px 0;">
+            <table style="width: 100%; font-size: 13px;">
+              <tr><td style="font-weight: bold; width: 35%; padding: 4px 0;">Name:</td><td>${dataRecord.name}</td></tr>
+              <tr><td style="font-weight: bold; padding: 4px 0;">Email:</td><td>${dataRecord.email}</td></tr>
+              <tr><td style="font-weight: bold; padding: 4px 0;">Phone:</td><td>${dataRecord.phone}</td></tr>
+              <tr><td style="font-weight: bold; padding: 4px 0;">Events:</td><td>${guestEventLabels}</td></tr>
+              <tr><td style="font-weight: bold; padding: 4px 0;">Dietary Notes:</td><td>${dataRecord.dietary_notes || "None"}</td></tr>
+            </table>
+          </div>
+          <p style="text-align: center; margin-top: 20px;">
+            <a href="https://ais-dev-plobits2wmqn6auqyopv2a-787350730741.europe-west2.run.app/#admin" style="background-color: #BF3B52; color: white; padding: 10px 20px; text-decoration: none; border-radius: 20px; font-weight: bold; font-size: 12px; display: inline-block; letter-spacing: 1px; text-transform: uppercase;">
+              Groom Administration
+            </a>
+          </p>
+        </div>
+      `;
+
+      await resend.emails.send({
+        from: "Royal Union <wedding@resend.dev>",
+        to: "amosushadrach@gmail.com",
+        subject: `🔔 Admin Alert: New RSVP Registration From ${dataRecord.name}`,
+        html: adminEmailHtml
+      });
+      console.log(`[Resend Admin Alert OK] Dispatched real-time admin notification to amosushadrach@gmail.com`);
+    } catch (emailErr: any) {
+      console.warn("⚠️ [Resend Invitation Acknowledgment Dispatch Failure]:", emailErr);
+    }
+
     return res.status(201).json({ success: true, data: dataRecord });
 
   } catch (error: any) {

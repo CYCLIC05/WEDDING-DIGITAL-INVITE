@@ -485,22 +485,6 @@ export default function App() {
 
           <div className="flex flex-col sm:flex-row items-center justify-between text-[10px] font-sans text-slate-500 gap-4 pt-4 border-t border-slate-800">
             <p>© 2026 Chidi &amp; Adanna's Covenant Wedding. Designed in Majesty.</p>
-            
-            <div className="flex space-x-4">
-              <button 
-                onClick={() => changeView("guest")}
-                className="hover:text-[#BF3B52] transition uppercase tracking-wider font-semibold"
-              >
-                Invitation Home
-              </button>
-              <span>•</span>
-              <button 
-                onClick={() => changeView("admin")}
-                className="hover:text-[#BF3B52] transition uppercase tracking-wider flex items-center shadow-none border-none pointer-events-auto font-semibold"
-              >
-                Groom Admin Panel
-              </button>
-            </div>
           </div>
         </div>
       </footer>
