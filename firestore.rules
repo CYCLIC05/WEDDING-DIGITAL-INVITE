@@ -1,0 +1,33 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Global Safety Net (Default Deny Catch-all)
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Guest RSVPs matching 8 Pillars Zero-Trust guidelines
+    match /rsvps/{rsvpId} {
+      // Allow public creation but with thorough schema validation
+      allow create: if isValidRsvp(request.resource.data) && isValidId(rsvpId);
+      
+      // Admin-only actions like get, list, update, and delete are handled via 
+      // the Backend Server (Server uses the secure Firebase Admin SDK which bypasses security rules).
+      allow read, update, delete: if false;
+    }
+
+    // Programmatic Validation Helpers
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function isValidRsvp(data) {
+      return data.keys().hasAll(['name', 'email', 'phone', 'events', 'status'])
+        && data.name is string && data.name.size() >= 2 && data.name.size() <= 100
+        && data.email is string && data.email.size() >= 5 && data.email.size() <= 150 && data.email.matches('^.+@.+$')
+        && data.phone is string && data.phone.size() >= 6 && data.phone.size() <= 30
+        && data.events is list && data.events.size() > 0 && data.events.size() <= 5
+        && data.status is string && data.status in ['pending', 'approved', 'declined'];
+    }
+  }
+}

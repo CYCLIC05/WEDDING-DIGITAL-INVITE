@@ -1,0 +1,52 @@
+{
+  "entities": {
+    "rsvp": {
+      "title": "RSVP",
+      "description": "A wedding RSVP response containing contact info, event selections, and status.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the RSVP"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the RSVP was submitted"
+        },
+        "name": {
+          "type": "string",
+          "description": "Full name of the attendee"
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the attendee"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Phone number of the attendee"
+        },
+        "events": {
+          "type": "array",
+          "description": "List of wedding events selected"
+        },
+        "dietary_notes": {
+          "type": "string",
+          "description": "Dietary constraints and details"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "approved", "declined"],
+          "description": "The administrative verification/approval status of the RSVP"
+        }
+      },
+      "required": ["name", "email", "phone", "events", "status"]
+    }
+  },
+  "firestore": {
+    "/rsvps/{rsvpId}": {
+      "schema": "rsvp",
+      "description": "Global list of guest RSVPs"
+    }
+  }
+}
