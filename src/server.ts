@@ -8,7 +8,7 @@ import morgan from "morgan";
 import rateLimit from "express-rate-limit";
 import { createServer as createViteServer } from "vite";
 import { Resend } from "resend";
-import { db, isFirebaseConfigured } from "./lib/firebase.ts";
+import { db, isFirebaseConfigured, verifyFirebaseConnectivity, getFirebaseConfiguredStatus } from "./lib/firebase.ts";
 
 function cleanCredentials(val: string): string {
   if (!val) return "";
@@ -203,7 +203,7 @@ const requireAdmin = (req: express.Request, res: express.Response, next: express
 app.get("/api/health", (req, res) => {
   res.json({ 
     status: "ok", 
-    firebaseConfigured: isFirebaseConfigured,
+    firebaseConfigured: getFirebaseConfiguredStatus(),
     environment: process.env.NODE_ENV || "development" 
   });
 });
@@ -234,7 +234,7 @@ app.post("/api/rsvps", submitRSVPLimiter, async (req, res) => {
     let useLocalFallback = false;
 
     try {
-      if (db && isFirebaseConfigured) {
+      if (db && getFirebaseConfiguredStatus()) {
         const snapshot = await db.collection("rsvps").where("email", "==", normalizedEmail).get();
         if (!snapshot.empty) {
           existing = snapshot.docs[0].data();
@@ -262,7 +262,7 @@ app.post("/api/rsvps", submitRSVPLimiter, async (req, res) => {
     let useInsertFallback = false;
 
     try {
-      if (db && isFirebaseConfigured && !useLocalFallback) {
+      if (db && getFirebaseConfiguredStatus() && !useLocalFallback) {
         const id = crypto.randomUUID();
         const created_at = new Date().toISOString();
         dataRecord = {
@@ -418,7 +418,7 @@ app.get("/api/rsvps", requireAdmin, async (req, res) => {
     let fetchFallback = false;
 
     try {
-      if (db && isFirebaseConfigured) {
+      if (db && getFirebaseConfiguredStatus()) {
         const snapshot = await db.collection("rsvps").orderBy("created_at", "desc").get();
         rsvpsList = snapshot.docs.map((doc: any) => doc.data());
       } else {
@@ -463,7 +463,7 @@ app.post("/api/send-invitation", requireAdmin, async (req, res) => {
     // A. Delete Operation
     if (action === "delete") {
       try {
-        if (db && isFirebaseConfigured) {
+        if (db && getFirebaseConfiguredStatus()) {
           await db.collection("rsvps").doc(rsvpId).delete();
           return res.json({ success: true, deleted: true });
         } else {
@@ -487,7 +487,7 @@ app.post("/api/send-invitation", requireAdmin, async (req, res) => {
     let updatedRecord: any = null;
 
     try {
-      if (db && isFirebaseConfigured) {
+      if (db && getFirebaseConfiguredStatus()) {
         const docRef = db.collection("rsvps").doc(rsvpId);
         const docSnap = await docRef.get();
 
@@ -618,6 +618,9 @@ app.post("/api/send-invitation", requireAdmin, async (req, res) => {
 // VITE CLIENT DEV SERVER AND STATIC ASSETS HANDLING ROUTINES
 // ============================================================================
 async function startServer() {
+  // Test Firebase availability and active credentials on startup
+  await verifyFirebaseConnectivity();
+
   if (process.env.NODE_ENV !== "production") {
     console.log("🛠️  Configured developer mode. Launching HMR Vite Dev middleware...");
     const vite = await createViteServer({

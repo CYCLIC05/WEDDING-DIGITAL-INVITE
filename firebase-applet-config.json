@@ -1,22 +1,11 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyAR_kjegkimYy7_hgCBo1xlCAl8q8s9e7E",
-  authDomain: "wedding-db-7a798.firebaseapp.com",
-  databaseURL: "https://wedding-db-7a798-default-rtdb.firebaseio.com",
-  projectId: "wedding-db-7a798",
-  storageBucket: "wedding-db-7a798.firebasestorage.app",
-  messagingSenderId: "1091127699567",
-  appId: "1:1091127699567:web:4dfa38817bfcd6c82fc59a",
-  measurementId: "G-08X5B3GJTW"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+{
+  "projectId": "wedding-db-7a798",
+  "appId": "1:1091127699567:web:4dfa38817bfcd6c82fc59a",
+  "apiKey": "AIzaSyAR_kjegkimYy7_hgCBo1xlCAl8q8s9e7E",
+  "authDomain": "wedding-db-7a798.firebaseapp.com",
+  "databaseURL": "https://wedding-db-7a798-default-rtdb.firebaseio.com",
+  "storageBucket": "wedding-db-7a798.firebasestorage.app",
+  "messagingSenderId": "1091127699567",
+  "measurementId": "G-08X5B3GJTW",
+  "firestoreDatabaseId": ""
+}

@@ -35,4 +35,29 @@ try {
   console.error("❌ Exception during Firebase Admin initialization:", err);
 }
 
+// Check with live query whether credentials actually have permissions/access to the targeting database
+export async function verifyFirebaseConnectivity(): Promise<boolean> {
+  if (!db || !isFirebaseConfigured) {
+    isFirebaseConfigured = false;
+    return false;
+  }
+  try {
+    // Attempt a lightweight test fetch to verify read permissions
+    await db.collection("rsvps").limit(1).get();
+    console.log("✅ Firebase connectivity & read permissions confirmed successfully.");
+    isFirebaseConfigured = true;
+    return true;
+  } catch (err: any) {
+    console.warn("⚠️ Firebase connectivity verification check failed (possibly due to custom project configuration or insufficient credentials for this container's service account).");
+    console.warn(`Reason: ${err?.message || err}`);
+    console.warn("💡 Gracefully disabling server-side Firebase operations and falling back to offline JSON files to prevent user request failures.");
+    isFirebaseConfigured = false;
+    return false;
+  }
+}
+
+export function getFirebaseConfiguredStatus(): boolean {
+  return isFirebaseConfigured;
+}
+
 export { db, isFirebaseConfigured, projectId, databaseId };
