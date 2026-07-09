@@ -1,9 +1,11 @@
 import { Resend } from "resend";
 import admin from "firebase-admin";
 import { getFirestore } from "firebase-admin/firestore";
+import nodemailer from "nodemailer";
 
 let db: any = null;
 let firebaseReady = false;
+let transporter: nodemailer.Transporter | null = null;
 
 function getDb() {
   if (firebaseReady && db) return db;
@@ -59,4 +61,44 @@ function eventLabel(e: string) {
   return e;
 }
 
-export { getDb, getResend, getAdminPasscode, checkAdminAuth, setCors, eventLabel };
+function isSmtpConfigured(): boolean {
+  const user = process.env.GMAIL_USER || process.env.SMTP_USER;
+  const pass = process.env.GMAIL_PASS || process.env.SMTP_PASS;
+  return !!(user && pass && user.trim() !== "" && pass.trim() !== "");
+}
+
+function getTransporter(): nodemailer.Transporter {
+  if (transporter) return transporter;
+  const user = process.env.GMAIL_USER || process.env.SMTP_USER;
+  const pass = process.env.GMAIL_PASS || process.env.SMTP_PASS;
+  if (!user || !pass) {
+    throw new Error("Gmail SMTP Credentials missing.");
+  }
+  transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: user.trim(),
+      pass: pass.trim(),
+    },
+  });
+  return transporter;
+}
+
+async function sendSmtpEmail(
+  to: string,
+  subject: string,
+  htmlBody: string
+): Promise<{ messageId: string }> {
+  const activeTransporter = getTransporter();
+  const fromUser = process.env.GMAIL_USER || process.env.SMTP_USER || "";
+  const mailOptions = {
+    from: `"Tobi & Ayomide's Royal Wedding" <${fromUser}>`,
+    to: to,
+    subject: subject,
+    html: htmlBody,
+  };
+  const info = await activeTransporter.sendMail(mailOptions);
+  return { messageId: info.messageId };
+}
+
+export { getDb, getResend, getAdminPasscode, checkAdminAuth, setCors, eventLabel, isSmtpConfigured, sendSmtpEmail };
