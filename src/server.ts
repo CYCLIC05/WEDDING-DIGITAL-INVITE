@@ -9,6 +9,7 @@ import rateLimit from "express-rate-limit";
 import { createServer as createViteServer } from "vite";
 import { Resend } from "resend";
 import { db, isFirebaseConfigured, verifyFirebaseConnectivity, getFirebaseConfiguredStatus } from "./lib/firebase.ts";
+import { sendSmtpEmail, isSmtpConfigured } from "./lib/nodemailerService.ts";
 
 function cleanCredentials(val: string): string {
   if (!val) return "";
@@ -67,7 +68,7 @@ if (missingEnv.length > 0) {
 }
 
 // Clean and parse validated environment variables
-const ADMIN_PASSCODE = cleanCredentials(process.env.SYSTEM_ADMIN_PASSCODE || "ChidiAdanna2026");
+const ADMIN_PASSCODE = cleanCredentials(process.env.SYSTEM_ADMIN_PASSCODE || "TobiAyomide2026");
 const resendKey = cleanCredentials(process.env.RESEND_API_KEY || "re_mock_key");
 const resend = new Resend(resendKey);
 
@@ -304,62 +305,281 @@ app.post("/api/rsvps", submitRSVPLimiter, async (req, res) => {
     // Trigger RSVP Received Confirmation Emails (Guest + Admin notifications) via Resend API
     try {
       const guestEventLabels = dataRecord.events.map((e: string) => {
-        if (e === "traditional") return "Traditional Igbo Marriage (Igba Nkwu)";
-        if (e === "church") return "Church Holy Nuptials Ceremony";
-        if (e === "reception") return "Grand Marriage Wedding Gala Reception";
+        if (e === "traditional") return "Traditional Marriage (J.A. – Journey Aligned)";
+        if (e === "church") return "Church Wedding Ceremony";
+        if (e === "reception") return "Thanksgiving & Fellowship Reception";
         return e;
       }).join(", ");
 
       const guestEmailHtml = `
-        <div style="font-family: 'Georgia', serif; background-color: #FAF9F6; padding: 40px; text-align: center; border: 12px solid #BF3B52; outline: 3px double #B45309; max-width: 600px; margin: 20px auto; color: #4C0519; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-          <div style="text-align: center; margin-bottom: 24px;">
-            <img src="https://picsum.photos/seed/weddingrsvp/120/120?blur=1" style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid #B45309; object-fit: cover;" alt="Monogram" />
-            <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: #B45309; font-weight: bold; margin-top: 10px;">RSVP Received</div>
-          </div>
-          
-          <h2 style="font-size: 26px; color: #BF3B52; margin-top: 10px; margin-bottom: 4px; font-weight: normal;">Chidi &amp; Adanna</h2>
-          <p style="font-size: 13px; font-style: italic; color: #B45309; margin-top: 0; margin-bottom: 28px; letter-spacing: 1px;">- Holy Matrimony Selection -</p>
-          
-          <div style="background-color: #ffffff; padding: 28px; border: 1px solid rgba(180, 83, 9, 0.2); border-radius: 2px; text-align: left; margin: 20px 0; background-image: radial-gradient(#FAF9F6 1px, transparent 1px); background-size: 16px 16px;">
-            <p style="margin-top: 0; font-size: 12px; font-weight: bold; text-transform: uppercase; color: #B45309; letter-spacing: 2px; border-bottom: 1px solid rgba(180, 83, 9, 0.15); padding-bottom: 8px;">Registration Queue</p>
-            <p style="font-size: 18px; color: #4C0519; font-weight: bold; margin: 16px 0 8px 0;">Dear ${dataRecord.name},</p>
-            <p style="font-size: 14px; line-height: 1.6; color: #1F2937; margin-bottom: 16px;">
-              Thank you for submitting your RSVP registration for Chidi &amp; Adanna's Covenant Wedding. We are incredibly blessed by your warmth and support.
-            </p>
-            <p style="font-size: 14px; line-height: 1.6; color: #1F2937; margin-bottom: 16px;">
-              Your request has been successfully recorded in our Reservation Queue. Once we confirm table assignments and hospitality logistics, your official entry Gatepass and seat selection will be emailed to you.
-            </p>
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+        <meta charset="UTF-8">
+        <title>Wedding RSVP Confirmation</title>
+        <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;500;600&family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
+        <style>
+          * { box-sizing: border-box; margin: 0; padding: 0; }
+          body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: repeating-linear-gradient(135deg, #eef0f4 0px, #eef0f4 12px, #e4e7ec 12px, #e4e7ec 24px);
+            font-family: 'Cormorant Garamond', serif;
+            padding: 40px 20px;
+          }
+
+          .card {
+            position: relative;
+            width: 380px;
+            height: 600px;
+            background: linear-gradient(160deg, #1b2027 0%, #12151a 100%);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+            overflow: hidden;
+            border-radius: 2px;
+            margin: 0 auto;
+          }
+
+          /* Gold double border frame */
+          .frame-outer {
+            position: absolute;
+            inset: 18px;
+            border: 1.5px solid #c9a24b;
+          }
+          .frame-inner {
+            position: absolute;
+            inset: 24px;
+            border: 1px solid #c9a24b;
+          }
+
+          /* Corner flourish marks */
+          .corner-line {
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            border: 1.5px solid #c9a24b;
+          }
+          .corner-line.tl { top: 6px; left: 6px; border-right: none; border-bottom: none; }
+          .corner-line.br { bottom: 6px; right: 6px; border-left: none; border-top: none; }
+
+          .content {
+            position: relative;
+            z-index: 3;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 35px 25px;
+          }
+
+          .names {
+            font-family: 'Great Vibes', cursive;
+            color: #e8c992;
+            font-size: 44px;
+            line-height: 1.1;
+            letter-spacing: 1px;
+          }
+          .amp {
+            font-family: 'Cormorant Garamond', serif;
+            color: #c9a24b;
+            font-size: 20px;
+            margin: 4px 0;
+            letter-spacing: 4px;
+          }
+
+          .tagline {
+            margin-top: 14px;
+            font-style: italic;
+            color: #d9cbb0;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            position: relative;
+            padding-bottom: 12px;
+          }
+          .tagline::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 1px;
+            background: #c9a24b;
+          }
+
+          .sub {
+            margin-top: 20px;
+            color: #b9c0cc;
+            font-family: 'Cinzel', serif;
+            font-size: 9px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+          }
+
+          .date {
+            margin-top: 8px;
+            color: #f2e4c4;
+            font-family: 'Cinzel', serif;
+            font-size: 20px;
+            letter-spacing: 3px;
+            font-weight: 500;
+          }
+
+          .venue {
+            margin-top: 10px;
+            color: #98a1ae;
+            font-size: 12px;
+            letter-spacing: 1px;
+            font-style: italic;
+          }
+
+          svg.flora { position: absolute; z-index: 2; opacity: 0.95; }
+          .flora.top-right { top: -10px; right: -10px; width: 140px; height: 140px; }
+          .flora.bottom-left { bottom: -10px; left: -10px; width: 140px; height: 140px; transform: rotate(180deg); }
+        </style>
+        </head>
+        <body style="margin:0; padding:0; background-color:#eef0f4;">
+
+        <div class="card">
+          <div class="frame-outer"></div>
+          <div class="frame-inner"></div>
+          <div class="corner-line tl"></div>
+          <div class="corner-line br"></div>
+
+          <!-- Floral corner top-right -->
+          <svg class="flora top-right" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none" stroke="#c9a24b" stroke-width="1.2" opacity="0.55">
+              <path d="M200,0 C160,10 130,40 120,90 C150,70 180,50 200,60" />
+              <path d="M200,0 C170,25 150,55 145,100" />
+            </g>
+            <g>
+              <ellipse cx="150" cy="55" rx="16" ry="24" fill="#e7b8a0" transform="rotate(30 150 55)" opacity="0.9"/>
+              <ellipse cx="168" cy="70" rx="14" ry="20" fill="#f0cdb8" transform="rotate(-10 168 70)" opacity="0.9"/>
+              <ellipse cx="140" cy="80" rx="13" ry="19" fill="#d99f89" transform="rotate(70 140 80)" opacity="0.9"/>
+
+              <g transform="translate(120,45)">
+                <circle r="4" fill="#e9dcc4" cx="0" cy="0"/>
+                <ellipse rx="9" ry="14" fill="#f7f1e3" transform="translate(0,-13) rotate(0)"/>
+                <ellipse rx="9" ry="14" fill="#f7f1e3" transform="translate(12,-6) rotate(60)"/>
+                <ellipse rx="9" ry="14" fill="#f7f1e3" transform="translate(12,6) rotate(120)"/>
+                <ellipse rx="9" ry="14" fill="#f7f1e3" transform="translate(0,13) rotate(180)"/>
+                <ellipse rx="9" ry="14" fill="#f7f1e3" transform="translate(-12,6) rotate(240)"/>
+                <ellipse rx="9" ry="14" fill="#f7f1e3" transform="translate(-12,-6) rotate(300)"/>
+                <circle r="4" fill="#dba95c"/>
+              </g>
+
+              <g transform="translate(175,35) scale(0.7)">
+                <circle r="4" fill="#e9dcc4"/>
+                <ellipse rx="9" ry="14" fill="#f0cdb8" transform="translate(0,-13)"/>
+                <ellipse rx="9" ry="14" fill="#f0cdb8" transform="translate(12,-6) rotate(60)"/>
+                <ellipse rx="9" ry="14" fill="#f0cdb8" transform="translate(12,6) rotate(120)"/>
+                <ellipse rx="9" ry="14" fill="#f0cdb8" transform="translate(0,13) rotate(180)"/>
+                <ellipse rx="9" ry="14" fill="#f0cdb8" transform="translate(-12,6) rotate(240)"/>
+                <ellipse rx="9" ry="14" fill="#f0cdb8" transform="translate(-12,-6) rotate(300)"/>
+                <circle r="4" fill="#dba95c"/>
+              </g>
+
+              <path d="M60,20 Q75,5 95,15 Q80,25 60,20" fill="#8a9a6b" opacity="0.85"/>
+              <path d="M100,10 Q120,-5 140,10 Q120,20 100,10" fill="#a3b47f" opacity="0.85"/>
+              <path d="M130,90 Q150,80 165,95 Q150,100 130,90" fill="#8a9a6b" opacity="0.85"/>
+            </g>
+          </svg>
+
+          <!-- Floral corner bottom-left -->
+          <svg class="flora bottom-left" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none" stroke="#c9a24b" stroke-width="1.2" opacity="0.55">
+              <path d="M200,0 C160,10 130,40 120,90 C150,70 180,50 200,60" />
+              <path d="M200,0 C170,25 150,55 145,100" />
+            </g>
+            <g>
+              <ellipse cx="150" cy="55" rx="16" ry="24" fill="#e7b8a0" transform="rotate(30 150 55)" opacity="0.9"/>
+              <ellipse cx="168" cy="70" rx="14" ry="20" fill="#f0cdb8" transform="rotate(-10 168 70)" opacity="0.9"/>
+              <ellipse cx="140" cy="80" rx="13" ry="19" fill="#d99f89" transform="rotate(70 140 80)" opacity="0.9"/>
+
+              <g transform="translate(120,45)">
+                <circle r="4" fill="#e9dcc4"/>
+                <ellipse rx="9" ry="14" fill="#f7f1e3" transform="translate(0,-13)"/>
+                <ellipse rx="9" ry="14" fill="#f7f1e3" transform="translate(12,-6) rotate(60)"/>
+                <ellipse rx="9" ry="14" fill="#f7f1e3" transform="translate(12,6) rotate(120)"/>
+                <ellipse rx="9" ry="14" fill="#f7f1e3" transform="translate(0,13) rotate(180)"/>
+                <ellipse rx="9" ry="14" fill="#f7f1e3" transform="translate(-12,6) rotate(240)"/>
+                <ellipse rx="9" ry="14" fill="#f7f1e3" transform="translate(-12,-6) rotate(300)"/>
+                <circle r="4" fill="#dba95c"/>
+              </g>
+
+              <path d="M60,20 Q75,5 95,15 Q80,25 60,20" fill="#8a9a6b" opacity="0.85"/>
+              <path d="M100,10 Q120,-5 140,10 Q120,20 100,10" fill="#a3b47f" opacity="0.85"/>
+            </g>
+          </svg>
+
+          <div class="content">
+            <div class="names">Tobi</div>
+            <div class="amp">&amp;</div>
+            <div class="names">Ayomide</div>
+
+            <div class="tagline">"He who finds a wife finds a good thing<br>and obtains favor from the Lord." – Proverbs 18:22</div>
+
+            <div class="sub">Thank You For Your RSVP</div>
             
-            <div style="background-color: #FAF9F6; border-left: 4px solid #C29D70; padding: 14px; margin: 20px 0; border-radius: 2px;">
-              <p style="margin: 0; font-size: 12px; color: #4B5563; line-height: 1.5; font-family: sans-serif;">
-                <strong>Registered Email:</strong> ${dataRecord.email}<br />
-                <strong>WhatsApp Phone:</strong> ${dataRecord.phone}<br />
-                <strong>Events Selected:</strong> ${guestEventLabels}
-              </p>
+            <div style="color: #e8c992; font-family: 'Cormorant Garamond', serif; font-size: 21px; margin-top: 14px; font-weight: 500;">
+              Dear ${dataRecord.name},
             </div>
+            
+            <div style="color: #d9cbb0; font-family: 'Cormorant Garamond', serif; font-size: 13px; line-height: 1.5; margin: 8px 0; max-width: 320px; text-align: center; font-style: italic;">
+              We have joyfully received your RSVP registration for our celebration. Your request has been queued for verification. Once table assignments and guest limits are confirmed, your official gatepass credentials will be sent.
+            </div>
+
+            <div style="color: #c9a24b; font-family: 'Cinzel', serif; font-size: 8px; letter-spacing: 2px; margin-top: 6px; font-weight: bold; text-transform: uppercase;">
+              Events Selected: ${guestEventLabels}
+            </div>
+
+            <div class="date" style="margin-top: 15px;">11 &ndash; 12 . 09 . 2026</div>
+            <div class="venue">Bwari, FCT Abuja</div>
           </div>
-          
-          <p style="font-size: 12px; line-height: 1.6; color: #6B7280; text-align: center; margin-top: 30px;">
-            Host Venue: Nike Lake Resort, Enugu, Nigeria.<br />
-            No further action is required from you at this time.
-          </p>
         </div>
+
+        </body>
+        </html>
       `;
 
       // 1. Dispatch confirmation to guest
-      await resend.emails.send({
-        from: "Royal Union <wedding@resend.dev>",
-        to: dataRecord.email,
-        subject: `✨ Chidi & Adanna's Web RSVP Registration Acknowledged`,
-        html: guestEmailHtml
-      });
-      console.log(`[Resend Guest RSVP Confirm OK] Dispatched registration email to guest: ${dataRecord.email}`);
+      let guestEmailSent = false;
+      if (isSmtpConfigured()) {
+        try {
+          await sendSmtpEmail(
+            dataRecord.email,
+            `✨ Tobi & Ayomide's Web RSVP Registration Acknowledged`,
+            guestEmailHtml
+          );
+          guestEmailSent = true;
+          console.log(`[SMTP Guest Confirm OK] Dispatched registration email to guest: ${dataRecord.email}`);
+        } catch (smtpErr: any) {
+          console.error("❌ [SMTP Guest Error]: Failed to dispatch confirmation email via Gmail SMTP, trying Resend fallback...", smtpErr);
+        }
+      }
+
+      if (!guestEmailSent) {
+        try {
+          await resend.emails.send({
+            from: "Royal Union <wedding@resend.dev>",
+            to: dataRecord.email,
+            subject: `✨ Tobi & Ayomide's Web RSVP Registration Acknowledged`,
+            html: guestEmailHtml
+          });
+          console.log(`[Resend Guest RSVP Confirm OK] Dispatched registration email to guest: ${dataRecord.email}`);
+        } catch (resendErr: any) {
+          console.error("❌ [Resend Guest Error]: Failed to dispatch confirmation email:", resendErr);
+        }
+      }
 
       // 2. Dispatch real-time alert to primary admin: amosushadrach@gmail.com
       const adminEmailHtml = `
         <div style="font-family: sans-serif; padding: 24px; border: 3px double #BF3B52; background-color: #FAF9F6; border-radius: 12px; max-width: 500px; margin: 20px auto; color: #1F2937;">
           <h2 style="color: #BF3B52; margin-top: 0; font-size: 20px; border-bottom: 2px solid #BF3B52; padding-bottom: 8px;">New RSVP Registered 🎉</h2>
-          <p style="font-size: 14px;">A new guest has submitted an RSVP for Chidi &amp; Adanna's wedding:</p>
+          <p style="font-size: 14px;">A new guest has submitted an RSVP for Tobi &amp; Ayomide's wedding:</p>
           <div style="background-color: white; padding: 16px; border: 1px solid #E5E7EB; border-radius: 8px; margin: 16px 0;">
             <table style="width: 100%; font-size: 13px;">
               <tr><td style="font-weight: bold; width: 35%; padding: 4px 0;">Name:</td><td>${dataRecord.name}</td></tr>
@@ -377,15 +597,36 @@ app.post("/api/rsvps", submitRSVPLimiter, async (req, res) => {
         </div>
       `;
 
-      await resend.emails.send({
-        from: "Royal Union <wedding@resend.dev>",
-        to: "amosushadrach@gmail.com",
-        subject: `🔔 Admin Alert: New RSVP Registration From ${dataRecord.name}`,
-        html: adminEmailHtml
-      });
-      console.log(`[Resend Admin Alert OK] Dispatched real-time admin notification to amosushadrach@gmail.com`);
+      let adminEmailSent = false;
+      if (isSmtpConfigured()) {
+        try {
+          await sendSmtpEmail(
+            "amosushadrach@gmail.com",
+            `🔔 Admin Alert: New RSVP Registration From ${dataRecord.name}`,
+            adminEmailHtml
+          );
+          adminEmailSent = true;
+          console.log(`[SMTP Admin Alert OK] Dispatched real-time admin notification to amosushadrach@gmail.com`);
+        } catch (smtpErr: any) {
+          console.error("❌ [SMTP Admin Alert Error]: Failed to dispatch admin alert via Gmail SMTP, trying Resend fallback...", smtpErr);
+        }
+      }
+
+      if (!adminEmailSent) {
+        try {
+          await resend.emails.send({
+            from: "Royal Union <wedding@resend.dev>",
+            to: "amosushadrach@gmail.com",
+            subject: `🔔 Admin Alert: New RSVP Registration From ${dataRecord.name}`,
+            html: adminEmailHtml
+          });
+          console.log(`[Resend Admin Alert OK] Dispatched real-time admin notification to amosushadrach@gmail.com`);
+        } catch (resendErr: any) {
+          console.error("❌ [Resend Admin Alert Error]: Failed to dispatch admin alert:", resendErr);
+        }
+      }
     } catch (emailErr: any) {
-      console.warn("⚠️ [Resend Invitation Acknowledgment Dispatch Failure]:", emailErr);
+      console.warn("⚠️ [RSVP Confirmation Email Dispatch Failure]:", emailErr);
     }
 
     return res.status(201).json({ success: true, data: dataRecord });
@@ -435,7 +676,11 @@ app.get("/api/rsvps", requireAdmin, async (req, res) => {
       rsvpsList = [...fileData].sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
     }
 
-    return res.json({ success: true, data: rsvpsList });
+    return res.json({ 
+      success: true, 
+      data: rsvpsList, 
+      smtpConfigured: isSmtpConfigured() 
+    });
 
   } catch (error: any) {
     console.error("[Roster Query Crash]:", error);
@@ -522,9 +767,9 @@ app.post("/api/send-invitation", requireAdmin, async (req, res) => {
 
     const shortToken = updatedRecord.id.substring(0, 8).toUpperCase();
     const eventLabels = updatedRecord.events.map((e: string) => {
-      if (e === "traditional") return "Traditional Igbo Marriage (Igba Nkwu)";
-      if (e === "church") return "Church Holy Nuptials Ceremony";
-      if (e === "reception") return "Grand Marriage Wedding Gala Reception";
+      if (e === "traditional") return "Traditional Marriage (J.A. – Journey Aligned)";
+      if (e === "church") return "Church Wedding Ceremony";
+      if (e === "reception") return "Thanksgiving & Fellowship Reception";
       return e;
     }).join(", ");
 
@@ -536,8 +781,8 @@ app.post("/api/send-invitation", requireAdmin, async (req, res) => {
           <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: #B45309; font-weight: bold; margin-top: 10px;">Official Gatepass</div>
         </div>
         
-        <h2 style="font-size: 28px; color: #BF3B52; margin-top: 10px; margin-bottom: 4px; font-weight: normal;">Chidi &amp; Adanna</h2>
-        <p style="font-size: 13px; font-style: italic; color: #B45309; margin-top: 0; margin-bottom: 28px; letter-spacing: 1px;">- Ecclesiastes 4:12 -</p>
+        <h2 style="font-size: 28px; color: #BF3B52; margin-top: 10px; margin-bottom: 4px; font-weight: normal;">Tobi &amp; Ayomide</h2>
+        <p style="font-size: 13px; font-style: italic; color: #B45309; margin-top: 0; margin-bottom: 28px; letter-spacing: 1px;">- Proverbs 18:22 -</p>
         
         <div style="background-color: #ffffff; padding: 28px; border: 1px solid rgba(180, 83, 9, 0.2); border-radius: 2px; text-align: left; margin: 20px 0; background-image: radial-gradient(#FAF9F6 1px, transparent 1px); background-size: 16px 16px;">
           <p style="margin-top: 0; font-size: 12px; font-weight: bold; text-transform: uppercase; color: #B45309; letter-spacing: 2px; border-bottom: 1px solid rgba(180, 83, 9, 0.15); padding-bottom: 8px;">Admittance Pass</p>
@@ -569,33 +814,57 @@ app.post("/api/send-invitation", requireAdmin, async (req, res) => {
         </div>
         
         <p style="font-size: 13px; line-height: 1.6; color: #4C0519; text-align: center; max-width: 480px; margin: 30px auto; padding: 15px; border-top: 1px dotted rgba(180, 83, 9, 0.4); border-bottom: 1px dotted rgba(180, 83, 9, 0.4);">
-          "Though one may be overpowered, two can defend themselves. A cord of three strands is not quickly broken."<br/>
-          <strong style="color: #B45309; font-size: 12px; display: block; margin-top: 8px;">— Ecclesiastes 4:12</strong>
+          "He who finds a wife finds a good thing and obtains favor from the Lord."<br/>
+          <strong style="color: #B45309; font-size: 12px; display: block; margin-top: 8px;">— Proverbs 18:22</strong>
         </p>
         
         <div style="font-size: 10px; color: #6B7280; text-transform: uppercase; letter-spacing: 2px; margin-top: 24px;">
-          Chidi &amp; Adanna's Sovereign Union • Enugu, Nigeria
+          Tobi &amp; Ayomide's Covenant Wedding • Abuja, Nigeria
         </div>
       </div>
     `;
 
     let isEmailSent = false;
     let resendId = "";
+    let smtpMessageId = "";
+    let emailMethod = "none";
+    let smtpError = "";
 
     if (action === "approve") {
-      try {
-        const sent = await resend.emails.send({
-          from: "Royal Union <wedding@resend.dev>",
-          to: updatedRecord.email,
-          subject: `✨ Chidi & Adanna's Wedding Official Entry Gatepass [Code: ${shortToken}]`,
-          html: emailHtml
-        });
+      if (isSmtpConfigured()) {
+        try {
+          const info = await sendSmtpEmail(
+            updatedRecord.email,
+            `✨ Tobi & Ayomide's Wedding Official Entry Gatepass [Code: ${shortToken}]`,
+            emailHtml
+          );
+          isEmailSent = true;
+          smtpMessageId = info.messageId;
+          emailMethod = "smtp";
+          console.log(`[SMTP OK] Gatepass email successfully sent via Gmail SMTP to ${updatedRecord.email}. MessageId: ${smtpMessageId}`);
+        } catch (smtpErr: any) {
+          smtpError = smtpErr.message || String(smtpErr);
+          console.error("❌ [SMTP Error]: Failed to dispatch gatepass email via Gmail SMTP, trying Resend fallback...", smtpErr);
+        }
+      }
 
-        isEmailSent = true;
-        resendId = sent?.data?.id || "unknown";
-        console.log(`[Resend OK] Gatepass email successfully dispatched to ${updatedRecord.email}. ID: ${resendId}`);
-      } catch (emailErr: any) {
-        console.error("❌ [Resend API Error]: Failed to dispatch real gatepass email:", emailErr);
+      // Fallback to Resend if SMTP wasn't configured or failed
+      if (!isEmailSent) {
+        try {
+          const sent = await resend.emails.send({
+            from: "Royal Union <wedding@resend.dev>",
+            to: updatedRecord.email,
+            subject: `✨ Tobi & Ayomide's Wedding Official Entry Gatepass [Code: ${shortToken}]`,
+            html: emailHtml
+          });
+
+          isEmailSent = true;
+          resendId = sent?.data?.id || "unknown";
+          emailMethod = "resend";
+          console.log(`[Resend OK] Gatepass email successfully dispatched to ${updatedRecord.email}. ID: ${resendId}`);
+        } catch (emailErr: any) {
+          console.error("❌ [Resend API Error]: Failed to dispatch real gatepass email:", emailErr);
+        }
       }
     }
 
@@ -604,6 +873,9 @@ app.post("/api/send-invitation", requireAdmin, async (req, res) => {
       data: updatedRecord,
       isEmailSent,
       resendId,
+      smtpMessageId,
+      emailMethod,
+      smtpError,
       simulatedEmailCode: shortToken,
       simulatedEmailHtml: emailHtml
     });
@@ -611,6 +883,56 @@ app.post("/api/send-invitation", requireAdmin, async (req, res) => {
   } catch (error: any) {
     console.error("[Mail Dispatch & Row-State Crash]:", error);
     return res.status(500).json({ error: "Internal Server Error: RSVP invitation routine crashed." });
+  }
+});
+
+// 6. Send bulk or direct update emails via Nodemailer Gmail SMTP server-side
+app.post("/api/admin/send-email-smtp", requireAdmin, async (req, res) => {
+  try {
+    const { recipients, subject, htmlBody } = req.body;
+    
+    if (!recipients || !subject || !htmlBody) {
+      return res.status(400).json({ error: "Missing required parameters: 'recipients', 'subject', or 'htmlBody'." });
+    }
+
+    const emailList = Array.isArray(recipients) ? recipients : [recipients];
+    
+    if (emailList.length === 0) {
+      return res.status(400).json({ error: "Recipients list is empty." });
+    }
+
+    if (!isSmtpConfigured()) {
+      return res.status(400).json({ 
+        error: "Gmail SMTP is not configured on the backend. Please declare GMAIL_USER and GMAIL_PASS environment variables." 
+      });
+    }
+
+    const results = {
+      successCount: 0,
+      errorCount: 0,
+      details: [] as any[]
+    };
+
+    for (const email of emailList) {
+      try {
+        const info = await sendSmtpEmail(email.trim(), subject, htmlBody);
+        results.successCount++;
+        results.details.push({ email, success: true, messageId: info.messageId });
+      } catch (err: any) {
+        results.errorCount++;
+        results.details.push({ email, success: false, error: err.message || err });
+      }
+    }
+
+    return res.json({
+      success: true,
+      summary: `Dispatched ${results.successCount} email(s) successfully, ${results.errorCount} failed.`,
+      ...results
+    });
+
+  } catch (error: any) {
+    console.error("[SMTP Bulk Mailer Error]:", error);
+    return res.status(500).json({ error: `Internal Server Error: ${error.message || error}` });
   }
 });
 

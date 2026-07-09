@@ -32,7 +32,7 @@ function getResend() {
 }
 
 function getAdminPasscode() {
-  return (process.env.SYSTEM_ADMIN_PASSCODE || "ChidiAdanna2026").trim();
+  return (process.env.SYSTEM_ADMIN_PASSCODE || "TobiAyomide2026").trim();
 }
 
 function checkAdminAuth(req: any): boolean {
@@ -53,9 +53,9 @@ function setCors(res: any) {
 }
 
 function eventLabel(e: string) {
-  if (e === "traditional") return "Traditional Igbo Marriage (Igba Nkwu)";
-  if (e === "church") return "Church Holy Nuptials Ceremony";
-  if (e === "reception") return "Grand Marriage Wedding Gala Reception";
+  if (e === "traditional") return "Traditional Marriage (J.A. – Journey Aligned)";
+  if (e === "church") return "Church Wedding Ceremony";
+  if (e === "reception") return "Thanksgiving & Fellowship Reception";
   return e;
 }
 

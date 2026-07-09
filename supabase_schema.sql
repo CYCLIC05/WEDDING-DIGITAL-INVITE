@@ -3,7 +3,7 @@
 -- Target Platform: Supabase / PostgreSQL (15+)
 -- 
 -- Description: Establishes a highly-performant, optimized, and secure schema
---              for Chidi & Adanna's Covenant Wedding RSVP system.
+--              for Tobi & Ayomide's Covenant Wedding RSVP system.
 -- ============================================================================
 
 -- ENABLE NECESSARY EXTENSIONS

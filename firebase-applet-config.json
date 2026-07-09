@@ -1,11 +1,10 @@
 {
   "projectId": "wedding-db-7a798",
-  "appId": "1:1091127699567:web:4dfa38817bfcd6c82fc59a",
+  "appId": "1:1091127699567:web:5d6d7c550d9c8a982fc59a",
   "apiKey": "AIzaSyAR_kjegkimYy7_hgCBo1xlCAl8q8s9e7E",
   "authDomain": "wedding-db-7a798.firebaseapp.com",
-  "databaseURL": "https://wedding-db-7a798-default-rtdb.firebaseio.com",
+  "firestoreDatabaseId": "ai-studio-nigerianchristia-0dcbe018-87e8-49be-8bdb-8813a9db88c5",
   "storageBucket": "wedding-db-7a798.firebasestorage.app",
   "messagingSenderId": "1091127699567",
-  "measurementId": "G-08X5B3GJTW",
-  "firestoreDatabaseId": ""
+  "measurementId": ""
 }

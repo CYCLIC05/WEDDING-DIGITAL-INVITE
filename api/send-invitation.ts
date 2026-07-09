@@ -52,8 +52,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           <div style="text-align:center;margin-bottom:24px;">
             <div style="font-size:11px;text-transform:uppercase;letter-spacing:3px;color:#B45309;font-weight:bold;">Official Gatepass</div>
           </div>
-          <h2 style="font-size:28px;color:#BF3B52;text-align:center;font-weight:normal;margin-bottom:4px;">Chidi &amp; Adanna</h2>
-          <p style="font-size:13px;font-style:italic;color:#B45309;text-align:center;margin-top:0;margin-bottom:28px;letter-spacing:1px;">— Ecclesiastes 4:12 —</p>
+          <h2 style="font-size:28px;color:#BF3B52;text-align:center;font-weight:normal;margin-bottom:4px;">Tobi &amp; Ayomide</h2>
+          <p style="font-size:13px;font-style:italic;color:#B45309;text-align:center;margin-top:0;margin-bottom:28px;letter-spacing:1px;">— Proverbs 18:22 —</p>
           <div style="background:#fff;padding:28px;border:1px solid rgba(180,83,9,0.2);border-radius:2px;text-align:left;margin:20px 0;">
             <p style="font-size:18px;color:#4C0519;font-weight:bold;margin:0 0 12px;">Dear ${record.name},</p>
             <p style="font-size:15px;line-height:1.6;color:#1F2937;margin-bottom:20px;">
@@ -80,11 +80,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             </p>
           </div>
           <p style="font-size:13px;line-height:1.6;color:#4C0519;text-align:center;max-width:480px;margin:30px auto;padding:15px;border-top:1px dotted rgba(180,83,9,0.4);border-bottom:1px dotted rgba(180,83,9,0.4);">
-            "Though one may be overpowered, two can defend themselves. A cord of three strands is not quickly broken."<br/>
-            <strong style="color:#B45309;font-size:12px;display:block;margin-top:8px;">— Ecclesiastes 4:12</strong>
+            "He who finds a wife finds a good thing and obtains favor from the Lord."<br/>
+            <strong style="color:#B45309;font-size:12px;display:block;margin-top:8px;">— Proverbs 18:22</strong>
           </p>
           <div style="font-size:10px;color:#6B7280;text-transform:uppercase;letter-spacing:2px;margin-top:24px;text-align:center;">
-            Chidi &amp; Adanna's Sovereign Union • Enugu, Nigeria
+            Tobi &amp; Ayomide's Covenant Wedding • Abuja, Nigeria
           </div>
         </div>`;
 
@@ -93,7 +93,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         const sent = await resend.emails.send({
           from: `Royal Union <${fromAddress}>`,
           to: record.email,
-          subject: `✨ Chidi & Adanna's Wedding — Official Entry Gatepass [${shortToken}]`,
+          subject: `✨ Tobi & Ayomide's Wedding — Official Entry Gatepass [${shortToken}]`,
           html: gatepassHtml,
         });
         isEmailSent = true;

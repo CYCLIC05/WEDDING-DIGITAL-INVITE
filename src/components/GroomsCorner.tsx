@@ -1,5 +1,6 @@
 import React from "react";
 import { Shield, Sparkles, Award, Compass, Heart } from "lucide-react";
+import groomPortrait from "../assets/images/groom_portrait.jpg";
 
 /**
  * The Groom's Corner component showcasing groom profile, Scripture, and the Groomsmen.
@@ -7,9 +8,9 @@ import { Shield, Sparkles, Award, Compass, Heart } from "lucide-react";
 export function GroomsCorner() {
   const groomsmen = [
     {
-      name: "Chikezie Obi",
-      role: "Best Man (Covenant Brother)",
-      bio: "Medical Doctor and prayer partner since high school years.",
+      name: "Akintayo O. Popoola",
+      role: "Best Man (Brother & Partner)",
+      bio: "Economist, investment banker, husband, and trusted friend who has been part of Jerry's journey for many years.",
       icon: Shield,
     },
     {
@@ -45,14 +46,19 @@ export function GroomsCorner() {
           </h3>
           <div className="w-16 h-[2px] bg-[#C29D70] mb-6"></div>
           
-          {/* Avatar placeholder with initials styled beautifully */}
+          {/* Groom portrait photo */}
           <div className="flex items-center space-x-4 mb-6">
-            <div className="w-16 h-16 rounded-full bg-white/10 text-[#C29D70] font-serif font-bold flex items-center justify-center text-xl border border-[#C29D70]/40 shadow-inner uppercase tracking-wider">
-              CO
+            <div className="w-16 h-16 rounded-full overflow-hidden border border-[#C29D70]/40 shadow-inner shrink-0 bg-white/15">
+              <img 
+                referrerPolicy="no-referrer"
+                src={groomPortrait} 
+                alt="Jerry Tobi" 
+                className="w-full h-full object-cover"
+              />
             </div>
             <div>
               <h4 className="font-serif text-lg font-bold text-white leading-tight">
-                Chidi Osofor
+                Jerry Tobi
               </h4>
               <p className="text-xs text-[#C29D70] font-sans tracking-widest uppercase mt-1 font-extrabold">
                 The Groom • Man of Faith
@@ -62,15 +68,15 @@ export function GroomsCorner() {
 
           <div className="bg-[#420E19] border-l-4 border-[#C29D70] p-4 mb-6 rounded-r-2xl border-y border-r border-[#C29D70]/10">
             <p className="font-serif text-sm italic text-stone-200 leading-relaxed">
-              "Husbands, love your wives, just as Christ loved the church and gave himself up for her."
+              "He who finds a wife finds a good thing and obtains favor from the Lord."
             </p>
             <p className="font-sans text-[10px] font-bold text-[#C29D70] uppercase mt-2 text-right tracking-[0.2em]">
-              — Ephesians 5:25
+              — Proverbs 18:22
             </p>
           </div>
 
           <p className="text-xs md:text-sm text-stone-300 leading-relaxed font-sans">
-            By God's infinite grace, I step forward into this covenant with Adanna. To build a home anchored in the Word of God, governed by love, integrity, and absolute devotion. We welcome you to lift us up in prayers as we begin this sacred union.
+            I am grateful to God for bringing Ayomide into my life. As we begin this journey together, we look forward to building a Christ-centered home that will honor God, serve people, and impact generations.
           </p>
         </div>
 
@@ -84,7 +90,7 @@ export function GroomsCorner() {
               The Groom's Party
             </h3>
             <p className="text-xs text-slate-500 mt-2 font-medium">
-              Brilliant men of virtue standing alongside Chidi in prayers and covenant strength.
+              Brilliant men of virtue standing alongside Tobi in prayers and covenant strength.
             </p>
           </div>
 

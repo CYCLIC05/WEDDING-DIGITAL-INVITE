@@ -29,7 +29,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    document.title = "The AJ's wedding ";
+    document.title = "Tobi & Ayomide's Wedding";
   }, []);
 
   // Suppress HMR-related Vite logs/overlays if they happen
@@ -96,7 +96,7 @@ export default function App() {
 
   // Countdown calculations
   useEffect(() => {
-    const targetDate = new Date("2026-10-17T10:00:00").getTime();
+    const targetDate = new Date("2026-09-11T14:00:00").getTime();
 
     const updateTimer = () => {
       const now = new Date().getTime();
@@ -181,7 +181,7 @@ export default function App() {
           </span>
           
           <h2 className="font-script text-6xl text-[#BF3B52] drop-shadow-sm select-none">
-            Chidi &amp; Adanna
+            Tobi &amp; Ayomide
           </h2>
           
           <div className="flex items-center justify-center space-x-2 my-2">
@@ -218,14 +218,14 @@ export default function App() {
             className="flex items-center space-x-3 cursor-pointer group animate-fade-in"
           >
             <div className="w-10 h-10 rounded-full bg-[#BF3B52] text-white font-serif font-bold flex items-center justify-center text-sm shadow-md duration-300 group-hover:scale-105 border border-[#C29D70]/40">
-              C&amp;A
+              T&amp;A
             </div>
             <div>
               <span className="font-serif text-base font-bold text-slate-800 tracking-tight group-hover:text-[#BF3B52] transition-colors block">
-                Chidi &amp; Adanna
+                Tobi &amp; Ayomide
               </span>
               <span className="hidden sm:block text-[9px] text-[#C29D70] font-sans tracking-widest uppercase mt-0.5 font-extrabold">
-                Holy Matrimony • Oct 17, 2026
+                Holy Matrimony • Sept 11th - 12th, 2026
               </span>
             </div>
           </div>
@@ -374,21 +374,21 @@ export default function App() {
 
                   {/* Wedding Date matching Image 1 styling */}
                   <div className="font-serif text-white text-xl md:text-2xl font-semibold tracking-[0.2em] mt-3 drop-shadow-md select-none">
-                    17.10.2026
+                    11.09.2026
                   </div>
 
                   <p className="text-[10px] text-[#C29D70] font-sans font-extrabold tracking-[0.3em] uppercase mt-2">
-                    ENUGU, NIGERIA
+                    ABUJA, NIGERIA
                   </p>
                 </div>
 
-                {/* SCRIPTURE OVERLAY STATEMENT (Eco 4:12) */}
+                {/* SCRIPTURE OVERLAY STATEMENT (Proverbs 18:22) */}
                 <div className="mt-10 max-w-lg mx-auto bg-black/40 border border-white/10 rounded-2xl p-5 backdrop-blur-xs select-none">
                   <blockquote className="font-serif italic text-xs md:text-sm text-stone-200 leading-relaxed font-normal">
-                    "Though one may be overpowered, two can defend themselves. A cord of three strands is not quickly broken."
+                    "He who finds a wife finds a good thing and obtains favor from the Lord."
                   </blockquote>
                   <cite className="block text-[9px] font-sans font-bold text-[#C29D70] uppercase tracking-widest mt-2">
-                    — Ecclesiastes 4:12
+                    — Proverbs 18:22
                   </cite>
                 </div>
 
@@ -398,7 +398,7 @@ export default function App() {
               <div className="relative z-10 w-full bg-black/40 border-t border-white/15 px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-6 backdrop-blur-xs">
                 <div>
                   <h4 className="font-serif text-sm text-white font-bold tracking-wide text-left">Counting Down to the Altar Vows</h4>
-                  <p className="text-[10.5px] text-zinc-300 font-sans tracking-tight mt-0.5 text-left">Join Chidi &amp; Adanna as they enter holy covenant.</p>
+                  <p className="text-[10.5px] text-zinc-300 font-sans tracking-tight mt-0.5 text-left">Join Tobi &amp; Ayomide as they enter holy covenant.</p>
                 </div>
 
                 <div className="grid grid-cols-4 gap-3">
@@ -484,7 +484,7 @@ export default function App() {
           <div className="w-12 h-[1px] bg-slate-800 mx-auto"></div>
 
           <div className="flex flex-col sm:flex-row items-center justify-between text-[10px] font-sans text-slate-500 gap-4 pt-4 border-t border-slate-800">
-            <p>© 2026 Chidi &amp; Adanna's Covenant Wedding. Designed in Majesty.</p>
+            <p>© 2026 Tobi &amp; Ayomide's Covenant Wedding. Designed in Majesty.</p>
           </div>
         </div>
       </footer>

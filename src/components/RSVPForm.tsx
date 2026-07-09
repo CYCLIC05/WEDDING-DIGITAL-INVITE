@@ -121,7 +121,7 @@ export function RSVPForm() {
             <div className="h-[1px] bg-[#C29D70]/25 my-4 max-w-xs mx-auto"></div>
 
             <p className="text-xs text-slate-600 leading-relaxed max-w-sm mx-auto mb-6 font-medium">
-              Thank you for compiling your reservation. Your request has been queued for review by Chidi & Adanna's wedding host. An official Gatepass with your <strong>Verification Token</strong> and confirmed table selection will be emailed shortly.
+              Thank you for compiling your reservation. Your request has been queued for review by Tobi & Ayomide's wedding host. An official Gatepass with your <strong>Verification Token</strong> and confirmed table selection will be emailed shortly.
             </p>
 
             <button 

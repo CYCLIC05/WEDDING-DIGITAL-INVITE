@@ -20,6 +20,9 @@ export interface RSVPResponse {
   error?: string;
   isEmailSent?: boolean;
   resendId?: string;
+  smtpMessageId?: string;
+  emailMethod?: string;
+  smtpError?: string;
   simulatedEmailCode?: string;
   simulatedEmailHtml?: string;
 }

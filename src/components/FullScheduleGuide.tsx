@@ -17,43 +17,43 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
 
   const timelineEvents = [
     {
-      title: "Traditional Marriage (Igba Nkwu)",
-      date: "Thursday, Oct 15, 2026",
-      venue: "The Bride's Family Compound",
-      location: "Independence Layout, Enugu",
+      title: "J.A. – Journey Aligned (Traditional Marriage)",
+      date: "Friday, Sept 11, 2026",
+      venue: "Elim Top Hotel and suites, Bwari",
+      location: "Bwari, Abuja",
       steps: [
-        { time: "1:30 PM", label: "Arrival of Guests & Traditional Music", desc: "Guests are welcomed with traditional highlife melodies and seated by representatives." },
-        { time: "2:00 PM", label: "Solemn Prayer & Kolo Presentation", desc: "Traditional presentation and blessing of kola nuts by the elders of both families." },
-        { time: "3:00 PM", label: "The Wine Carrying Ceremony (Igba Nkwu)", desc: "Adanna searches for her groom Chidi amidst the crowd to present him with the traditional cup of palm wine." },
-        { time: "4:15 PM", label: "Presentation of Nuptial Gifts & Dancing", desc: "Opening of the floor for traditional celebrations, congratulations, and family presentation of gifts." },
-        { time: "5:30 PM", label: "Vote of Thanks & Exquisite Local Feast", desc: "Concluding prayers and serving of traditional Enugu delicacies (Abacha, Ugba, and native soups)." }
+        { time: "2:00 PM", label: "Guest Arrival & Welcome Reception", desc: "Guests are welcomed with beautiful traditional melodies and ushering into the main hall." },
+        { time: "2:30 PM", label: "Opening Prayers & Family Introductions", desc: "Formal presentation and opening of the traditional ceremony under the guidance of family elders." },
+        { time: "3:15 PM", label: "Cultural Presentation & Wine Search", desc: "The bride, Ayomide, searches for her groom, Tobi, to present him with the traditional cup of palm wine." },
+        { time: "4:30 PM", label: "Presentation of Gifts & Celebratory Dance", desc: "Opening of the dance floor for celebrations, congratulations, and the presentation of family gifts." },
+        { time: "5:30 PM", label: "Feasting & Traditional Buffet", desc: "Closing prayers followed by the serving of delicious local and continental delicacies." }
       ]
     },
     {
-      title: "Church Holy Matrimony",
-      date: "Saturday, Oct 17, 2026",
-      venue: "Cathedral of Good Shepherd",
-      location: "Ogui Road, Enugu",
+      title: "Church Wedding Ceremony",
+      date: "Saturday, Sept 12, 2026",
+      venue: "Deeper Life Bible Church, Bwari",
+      location: "Bwari, Abuja",
       steps: [
-        { time: "9:00 AM", label: "Arrival of Groomsmen & Guests", desc: "Doors open for guest seating. All attendees are kindly requested to be seated early." },
-        { time: "9:45 AM", label: "Processional & Entrance of the Bride", desc: "The bridal party enters, followed by the grand entrance of Adanna with her father." },
-        { time: "10:00 AM", label: "Liturgies & Exchange of Sacred Vows", desc: "A beautiful, solemn service before the Altar, including scripture readings, vows, and ring exchange." },
-        { time: "11:30 AM", label: "Holy Communion & Register Signing", desc: "The newly married couple shares Holy Communion, followed by the signing of the ecclesial certificates." },
-        { time: "12:15 PM", label: "Recessional & Professional Photoshoot", desc: "First walk as husband and wife, followed immediately by family and guest photographs at the cathedral courtyard." }
+        { time: "8:30 AM", label: "Guest Seating & Prelude of Hymns", desc: "Doors open for guest seating. Attendees are kindly requested to be seated early as the service starts on time." },
+        { time: "9:00 AM", label: "Arrival of Bridal Party & Processional", desc: "The bridal train enters, ushering in the grand entrance of the bride, Ayomide." },
+        { time: "9:30 AM", label: "Covenant Sermon & Holy Matrimony Vows", desc: "A beautiful, solemn service before the Altar, including scripture readings, exchange of vows, and rings." },
+        { time: "11:00 AM", label: "Signing of Certificates & Thanksgiving", desc: "The newly married couple signs the wedding register, followed by special thanksgiving offerings." },
+        { time: "11:45 AM", label: "Recessional & Photographs", desc: "First walk as husband and wife, followed immediately by professional group photographs in the church gardens." }
       ]
     },
     {
-      title: "Grand Reception & Rejoicing",
-      date: "Saturday, Oct 17, 2026",
-      venue: "Royal Event Pavilion, Nike Lake Resort",
-      location: "Nike Lake Road, Enugu",
+      title: "Thanksgiving & Fellowship Reception",
+      date: "Saturday, Sept 12, 2026",
+      venue: "Fellowship Hall, Deeper Life Bible Church",
+      location: "Bwari, Abuja",
       steps: [
-        { time: "1:00 PM", label: "Cocktail Reception & Seating", desc: "Pre-reception lounge opens with live harp scores and delicate refreshments by the lakeside." },
-        { time: "1:30 PM", label: "Grand Entry of the Royal Couple", desc: "The bridal train makes its high-energy entry, ushering in Chidi & Adanna." },
-        { time: "2:15 PM", label: "Feast & Toasting", desc: "Opening of the exquisite continental and local buffet dinner. Groom's and Bride's fathers present royal toasts." },
-        { time: "3:30 PM", label: "Cake Cutting & Choreographed Waltz", desc: "The official cutting of the royal wedding cake and the couple's beautiful first dance." },
-        { time: "4:30 PM", label: "Nupe-Igbo Cultural Dance & Rejoicing", desc: "Celebrating our diverse cultural union with dynamic traditional dance and music." },
-        { time: "6:00 PM", label: "Bridal Exit & Farewell", desc: "Concluding prayers and departure of the bride and groom under a canopy of light." }
+        { time: "12:30 PM", label: "Fellowship Hall Doors Open", desc: "Pre-reception lounge opens with light refreshments in the church fellowship hall." },
+        { time: "1:00 PM", label: "Grand Entry of the New Couple", desc: "The bridal train makes its high-energy entry, ushering in Mr. and Mrs. Jerry Tobi." },
+        { time: "1:45 PM", label: "Thanksgiving Feast & Toasting", desc: "Opening of the exquisite buffet dinner, accompanied by toasts from the groom's and bride's families." },
+        { time: "3:00 PM", label: "Cake Cutting & First Waltz", desc: "The official cutting of the wedding cake and the couple's celebratory waltz." },
+        { time: "3:45 PM", label: "Cultural Dance & Rejoicing", desc: "Celebrating our diverse union with beautiful cultural dance performances and rejoicing." },
+        { time: "4:30 PM", label: "Closing Prayers & Royal Send-off", desc: "Concluding prayers and departure of the bride and groom under a canopy of love." }
       ]
     }
   ];
@@ -196,10 +196,10 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
                     </h3>
                     <div className="w-8 h-[1.5px] bg-[#C29D70] my-3"></div>
                     <p className="text-xs text-slate-700 leading-relaxed font-sans font-semibold">
-                      The Bride's Family Compound
+                      Elim Top Hotel and suites
                     </p>
                     <p className="text-xs text-slate-500 leading-relaxed font-sans mt-2">
-                      No. 17, Independence Layout Extension, Phase II, Enugu, Nigeria. Directly behind the Government House, easily accessible via Presidential Road.
+                      Bwari, FCT Abuja, Nigeria. Easily accessible along the Bwari-Dutse expressway grid.
                     </p>
                   </div>
                   
@@ -208,7 +208,7 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
                       <Car className="w-3.5 h-3.5 mr-1 text-[#C29D70]" /> Parking Guideline
                     </h4>
                     <p className="text-[11px] text-slate-600 leading-relaxed mt-1.5 font-medium">
-                      Street parking is strictly organized along Independence Boulevard. Marked parallel slots will be fully guarded by armed patrols. Ensure your gatepass code is visible.
+                      Hotel-supervised private parking is available within the secure hotel gates. Guests are requested to display their approved RSVP Gatepass at the gates.
                     </p>
                   </div>
                 </div>
@@ -220,14 +220,14 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
                       <MapPin className="w-4 h-4" />
                     </div>
                     <h3 className="font-serif text-base font-bold text-slate-800">
-                      Good Shepherd Cathedral
+                      Deeper Life Bible Church
                     </h3>
                     <div className="w-8 h-[1.5px] bg-[#C29D70] my-3"></div>
                     <p className="text-xs text-slate-700 leading-relaxed font-sans font-semibold">
-                      Holy Trinity Cathedral Precincts
+                      Main Sanctuary Bwari
                     </p>
                     <p className="text-xs text-slate-500 leading-relaxed font-sans mt-2">
-                      No 4 Ogui Road, Enugu, Nigeria. Centrally located right adjacent to the Michael Okpara Square in Enugu's civic center.
+                      Bwari, FCT Abuja, Nigeria. A prominent cathedral sanctuary located within the heart of Bwari municipal zone.
                     </p>
                   </div>
                   
@@ -236,7 +236,7 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
                       <Car className="w-3.5 h-3.5 mr-1 text-[#C29D70]" /> Parking Guideline
                     </h4>
                     <p className="text-[11px] text-slate-600 leading-relaxed mt-1.5 font-medium">
-                      Spacious, secure, paved parking is generously provided in the Cathedral's North Yard and South Courtyard. Dedicated church wardens will guide vehicular arrivals.
+                      Paved church parking is provided inside the secure church compound. Professional traffic marshals will assist with seating vehicular arrivals.
                     </p>
                   </div>
                 </div>
@@ -248,14 +248,14 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
                       <MapPin className="w-4 h-4" />
                     </div>
                     <h3 className="font-serif text-base font-bold text-slate-800">
-                      Nike Lake Pavilion
+                      Fellowship Hall
                     </h3>
                     <div className="w-8 h-[1.5px] bg-[#C29D70] my-3"></div>
                     <p className="text-xs text-slate-700 leading-relaxed font-sans font-semibold">
-                      Nike Lake Resort Complex
+                      Deeper Life Bible Church Complex
                     </p>
                     <p className="text-xs text-slate-500 leading-relaxed font-sans mt-2">
-                      Nike Lake Road, Enugu, Nigeria. Set in pristine visual beauty, entered via the resort's secure main gate along the Abakpa-Nike road grid.
+                      Bwari, FCT Abuja, Nigeria. Right next to the main cathedral auditorium inside the church fellowship zone.
                     </p>
                   </div>
                   
@@ -264,7 +264,7 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
                       <Car className="w-3.5 h-3.5 mr-1 text-[#C29D70]" /> Parking Guideline
                     </h4>
                     <p className="text-[11px] text-slate-600 leading-relaxed mt-1.5 font-medium">
-                      Complimentary visitor parking is provided in the resort's premium lakeside compound. Battery-powered shuttle golf buggies are on standby for elderly guests.
+                      Same-site parking as the church wedding. Safe and convenient foot transfer from the main auditorium to the fellowship hall.
                     </p>
                   </div>
                 </div>
@@ -279,7 +279,7 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
                 <div>
                   <h4 className="font-serif text-base font-bold text-white tracking-wide">Strict Security Protocols Implemented</h4>
                   <p className="text-xs text-[#FAF4F0] mt-1 leading-relaxed font-sans font-medium">
-                    Nike Lake Resort and wedding security will strictly check everyone at the gates. Please display your approved Gatepass on your dashboard or present your verification token text on your mobile screen.
+                    Church security patrols and hotel check stations will strictly check everyone at the gates. Please display your approved Gatepass on your dashboard or present your verification token text on your mobile screen.
                   </p>
                 </div>
               </div>
@@ -298,19 +298,19 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
                     CULTURAL PRIDE
                   </span>
                   <h3 className="font-serif text-base font-bold text-slate-800 flex items-center">
-                    <Shirt className="w-4 h-4 mr-2 text-[#C29D70]" /> Traditional (Igba Nkwu) Attire
+                    <Shirt className="w-4 h-4 mr-2 text-[#C29D70]" /> Traditional Attire Style
                   </h3>
                   <div className="w-12 h-[1px] bg-[#C29D70] my-3"></div>
                   
                   <div className="space-y-3 text-xs text-slate-700 leading-relaxed">
                     <p className="font-medium text-slate-600">
-                      We celebrate the rich, royal African heritage. Guests are highly encouraged to wear glamorous traditional attire with primary accents in <strong>Beige, Cream, or Regal Gold</strong>.
+                      We celebrate our rich African heritage. Guests are highly encouraged to wear glamorous traditional attire with primary accents in <strong>Purple &amp; Gold</strong>.
                     </p>
                     <div className="p-4 bg-[#FAF4F0]/60 rounded-xl border border-dashed border-[#C29D70]/40">
                       <p className="font-bold text-slate-800 text-[11px] uppercase tracking-wider mb-2 font-sans text-[#BF3B52]">Recommended Fabrics &amp; Style:</p>
                       <ul className="list-disc pl-4 space-y-1.5 text-slate-600 font-medium">
-                        <li><strong>Ladies</strong>: George wrappers, upscale Lace styles, embellished blouses, elegant head ties (Gele), and coral beaded necklines.</li>
-                        <li><strong>Gentlemen</strong>: Chieftaincy kaftans, majestic Agbada styles, or structured Isiagu shirts matched with complementary caps and walking sticks.</li>
+                        <li><strong>Ladies</strong>: Beautiful lace wrappers, embellished traditional gowns, and custom elegant head ties (Gele).</li>
+                        <li><strong>Gentlemen</strong>: Chieftaincy kaftans, majestic Agbada styles, or styled native senator wears with custom caps.</li>
                       </ul>
                     </div>
                   </div>
@@ -322,22 +322,22 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
                     ROMANTIC GALA &amp; SACRED REVERENCE
                   </span>
                   <h3 className="font-serif text-base font-bold text-slate-800 flex items-center">
-                    <Shirt className="w-4 h-4 mr-2 text-[#C29D70]" /> White Wedding Gala Attire
+                    <Shirt className="w-4 h-4 mr-2 text-[#C29D70]" /> Church &amp; Reception Attire
                   </h3>
                   <div className="w-12 h-[1px] bg-[#C29D70] my-3"></div>
                   
                   <div className="space-y-3 text-xs text-slate-700 leading-relaxed">
                     <p className="font-medium text-slate-600">
-                      The White Wedding calls for glamorous, formal wedding luxury. Our chosen theme features gorgeous <strong>Cyan Elegance &amp; Premium Platinum</strong> accents.
+                      The Church Wedding calls for formal elegance. Our chosen color theme features gorgeous <strong>Magenta purple, White &amp; Gold</strong>.
                     </p>
                     
                     <div className="p-4 bg-[#FAF4F0]/60 rounded-xl border border-dashed border-[#C29D70]/40">
                       <p className="font-bold text-slate-800 text-[11px] uppercase tracking-wider mb-2 font-sans text-[#BF3B52]">Reverent Church Guidelines &amp; Colors:</p>
                       <ul className="list-disc pl-4 space-y-1.5 text-slate-600 font-medium">
-                        <li><strong>Cathedral Decorum</strong>: In respect of the Cathedral, ladies are requested to wear elegant floor-length dresses that cover shoulders.</li>
-                        <li><strong>Color Harmony</strong>: Splendid shades of beautiful Cyan or shimmering Platinum white are requested.</li>
-                        <li><strong>Suited Perfection</strong>: Gentlemen should don classic dark tuxedo-cut suits, sleek bow-ties, or pristine white formal Kaftans with structured lines.</li>
-                        <li><strong className="text-red-700">Strict Note</strong>: White clothing is reserved exclusively for the beautiful bride Adanna.</li>
+                        <li><strong>Decorum</strong>: In respect of the sanctuary, guests are requested to wear elegant, modest, and respectful formal wear.</li>
+                        <li><strong>Color Harmony</strong>: Splendid shades of Magenta purple, White, or shimmering Gold are requested.</li>
+                        <li><strong>Suited Perfection</strong>: Gentlemen should don formal suits or crisp, structured traditional native attire.</li>
+                        <li><strong className="text-red-700">Strict Note</strong>: All-white clothing is reserved exclusively for the beautiful bride Ayomide.</li>
                       </ul>
                     </div>
                   </div>
@@ -382,7 +382,7 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
         {/* MODAL FOOTER */}
         <div className="px-6 py-4 bg-zinc-50 border-t border-[#C29D70]/20 flex items-center justify-between">
           <p className="text-[10px] text-zinc-400 font-sans font-bold">
-            Holy Matrimony • Chidi &amp; Adanna • 2026
+            Holy Matrimony • Tobi &amp; Ayomide • 2026
           </p>
           <button 
             onClick={onClose}

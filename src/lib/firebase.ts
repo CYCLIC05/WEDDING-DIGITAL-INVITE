@@ -1,63 +1,67 @@
 import admin from "firebase-admin";
-import { getFirestore } from "firebase-admin/firestore";
-import path from "path";
 import fs from "fs";
+import path from "path";
 
-let db: any = null;
-let isFirebaseConfigured = false;
-let projectId = "";
-let databaseId = "";
+// Check if firebase-applet-config.json exists
+const configPath = path.join(process.cwd(), "firebase-applet-config.json");
+let firebaseConfigured = false;
+let db: admin.firestore.Firestore | null = null;
 
-try {
-  const configPath = path.join(process.cwd(), "firebase-applet-config.json");
-  if (fs.existsSync(configPath)) {
-    const configData = fs.readFileSync(configPath, "utf-8");
-    const firebaseConfig = JSON.parse(configData);
-    
-    projectId = firebaseConfig?.projectId || "";
-    databaseId = firebaseConfig?.firestoreDatabaseId || "";
-    
-    if (projectId) {
-      if (!admin.apps.length) {
-        admin.initializeApp({
-          projectId: projectId,
-        });
-      }
-      
-      db = databaseId ? getFirestore(databaseId) : getFirestore();
-      isFirebaseConfigured = true;
-      console.log(`✅ Firebase Admin SDK initialized successfully for project "${projectId}" and database "${databaseId || "(default)"}".`);
-    }
-  } else {
-    console.warn("⚠️ firebase-applet-config.json not found in workspace root.");
-  }
-} catch (err) {
-  console.error("❌ Exception during Firebase Admin initialization:", err);
-}
-
-// Check with live query whether credentials actually have permissions/access to the targeting database
-export async function verifyFirebaseConnectivity(): Promise<boolean> {
-  if (!db || !isFirebaseConfigured) {
-    isFirebaseConfigured = false;
-    return false;
-  }
+if (fs.existsSync(configPath)) {
   try {
-    // Attempt a lightweight test fetch to verify read permissions
-    await db.collection("rsvps").limit(1).get();
-    console.log("✅ Firebase connectivity & read permissions confirmed successfully.");
-    isFirebaseConfigured = true;
-    return true;
-  } catch (err: any) {
-    console.warn("⚠️ Firebase connectivity verification check failed (possibly due to custom project configuration or insufficient credentials for this container's service account).");
-    console.warn(`Reason: ${err?.message || err}`);
-    console.warn("💡 Gracefully disabling server-side Firebase operations and falling back to offline JSON files to prevent user request failures.");
-    isFirebaseConfigured = false;
-    return false;
+    const rawConfig = fs.readFileSync(configPath, "utf-8");
+    const config = JSON.parse(rawConfig);
+    
+    if (config.projectId) {
+      // Initialize Firebase Admin App
+      admin.initializeApp({
+        projectId: config.projectId,
+      });
+
+      // Get Firestore instance, specifying the databaseId if provided
+      const targetDatabaseId = config.databaseId || config.firestoreDatabaseId;
+      if (targetDatabaseId) {
+        db = admin.firestore(admin.app());
+        // Configure Firestore to use the custom database
+        db.settings({
+          databaseId: targetDatabaseId,
+        });
+        console.log(`[Firebase] Admin SDK initialized successfully for project "${config.projectId}" and database "${targetDatabaseId}".`);
+      } else {
+        db = admin.firestore();
+        console.log(`[Firebase] Admin SDK initialized successfully for default database in project "${config.projectId}".`);
+      }
+      firebaseConfigured = true;
+    }
+  } catch (error) {
+    console.error("[Firebase] Failed to parse or initialize Firebase Applet Config:", error);
   }
 }
+
+let firebaseConfiguredStatus = false;
 
 export function getFirebaseConfiguredStatus(): boolean {
-  return isFirebaseConfigured;
+  return firebaseConfiguredStatus;
 }
 
-export { db, isFirebaseConfigured, projectId, databaseId };
+export function isFirebaseConfigured(): boolean {
+  return firebaseConfigured;
+}
+
+export async function verifyFirebaseConnectivity(): Promise<boolean> {
+  if (!db || !firebaseConfigured) return false;
+  try {
+    // Attempt a lightweight test query to ensure database connection and permissions are working
+    await db.collection("system_check").doc("status").get();
+    console.log("[Firebase] Connectivity & read permissions confirmed successfully.");
+    firebaseConfiguredStatus = true;
+    return true;
+  } catch (error: any) {
+    console.log("[Firebase] Running database operations in local backup storage mode.");
+    console.log(`[Firebase] Database verification status details: ${error.message || error}`);
+    firebaseConfiguredStatus = false;
+    return false;
+  }
+}
+
+export { db };

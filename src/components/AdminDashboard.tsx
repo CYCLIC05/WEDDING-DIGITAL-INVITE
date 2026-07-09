@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { 
-  Lock, Unlock, RefreshCw, Search, Eye, Filter, Check, Trash, X, ChevronRight, FileText, Database, Info, LogOut, CheckCircle, Mail, HelpCircle, Loader2
+  Lock, Unlock, RefreshCw, Search, Eye, Filter, Check, Trash, X, ChevronRight, FileText, Database, Info, LogOut, CheckCircle, Mail, HelpCircle, Loader2, Send, CheckSquare, Square
 } from "lucide-react";
 import { RSVP, RSVPResponse } from "../types.ts";
 import { EnvelopeSimulator } from "./EnvelopeSimulator.tsx";
+import { signInWithGoogle, logoutGoogle, getGmailAccessToken, auth as firebaseAuth } from "../lib/googleAuth.ts";
+import { sendGmailEmail } from "../lib/gmailService.ts";
+import { onAuthStateChanged, User } from "firebase/auth";
 
 export function AdminDashboard() {
   const [passcode, setPasscode] = useState("");
@@ -20,8 +23,7 @@ export function AdminDashboard() {
   const [statusFilter, setStatusFilter] = useState("all");
   const [eventFilter, setEventFilter] = useState("all");
 
-  // Tab
-  const [activeTab, setActiveTab] = useState<"roster" | "sql">("roster");
+
 
   // Multi-state for Envelope Simulator
   const [simulatorState, setSimulatorState] = useState<{
@@ -32,6 +34,9 @@ export function AdminDashboard() {
     code: string;
     events: string[];
     htmlContent: string;
+    isEmailSent?: boolean;
+    emailMethod?: string;
+    smtpError?: string;
   }>({
     isOpen: false,
     guestName: "",
@@ -39,12 +44,53 @@ export function AdminDashboard() {
     status: "",
     code: "",
     events: [],
-    htmlContent: ""
+    htmlContent: "",
+    isEmailSent: false,
+    emailMethod: "none",
+    smtpError: ""
   });
 
   // Action states
   const [actioningId, setActioningId] = useState<string | null>(null);
   const [seatingSelection, setSeatingSelection] = useState("Imperial Main Hall • Section A");
+
+  // State variables for Gmail SMTP Interactive diagnostics
+  const [testEmailAddress, setTestEmailAddress] = useState("");
+  const [sendingTestEmail, setSendingTestEmail] = useState(false);
+  const [testEmailResult, setTestEmailResult] = useState<{
+    success: boolean;
+    message: string;
+    errorDetails?: string;
+  } | null>(null);
+
+  // Gmail & OAuth states
+  const [googleUser, setGoogleUser] = useState<User | null>(null);
+  const [useGmailForGatepass, setUseGmailForGatepass] = useState(true);
+  const [emailSubject, setEmailSubject] = useState("");
+  const [emailBody, setEmailBody] = useState("");
+  const [isComposeModalOpen, setIsComposeModalOpen] = useState(false);
+  const [selectedRsvpsForEmail, setSelectedRsvpsForEmail] = useState<RSVP[]>([]);
+  const [sendingEmails, setSendingEmails] = useState(false);
+  const [smtpConfigured, setSmtpConfigured] = useState(false);
+  const [emailSendMethod, setEmailSendMethod] = useState<"smtp" | "client">("smtp");
+  const [emailProgress, setEmailProgress] = useState<{
+    current: number;
+    total: number;
+    successCount: number;
+    errorCount: number;
+  } | null>(null);
+
+  const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
+  const [confirmingSend, setConfirmingSend] = useState(false);
+  const [emailSendErrors, setEmailSendErrors] = useState<{ recipient: string; error: string }[]>([]);
+
+  // Monitor Google Authentication State changes
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(firebaseAuth, (user) => {
+      setGoogleUser(user);
+    });
+    return () => unsubscribe();
+  }, []);
 
   // Check if saved passcode exists in localStorage
   useEffect(() => {
@@ -110,6 +156,72 @@ export function AdminDashboard() {
     setRsvps([]);
   };
 
+  const handleSendTestEmail = async () => {
+    if (!testEmailAddress) {
+      alert("Please provide a recipient email address to send the test message.");
+      return;
+    }
+    const currentCode = localStorage.getItem("wedding_admin_passcode") || "";
+    if (!currentCode) {
+      alert("You must be logged in as admin to test SMTP mailer settings.");
+      return;
+    }
+
+    setSendingTestEmail(true);
+    setTestEmailResult(null);
+
+    try {
+      const res = await fetch("/api/admin/send-email-smtp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${currentCode}`
+        },
+        body: JSON.stringify({
+          recipients: testEmailAddress,
+          subject: "💍 Wedding Mailer SMTP Integration Test",
+          htmlBody: `
+            <div style="font-family: sans-serif; padding: 24px; border: 3px double #BF3B52; background-color: #FAF9F6; border-radius: 12px; max-width: 500px; margin: 20px auto; color: #1F2937; text-align: center;">
+              <h2 style="color: #BF3B52; margin-top: 0; font-size: 20px; border-bottom: 2px solid #BF3B52; padding-bottom: 8px; font-family: serif; font-weight: bold;">Integration Active! 🎉</h2>
+              <p style="font-size: 14px; line-height: 1.6;">This is an automated test verifying that the backend Nodemailer SMTP service is securely authenticated and communicating with Gmail SMTP server ports.</p>
+              <div style="background-color: #ECFDF5; border: 1px solid #A7F3D0; padding: 12px; border-radius: 6px; margin: 20px 0; font-weight: bold; color: #047857; font-size: 13px;">
+                ✓ SECURE GMAIL SMTP OUTBOUND TRANSMISSION SUCCESSFUL
+              </div>
+              <p style="font-size: 12px; color: #6B7280; font-style: italic; margin-top: 20px;">Tobi &amp; Ayomide's Covenant Wedding • Abuja, Nigeria</p>
+            </div>
+          `
+        })
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || `HTTP Error ${res.status}`);
+      }
+
+      if (data.success && data.successCount > 0) {
+        setTestEmailResult({
+          success: true,
+          message: "✓ Success! The test email has been delivered successfully to your inbox."
+        });
+      } else {
+        const failedDetail = data.details?.[0]?.error || data.summary || "Unknown error";
+        setTestEmailResult({
+          success: false,
+          message: "✗ SMTP Transmission Failed",
+          errorDetails: failedDetail
+        });
+      }
+    } catch (err: any) {
+      setTestEmailResult({
+        success: false,
+        message: "✗ SMTP Client Error",
+        errorDetails: err.message || String(err)
+      });
+    } finally {
+      setSendingTestEmail(false);
+    }
+  };
+
   const fetchRSVPs = async (code: string) => {
     const currentCode = code || localStorage.getItem("wedding_admin_passcode") || "";
     if (!currentCode) return;
@@ -138,6 +250,13 @@ export function AdminDashboard() {
       const data = await res.json();
       if (data.success) {
         setRsvps(data.data);
+        if (data.smtpConfigured) {
+          setSmtpConfigured(true);
+          setEmailSendMethod("smtp");
+        } else {
+          setSmtpConfigured(false);
+          setEmailSendMethod("client");
+        }
       } else {
         setListError(data.error || "Failed to load RSVPs.");
       }
@@ -184,16 +303,35 @@ export function AdminDashboard() {
 
       const resData: RSVPResponse = await res.json();
 
+      // Send via Gmail if enabled and approved
+      let gmailStatusMessage = "";
+      if (action === "approve" && resData.data && googleUser && useGmailForGatepass) {
+        try {
+          await sendGmailEmail(
+            resData.data.email,
+            `✨ Tobi & Ayomide's Wedding Official Entry Gatepass [Code: ${resData.simulatedEmailCode || "INV-PASS"}]`,
+            resData.simulatedEmailHtml || ""
+          );
+          gmailStatusMessage = " (Dispatched via Gmail)";
+        } catch (gmailErr: any) {
+          console.error("Failed to send via Gmail:", gmailErr);
+          alert(`Database updated successfully, but Gmail send failed: ${gmailErr.message}. Falling back to default handler.`);
+        }
+      }
+
       // If approved, trigger the Envelope Simulator for supreme designer UX feedback
       if (action === "approve" && resData.data) {
         setSimulatorState({
           isOpen: true,
-          guestName: resData.data.name,
+          guestName: resData.data.name + gmailStatusMessage,
           email: resData.data.email,
           status: resData.data.status,
           code: resData.simulatedEmailCode || "INV-PASS",
           events: resData.data.events,
-          htmlContent: resData.simulatedEmailHtml || ""
+          htmlContent: resData.simulatedEmailHtml || "",
+          isEmailSent: resData.isEmailSent,
+          emailMethod: resData.emailMethod,
+          smtpError: resData.smtpError
         });
       }
 
@@ -296,7 +434,7 @@ export function AdminDashboard() {
                 <span className="text-emerald-950 flex items-center"><Unlock className="w-3.5 h-3.5 mr-1" /> Authenticated Console</span>
               </div>
               <h1 className="font-serif text-3xl font-medium text-emerald-950 tracking-tight">
-                Chidi &amp; Adanna's RSVP Registry
+                Tobi &amp; Ayomide's RSVP Registry
               </h1>
             </div>
 
@@ -322,82 +460,168 @@ export function AdminDashboard() {
             </div>
           </div>
 
-          {/* Sub Navigation Tabs */}
-          <div className="flex space-x-1 border-b border-zinc-200 mb-6">
-            <button
-              onClick={() => setActiveTab("roster")}
-              className={`px-4 py-2 text-xs font-mono uppercase tracking-wider font-bold border-b-2 transition duration-200 ${
-                activeTab === "roster"
-                  ? "border-emerald-900 text-emerald-900"
-                  : "border-transparent text-zinc-500 hover:text-emerald-950"
-              }`}
-            >
-              Attendee Roster
-            </button>
-            <button
-              onClick={() => setActiveTab("sql")}
-              className={`px-4 py-2 text-xs font-mono uppercase tracking-wider font-bold border-b-2 transition duration-200 ${
-                activeTab === "sql"
-                  ? "border-emerald-900 text-emerald-900"
-                  : "border-transparent text-zinc-500 hover:text-emerald-950"
-              }`}
-            >
-              Supabase SQL Script
-            </button>
-          </div>
+          {/* Main Dashboard Content */}
+          <div className="space-y-6">
 
-          {activeTab === "sql" ? (
-            /* Database SQL Schema Instructions Panel */
-            <div className="bg-white border border-amber-900/10 p-6 md:p-8 rounded-sm shadow-sm">
-              <div className="flex items-start space-x-3 mb-6">
-                <Database className="w-6 h-6 text-amber-700 mt-1 shrink-0" />
-                <div>
-                  <h3 className="font-serif text-xl font-bold text-emerald-950">
-                    Database Schema (Supabase SQL Script)
-                  </h3>
-                  <p className="text-xs text-zinc-500 mt-1 leading-relaxed">
-                    Execute the following script inside your Supabase project's SQL Editor to bootstrap the exact table variables, types, and security parameters required by this wedding system.
-                  </p>
+              {/* GMAIL INTEGRATION CONTROLLER */}
+              <div className="bg-white border border-rose-100 p-6 rounded-sm shadow-xs flex flex-col lg:flex-row items-stretch gap-6">
+                {/* SMTP Server Configuration card */}
+                <div className="flex-1 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-rose-50 pb-6 lg:pb-0 lg:pr-6 gap-4">
+                  <div className="flex items-start space-x-3.5">
+                    <div className={`p-2.5 rounded-full shrink-0 ${smtpConfigured ? "bg-emerald-50 text-emerald-700" : "bg-amber-50 text-amber-700"}`}>
+                      <Database className="w-5.5 h-5.5" />
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-serif text-base font-bold text-emerald-950 flex flex-wrap items-center gap-2">
+                        <span>Backend SMTP Mailer Service</span>
+                        {smtpConfigured ? (
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-bold bg-green-100 text-green-800 font-mono tracking-wider">
+                            ✓ ACTIVE (GMAIL)
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-bold bg-amber-100 text-amber-800 font-mono tracking-wider">
+                            UNCONFIGURED
+                          </span>
+                        )}
+                      </h4>
+                      <p className="text-xs text-zinc-500 mt-1 leading-relaxed">
+                        {smtpConfigured ? (
+                          <>
+                            Direct confirmations, gatepass credentials, and updates are securely transmitted directly from the Node.js server using Nodemailer and Gmail SMTP credentials.
+                          </>
+                        ) : (
+                          <>
+                            To enable automated direct confirmation emails on registration approval, please define <code className="font-mono text-[10px] bg-zinc-100 px-1 py-0.5 text-rose-700">GMAIL_USER</code> and <code className="font-mono text-[10px] bg-zinc-100 px-1 py-0.5 text-rose-700">GMAIL_PASS</code> in your project environment secrets.
+                          </>
+                        )}
+                      </p>
+
+                      {/* Interactive SMTP Tester */}
+                      {smtpConfigured && (
+                        <div className="mt-4 pt-3.5 border-t border-rose-50/50">
+                          <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-rose-800 block mb-2">
+                            ✉ Outbound SMTP Diagnostics &amp; Testing
+                          </span>
+                          <div className="flex items-center gap-2">
+                            <input
+                              type="email"
+                              placeholder="admin-test-inbox@gmail.com"
+                              value={testEmailAddress}
+                              onChange={(e) => setTestEmailAddress(e.target.value)}
+                              className="px-2.5 py-1.5 text-xs border border-rose-100 rounded bg-stone-50/50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#BF3B52] flex-1 font-mono placeholder-zinc-400"
+                            />
+                            <button
+                              onClick={handleSendTestEmail}
+                              disabled={sendingTestEmail || !testEmailAddress}
+                              className="px-3.5 py-1.5 bg-[#BF3B52] hover:bg-[#9E2B3E] text-white disabled:bg-zinc-100 disabled:text-zinc-400 transition font-mono text-[10px] font-bold uppercase tracking-wider rounded cursor-pointer shrink-0"
+                            >
+                              {sendingTestEmail ? "Sending..." : "Test SMTP"}
+                            </button>
+                          </div>
+
+                          {testEmailResult && (
+                            <div className={`mt-3 p-3 rounded text-xs leading-relaxed font-sans ${testEmailResult.success ? "bg-emerald-50 text-emerald-900 border border-emerald-200" : "bg-amber-50 text-amber-950 border border-amber-200"}`}>
+                              <p className="font-bold font-mono text-[10px] uppercase flex items-center gap-1.5">
+                                {testEmailResult.success ? (
+                                  <span className="text-emerald-700 font-bold">✓ SMTP TEST COMPLETED</span>
+                                ) : (
+                                  <span className="text-rose-800 font-bold">✗ SMTP DIAGNOSTIC FAILURE</span>
+                                )}
+                              </p>
+                              <p className="mt-1 font-semibold text-zinc-900">{testEmailResult.message}</p>
+                              {testEmailResult.errorDetails && (
+                                <div className="mt-2 text-[11px]">
+                                  <span className="font-mono font-bold block text-rose-800 mb-0.5">Error logs captured:</span>
+                                  <pre className="font-mono text-[10px] bg-white border border-rose-100 p-2 rounded overflow-x-auto whitespace-pre-wrap select-text max-h-40">
+                                    {testEmailResult.errorDetails}
+                                  </pre>
+                                  {testEmailResult.errorDetails.includes("Application-specific password required") && (
+                                    <div className="mt-2.5 bg-white p-2.5 rounded border border-amber-200 leading-relaxed text-zinc-700 font-medium font-sans">
+                                      💡 <strong>Action Required:</strong> Gmail blocks programmatic access using standard account passwords.
+                                      <ol className="list-decimal pl-4.5 mt-1.5 space-y-1 text-zinc-800 font-semibold">
+                                        <li>Go to your Google Account Settings (<a href="https://myaccount.google.com" target="_blank" rel="noreferrer" className="text-blue-700 underline hover:text-blue-900">myaccount.google.com</a>)</li>
+                                        <li>Select the <strong>Security</strong> tab</li>
+                                        <li>Under <strong>How you sign in to Google</strong>, click on <strong>2-Step Verification</strong> (ensure it is enabled)</li>
+                                        <li>Scroll to the very bottom and select <strong>App Passwords</strong></li>
+                                        <li>Enter "Wedding Mailer" as app name, click <strong>Create</strong>, and copy the generated 16-character passcode</li>
+                                        <li>Replace your <code className="bg-zinc-100 px-1 py-0.5 rounded text-rose-700 font-mono font-bold">GMAIL_PASS</code> environment secret with this passcode.</li>
+                                      </ol>
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* OAuth Client Connection card */}
+                <div className="flex-1 flex flex-col justify-between gap-3">
+                  <div className="flex items-start space-x-3.5">
+                    <div className={`p-2.5 rounded-full shrink-0 ${googleUser ? "bg-emerald-50 text-emerald-700" : "bg-zinc-50 text-zinc-400"}`}>
+                      <Mail className="w-5.5 h-5.5" />
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-serif text-base font-bold text-emerald-950 flex flex-wrap items-center gap-2">
+                        <span>Admin Personal Gmail Workspace</span>
+                        {googleUser ? (
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-bold bg-green-100 text-green-800 font-mono tracking-wider">
+                            ✓ CONNECTED
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-bold bg-zinc-100 text-zinc-500 font-mono tracking-wider">
+                            DISCONNECTED
+                          </span>
+                        )}
+                      </h4>
+                      <p className="text-xs text-zinc-500 mt-1 leading-relaxed">
+                        {googleUser ? (
+                          <>
+                            Authorized to read/send custom broadcast emails on behalf of <strong className="text-[#BF3B52] font-mono">{googleUser.email}</strong>. Useful for bespoke direct replies.
+                          </>
+                        ) : (
+                          <>
+                            (Optional) Authorize personal Gmail connection if you wish to run on-demand broadcasts directly using your individual inbox rather than the backend automated SMTP service.
+                          </>
+                        )}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-end pt-2">
+                    {googleUser ? (
+                      <button 
+                        onClick={async () => {
+                          await logoutGoogle();
+                        }}
+                        className="px-3.5 py-1.5 border border-zinc-200 hover:bg-zinc-50 text-zinc-600 text-[10px] font-mono font-bold uppercase tracking-wider transition rounded-sm flex items-center gap-1 cursor-pointer"
+                      >
+                        <LogOut className="w-3.5 h-3.5" />
+                        Disconnect
+                      </button>
+                    ) : (
+                      <button 
+                        onClick={async () => {
+                          try {
+                            await signInWithGoogle();
+                          } catch (err: any) {
+                            alert(`Google Workspace Connection failed: ${err.message || err}`);
+                          }
+                        }}
+                        className="px-4 py-1.5 bg-zinc-100 hover:bg-zinc-200 text-zinc-700 text-[10px] font-mono font-bold uppercase tracking-wider transition rounded-sm flex items-center gap-1.5 cursor-pointer"
+                      >
+                        <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.114-5.136 4.114-3.504 0-6.35-2.846-6.35-6.35s2.846-6.35 6.35-6.35c1.472 0 2.82.508 3.89 1.44l3.155-3.155C18.91 1.99 15.82 1 12.24 1 5.48 1 0 6.48 0 13.24s5.48 12.24 12.24 12.24c6.76 0 12.24-5.48 12.24-12.24 0-.825-.094-1.631-.262-2.41H12.24z"/>
+                        </svg>
+                        Connect Workspace
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
-
-              {/* Code window block */}
-              <div className="relative">
-                <textarea 
-                  readOnly
-                  rows={15}
-                  value={`-- Supabase Database Schema for Nigerian Christian Wedding RSVP
-CREATE TABLE IF NOT EXISTS public.rsvps (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
-    name TEXT NOT NULL,
-    email TEXT NOT NULL UNIQUE,
-    phone TEXT NOT NULL,
-    events TEXT[] NOT NULL,
-    dietary_notes TEXT,
-    status TEXT NOT NULL DEFAULT 'pending' 
-        CONSTRAINT check_rsvp_status CHECK (status IN ('pending', 'approved', 'declined'))
-);
-
--- Enable Row-Level Security (RLS)
-ALTER TABLE public.rsvps ENABLE ROW LEVEL SECURITY;
-
--- Allow public inserts
-CREATE POLICY "Allow public inserts" ON public.rsvps FOR INSERT WITH CHECK (true);
-
--- Allow system admin reads
-CREATE POLICY "Restricted SELECT to service_role" ON public.rsvps FOR SELECT USING (auth.role() = 'authenticated');`}
-                  className="w-full bg-zinc-950 text-emerald-400 font-mono text-xs p-4 rounded-xs border border-zinc-800 leading-relaxed shadow-inner"
-                />
-              </div>
-
-              <div className="mt-4 p-4 bg-emerald-950/5 border-l-4 border-emerald-900 text-xs text-emerald-950 leading-relaxed">
-                <strong>🔒 Elite Security Practice:</strong> The Express server bypasses client-side restrictions by routing connection strings securely behind backend proxies. Raw Supabase anon credentials or database passwords are completely hidden from the browser.
-              </div>
-            </div>
-          ) : (
-            /* Main Dashboard Content */
-            <div className="space-y-6">
 
               {/* METRICS ROW COUNTERS */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -505,22 +729,43 @@ CREATE POLICY "Restricted SELECT to service_role" ON public.rsvps FOR SELECT USI
 
                 </div>
 
-                {/* Seating Assignation Tool */}
-                <div className="border-t border-zinc-100 pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                  <div className="flex items-center space-x-2 text-[11px] font-mono text-zinc-500">
-                    <Info className="w-4 h-4 text-amber-700 shrink-0" />
-                    <span>Seating assignment allocated for newly approved invitations:</span>
+                {/* Seating Assignation Tool & Email Actions */}
+                <div className="border-t border-zinc-100 pt-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                  <div className="flex flex-wrap items-center gap-4">
+                    <div className="flex items-center space-x-2 text-[11px] font-mono text-zinc-500">
+                      <Info className="w-4 h-4 text-amber-700 shrink-0" />
+                      <span>Seating assignment allocated for newly approved invitations:</span>
+                    </div>
+                    
+                    <div className="flex items-center space-x-2">
+                      <span className="text-xs font-bold text-emerald-950 font-mono uppercase">Assign Seat:</span>
+                      <input 
+                        type="text" 
+                        value={seatingSelection}
+                        onChange={(e) => setSeatingSelection(e.target.value)}
+                        placeholder="e.g. Table 5 • Imperial Row"
+                        className="bg-zinc-50 border border-zinc-200 hover:bg-zinc-100 focus:bg-white px-3 py-1.5 text-xs font-bold text-emerald-900 rounded-xs focus:outline-none"
+                      />
+                    </div>
                   </div>
-                  
+
                   <div className="flex items-center space-x-2">
-                    <span className="text-xs font-bold text-emerald-950 font-mono uppercase">Assign Seat:</span>
-                    <input 
-                      type="text" 
-                      value={seatingSelection}
-                      onChange={(e) => setSeatingSelection(e.target.value)}
-                      placeholder="e.g. Table 5 • Imperial Row"
-                      className="bg-zinc-50 border border-zinc-200 hover:bg-zinc-100 focus:bg-white px-3 py-1.5 text-xs font-bold text-emerald-900 rounded-xs focus:outline-none"
-                    />
+                    <button
+                      onClick={() => {
+                        if (filteredRSVPs.length === 0) {
+                          alert("No guests match the current filters.");
+                          return;
+                        }
+                        setSelectedRsvpsForEmail(filteredRSVPs);
+                        setEmailSubject("Important Updates: Tobi & Ayomide's Wedding Celebration");
+                        setEmailBody(`<h3>Tobi &amp; Ayomide's Royal Union Wedding</h3>\n<p>Dear Guest,</p>\n<p>We are delighted to share some important details with you regarding our celebration...</p>\n<p>With love,<br/>Tobi &amp; Ayomide</p>`);
+                        setIsComposeModalOpen(true);
+                      }}
+                      className="px-3.5 py-1.5 bg-emerald-950 hover:bg-emerald-900 text-white font-mono text-[11px] font-bold uppercase tracking-wider transition rounded-sm flex items-center shadow-xs cursor-pointer"
+                    >
+                      <Send className="w-3.5 h-3.5 mr-1.5" />
+                      Email Filtered Guests ({filteredRSVPs.length})
+                    </button>
                   </div>
                 </div>
 
@@ -652,19 +897,52 @@ CREATE POLICY "Restricted SELECT to service_role" ON public.rsvps FOR SELECT USI
                                     </button>
                                   )}
 
-                                  {/* Delete Button */}
+                                  {/* Send Custom Email button */}
                                   <button
-                                    title="Delete Submission log"
-                                    disabled={actioningId !== null}
+                                    title="Send Custom Email via Gmail"
                                     onClick={() => {
-                                      if (confirm(`Remove records for ${row.name} permanently?`)) {
-                                        executeRSVPAction(row.id, "delete");
-                                      }
+                                      setSelectedRsvpsForEmail([row]);
+                                      setEmailSubject(`Regarding your RSVP to Tobi & Ayomide's Wedding`);
+                                      setEmailBody(`<h3>Tobi &amp; Ayomide's Wedding Celebration</h3>\n<p>Dear ${row.name},</p>\n<p>We are writing to you regarding your registration for our destination wedding in Abuja...</p>\n<p>With love,<br/>Tobi &amp; Ayomide</p>`);
+                                      setIsComposeModalOpen(true);
                                     }}
-                                    className="p-1.5 border border-zinc-200 text-zinc-500 hover:bg-zinc-100 hover:text-zinc-800 hover:border-zinc-300 transition rounded-xs"
+                                    className="p-1.5 border border-amber-200 text-amber-700 hover:bg-amber-50 hover:border-amber-300 transition rounded-xs flex items-center cursor-pointer"
                                   >
-                                    <Trash className="w-3.5 h-3.5" />
+                                    <Send className="w-3.5 h-3.5" />
                                   </button>
+
+                                  {/* Delete Button with Inline Confirmation */}
+                                  {confirmDeleteId === row.id ? (
+                                    <div className="flex items-center gap-1 bg-red-50 border border-red-200 p-1 rounded-sm shrink-0">
+                                      <span className="text-[9px] text-red-800 font-bold uppercase tracking-wider px-1">Delete?</span>
+                                      <button
+                                        onClick={() => {
+                                          executeRSVPAction(row.id, "delete");
+                                          setConfirmDeleteId(null);
+                                        }}
+                                        className="px-1.5 py-0.5 bg-red-600 hover:bg-red-700 text-white rounded-xs text-[10px] font-bold font-mono transition cursor-pointer"
+                                      >
+                                        Yes
+                                      </button>
+                                      <button
+                                        onClick={() => setConfirmDeleteId(null)}
+                                        className="px-1.5 py-0.5 bg-zinc-200 hover:bg-zinc-300 text-zinc-700 rounded-xs text-[10px] font-bold font-mono transition cursor-pointer"
+                                      >
+                                        No
+                                      </button>
+                                    </div>
+                                  ) : (
+                                    <button
+                                      title="Delete Submission log"
+                                      disabled={actioningId !== null}
+                                      onClick={() => {
+                                        setConfirmDeleteId(row.id);
+                                      }}
+                                      className="p-1.5 border border-zinc-200 text-zinc-500 hover:bg-zinc-100 hover:text-zinc-800 hover:border-zinc-300 transition rounded-xs cursor-pointer"
+                                    >
+                                      <Trash className="w-3.5 h-3.5" />
+                                    </button>
+                                  )}
 
                                 </div>
                               </td>
@@ -679,7 +957,6 @@ CREATE POLICY "Restricted SELECT to service_role" ON public.rsvps FOR SELECT USI
               </div>
 
             </div>
-          )}
 
           {/* Render our breathtaking Envelope simulated delivery popups */}
           <EnvelopeSimulator 
@@ -690,14 +967,17 @@ CREATE POLICY "Restricted SELECT to service_role" ON public.rsvps FOR SELECT USI
             status={simulatorState.status}
             code={simulatorState.code}
             events={simulatorState.events}
+            isEmailSent={simulatorState.isEmailSent}
+            emailMethod={simulatorState.emailMethod}
+            smtpError={simulatorState.smtpError}
             simulatedHtmlContent={simulatorState.htmlContent || `
               <div style="font-family: 'Georgia', serif; background-color: #FAF4F0; padding: 40px; text-align: center; border: 12px double #C29D70; outline: 3px solid #BF3B52; max-width: 600px; margin: 20px auto; color: #1E293B; border-radius: 8px;">
                 <div style="text-align: center; margin-bottom: 24px;">
                   <img src="https://picsum.photos/seed/monogram/100/100" style="width: 50px; height: 50px; border-radius: 50%;" alt="Monogram" referrerPolicy="no-referrer" />
                   <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #BF3B52; font-weight: bold; margin-top: 10px;">Official Gatepass</div>
                 </div>
-                <h2 style="font-size: 26px; color: #BF3B52; margin-bottom: 4px; font-weight: normal;">Chidi &amp; Adanna</h2>
-                <p style="font-size: 13px; font-style: italic; color: #C29D70; margin-top: 0; margin-bottom: 24px;">Celebrating a Cord of Three Strands</p>
+                <h2 style="font-size: 26px; color: #BF3B52; margin-bottom: 4px; font-weight: normal;">Tobi &amp; Ayomide</h2>
+                <p style="font-size: 13px; font-style: italic; color: #C29D70; margin-top: 0; margin-bottom: 24px;">Celebrating our forever journey together</p>
                 
                 <div style="background-color: #ffffff; padding: 24px; border: 1px solid rgba(194, 157, 112, 0.4); text-align: left; margin: 20px 0;">
                   <p style="font-size: 16px; color: #0F172A; font-weight: bold;">Dear ${simulatorState.guestName},</p>
@@ -719,12 +999,452 @@ CREATE POLICY "Restricted SELECT to service_role" ON public.rsvps FOR SELECT USI
                   </div>
                 </div>
                 <p style="font-size: 11px; color: #4B5563;">
-                  "Though one may be overpowered, two can defend themselves. A cord of three strands is not quickly broken."<br/>
-                  <strong style="color: #BF3B52;">— Ecclesiastes 4:12</strong>
+                  "He who finds a wife finds a good thing and obtains favor from the Lord."<br/>
+                  <strong style="color: #BF3B52;">— Proverbs 18:22</strong>
                 </p>
               </div>
             `}
           />
+
+          {/* COMPOSE GMAIL MODAL */}
+          {isComposeModalOpen && (
+            <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+              <div className="bg-white border border-rose-100 rounded-sm shadow-2xl w-full max-w-3xl overflow-hidden max-h-[90vh] flex flex-col">
+                {/* Modal Header */}
+                <div className="bg-emerald-950 text-white px-6 py-4 flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <Mail className="w-5 h-5 text-amber-400" />
+                    <h3 className="font-serif text-lg font-bold">Compose Custom Email via Gmail</h3>
+                  </div>
+                  <button 
+                    onClick={() => {
+                      setIsComposeModalOpen(false);
+                      setEmailProgress(null);
+                      setSendingEmails(false);
+                    }}
+                    className="text-white/70 hover:text-white transition cursor-pointer"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+
+                {/* Modal Body */}
+                <div className="flex-grow overflow-y-auto p-6 space-y-4">
+                  {/* Auth Warning if not connected and no SMTP */}
+                  {!smtpConfigured && !googleUser ? (
+                    <div className="p-6 text-center space-y-4">
+                      <div className="w-12 h-12 bg-rose-50 text-[#BF3B52] rounded-full flex items-center justify-center mx-auto">
+                        <Lock className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <h4 className="font-serif text-lg font-bold text-emerald-950">Email Delivery System Unconfigured</h4>
+                        <p className="text-xs text-zinc-500 mt-1 max-w-md mx-auto leading-relaxed">
+                          To send customized update or confirmation emails, please define <code className="font-mono bg-zinc-100 px-1 text-[#BF3B52]">GMAIL_USER</code> and <code className="font-mono bg-zinc-100 px-1 text-[#BF3B52]">GMAIL_PASS</code> environment variables, or link your Google Workspace account below.
+                        </p>
+                      </div>
+                      <button
+                        onClick={async () => {
+                          try {
+                            await signInWithGoogle();
+                          } catch (err: any) {
+                            alert(`Google Auth failed: ${err.message || err}`);
+                          }
+                        }}
+                        className="px-5 py-2.5 bg-[#BF3B52] hover:bg-[#9E2B3E] text-white text-xs font-mono font-bold uppercase tracking-widest transition rounded-sm shadow-xs inline-flex items-center gap-2 cursor-pointer"
+                      >
+                        <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.114-5.136 4.114-3.504 0-6.35-2.846-6.35-6.35s2.846-6.35 6.35-6.35c1.472 0 2.82.508 3.89 1.44l3.155-3.155C18.91 1.99 15.82 1 12.24 1 5.48 1 0 6.48 0 13.24s5.48 12.24 12.24 12.24c6.76 0 12.24-5.48 12.24-12.24 0-.825-.094-1.631-.262-2.41H12.24z"/>
+                        </svg>
+                        Link Google Account
+                      </button>
+                    </div>
+                  ) : emailProgress && emailProgress.current >= emailProgress.total ? (
+                    /* Progress Complete Screen */
+                    <div className="p-8 text-center space-y-4">
+                      <div className="w-14 h-14 bg-emerald-50 text-emerald-700 rounded-full flex items-center justify-center mx-auto">
+                        <CheckCircle className="w-8 h-8" />
+                      </div>
+                      <div className="space-y-1">
+                        <h4 className="font-serif text-xl font-bold text-emerald-950">Emails Dispatched Successfully!</h4>
+                        <p className="text-xs text-zinc-500 max-w-md mx-auto">
+                          Successfully completed dispatch using the{" "}
+                          <strong>
+                            {emailSendMethod === "smtp" ? "Backend SMTP Mailer Service" : `Gmail Workspace account (${googleUser?.email})`}
+                          </strong>.
+                        </p>
+                      </div>
+                      
+                      <div className="bg-zinc-50 border border-zinc-100 p-4 rounded-sm text-left max-w-md mx-auto space-y-1.5 text-xs font-mono">
+                        <div className="flex justify-between">
+                          <span className="text-zinc-500">Recipients Count:</span>
+                          <span className="font-bold text-zinc-800">{emailProgress.total}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-zinc-500">Successful:</span>
+                          <span className="font-bold text-emerald-700">{emailProgress.successCount}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-zinc-500">Failed / Skips:</span>
+                          <span className="font-bold text-red-600">{emailProgress.errorCount}</span>
+                        </div>
+                      </div>
+
+                      {/* Display of outbound failures if any occurred */}
+                      {emailSendErrors.length > 0 && (
+                        <div className="mt-4 p-3.5 bg-rose-50 border border-rose-100 rounded text-left text-xs max-w-md mx-auto space-y-2">
+                          <span className="font-mono font-bold text-rose-800 block uppercase tracking-wider text-[10px]">
+                            ⚠️ Outbound Mail Failures ({emailSendErrors.length}):
+                          </span>
+                          <div className="max-h-40 overflow-y-auto space-y-2 font-mono text-[11px] text-zinc-700 leading-normal pr-1">
+                            {emailSendErrors.map((err, idx) => (
+                              <div key={idx} className="border-b border-rose-100/50 pb-1.5 last:border-b-0 last:pb-0">
+                                <span className="font-bold text-zinc-900">{err.recipient}:</span>
+                                <div className="text-red-600 bg-white border border-rose-100 p-1.5 rounded mt-1 overflow-x-auto whitespace-pre-wrap select-text">
+                                  {err.error}
+                                </div>
+                                {err.error.includes("Application-specific password required") && (
+                                  <div className="mt-2 bg-amber-50 border border-amber-200 p-2.5 rounded font-sans text-zinc-800 text-[11px] font-medium leading-relaxed">
+                                    💡 <strong>Gmail Passcode Required:</strong> Gmail blocks custom programmatic SMTP requests with your standard account password. To resolve:<br/>
+                                    1. Go to <a href="https://myaccount.google.com" target="_blank" rel="noreferrer" className="text-blue-700 underline hover:text-blue-900 font-bold">Google Account Security Settings</a>.<br/>
+                                    2. Turn on <strong>2-Step Verification</strong>.<br/>
+                                    3. Search/Navigate to <strong>App Passwords</strong> and generate a 16-character code.<br/>
+                                    4. Configure this App Password as your <code>GMAIL_PASS</code> env variable.
+                                  </div>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      <div className="pt-2">
+                        <button
+                          onClick={() => {
+                            setIsComposeModalOpen(false);
+                            setEmailProgress(null);
+                            setEmailSendErrors([]);
+                          }}
+                          className="px-5 py-2.5 bg-[#BF3B52] hover:bg-[#9E2B3E] text-white text-xs font-mono font-bold uppercase tracking-widest transition rounded-sm cursor-pointer"
+                        >
+                          Return to Console
+                        </button>
+                      </div>
+                    </div>
+                  ) : confirmingSend ? (
+                    /* High-Fidelity Custom Confirmation Screen */
+                    <div className="p-8 text-center space-y-5">
+                      <div className="w-14 h-14 bg-amber-50 text-amber-600 rounded-full flex items-center justify-center mx-auto border border-amber-200">
+                        <Info className="w-8 h-8" />
+                      </div>
+                      <div className="space-y-1">
+                        <h4 className="font-serif text-xl font-bold text-amber-950">Confirm Outbound Broadcast</h4>
+                        <p className="text-xs text-zinc-500 max-w-md mx-auto">
+                          You are about to initiate a customized email broadcast to <strong>{selectedRsvpsForEmail.length} selected guest(s)</strong>.
+                        </p>
+                      </div>
+
+                      <div className="bg-stone-50 border border-stone-200 p-5 rounded-sm text-left max-w-lg mx-auto space-y-3 text-xs font-mono">
+                        <div className="flex justify-between border-b border-stone-200 pb-1.5">
+                          <span className="text-zinc-500">Delivery Channel:</span>
+                          <span className="font-bold text-zinc-800 uppercase">
+                            {emailSendMethod === "smtp" ? "✓ Secure Backend SMTP" : `✓ Gmail API (${googleUser?.email})`}
+                          </span>
+                        </div>
+                        <div className="flex justify-between border-b border-stone-200 pb-1.5">
+                          <span className="text-zinc-500">Recipients Count:</span>
+                          <span className="font-bold text-zinc-800">{selectedRsvpsForEmail.length} Guests</span>
+                        </div>
+                        <div className="flex justify-between border-b border-stone-200 pb-1.5">
+                          <span className="text-zinc-500">Email Subject:</span>
+                          <span className="font-bold text-zinc-800 truncate max-w-xs">{emailSubject}</span>
+                        </div>
+                        <div className="pt-1.5 text-zinc-600 leading-relaxed font-sans text-[11px]">
+                          <strong>⚠️ Broadcast Notice:</strong> Every message will be custom-interpolated with each guest's name if the placeholder is present. Ensure your connection settings are valid. Click confirm to begin dispatching immediately.
+                        </div>
+                      </div>
+
+                      <div className="flex justify-center space-x-3 pt-3">
+                        <button
+                          onClick={() => setConfirmingSend(false)}
+                          className="px-5 py-2.5 border border-zinc-300 text-zinc-600 text-xs font-mono font-bold uppercase tracking-widest transition rounded-sm hover:bg-zinc-100 cursor-pointer"
+                        >
+                          Cancel / Go Back
+                        </button>
+                        <button
+                          onClick={async () => {
+                            setConfirmingSend(false);
+                            setSendingEmails(true);
+                            setEmailSendErrors([]);
+                            const totalCount = selectedRsvpsForEmail.length;
+                            const progress = { current: 0, total: totalCount, successCount: 0, errorCount: 0 };
+                            setEmailProgress(progress);
+
+                            for (let i = 0; i < totalCount; i++) {
+                              const recipient = selectedRsvpsForEmail[i];
+                              
+                              let customizedBody = emailBody;
+                              if (customizedBody.includes("[Guest Name]")) {
+                                customizedBody = customizedBody.replace(/\[Guest Name\]/g, recipient.name);
+                              }
+
+                              try {
+                                if (emailSendMethod === "smtp") {
+                                  const adminCode = localStorage.getItem("wedding_admin_passcode") || "";
+                                  const response = await fetch("/api/admin/send-email-smtp", {
+                                    method: "POST",
+                                    headers: {
+                                      "Content-Type": "application/json",
+                                      "Authorization": `Bearer ${adminCode}`,
+                                      "X-Admin-Passcode": adminCode
+                                    },
+                                    body: JSON.stringify({
+                                      recipients: [recipient.email],
+                                      subject: emailSubject,
+                                      htmlBody: customizedBody
+                                    })
+                                  });
+                                  if (!response.ok) {
+                                    const errData = await response.json();
+                                    throw new Error(errData.error || `HTTP error ${response.status}`);
+                                  }
+                                } else {
+                                  await sendGmailEmail(recipient.email, emailSubject, customizedBody);
+                                }
+                                progress.successCount++;
+                              } catch (err: any) {
+                                console.error(`Failed to send to ${recipient.email}:`, err);
+                                progress.errorCount++;
+                                setEmailSendErrors(prev => [...prev, { recipient: recipient.email, error: err.message || String(err) }]);
+                              }
+                              
+                              progress.current = i + 1;
+                              setEmailProgress({ ...progress });
+                              await new Promise(resolve => setTimeout(resolve, 200));
+                            }
+                            
+                            setSendingEmails(false);
+                          }}
+                          className="px-5 py-2.5 bg-[#BF3B52] hover:bg-[#9E2B3E] text-white text-xs font-mono font-bold uppercase tracking-widest transition rounded-sm flex items-center gap-1.5 shadow-sm cursor-pointer"
+                        >
+                          <Send className="w-3.5 h-3.5" />
+                          Confirm &amp; Dispatch
+                        </button>
+                      </div>
+                    </div>
+                  ) : sendingEmails ? (
+                    /* Active Sending Loader */
+                    <div className="p-8 text-center space-y-4">
+                      <Loader2 className="w-10 h-10 animate-spin text-[#BF3B52] mx-auto" />
+                      <div className="space-y-1">
+                        <h4 className="font-serif text-lg font-bold text-emerald-950">
+                          Sending Emails...
+                        </h4>
+                        <p className="text-xs text-zinc-500">
+                          Dispatched via{" "}
+                          <strong>
+                            {emailSendMethod === "smtp" ? "Secure Backend SMTP" : `Gmail Workspace (${googleUser?.email})`}
+                          </strong>. Please do not close this modal.
+                        </p>
+                      </div>
+
+                      <div className="max-w-md mx-auto space-y-2">
+                        <div className="flex justify-between text-xs font-mono font-bold text-[#BF3B52]">
+                          <span>Progress</span>
+                          <span>{emailProgress?.current} / {emailProgress?.total}</span>
+                        </div>
+                        {/* Progress Bar */}
+                        <div className="w-full bg-zinc-100 h-2 rounded-full overflow-hidden">
+                          <div 
+                            className="bg-[#BF3B52] h-full transition-all duration-300"
+                            style={{ width: `${((emailProgress?.current || 0) / (emailProgress?.total || 1)) * 100}%` }}
+                          />
+                        </div>
+                        <div className="text-[10px] text-zinc-400 font-mono flex justify-between">
+                          <span>Succeeded: {emailProgress?.successCount}</span>
+                          <span>Failed: {emailProgress?.errorCount}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    /* Form Input screen */
+                    <div className="space-y-4">
+                      {/* Delivery Mode Choice */}
+                      <div className="space-y-1.5">
+                        <label className="block text-[11px] font-mono font-bold text-[#BF3B52] uppercase tracking-wider">
+                          Email Delivery Channel
+                        </label>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                          {/* SMTP Channel */}
+                          <div 
+                            onClick={() => {
+                              if (smtpConfigured) setEmailSendMethod("smtp");
+                            }}
+                            className={`p-3.5 border rounded-sm flex items-start space-x-3 cursor-pointer transition ${
+                              emailSendMethod === "smtp" 
+                                ? "bg-emerald-50/40 border-emerald-600 text-emerald-950" 
+                                : smtpConfigured 
+                                  ? "border-zinc-200 hover:bg-zinc-50/50" 
+                                  : "opacity-50 cursor-not-allowed bg-zinc-50 border-zinc-200"
+                            }`}
+                          >
+                            <input 
+                              type="radio" 
+                              id="method-smtp"
+                              name="send-method"
+                              checked={emailSendMethod === "smtp"}
+                              disabled={!smtpConfigured}
+                              onChange={() => setEmailSendMethod("smtp")}
+                              className="accent-emerald-700 mt-0.5"
+                            />
+                            <div className="text-left">
+                              <label htmlFor="method-smtp" className="text-xs font-serif font-bold cursor-pointer block">
+                                Backend SMTP Service
+                              </label>
+                              <span className="text-[10px] text-zinc-400 block mt-0.5">
+                                {smtpConfigured ? "✓ Configured & Active (Nodemailer)" : "✗ Unconfigured (GMAIL_USER env missing)"}
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Client Workspace Channel */}
+                          <div 
+                            onClick={() => {
+                              if (googleUser) setEmailSendMethod("client");
+                            }}
+                            className={`p-3.5 border rounded-sm flex items-start space-x-3 cursor-pointer transition ${
+                              emailSendMethod === "client" 
+                                ? "bg-emerald-50/40 border-emerald-600 text-emerald-950" 
+                                : googleUser 
+                                  ? "border-zinc-200 hover:bg-zinc-50/50" 
+                                  : "opacity-50 cursor-not-allowed bg-zinc-50 border-zinc-200"
+                            }`}
+                          >
+                            <input 
+                              type="radio" 
+                              id="method-client"
+                              name="send-method"
+                              checked={emailSendMethod === "client"}
+                              disabled={!googleUser}
+                              onChange={() => setEmailSendMethod("client")}
+                              className="accent-emerald-700 mt-0.5"
+                            />
+                            <div className="text-left">
+                              <label htmlFor="method-client" className="text-xs font-serif font-bold cursor-pointer block">
+                                Personal Workspace API
+                              </label>
+                              <span className="text-[10px] text-zinc-400 block mt-0.5">
+                                {googleUser ? `✓ Connected: ${googleUser.email}` : "✗ Disconnected (OAuth required)"}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Recipients info */}
+                      <div className="bg-zinc-50 border border-zinc-200 p-4 rounded-sm text-xs">
+                        <div className="font-mono text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-1">
+                          Recipients Selection ({selectedRsvpsForEmail.length})
+                        </div>
+                        <div className="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto pt-1">
+                          {selectedRsvpsForEmail.map(r => (
+                            <span key={r.id} className="inline-flex items-center px-2 py-1 bg-white border border-zinc-200 text-zinc-700 rounded-sm font-mono text-[10px]">
+                              {r.name} &lt;{r.email}&gt;
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Subject input */}
+                      <div className="space-y-1">
+                        <label htmlFor="subject-compose" className="block text-[11px] font-mono font-bold text-[#BF3B52] uppercase tracking-wider">
+                          Email Subject
+                        </label>
+                        <input 
+                          id="subject-compose"
+                          type="text"
+                          required
+                          value={emailSubject}
+                          onChange={(e) => setEmailSubject(e.target.value)}
+                          placeholder="e.g. Important Wedding Venue updates"
+                          className="w-full bg-white border border-zinc-300 focus:outline-none focus:border-[#BF3B52] px-3.5 py-2.5 text-xs rounded-sm"
+                        />
+                      </div>
+
+                      {/* Rich Content body input */}
+                      <div className="space-y-1">
+                        <label htmlFor="body-compose" className="block text-[11px] font-mono font-bold text-[#BF3B52] uppercase tracking-wider flex justify-between">
+                          <span>Email Body (HTML supported)</span>
+                          <span className="text-[9px] text-zinc-400 font-normal">Use [Guest Name] as a placeholder</span>
+                        </label>
+                        <textarea 
+                          id="body-compose"
+                          required
+                          rows={6}
+                          value={emailBody}
+                          onChange={(e) => setEmailBody(e.target.value)}
+                          placeholder="Type your HTML body content here..."
+                          className="w-full bg-white border border-zinc-300 focus:outline-none focus:border-[#BF3B52] p-3.5 text-xs rounded-sm font-sans"
+                        />
+                      </div>
+
+                       {/* Visual Mail Preview */}
+                      <div className="border border-zinc-200 rounded-sm overflow-hidden">
+                        <div className="bg-zinc-100 px-4 py-2 text-[10px] font-mono font-bold text-zinc-500 uppercase tracking-wider border-b border-zinc-200 flex justify-between items-center">
+                          <span>Real-time Live Render Preview</span>
+                          <span className="text-[9px] text-emerald-800 font-normal">
+                            Sender: {emailSendMethod === "smtp" ? "System SMTP Mailer" : googleUser?.email || "Personal Inbox"}
+                          </span>
+                        </div>
+                        <div className="p-6 bg-[#FAF9F6] max-h-48 overflow-y-auto">
+                          <div 
+                            className="bg-white border border-rose-100 p-6 shadow-sm rounded-sm font-serif max-w-xl mx-auto text-[#4C0519]"
+                            dangerouslySetInnerHTML={{ __html: emailBody.replace(/\[Guest Name\]/g, selectedRsvpsForEmail[0]?.name || "Guest") }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Modal Footer */}
+                {((emailSendMethod === "smtp" && smtpConfigured) || (emailSendMethod === "client" && googleUser)) && !sendingEmails && !confirmingSend && (!emailProgress || emailProgress.current < emailProgress.total) && (
+                  <div className="bg-zinc-50 border-t border-zinc-200 px-6 py-4 flex justify-between items-center">
+                    <span className="text-[11px] font-mono text-zinc-400">
+                      {emailSendMethod === "smtp" 
+                        ? "Dispatched via high-deliverability server SMTP."
+                        : "Emails sent directly through Google Mail servers."
+                      }
+                    </span>
+                    <div className="flex space-x-3">
+                      <button
+                        onClick={() => setIsComposeModalOpen(false)}
+                        className="px-4 py-2 border border-zinc-300 text-zinc-600 text-xs font-mono uppercase tracking-wider transition rounded-sm hover:bg-zinc-100 cursor-pointer"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        onClick={() => {
+                          if (!emailSubject || !emailBody) {
+                            alert("Subject and Body are required.");
+                            return;
+                          }
+                          
+                          const totalCount = selectedRsvpsForEmail.length;
+                          if (totalCount === 0) return;
+
+                          setConfirmingSend(true);
+                        }}
+                        className="px-5 py-2 bg-[#BF3B52] hover:bg-[#9E2B3E] text-white text-xs font-mono font-bold uppercase tracking-widest transition rounded-sm flex items-center gap-1.5 shadow-sm cursor-pointer"
+                      >
+                        <Send className="w-3.5 h-3.5" />
+                        Send {selectedRsvpsForEmail.length > 1 ? `${selectedRsvpsForEmail.length} Emails` : "Email"}
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
 
         </div>
       )}
