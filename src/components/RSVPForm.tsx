@@ -1,5 +1,33 @@
 import React, { useState } from "react";
-import { Check, ClipboardList, Loader2, PartyPopper } from "lucide-react";
+
+// Bespoke SVG icons
+const QuillSVG = () => (
+  <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M17 3C15 3 4 12 4 20l3-1c0-4 6-10 12-14-2 2-4 6-4 10l3 1" />
+    <path d="M4 20l4-4" />
+  </svg>
+);
+const SpinnerSVG = () => (
+  <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4 animate-spin mr-2" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+    <circle cx="12" cy="12" r="10" strokeOpacity="0.2"/>
+    <path d="M12 2a10 10 0 0 1 10 10" />
+  </svg>
+);
+const CelebrationSVG = () => (
+  <svg viewBox="0 0 24 24" fill="none" className="w-8 h-8" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M5.5 14.5L3 21l6.5-2.5"/>
+    <path d="M3 21L14 10"/>
+    <path d="M14 3l7 7"/>
+    <path d="M18 5l3-2-2 3"/>
+    <path d="M10 8l2-5 2 5"/>
+    <path d="M16 14l5 2-5 2"/>
+  </svg>
+);
+const CheckSVG = () => (
+  <svg viewBox="0 0 12 12" fill="none" className="w-3 h-3" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="1.5,6 4.5,9 10.5,3" />
+  </svg>
+);
 
 export function RSVPForm() {
   const [formData, setFormData] = useState({
@@ -88,17 +116,17 @@ export function RSVPForm() {
         {/* Header Block */}
         <div className="text-center mb-12 animate-fade-in">
           <div className="inline-flex p-3 bg-[#BF3B52]/5 text-[#BF3B52] rounded-full mb-3 shadow-inner">
-            <ClipboardList className="w-5 h-5 text-[#BF3B52]" />
+            <QuillSVG />
           </div>
           <span className="text-xs text-[#C29D70] font-sans font-extrabold tracking-[0.25em] uppercase block mb-1">
-            Secure Attendance
+            Kindly RSVP
           </span>
           <h2 className="font-serif text-3xl text-slate-800 md:text-4xl tracking-tight font-bold">
-            Digital RSVP Registry
+            Confirm Attendance
           </h2>
           <div className="w-12 h-[1px] bg-[#C29D70] mx-auto mt-3 mb-3"></div>
           <p className="text-xs text-slate-500 leading-relaxed max-w-md mx-auto font-medium">
-            Due to seating constraints and strict security guidelines at Nike Lake Resort, all guests must pre-register. Approved reservations will receive an official entry pass.
+            Please respond by submitting your details below so we can prepare for your presence.
           </p>
         </div>
 
@@ -107,21 +135,21 @@ export function RSVPForm() {
           /* Animated success panel */
           <div className="border-2 border-[#C29D70]/30 bg-[#FAF4F0] rounded-3xl p-8 text-center card-shadow duration-500 transform scale-100 animate-fade-in double-gold-border">
             <div className="w-16 h-16 bg-[#BF3B52] text-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-md animate-bounce border border-[#C29D70]/40">
-              <PartyPopper className="w-8 h-8" />
+              <CelebrationSVG />
             </div>
             
             <h3 className="font-serif text-2xl text-slate-800 mb-2 font-bold">
-              RSVP Registered, {submittedName}!
+              Response Received, {submittedName}!
             </h3>
             
             <p className="text-xs font-sans text-[#BF3B52] uppercase tracking-widest mb-4 font-extrabold">
-              ✨ Seating Approval is Pending ✨
+              ✨ Thank You for Responding ✨
             </p>
 
             <div className="h-[1px] bg-[#C29D70]/25 my-4 max-w-xs mx-auto"></div>
 
             <p className="text-xs text-slate-600 leading-relaxed max-w-sm mx-auto mb-6 font-medium">
-              Thank you for compiling your reservation. Your request has been queued for review by Tobi & Ayomide's wedding host. An official Gatepass with your <strong>Verification Token</strong> and confirmed table selection will be emailed shortly.
+              Thank you for letting us know! We have successfully received your RSVP response. We look forward to celebrating this beautiful day together.
             </p>
 
             <button 
@@ -199,9 +227,9 @@ export function RSVPForm() {
               
               <div className="grid grid-cols-1 gap-3">
                 {[
-                  { value: "传统", label: "Part 1 • Traditional Wedding (Igba Nkwu) - Oct 15", val: "traditional" },
-                  { value: "教堂", label: "Part 2 • Church Holy Matrimony - Oct 17", val: "church" },
-                  { value: "招待", label: "Part 3 • White Wedding Reception - Oct 17", val: "reception" }
+                  { value: "传统", label: "Part 1 • Traditional Marriage (Journey Aligned) - Sept 11", val: "traditional" },
+                  { value: "教堂", label: "Part 2 • Church Wedding Ceremony - Sept 12", val: "church" },
+                  { value: "招待", label: "Part 3 • Thanksgiving & Fellowship - Sept 12", val: "reception" }
                 ].map((item) => {
                   const isChecked = formData.events.includes(item.val);
                   return (
@@ -215,7 +243,7 @@ export function RSVPForm() {
                       <div className={`mt-0.5 w-4 h-4 rounded-lg border flex items-center justify-center mr-3 shrink-0 ${
                         isChecked ? 'border-[#BF3B52] bg-[#BF3B52] text-white' : 'border-[#C29D70]/40'
                       }`}>
-                        {isChecked && <Check className="w-3 h-3 stroke-[3]" />}
+                        {isChecked && <CheckSVG />}
                       </div>
                       <span className="text-xs text-slate-800 font-semibold">
                         {item.label}
@@ -236,11 +264,11 @@ export function RSVPForm() {
               >
                 {loading ? (
                   <>
-                    <Loader2 className="w-4 h-4 animate-spin mr-2" />
-                    Compiling Reservation...
+                    <SpinnerSVG />
+                    Submitting Response...
                   </>
                 ) : (
-                  "Confirm Seating Reservation"
+                  "Confirm RSVP"
                 )}
               </button>
             </div>

@@ -1,5 +1,29 @@
 import React from "react";
-import { MapPin, Calendar, Clock, Sparkles } from "lucide-react";
+
+// Bespoke inline SVG icon components — no icon library
+const CalendarSVG = () => (
+  <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4 shrink-0" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="4" width="16" height="14" rx="2" />
+    <path d="M2 8h16M7 2v4M13 2v4" />
+  </svg>
+);
+const ClockSVG = () => (
+  <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4 shrink-0" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="10" cy="10" r="8" />
+    <path d="M10 6v4l3 2" />
+  </svg>
+);
+const PinSVG = () => (
+  <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4 shrink-0" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M10 2C7.24 2 5 4.24 5 7c0 4.5 5 11 5 11s5-6.5 5-11c0-2.76-2.24-5-5-5z" />
+    <circle cx="10" cy="7" r="1.8" />
+  </svg>
+);
+const DiamondSVG = () => (
+  <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4 shrink-0" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M10 2l4 5H6L10 2zM6 7l4 11 4-11H6z" />
+  </svg>
+);
 
 export function EventGrid() {
   const events = [
@@ -69,7 +93,9 @@ export function EventGrid() {
               {/* Event Card Badge */}
               <div className="text-[10px] text-[#BF3B52] font-sans tracking-[0.2em] uppercase font-extrabold mb-3 border-b border-rose-50 pb-2 flex items-center justify-between select-none">
                 <span>Part {idx + 1} • Celebration</span>
-                <span>✨</span>
+                <svg viewBox="0 0 16 16" fill="currentColor" className="w-3 h-3 text-[#C29D70]">
+                  <path d="M8 0l1.5 4.5H14l-3.7 2.7 1.4 4.3L8 9l-3.7 2.5 1.4-4.3L2 4.5h4.5z"/>
+                </svg>
               </div>
 
               <h3 className="font-serif text-xl font-bold text-slate-800 leading-snug mb-3">
@@ -83,7 +109,7 @@ export function EventGrid() {
               {/* Details List */}
               <div className="space-y-4 mb-2">
                 <div className="flex items-start text-xs text-slate-700">
-                  <Calendar className="w-4 h-4 text-[#C29D70] mr-3 mt-0.5 shrink-0" />
+                  <span className="text-[#C29D70] mr-3 mt-0.5"><CalendarSVG /></span>
                   <div>
                     <span className="font-bold text-slate-800 tracking-wide">Date</span>
                     <span className="mt-0.5 font-sans text-slate-600 block">{event.date}</span>
@@ -91,7 +117,7 @@ export function EventGrid() {
                 </div>
 
                 <div className="flex items-start text-xs text-slate-700">
-                  <Clock className="w-4 h-4 text-[#C29D70] mr-3 mt-0.5 shrink-0" />
+                  <span className="text-[#C29D70] mr-3 mt-0.5"><ClockSVG /></span>
                   <div>
                     <span className="font-bold text-slate-800 tracking-wide">Reception &amp; Time</span>
                     <span className="mt-0.5 font-sans text-slate-600 block">{event.time}</span>
@@ -99,7 +125,7 @@ export function EventGrid() {
                 </div>
 
                 <div className="flex items-start text-xs text-slate-700">
-                  <MapPin className="w-4 h-4 text-[#C29D70] mr-3 mt-0.5 shrink-0" />
+                  <span className="text-[#C29D70] mr-3 mt-0.5"><PinSVG /></span>
                   <div>
                     <span className="font-bold text-slate-800 tracking-wide">Venue Location</span>
                     <span className="mt-0.5 block font-semibold text-slate-800">{event.venue}</span>
@@ -108,9 +134,9 @@ export function EventGrid() {
                 </div>
 
                 <div className="flex items-start text-xs text-slate-700 pt-2">
-                  <Sparkles className="w-4 h-4 text-[#BF3B52] mr-3 mt-0.5 shrink-0 animate-pulse" />
+                  <span className="text-[#BF3B52] mr-3 mt-0.5"><DiamondSVG /></span>
                   <div>
-                    <span className="font-bold text-[#BF3B52] tracking-wide block">Dress Code Designation</span>
+                    <span className="font-bold text-[#BF3B52] tracking-wide block">Dress Code</span>
                     <span className="mt-0.5 text-slate-800 italic font-sans text-[11px] leading-relaxed font-semibold block">
                       {event.dressCode}
                     </span>

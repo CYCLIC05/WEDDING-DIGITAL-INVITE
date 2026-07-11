@@ -1,6 +1,33 @@
 import React from "react";
-import { Shield, Sparkles, Award, Compass, Heart } from "lucide-react";
 import groomPortrait from "../assets/images/groom_portrait.jpg";
+
+// Bespoke Roman numeral / monogram SVGs for each groomsman card
+const IconI = () => (
+  <svg viewBox="0 0 20 20" fill="none" className="w-5 h-5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+    <rect x="8" y="3" width="4" height="14" rx="1" fill="currentColor" stroke="none" opacity="0.85"/>
+    <line x1="5" y1="3" x2="15" y2="3" strokeWidth="2"/>
+    <line x1="5" y1="17" x2="15" y2="17" strokeWidth="2"/>
+  </svg>
+);
+const IconII = () => (
+  <svg viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+    <rect x="4" y="3" width="3.5" height="14" rx="0.8" opacity="0.85"/>
+    <rect x="12.5" y="3" width="3.5" height="14" rx="0.8" opacity="0.85"/>
+  </svg>
+);
+const IconIII = () => (
+  <svg viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+    <rect x="2" y="3" width="3" height="14" rx="0.8" opacity="0.85"/>
+    <rect x="8.5" y="3" width="3" height="14" rx="0.8" opacity="0.85"/>
+    <rect x="15" y="3" width="3" height="14" rx="0.8" opacity="0.85"/>
+  </svg>
+);
+const IconIV = () => (
+  <svg viewBox="0 0 20 20" fill="none" className="w-5 h-5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M3 4l5 12M3 4h7M14 4l3 12" />
+    <line x1="11" y1="10" x2="17" y2="10" strokeWidth="1.5"/>
+  </svg>
+);
 
 /**
  * The Groom's Corner component showcasing groom profile, Scripture, and the Groomsmen.
@@ -11,25 +38,25 @@ export function GroomsCorner() {
       name: "Akintayo O. Popoola",
       role: "Best Man (Brother & Partner)",
       bio: "Economist, investment banker, husband, and trusted friend who has been part of Jerry's journey for many years.",
-      icon: Shield,
+      icon: IconI,
     },
     {
       name: "Uzoma Nwachukwu",
       role: "Groomsman (Childhood Friend)",
       bio: "Brilliant tech engineer who keeps everyone laughing.",
-      icon: Compass,
+      icon: IconII,
     },
     {
       name: "Babajide Alao",
       role: "Groomsman (College Roommate)",
       bio: "A faithful friend of integrity, managing the wedding strategy.",
-      icon: Award,
+      icon: IconIII,
     },
     {
       name: "Emeka Okafor",
       role: "Groomsman (Groom's Cousin)",
       bio: "Gifted praise leader who coordinates the ceremony logistics.",
-      icon: Sparkles,
+      icon: IconIV,
     },
   ];
 

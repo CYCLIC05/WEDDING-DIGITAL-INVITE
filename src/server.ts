@@ -8,7 +8,8 @@ import morgan from "morgan";
 import rateLimit from "express-rate-limit";
 import { createServer as createViteServer } from "vite";
 import { Resend } from "resend";
-import { db, isFirebaseConfigured, verifyFirebaseConnectivity, getFirebaseConfiguredStatus } from "./lib/firebase.ts";
+import { supabase, isSupabaseConfigured, verifySupabaseConnectivity } from "./lib/supabase.ts";
+import { buildInvitationEmailHtml } from "./lib/inviteEmail.ts";
 import { sendSmtpEmail, isSmtpConfigured } from "./lib/nodemailerService.ts";
 
 function cleanCredentials(val: string): string {
@@ -204,7 +205,7 @@ const requireAdmin = (req: express.Request, res: express.Response, next: express
 app.get("/api/health", (req, res) => {
   res.json({ 
     status: "ok", 
-    firebaseConfigured: getFirebaseConfiguredStatus(),
+    supabaseConfigured: isSupabaseConfigured(),
     environment: process.env.NODE_ENV || "development" 
   });
 });
@@ -235,16 +236,19 @@ app.post("/api/rsvps", submitRSVPLimiter, async (req, res) => {
     let useLocalFallback = false;
 
     try {
-      if (db && getFirebaseConfiguredStatus()) {
-        const snapshot = await db.collection("rsvps").where("email", "==", normalizedEmail).get();
-        if (!snapshot.empty) {
-          existing = snapshot.docs[0].data();
-        }
+      if (supabase && isSupabaseConfigured()) {
+        const { data, error } = await supabase
+          .from("rsvps")
+          .select("id, email")
+          .eq("email", normalizedEmail)
+          .maybeSingle();
+        if (error) throw error;
+        if (data) existing = data;
       } else {
         useLocalFallback = true;
       }
     } catch (err) {
-      console.warn("[Firebase Select Exception - falling back to local file store]:", err);
+      console.warn("[Supabase Select Exception - falling back to local file store]:", err);
       useLocalFallback = true;
     }
 
@@ -263,25 +267,27 @@ app.post("/api/rsvps", submitRSVPLimiter, async (req, res) => {
     let useInsertFallback = false;
 
     try {
-      if (db && getFirebaseConfiguredStatus() && !useLocalFallback) {
-        const id = crypto.randomUUID();
-        const created_at = new Date().toISOString();
-        dataRecord = {
-          id,
-          created_at,
+      if (supabase && isSupabaseConfigured() && !useLocalFallback) {
+        const newRecord = {
           name: name.trim(),
           email: normalizedEmail,
           phone: phone.trim(),
-          events: events.map((v) => String(v).trim()),
+          events: events.map((v: any) => String(v).trim()),
           dietary_notes: dietary_notes ? String(dietary_notes).trim() : "",
           status: "pending"
         };
-        await db.collection("rsvps").doc(id).set(dataRecord);
+        const { data, error } = await supabase
+          .from("rsvps")
+          .insert(newRecord)
+          .select()
+          .single();
+        if (error) throw error;
+        dataRecord = data;
       } else {
         useInsertFallback = true;
       }
     } catch (err) {
-      console.warn("[Firebase Insertion Exception - falling back to local file store]:", err);
+      console.warn("[Supabase Insertion Exception - falling back to local file store]:", err);
       useInsertFallback = true;
     }
 
@@ -659,14 +665,18 @@ app.get("/api/rsvps", requireAdmin, async (req, res) => {
     let fetchFallback = false;
 
     try {
-      if (db && getFirebaseConfiguredStatus()) {
-        const snapshot = await db.collection("rsvps").orderBy("created_at", "desc").get();
-        rsvpsList = snapshot.docs.map((doc: any) => doc.data());
+      if (supabase && isSupabaseConfigured()) {
+        const { data, error } = await supabase
+          .from("rsvps")
+          .select("*")
+          .order("created_at", { ascending: false });
+        if (error) throw error;
+        rsvpsList = data || [];
       } else {
         fetchFallback = true;
       }
     } catch (err) {
-      console.warn("[Firebase Fetch All Exception - falling back to local file store]:", err);
+      console.warn("[Supabase Fetch All Exception - falling back to local file store]:", err);
       fetchFallback = true;
     }
 
@@ -708,14 +718,15 @@ app.post("/api/send-invitation", requireAdmin, async (req, res) => {
     // A. Delete Operation
     if (action === "delete") {
       try {
-        if (db && getFirebaseConfiguredStatus()) {
-          await db.collection("rsvps").doc(rsvpId).delete();
+        if (supabase && isSupabaseConfigured()) {
+          const { error } = await supabase.from("rsvps").delete().eq("id", rsvpId);
+          if (error) throw error;
           return res.json({ success: true, deleted: true });
         } else {
           updateFallback = true;
         }
       } catch (err) {
-        console.warn("[Firebase Delete Exception - falling back to local file store]:", err);
+        console.warn("[Supabase Delete Exception - falling back to local file store]:", err);
         updateFallback = true;
       }
 
@@ -732,23 +743,25 @@ app.post("/api/send-invitation", requireAdmin, async (req, res) => {
     let updatedRecord: any = null;
 
     try {
-      if (db && getFirebaseConfiguredStatus()) {
-        const docRef = db.collection("rsvps").doc(rsvpId);
-        const docSnap = await docRef.get();
-
-        if (!docSnap.exists) {
-          console.warn("[Firebase Lookup Warn - falling back to local file store]: Document does not exist");
+      if (supabase && isSupabaseConfigured()) {
+        const { data, error } = await supabase
+          .from("rsvps")
+          .update({ status: newStatus })
+          .eq("id", rsvpId)
+          .select()
+          .single();
+        if (error) throw error;
+        if (!data) {
+          console.warn("[Supabase Lookup Warn - falling back to local file store]: Record not found");
           updateFallback = true;
         } else {
-          await docRef.update({ status: newStatus });
-          const updatedDocSnap = await docRef.get();
-          updatedRecord = updatedDocSnap.data();
+          updatedRecord = data;
         }
       } else {
         updateFallback = true;
       }
     } catch (err) {
-      console.warn("[Firebase Fetch/Update Exception - falling back to local file store]:", err);
+      console.warn("[Supabase Fetch/Update Exception - falling back to local file store]:", err);
       updateFallback = true;
     }
 
@@ -773,56 +786,12 @@ app.post("/api/send-invitation", requireAdmin, async (req, res) => {
       return e;
     }).join(", ");
 
-    // Generate Breathtaking Royal Crimson styled Gatepass HTML matching red vibe theme
-    const emailHtml = `
-      <div style="font-family: 'Georgia', serif; background-color: #FAF9F6; padding: 40px; text-align: center; border: 12px solid #BF3B52; outline: 3px double #B45309; max-width: 600px; margin: 20px auto; color: #4C0519; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-        <div style="text-align: center; margin-bottom: 24px;">
-          <img src="https://picsum.photos/seed/elegantwedding/120/120?blur=1" style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid #B45309; object-fit: cover;" alt="Monogram" />
-          <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: #B45309; font-weight: bold; margin-top: 10px;">Official Gatepass</div>
-        </div>
-        
-        <h2 style="font-size: 28px; color: #BF3B52; margin-top: 10px; margin-bottom: 4px; font-weight: normal;">Tobi &amp; Ayomide</h2>
-        <p style="font-size: 13px; font-style: italic; color: #B45309; margin-top: 0; margin-bottom: 28px; letter-spacing: 1px;">- Proverbs 18:22 -</p>
-        
-        <div style="background-color: #ffffff; padding: 28px; border: 1px solid rgba(180, 83, 9, 0.2); border-radius: 2px; text-align: left; margin: 20px 0; background-image: radial-gradient(#FAF9F6 1px, transparent 1px); background-size: 16px 16px;">
-          <p style="margin-top: 0; font-size: 12px; font-weight: bold; text-transform: uppercase; color: #B45309; letter-spacing: 2px; border-bottom: 1px solid rgba(180, 83, 9, 0.15); padding-bottom: 8px;">Admittance Pass</p>
-          <p style="font-size: 18px; color: #4C0519; font-weight: bold; margin: 16px 0 8px 0;">Dear ${updatedRecord.name},</p>
-          <p style="font-size: 15px; line-height: 1.6; color: #1F2937; margin-bottom: 20px;">
-            We are overjoyed to confirm your seating reservation at our celebration. Below, please find your secure gatepass credentials for accessing the celebration venues.
-          </p>
-          
-          <div style="background-color: #FAF9F6; border-left: 4px solid #BF3B52; padding: 16px; margin: 20px 0; border-radius: 2px;">
-            <table style="width: 100%; font-size: 14px; border-collapse: collapse;">
-              <tr>
-                <td style="color: #B45309; font-weight: bold; width: 45%; padding: 6px 0; font-family: sans-serif; font-size: 12px; letter-spacing: 0.5px;">SECURE VERIFICATION CODE:</td>
-                <td style="color: #BF3B52; font-family: monospace; font-weight: bold; font-size: 18px; letter-spacing: 1.5px; padding: 6px 0;">${shortToken}</td>
-              </tr>
-              <tr>
-                <td style="color: #B45309; font-weight: bold; padding: 6px 0; font-family: sans-serif; font-size: 12px; letter-spacing: 0.5px;">CONFIRMED SEATING:</td>
-                <td style="color: #4C0519; font-weight: bold; font-size: 15px; padding: 6px 0;">${seating}</td>
-              </tr>
-              <tr>
-                <td style="color: #B45309; font-weight: bold; padding: 6px 0; font-family: sans-serif; font-size: 12px; letter-spacing: 0.5px;">SECURED ACCESS EVENTS:</td>
-                <td style="color: #1F2937; font-size: 13px; line-height: 1.4; padding: 6px 0;">${eventLabels}</td>
-              </tr>
-            </table>
-          </div>
-          
-          <p style="font-size: 13px; line-height: 1.5; color: #4B5563; margin-top: 15px; font-style: italic;">
-            * Kindly present a digital or printed copy of this pass at security check stations.
-          </p>
-        </div>
-        
-        <p style="font-size: 13px; line-height: 1.6; color: #4C0519; text-align: center; max-width: 480px; margin: 30px auto; padding: 15px; border-top: 1px dotted rgba(180, 83, 9, 0.4); border-bottom: 1px dotted rgba(180, 83, 9, 0.4);">
-          "He who finds a wife finds a good thing and obtains favor from the Lord."<br/>
-          <strong style="color: #B45309; font-size: 12px; display: block; margin-top: 8px;">— Proverbs 18:22</strong>
-        </p>
-        
-        <div style="font-size: 10px; color: #6B7280; text-transform: uppercase; letter-spacing: 2px; margin-top: 24px;">
-          Tobi &amp; Ayomide's Covenant Wedding • Abuja, Nigeria
-        </div>
-      </div>
-    `;
+    const emailHtml = buildInvitationEmailHtml({
+      guestName: updatedRecord.name,
+      shortToken,
+      seating,
+      events: updatedRecord.events,
+    });
 
     let isEmailSent = false;
     let resendId = "";
@@ -940,8 +909,8 @@ app.post("/api/admin/send-email-smtp", requireAdmin, async (req, res) => {
 // VITE CLIENT DEV SERVER AND STATIC ASSETS HANDLING ROUTINES
 // ============================================================================
 async function startServer() {
-  // Test Firebase availability and active credentials on startup
-  await verifyFirebaseConnectivity();
+  // Test Supabase availability and active credentials on startup
+  await verifySupabaseConnectivity();
 
   if (process.env.NODE_ENV !== "production") {
     console.log("🛠️  Configured developer mode. Launching HMR Vite Dev middleware...");

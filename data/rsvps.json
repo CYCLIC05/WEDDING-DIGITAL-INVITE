@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "id": "1ea37986-4671-49d5-bf6e-52a51b7275db",
+    "created_at": "2026-07-10T22:45:58.630Z",
+    "name": "samuel",
+    "email": "oyewales@gmail.com",
+    "phone": "9160036915",
+    "events": [
+      "traditional",
+      "church",
+      "reception"
+    ],
+    "dietary_notes": "",
+    "status": "pending"
+  }
+]

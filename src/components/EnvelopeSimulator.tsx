@@ -1,5 +1,37 @@
 import React, { useState } from "react";
-import { Mail, X, CheckCircle, Info, Sparkles, Send } from "lucide-react";
+
+// Bespoke SVG Icons for Envelope Simulator
+const MailSVG = () => (
+  <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5 text-[#C29D70]" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+    <polyline points="22,6 12,13 2,6" />
+  </svg>
+);
+const CloseSVG = () => (
+  <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+    <line x1="18" y1="6" x2="6" y2="18"/>
+    <line x1="6" y1="6" x2="18" y2="18"/>
+  </svg>
+);
+const InfoSVG = ({ className = "w-4 h-4 mr-2 shrink-0 mt-0.5" }) => (
+  <svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10"/>
+    <line x1="12" y1="8" x2="12" y2="8" strokeWidth="3"/>
+    <line x1="12" y1="12" x2="12" y2="16"/>
+  </svg>
+);
+const SendSVG = () => (
+  <svg viewBox="0 0 24 24" fill="none" className="w-4.5 h-4.5 mr-1" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="22" y1="2" x2="11" y2="13" />
+    <polygon points="22 2 15 22 11 13 2 9 22 2" />
+  </svg>
+);
+const CheckCircleSVG = ({ className = "w-4 h-4" }) => (
+  <svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <polyline points="9 11 12 14 17 9" strokeWidth="2"/>
+  </svg>
+);
 
 interface EnvelopeProps {
   isOpen: boolean;
@@ -46,7 +78,7 @@ export function EnvelopeSimulator({
         {/* Header bar */}
         <div className="flex items-center justify-between px-6 py-4 bg-[#BF3B52] text-white">
           <div className="flex items-center space-x-2">
-            <Mail className="w-5 h-5 text-[#C29D70]" />
+            <MailSVG />
             <span className="font-serif text-lg font-bold">Gatepass Mail Delivery System</span>
           </div>
           <button 
@@ -56,14 +88,14 @@ export function EnvelopeSimulator({
             }}
             className="text-white hover:bg-white/10 p-1.5 rounded-full duration-200 cursor-pointer"
           >
-            <X className="w-5 h-5" />
+            <CloseSVG />
           </button>
         </div>
 
         {/* Informative message */}
         <div className={`p-4 border-b border-[#C29D70]/20 text-[11px] font-semibold leading-relaxed font-mono flex flex-col gap-2.5 ${smtpError ? "bg-amber-50 text-amber-900" : "bg-[#C29D70]/5 text-[#BF3B52]"}`}>
           <div className="flex items-start">
-            <Info className={`w-4 h-4 mr-2 shrink-0 mt-0.5 ${smtpError ? "text-amber-600" : "text-[#BF3B52]"}`} />
+            <InfoSVG className={`w-4 h-4 mr-2 shrink-0 mt-0.5 ${smtpError ? "text-amber-600" : "text-[#BF3B52]"}`} />
             <div>
               <strong className="uppercase">Transactional Delivery Log:</strong> Approving {guestName}'s credentials triggered an outbound gatepass email transmission to <strong>{email}</strong>.
             </div>
@@ -133,7 +165,7 @@ export function EnvelopeSimulator({
                   onClick={() => setOpened(true)}
                   className="px-6 py-2.5 bg-[#BF3B52] hover:bg-[#9E2B3E] font-bold font-mono text-[11px] uppercase tracking-wider text-white transition duration-200 rounded-full flex items-center justify-center mx-auto border border-[#C29D70]/40 cursor-pointer"
                 >
-                  <Send className="w-4.5 h-4.5 mr-1" /> Open Transformed Envelope
+                  <SendSVG /> Open Transformed Envelope
                 </button>
               </div>
             </div>
@@ -163,8 +195,8 @@ export function EnvelopeSimulator({
         {/* Footer */}
         <div className="px-6 py-4 bg-zinc-50 border-t border-[#C29D70]/20 flex items-center justify-between font-mono">
           <div className="flex items-center space-x-2 text-xs text-slate-700 font-bold">
-            <CheckCircle className={`w-4 h-4 ${isEmailSent ? "text-emerald-600" : "text-amber-500"}`} />
-            <span>Outbound State: <strong className={isEmailSent ? "text-[#BF3B52] font-bold" : "text-amber-600 font-bold"}>{isEmailSent ? `Delivered via ${emailMethod.toUpperCase()}` : "Local Backup Draft (Unsent)"}</strong></span>
+            <CheckCircleSVG className={`${isEmailSent ? "text-emerald-600" : "text-amber-500"}`} />
+            <span>Outbound State: <strong className={isEmailSent ? "text-[#BF3B52] font-bold" : "text-emerald-600 font-bold"}>{isEmailSent ? `Delivered via ${emailMethod.toUpperCase()}` : "Local Backup Draft (Unsent)"}</strong></span>
           </div>
           <button 
             onClick={() => {

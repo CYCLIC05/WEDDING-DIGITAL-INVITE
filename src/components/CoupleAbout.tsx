@@ -1,6 +1,11 @@
 import React from "react";
-import { Heart } from "lucide-react";
 import groomPortrait from "../assets/images/groom_portrait.jpg";
+
+const HeartSVG = ({ className = "w-3.5 h-3.5" }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+  </svg>
+);
 
 /**
  * Programmatic SVG scallop lace vector overlay for the circle portraits.
@@ -80,7 +85,7 @@ export function CoupleAbout() {
             <div className="relative w-24 h-24 transform transition hover:scale-105 duration-300">
               <div className="absolute inset-1.5 rounded-full bg-white flex flex-col items-center justify-center text-center shadow-md border border-[#BF3B52]/10 z-15">
                 <span className="font-serif text-[11px] italic text-[#1E293B] uppercase tracking-wider font-semibold leading-none mt-1">True</span>
-                <Heart className="w-3.5 h-3.5 text-[#BF3B52] fill-[#BF3B52] my-0.5 animate-pulse" />
+                <HeartSVG className="w-3.5 h-3.5 text-[#BF3B52] animate-pulse my-0.5" />
                 <span className="font-script text-base text-[#1E293B] leading-none">Love</span>
               </div>
               <LaceFrame className="absolute inset-0 w-full h-full z-20 pointer-events-none" />
@@ -156,11 +161,11 @@ export function CoupleAbout() {
               </h3>
               
               <div className="my-2 text-[#BF3B52]">
-                <Heart className="w-3.5 h-3.5 fill-current" />
+                <HeartSVG className="w-3.5 h-3.5" />
               </div>
 
               <p className="text-xs md:text-sm text-slate-600 max-w-sm leading-relaxed px-4 font-medium italic font-serif">
-                "{couple.groomAbout}"
+                “{couple.groomAbout}”
               </p>
             </div>
           </div>
@@ -223,11 +228,11 @@ export function CoupleAbout() {
               </h3>
               
               <div className="my-2 text-[#BF3B52]">
-                <Heart className="w-3.5 h-3.5 fill-current" />
+                <HeartSVG className="w-3.5 h-3.5" />
               </div>
 
               <p className="text-xs md:text-sm text-slate-600 max-w-sm leading-relaxed px-4 font-medium italic font-serif">
-                "{couple.brideAbout}"
+                “{couple.brideAbout}”
               </p>
             </div>
           </div>
