@@ -5,11 +5,23 @@ import nodemailer from "nodemailer";
 let supabaseClient: SupabaseClient | null = null;
 let transporter: nodemailer.Transporter | null = null;
 
+function cleanCredentials(val: string): string {
+  if (!val) return "";
+  let clean = val.replace(/[\u200b-\u200d\u200e\u200f\ufeff\u202a-\u202e\u200c]/g, "").trim();
+  if (clean.startsWith('"') && clean.endsWith('"')) {
+    clean = clean.slice(1, -1);
+  }
+  if (clean.startsWith("'") && clean.endsWith("'")) {
+    clean = clean.slice(1, -1);
+  }
+  return clean.trim();
+}
+
 function getSupabase(): SupabaseClient | null {
   if (supabaseClient) return supabaseClient;
   try {
-    const url = process.env.SUPABASE_URL || "";
-    const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || "";
+    const url = cleanCredentials(process.env.SUPABASE_URL || "");
+    const key = cleanCredentials(process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || "");
     if (url && key) {
       supabaseClient = createClient(url, key, {
         auth: { persistSession: false },
