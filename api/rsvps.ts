@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { getSupabase, checkAdminAuth, setCors, isSmtpConfigured } from "./_lib";
+import { getSupabase, checkAdminAuth, setCors, isSmtpConfigured } from "./_lib.js";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   setCors(res);
