@@ -353,22 +353,21 @@ export function AdminDashboard() {
     }
   };
 
-  // Tallies count
   const metrics = {
     total: rsvps.length,
-    pending: rsvps.filter((r) => r.status === "pending").length,
+    registered: rsvps.filter((r) => r.status === "registered" || r.status === "pending").length,
     approved: rsvps.filter((r) => r.status === "approved").length,
     declined: rsvps.filter((r) => r.status === "declined").length,
   };
 
-  // Search & Filters filtering
   const filteredRSVPs = rsvps.filter((item) => {
     const matchesSearch = 
       item.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
       item.email.toLowerCase().includes(searchTerm.toLowerCase()) || 
       item.phone.includes(searchTerm);
     
-    const matchesStatus = statusFilter === "all" || item.status === statusFilter;
+    const matchesStatus = statusFilter === "all" || item.status === statusFilter ||
+      (statusFilter === "registered" && (item.status === "registered" || item.status === "pending"));
     const matchesEvent = eventFilter === "all" || item.events.includes(eventFilter);
 
     return matchesSearch && matchesStatus && matchesEvent;
@@ -647,11 +646,11 @@ export function AdminDashboard() {
 
                 <div className="bg-white border border-amber-900/10 p-5 rounded-xs shadow-xs border-l-4 border-l-amber-500">
                   <span className="text-[10px] font-mono font-bold tracking-widest text-amber-700 uppercase block mb-1">
-                    Pending Review
+                    Registered
                   </span>
                   <div className="flex items-baseline space-x-1.5">
-                    <span className="text-3xl font-bold text-amber-700 font-serif">{metrics.pending}</span>
-                    <span className="text-zinc-400 text-xs">queue</span>
+                    <span className="text-3xl font-bold text-amber-700 font-serif">{metrics.registered}</span>
+                    <span className="text-zinc-400 text-xs">guests</span>
                   </div>
                 </div>
 
@@ -712,7 +711,7 @@ export function AdminDashboard() {
                       className="w-full bg-zinc-50 border border-zinc-200 focus:border-emerald-800 focus:bg-white focus:outline-none px-3 py-2.5 text-xs rounded-xs font-medium"
                     >
                       <option value="all">All statuses ({metrics.total})</option>
-                      <option value="pending">Pending review ({metrics.pending})</option>
+                      <option value="registered">Registered ({metrics.registered})</option>
                       <option value="approved">Approved passes ({metrics.approved})</option>
                       <option value="declined">Declined requests ({metrics.declined})</option>
                     </select>
@@ -799,6 +798,7 @@ export function AdminDashboard() {
                     <table className="w-full text-left border-collapse">
                       <thead>
                         <tr className="bg-emerald-950/5 text-[10px] font-mono font-bold text-emerald-950 uppercase tracking-wider border-b border-zinc-200">
+                          <th className="py-4 px-4 w-12 text-center">#</th>
                           <th className="py-4 px-6">Guest / Contact Channels</th>
                           <th className="py-4 px-4">Targeted Events</th>
                           <th className="py-4 px-4 text-center">Status Badge</th>
@@ -806,10 +806,17 @@ export function AdminDashboard() {
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-zinc-200">
-                        {filteredRSVPs.map((row) => {
+                        {filteredRSVPs.map((row, index) => {
                           const code = row.id.substring(0, 8).toUpperCase();
                           return (
                             <tr key={row.id} className="hover:bg-zinc-50/50 transition duration-150 text-xs text-zinc-700">
+                              
+                              {/* Row number */}
+                              <td className="py-4 px-4 text-center">
+                                <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-[#580F6E]/10 text-[#580F6E] font-bold font-mono text-[11px]">
+                                  {index + 1}
+                                </span>
+                              </td>
                               
                               {/* Guest Identity */}
                               <td className="py-4 px-6">
@@ -841,16 +848,15 @@ export function AdminDashboard() {
                                 </div>
                               </td>
 
-                              {/* Status Badges */}
                               <td className="py-4 px-4 text-center">
                                 <span className={`inline-flex px-2.5 py-1 text-[9px] font-mono uppercase font-bold rounded-full ${
                                   row.status === "approved"
                                     ? "bg-green-100 text-green-800"
                                     : row.status === "declined"
                                     ? "bg-red-100 text-red-800"
-                                    : "bg-amber-100 text-amber-800"
+                                    : "bg-blue-100 text-blue-800"
                                 }`}>
-                                  {row.status}
+                                  {row.status === "pending" ? "registered" : row.status}
                                 </span>
                               </td>
 

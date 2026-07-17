@@ -51,7 +51,8 @@ function getResend() {
 }
 
 function getAdminPasscode() {
-  return (process.env.SYSTEM_ADMIN_PASSCODE || "TobiAyomide2026").trim();
+  // Default is "22122" — the admin passcode set by the owner
+  return (process.env.SYSTEM_ADMIN_PASSCODE || "22122").trim();
 }
 
 function checkAdminAuth(req: any): boolean {
@@ -63,7 +64,7 @@ function checkAdminAuth(req: any): boolean {
   else if (headerPasscode) provided = headerPasscode;
   else if (queryPasscode) provided = queryPasscode;
   const trimmed = provided.trim();
-  // Accept the hardcoded local passcode OR the env-var passcode
+  // Accept both the env-var passcode AND the hardcoded owner passcode
   return trimmed === "22122" || trimmed === getAdminPasscode();
 }
 
