@@ -14,7 +14,20 @@ function cleanCredentials(val: string): string {
   if (clean.startsWith("'") && clean.endsWith("'")) {
     clean = clean.slice(1, -1);
   }
-  return clean.trim();
+  clean = clean.trim();
+  
+  // Filter out placeholder templates
+  const lowercase = clean.toLowerCase();
+  if (
+    lowercase.includes("placeholder") || 
+    lowercase.includes("your-") || 
+    lowercase.includes("get this from") || 
+    clean === "re_123456789"
+  ) {
+    return "";
+  }
+  
+  return clean;
 }
 
 function getSupabase(): SupabaseClient | null {
