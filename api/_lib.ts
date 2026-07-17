@@ -1,32 +1,24 @@
 import { Resend } from "resend";
-import admin from "firebase-admin";
-import { getFirestore } from "firebase-admin/firestore";
+import { createClient, SupabaseClient } from "@supabase/supabase-js";
 import nodemailer from "nodemailer";
 
-let db: any = null;
-let firebaseReady = false;
+let supabaseClient: SupabaseClient | null = null;
 let transporter: nodemailer.Transporter | null = null;
 
-function getDb() {
-  if (firebaseReady && db) return db;
+function getSupabase(): SupabaseClient | null {
+  if (supabaseClient) return supabaseClient;
   try {
-    const projectId = process.env.FIREBASE_PROJECT_ID || "";
-    const databaseId = process.env.FIREBASE_DATABASE_ID || "(default)";
-    if (!admin.apps.length) {
-      const serviceAccountJson = process.env.FIREBASE_SERVICE_ACCOUNT_JSON;
-      if (serviceAccountJson) {
-        const serviceAccount = JSON.parse(serviceAccountJson);
-        admin.initializeApp({ credential: admin.credential.cert(serviceAccount), projectId });
-      } else {
-        admin.initializeApp({ projectId });
-      }
+    const url = process.env.SUPABASE_URL || "";
+    const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || "";
+    if (url && key) {
+      supabaseClient = createClient(url, key, {
+        auth: { persistSession: false },
+      });
     }
-    db = databaseId === "(default)" ? getFirestore() : getFirestore(databaseId);
-    firebaseReady = true;
   } catch (err) {
-    console.error("Firebase init error:", err);
+    console.error("Supabase init error:", err);
   }
-  return db;
+  return supabaseClient;
 }
 
 function getResend() {
@@ -101,4 +93,4 @@ async function sendSmtpEmail(
   return { messageId: info.messageId };
 }
 
-export { getDb, getResend, getAdminPasscode, checkAdminAuth, setCors, eventLabel, isSmtpConfigured, sendSmtpEmail };
+export { getSupabase, getResend, getAdminPasscode, checkAdminAuth, setCors, eventLabel, isSmtpConfigured, sendSmtpEmail };

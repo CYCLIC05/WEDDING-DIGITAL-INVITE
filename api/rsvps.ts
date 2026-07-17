@@ -1,14 +1,13 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import crypto from "crypto";
-import { getDb, checkAdminAuth, setCors, isSmtpConfigured } from "./_lib";
+import { getSupabase, checkAdminAuth, setCors, isSmtpConfigured } from "./_lib";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   setCors(res);
   if (req.method === "OPTIONS") return res.status(204).end();
 
-  const db = getDb();
-  if (!db) {
-    return res.status(503).json({ error: "Database not configured. Firestore credentials missing." });
+  const supabase = getSupabase();
+  if (!supabase) {
+    return res.status(503).json({ error: "Database not configured. Supabase credentials missing." });
   }
 
   // ============================================================================
@@ -20,8 +19,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     try {
-      const snapshot = await db.collection("rsvps").orderBy("created_at", "desc").get();
-      const rsvpsList = snapshot.docs.map((doc: any) => doc.data());
+      const { data: rsvpsList, error: fetchError } = await supabase
+        .from("rsvps")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (fetchError) throw fetchError;
+
       return res.json({
         success: true,
         data: rsvpsList,
@@ -29,7 +33,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       });
     } catch (err: any) {
       console.error("[GET /api/rsvps error]:", err);
-      return res.status(500).json({ error: `Firestore fetch error: ${err.message || err}` });
+      return res.status(500).json({ error: `Supabase fetch error: ${err.message || err}` });
     }
   }
 
@@ -55,17 +59,21 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
       const normalizedEmail = email.toLowerCase().trim();
 
-      // Check if duplicate RSVP exists in Firestore
-      const duplicateSnap = await db.collection("rsvps").where("email", "==", normalizedEmail).get();
-      if (!duplicateSnap.empty) {
+      // Check if duplicate RSVP exists in Supabase
+      const { data: existing, error: dupError } = await supabase
+        .from("rsvps")
+        .select("id")
+        .eq("email", normalizedEmail)
+        .maybeSingle();
+
+      if (dupError) {
+        throw new Error(`Database check error: ${dupError.message}`);
+      }
+      if (existing) {
         return res.status(400).json({ error: "Conflict Error: An RSVP registration with this email address already exists." });
       }
 
-      const id = crypto.randomUUID();
-      const created_at = new Date().toISOString();
       const dataRecord = {
-        id,
-        created_at,
         name: name.trim(),
         email: normalizedEmail,
         phone: phone.trim(),
@@ -74,12 +82,20 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         status: "pending"
       };
 
-      await db.collection("rsvps").doc(id).set(dataRecord);
+      const { data: insertedRecord, error: insertError } = await supabase
+        .from("rsvps")
+        .insert(dataRecord)
+        .select()
+        .single();
+
+      if (insertError) {
+        throw new Error(`Database insert error: ${insertError.message}`);
+      }
 
       return res.json({
         success: true,
         message: "Your RSVP has been registered successfully!",
-        data: dataRecord
+        data: insertedRecord
       });
 
     } catch (err: any) {
