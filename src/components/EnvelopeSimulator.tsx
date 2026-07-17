@@ -73,10 +73,10 @@ export function EnvelopeSimulator({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/75 backdrop-blur-md">
-      <div className="relative w-full max-w-2xl bg-[#FAF4F0] border-2 border-[#C29D70] rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] double-gold-border animate-scale-up">
+      <div className="relative w-full max-w-2xl bg-[#FAF4F0] border-2 border-[#C29D70] rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] double-gold-border">
         
         {/* Header bar */}
-        <div className="flex items-center justify-between px-6 py-4 bg-[#BF3B52] text-white">
+        <div className="flex items-center justify-between px-6 py-4 bg-[#580F6E] text-white">
           <div className="flex items-center space-x-2">
             <MailSVG />
             <span className="font-serif text-lg font-bold">Gatepass Mail Delivery System</span>
@@ -93,9 +93,9 @@ export function EnvelopeSimulator({
         </div>
 
         {/* Informative message */}
-        <div className={`p-4 border-b border-[#C29D70]/20 text-[11px] font-semibold leading-relaxed font-mono flex flex-col gap-2.5 ${smtpError ? "bg-amber-50 text-amber-900" : "bg-[#C29D70]/5 text-[#BF3B52]"}`}>
+        <div className={`p-4 border-b border-[#C29D70]/20 text-[11px] font-semibold leading-relaxed font-mono flex flex-col gap-2.5 ${smtpError ? "bg-amber-50 text-amber-900" : "bg-[#C29D70]/5 text-[#580F6E]"}`}>
           <div className="flex items-start">
-            <InfoSVG className={`w-4 h-4 mr-2 shrink-0 mt-0.5 ${smtpError ? "text-amber-600" : "text-[#BF3B52]"}`} />
+            <InfoSVG className={`w-4 h-4 mr-2 shrink-0 mt-0.5 ${smtpError ? "text-amber-600" : "text-[#580F6E]"}`} />
             <div>
               <strong className="uppercase">Transactional Delivery Log:</strong> Approving {guestName}'s credentials triggered an outbound gatepass email transmission to <strong>{email}</strong>.
             </div>
@@ -124,7 +124,7 @@ export function EnvelopeSimulator({
                       <li>Under <strong>How you sign in to Google</strong>, click on <strong>2-Step Verification</strong> (ensure it is enabled)</li>
                       <li>Scroll to the very bottom and select <strong>App Passwords</strong></li>
                       <li>Enter "Wedding Mailer" as app name, click <strong>Create</strong>, and copy the generated 16-character passcode</li>
-                      <li>Paste this passcode as <code className="bg-zinc-100 px-1 py-0.5 rounded text-[#BF3B52] font-mono">GMAIL_PASS</code> in the project's environment settings.</li>
+                      <li>Paste this passcode as <code className="bg-zinc-100 px-1 py-0.5 rounded text-[#580F6E] font-mono">GMAIL_PASS</code> in the project's environment settings.</li>
                     </ol>
                   </div>
                 )}
@@ -145,7 +145,7 @@ export function EnvelopeSimulator({
             /* Envelope cover */
             <div className="w-full max-w-md my-8 bg-[#5C1624] border-4 border-double border-[#C29D70] p-8 rounded-2xl shadow-xl text-center relative flex flex-col justify-between aspect-video select-none transform transition hover:scale-[1.02] duration-300">
               {/* Gold wax seal monogram */}
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-[#BF3B52] border-4 border-[#C29D70] text-white font-serif font-black flex items-center justify-center text-xl shadow-lg ring-8 ring-[#C29D70]/10">
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-[#580F6E] border-4 border-[#C29D70] text-white font-serif font-black flex items-center justify-center text-xl shadow-lg ring-8 ring-[#C29D70]/10">
                 T&amp;A
               </div>
 
@@ -163,9 +163,9 @@ export function EnvelopeSimulator({
               <div className="pt-4 z-10">
                 <button
                   onClick={() => setOpened(true)}
-                  className="px-6 py-2.5 bg-[#BF3B52] hover:bg-[#9E2B3E] font-bold font-mono text-[11px] uppercase tracking-wider text-white transition duration-200 rounded-full flex items-center justify-center mx-auto border border-[#C29D70]/40 cursor-pointer"
+                  className="px-6 py-2.5 bg-[#580F6E] hover:bg-[#9E2B3E] font-bold font-mono text-[11px] uppercase tracking-wider text-white transition duration-200 rounded-full flex items-center justify-center mx-auto border border-[#C29D70]/40 cursor-pointer"
                 >
-                  <SendSVG /> Open Transformed Envelope
+                  <SendSVG /> Open Invitation
                 </button>
               </div>
             </div>
@@ -176,7 +176,7 @@ export function EnvelopeSimulator({
                 <span className="text-[10px] font-mono text-zinc-400 uppercase">Interactive Gatepass E-mail Preview</span>
                 <button
                   onClick={() => setOpened(false)}
-                  className="text-xs text-[#BF3B52] hover:text-[#5C1624] font-mono font-bold"
+                  className="text-xs text-[#580F6E] hover:text-[#5C1624] font-mono font-bold"
                 >
                   ← Pack Envelope
                 </button>
@@ -196,14 +196,14 @@ export function EnvelopeSimulator({
         <div className="px-6 py-4 bg-zinc-50 border-t border-[#C29D70]/20 flex items-center justify-between font-mono">
           <div className="flex items-center space-x-2 text-xs text-slate-700 font-bold">
             <CheckCircleSVG className={`${isEmailSent ? "text-emerald-600" : "text-amber-500"}`} />
-            <span>Outbound State: <strong className={isEmailSent ? "text-[#BF3B52] font-bold" : "text-emerald-600 font-bold"}>{isEmailSent ? `Delivered via ${emailMethod.toUpperCase()}` : "Local Backup Draft (Unsent)"}</strong></span>
+            <span>Outbound State: <strong className={isEmailSent ? "text-[#580F6E] font-bold" : "text-emerald-600 font-bold"}>{isEmailSent ? `Delivered via ${emailMethod.toUpperCase()}` : "Local Backup Draft (Unsent)"}</strong></span>
           </div>
           <button 
             onClick={() => {
               setOpened(false);
               onClose();
             }}
-            className="px-5 py-2.5 bg-[#BF3B52] hover:bg-[#9E2B3E] text-white text-xs uppercase tracking-wider font-bold transition duration-200 rounded-full cursor-pointer border border-[#C29D70]/30"
+            className="px-5 py-2.5 bg-[#580F6E] hover:bg-[#9E2B3E] text-white text-xs uppercase tracking-wider font-bold transition duration-200 rounded-full cursor-pointer border border-[#C29D70]/30"
           >
             Acknowledge Gatepass
           </button>

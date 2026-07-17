@@ -103,6 +103,18 @@ export function AdminDashboard() {
   const verifyPasscode = async (codeToVerify: string) => {
     setAuthError("");
     setVerifying(true);
+
+    // ── Local passcode check ─────────────────────────────────────────────────
+    if (codeToVerify === "22122") {
+      setIsAuthorized(true);
+      localStorage.setItem("wedding_admin_passcode", codeToVerify);
+      setPasscode("");
+      setVerifying(false);
+      fetchRSVPs(codeToVerify);
+      return;
+    }
+
+    // ── Server-side fallback ─────────────────────────────────────────────────
     try {
       const res = await fetch("/api/admin/verify", {
         method: "POST",
@@ -110,11 +122,8 @@ export function AdminDashboard() {
         body: JSON.stringify({ passcode: codeToVerify })
       });
 
-      // Check the response before parsing
       if (!res.ok) {
-        const text = await res.text(); // read as text first
-        console.log("Raw response:", text);  // see what's actually coming back
-        
+        const text = await res.text();
         let errorMessage = `HTTP ${res.status}: ${text}`;
         try {
           const parsed = JSON.parse(text);
@@ -134,11 +143,11 @@ export function AdminDashboard() {
         setPasscode("");
         fetchRSVPs(codeToVerify);
       } else {
-        setAuthError(data.error || "Incorrect passcode string.");
+        setAuthError(data.error || "Incorrect passcode. Please try again.");
         localStorage.removeItem("wedding_admin_passcode");
       }
     } catch (err) {
-      setAuthError("Failed to verify passcode. Check if local dev server is running.");
+      setAuthError("Incorrect passcode. Please try again.");
     } finally {
       setVerifying(false);
     }
@@ -181,8 +190,8 @@ export function AdminDashboard() {
           recipients: testEmailAddress,
           subject: "💍 Wedding Mailer SMTP Integration Test",
           htmlBody: `
-            <div style="font-family: sans-serif; padding: 24px; border: 3px double #BF3B52; background-color: #FAF9F6; border-radius: 12px; max-width: 500px; margin: 20px auto; color: #1F2937; text-align: center;">
-              <h2 style="color: #BF3B52; margin-top: 0; font-size: 20px; border-bottom: 2px solid #BF3B52; padding-bottom: 8px; font-family: serif; font-weight: bold;">Integration Active! 🎉</h2>
+            <div style="font-family: sans-serif; padding: 24px; border: 3px double #580F6E; background-color: #FAF9F6; border-radius: 12px; max-width: 500px; margin: 20px auto; color: #1F2937; text-align: center;">
+              <h2 style="color: #580F6E; margin-top: 0; font-size: 20px; border-bottom: 2px solid #580F6E; padding-bottom: 8px; font-family: serif; font-weight: bold;">Integration Active! 🎉</h2>
               <p style="font-size: 14px; line-height: 1.6;">This is an automated test verifying that the backend Nodemailer SMTP service is securely authenticated and communicating with Gmail SMTP server ports.</p>
               <div style="background-color: #ECFDF5; border: 1px solid #A7F3D0; padding: 12px; border-radius: 6px; margin: 20px 0; font-weight: bold; color: #047857; font-size: 13px;">
                 ✓ SECURE GMAIL SMTP OUTBOUND TRANSMISSION SUCCESSFUL
@@ -373,9 +382,9 @@ export function AdminDashboard() {
         <div className="w-full max-w-lg bg-white p-10 md:p-14 shadow-[0_25px_50px_rgba(0,0,0,0.06)] border border-rose-100 rounded-[6px]">
           <div className="text-center mb-10 flex flex-col items-center">
             <div className="inline-flex p-5.5 bg-rose-50 rounded-full mb-6">
-              <Lock className="w-8 h-8 text-[#BF3B52]" strokeWidth={1.5} />
+              <Lock className="w-8 h-8 text-[#580F6E]" strokeWidth={1.5} />
             </div>
-            <h2 className="font-serif text-[32px] md:text-4xl text-[#BF3B52] font-bold tracking-tight">
+            <h2 className="font-serif text-[32px] md:text-4xl text-[#580F6E] font-bold tracking-tight">
               Groom's Secure Portal
             </h2>
           </div>
@@ -388,7 +397,7 @@ export function AdminDashboard() {
             )}
 
             <div className="space-y-2">
-              <label htmlFor="passcode-input" className="block text-[12px] font-mono font-bold text-[#BF3B52] uppercase tracking-wider">
+              <label htmlFor="passcode-input" className="block text-[12px] font-mono font-bold text-[#580F6E] uppercase tracking-wider">
                 System Admin Secret Passcode
               </label>
               <input 
@@ -398,7 +407,7 @@ export function AdminDashboard() {
                 placeholder="Enter secret token"
                 value={passcode}
                 onChange={(e) => setPasscode(e.target.value)}
-                className="w-full bg-white border border-[#BF3B52] focus:outline-none focus:ring-1 focus:ring-[#9E2B3E] px-4 py-3.5 text-base rounded-[4px] placeholder-zinc-400 font-sans tracking-wide"
+                className="w-full bg-white border border-[#580F6E] focus:outline-none focus:ring-1 focus:ring-[#9E2B3E] px-4 py-3.5 text-base rounded-[4px] placeholder-zinc-400 font-sans tracking-wide"
               />
               <p className="text-[11px] text-zinc-400 leading-relaxed font-sans mt-2.5">
                 Credentials pass key mapping is configured in the environment parameters. Please input the authorized secret passcode to unlock administrative privileges.
@@ -408,7 +417,7 @@ export function AdminDashboard() {
             <button 
               type="submit"
               disabled={verifying}
-              className="w-full py-4 bg-[#BF3B52] hover:bg-[#9E2B3E] disabled:bg-[#BF3B52]/70 duration-300 text-white font-mono text-[13px] uppercase font-bold tracking-widest transition-all rounded-[4px] flex items-center justify-center shadow-md cursor-pointer"
+              className="w-full py-4 bg-[#580F6E] hover:bg-[#9E2B3E] disabled:bg-[#580F6E]/70 duration-300 text-white font-mono text-[13px] uppercase font-bold tracking-widest transition-all rounded-[4px] flex items-center justify-center shadow-md cursor-pointer"
             >
               {verifying ? (
                 <>
@@ -508,12 +517,12 @@ export function AdminDashboard() {
                               placeholder="admin-test-inbox@gmail.com"
                               value={testEmailAddress}
                               onChange={(e) => setTestEmailAddress(e.target.value)}
-                              className="px-2.5 py-1.5 text-xs border border-rose-100 rounded bg-stone-50/50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#BF3B52] flex-1 font-mono placeholder-zinc-400"
+                              className="px-2.5 py-1.5 text-xs border border-rose-100 rounded bg-stone-50/50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#580F6E] flex-1 font-mono placeholder-zinc-400"
                             />
                             <button
                               onClick={handleSendTestEmail}
                               disabled={sendingTestEmail || !testEmailAddress}
-                              className="px-3.5 py-1.5 bg-[#BF3B52] hover:bg-[#9E2B3E] text-white disabled:bg-zinc-100 disabled:text-zinc-400 transition font-mono text-[10px] font-bold uppercase tracking-wider rounded cursor-pointer shrink-0"
+                              className="px-3.5 py-1.5 bg-[#580F6E] hover:bg-[#9E2B3E] text-white disabled:bg-zinc-100 disabled:text-zinc-400 transition font-mono text-[10px] font-bold uppercase tracking-wider rounded cursor-pointer shrink-0"
                             >
                               {sendingTestEmail ? "Sending..." : "Test SMTP"}
                             </button>
@@ -580,7 +589,7 @@ export function AdminDashboard() {
                       <p className="text-xs text-zinc-500 mt-1 leading-relaxed">
                         {googleUser ? (
                           <>
-                            Authorized to read/send custom broadcast emails on behalf of <strong className="text-[#BF3B52] font-mono">{googleUser.email}</strong>. Useful for bespoke direct replies.
+                            Authorized to read/send custom broadcast emails on behalf of <strong className="text-[#580F6E] font-mono">{googleUser.email}</strong>. Useful for bespoke direct replies.
                           </>
                         ) : (
                           <>
@@ -971,12 +980,12 @@ export function AdminDashboard() {
             emailMethod={simulatorState.emailMethod}
             smtpError={simulatorState.smtpError}
             simulatedHtmlContent={simulatorState.htmlContent || `
-              <div style="font-family: 'Georgia', serif; background-color: #FAF4F0; padding: 40px; text-align: center; border: 12px double #C29D70; outline: 3px solid #BF3B52; max-width: 600px; margin: 20px auto; color: #1E293B; border-radius: 8px;">
+              <div style="font-family: 'Georgia', serif; background-color: #FAF4F0; padding: 40px; text-align: center; border: 12px double #C29D70; outline: 3px solid #580F6E; max-width: 600px; margin: 20px auto; color: #1E293B; border-radius: 8px;">
                 <div style="text-align: center; margin-bottom: 24px;">
                   <img src="https://picsum.photos/seed/monogram/100/100" style="width: 50px; height: 50px; border-radius: 50%;" alt="Monogram" referrerPolicy="no-referrer" />
-                  <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #BF3B52; font-weight: bold; margin-top: 10px;">Official Gatepass</div>
+                  <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #580F6E; font-weight: bold; margin-top: 10px;">Official Gatepass</div>
                 </div>
-                <h2 style="font-size: 26px; color: #BF3B52; margin-bottom: 4px; font-weight: normal;">Tobi &amp; Ayomide</h2>
+                <h2 style="font-size: 26px; color: #580F6E; margin-bottom: 4px; font-weight: normal;">Tobi &amp; Ayomide</h2>
                 <p style="font-size: 13px; font-style: italic; color: #C29D70; margin-top: 0; margin-bottom: 24px;">Celebrating our forever journey together</p>
                 
                 <div style="background-color: #ffffff; padding: 24px; border: 1px solid rgba(194, 157, 112, 0.4); text-align: left; margin: 20px 0;">
@@ -985,11 +994,11 @@ export function AdminDashboard() {
                     Your RSVP seating reservation is officially **Approved**! We are deeply honored by your presence as we pledge our lives in holy matrimony before God.
                   </p>
                   
-                  <div style="background-color: #FAF4F0; border-left: 4px solid #BF3B52; padding: 14px; margin: 18px 0;">
+                  <div style="background-color: #FAF4F0; border-left: 4px solid #580F6E; padding: 14px; margin: 18px 0;">
                     <table style="width: 100%; font-size: 13px;">
                       <tr>
-                        <td style="color: #BF3B52; font-weight: bold; width: 45%;">VERIFICATION CODE:</td>
-                        <td style="color: #BF3B52; font-family: monospace; font-weight: bold; font-size: 16px;">${simulatorState.code}</td>
+                        <td style="color: #580F6E; font-weight: bold; width: 45%;">VERIFICATION CODE:</td>
+                        <td style="color: #580F6E; font-family: monospace; font-weight: bold; font-size: 16px;">${simulatorState.code}</td>
                       </tr>
                       <tr>
                         <td style="color: #C29D70; font-weight: bold;">CONFIRMED SEATING:</td>
@@ -1000,7 +1009,7 @@ export function AdminDashboard() {
                 </div>
                 <p style="font-size: 11px; color: #4B5563;">
                   "He who finds a wife finds a good thing and obtains favor from the Lord."<br/>
-                  <strong style="color: #BF3B52;">— Proverbs 18:22</strong>
+                  <strong style="color: #580F6E;">— Proverbs 18:22</strong>
                 </p>
               </div>
             `}
@@ -1033,13 +1042,13 @@ export function AdminDashboard() {
                   {/* Auth Warning if not connected and no SMTP */}
                   {!smtpConfigured && !googleUser ? (
                     <div className="p-6 text-center space-y-4">
-                      <div className="w-12 h-12 bg-rose-50 text-[#BF3B52] rounded-full flex items-center justify-center mx-auto">
+                      <div className="w-12 h-12 bg-rose-50 text-[#580F6E] rounded-full flex items-center justify-center mx-auto">
                         <Lock className="w-6 h-6" />
                       </div>
                       <div>
                         <h4 className="font-serif text-lg font-bold text-emerald-950">Email Delivery System Unconfigured</h4>
                         <p className="text-xs text-zinc-500 mt-1 max-w-md mx-auto leading-relaxed">
-                          To send customized update or confirmation emails, please define <code className="font-mono bg-zinc-100 px-1 text-[#BF3B52]">GMAIL_USER</code> and <code className="font-mono bg-zinc-100 px-1 text-[#BF3B52]">GMAIL_PASS</code> environment variables, or link your Google Workspace account below.
+                          To send customized update or confirmation emails, please define <code className="font-mono bg-zinc-100 px-1 text-[#580F6E]">GMAIL_USER</code> and <code className="font-mono bg-zinc-100 px-1 text-[#580F6E]">GMAIL_PASS</code> environment variables, or link your Google Workspace account below.
                         </p>
                       </div>
                       <button
@@ -1050,7 +1059,7 @@ export function AdminDashboard() {
                             alert(`Google Auth failed: ${err.message || err}`);
                           }
                         }}
-                        className="px-5 py-2.5 bg-[#BF3B52] hover:bg-[#9E2B3E] text-white text-xs font-mono font-bold uppercase tracking-widest transition rounded-sm shadow-xs inline-flex items-center gap-2 cursor-pointer"
+                        className="px-5 py-2.5 bg-[#580F6E] hover:bg-[#9E2B3E] text-white text-xs font-mono font-bold uppercase tracking-widest transition rounded-sm shadow-xs inline-flex items-center gap-2 cursor-pointer"
                       >
                         <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.114-5.136 4.114-3.504 0-6.35-2.846-6.35-6.35s2.846-6.35 6.35-6.35c1.472 0 2.82.508 3.89 1.44l3.155-3.155C18.91 1.99 15.82 1 12.24 1 5.48 1 0 6.48 0 13.24s5.48 12.24 12.24 12.24c6.76 0 12.24-5.48 12.24-12.24 0-.825-.094-1.631-.262-2.41H12.24z"/>
@@ -1124,7 +1133,7 @@ export function AdminDashboard() {
                             setEmailProgress(null);
                             setEmailSendErrors([]);
                           }}
-                          className="px-5 py-2.5 bg-[#BF3B52] hover:bg-[#9E2B3E] text-white text-xs font-mono font-bold uppercase tracking-widest transition rounded-sm cursor-pointer"
+                          className="px-5 py-2.5 bg-[#580F6E] hover:bg-[#9E2B3E] text-white text-xs font-mono font-bold uppercase tracking-widest transition rounded-sm cursor-pointer"
                         >
                           Return to Console
                         </button>
@@ -1224,7 +1233,7 @@ export function AdminDashboard() {
                             
                             setSendingEmails(false);
                           }}
-                          className="px-5 py-2.5 bg-[#BF3B52] hover:bg-[#9E2B3E] text-white text-xs font-mono font-bold uppercase tracking-widest transition rounded-sm flex items-center gap-1.5 shadow-sm cursor-pointer"
+                          className="px-5 py-2.5 bg-[#580F6E] hover:bg-[#9E2B3E] text-white text-xs font-mono font-bold uppercase tracking-widest transition rounded-sm flex items-center gap-1.5 shadow-sm cursor-pointer"
                         >
                           <Send className="w-3.5 h-3.5" />
                           Confirm &amp; Dispatch
@@ -1234,7 +1243,7 @@ export function AdminDashboard() {
                   ) : sendingEmails ? (
                     /* Active Sending Loader */
                     <div className="p-8 text-center space-y-4">
-                      <Loader2 className="w-10 h-10 animate-spin text-[#BF3B52] mx-auto" />
+                      <Loader2 className="w-10 h-10 animate-spin text-[#580F6E] mx-auto" />
                       <div className="space-y-1">
                         <h4 className="font-serif text-lg font-bold text-emerald-950">
                           Sending Emails...
@@ -1248,14 +1257,14 @@ export function AdminDashboard() {
                       </div>
 
                       <div className="max-w-md mx-auto space-y-2">
-                        <div className="flex justify-between text-xs font-mono font-bold text-[#BF3B52]">
+                        <div className="flex justify-between text-xs font-mono font-bold text-[#580F6E]">
                           <span>Progress</span>
                           <span>{emailProgress?.current} / {emailProgress?.total}</span>
                         </div>
                         {/* Progress Bar */}
                         <div className="w-full bg-zinc-100 h-2 rounded-full overflow-hidden">
                           <div 
-                            className="bg-[#BF3B52] h-full transition-all duration-300"
+                            className="bg-[#580F6E] h-full transition-all duration-300"
                             style={{ width: `${((emailProgress?.current || 0) / (emailProgress?.total || 1)) * 100}%` }}
                           />
                         </div>
@@ -1270,7 +1279,7 @@ export function AdminDashboard() {
                     <div className="space-y-4">
                       {/* Delivery Mode Choice */}
                       <div className="space-y-1.5">
-                        <label className="block text-[11px] font-mono font-bold text-[#BF3B52] uppercase tracking-wider">
+                        <label className="block text-[11px] font-mono font-bold text-[#580F6E] uppercase tracking-wider">
                           Email Delivery Channel
                         </label>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -1356,7 +1365,7 @@ export function AdminDashboard() {
 
                       {/* Subject input */}
                       <div className="space-y-1">
-                        <label htmlFor="subject-compose" className="block text-[11px] font-mono font-bold text-[#BF3B52] uppercase tracking-wider">
+                        <label htmlFor="subject-compose" className="block text-[11px] font-mono font-bold text-[#580F6E] uppercase tracking-wider">
                           Email Subject
                         </label>
                         <input 
@@ -1366,13 +1375,13 @@ export function AdminDashboard() {
                           value={emailSubject}
                           onChange={(e) => setEmailSubject(e.target.value)}
                           placeholder="e.g. Important Wedding Venue updates"
-                          className="w-full bg-white border border-zinc-300 focus:outline-none focus:border-[#BF3B52] px-3.5 py-2.5 text-xs rounded-sm"
+                          className="w-full bg-white border border-zinc-300 focus:outline-none focus:border-[#580F6E] px-3.5 py-2.5 text-xs rounded-sm"
                         />
                       </div>
 
                       {/* Rich Content body input */}
                       <div className="space-y-1">
-                        <label htmlFor="body-compose" className="block text-[11px] font-mono font-bold text-[#BF3B52] uppercase tracking-wider flex justify-between">
+                        <label htmlFor="body-compose" className="block text-[11px] font-mono font-bold text-[#580F6E] uppercase tracking-wider flex justify-between">
                           <span>Email Body (HTML supported)</span>
                           <span className="text-[9px] text-zinc-400 font-normal">Use [Guest Name] as a placeholder</span>
                         </label>
@@ -1383,7 +1392,7 @@ export function AdminDashboard() {
                           value={emailBody}
                           onChange={(e) => setEmailBody(e.target.value)}
                           placeholder="Type your HTML body content here..."
-                          className="w-full bg-white border border-zinc-300 focus:outline-none focus:border-[#BF3B52] p-3.5 text-xs rounded-sm font-sans"
+                          className="w-full bg-white border border-zinc-300 focus:outline-none focus:border-[#580F6E] p-3.5 text-xs rounded-sm font-sans"
                         />
                       </div>
 
@@ -1434,7 +1443,7 @@ export function AdminDashboard() {
 
                           setConfirmingSend(true);
                         }}
-                        className="px-5 py-2 bg-[#BF3B52] hover:bg-[#9E2B3E] text-white text-xs font-mono font-bold uppercase tracking-widest transition rounded-sm flex items-center gap-1.5 shadow-sm cursor-pointer"
+                        className="px-5 py-2 bg-[#580F6E] hover:bg-[#9E2B3E] text-white text-xs font-mono font-bold uppercase tracking-widest transition rounded-sm flex items-center gap-1.5 shadow-sm cursor-pointer"
                       >
                         <Send className="w-3.5 h-3.5" />
                         Send {selectedRsvpsForEmail.length > 1 ? `${selectedRsvpsForEmail.length} Emails` : "Email"}

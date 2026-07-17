@@ -1,27 +1,32 @@
 import React from "react";
 
-// Bespoke inline SVG icon components — no icon library
+// Bespoke inline SVG icon components — professional fine-line wedding guide set
 const CalendarSVG = () => (
-  <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4 shrink-0" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="2" y="4" width="16" height="14" rx="2" />
-    <path d="M2 8h16M7 2v4M13 2v4" />
+  <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4 shrink-0" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+    <line x1="16" y1="2" x2="16" y2="6" />
+    <line x1="8" y1="2" x2="8" y2="6" />
+    <line x1="3" y1="10" x2="21" y2="10" />
+    <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01" strokeWidth="2" />
   </svg>
 );
 const ClockSVG = () => (
-  <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4 shrink-0" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="10" cy="10" r="8" />
-    <path d="M10 6v4l3 2" />
+  <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4 shrink-0" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <polyline points="12 6 12 12 16 14" />
   </svg>
 );
 const PinSVG = () => (
-  <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4 shrink-0" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M10 2C7.24 2 5 4.24 5 7c0 4.5 5 11 5 11s5-6.5 5-11c0-2.76-2.24-5-5-5z" />
-    <circle cx="10" cy="7" r="1.8" />
+  <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4 shrink-0" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+    <circle cx="12" cy="10" r="3" />
   </svg>
 );
-const DiamondSVG = () => (
-  <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4 shrink-0" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M10 2l4 5H6L10 2zM6 7l4 11 4-11H6z" />
+const HangerSVG = () => (
+  <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4 shrink-0" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 7a3 3 0 1 0-3-3" />
+    <path d="M12 7L4 15.5a1.5 1.5 0 0 0 1 2.5h14a1.5 1.5 0 0 0 1-2.5L12 7z" />
+    <path d="M12 13.5 C 11.5 12.5, 10.5 12.5, 10.5 13.5 C 10.5 14.5, 12 15.5, 12 15.5 C 12 15.5, 13.5 14.5, 13.5 13.5 C 13.5 12.5, 12.5 12.5, 12 13.5 Z" fill="currentColor" stroke="none" />
   </svg>
 );
 
@@ -61,103 +66,86 @@ export function EventGrid() {
 
   return (
     <section className="py-20 px-6 max-w-7xl mx-auto">
-      
-      {/* Decorative Ornate Section Header */}
-      <div className="text-center max-w-2xl mx-auto mb-16 animate-fade-in select-none">
-        <span className="text-xs text-[#C29D70] font-sans font-extrabold tracking-[0.25em] uppercase block mb-2">
-          The Wedding Itinerary
+      <div className="text-center max-w-2xl mx-auto mb-16 select-none animate-fade-up">
+        <span className="text-[10px] text-[#580F6E] font-bold uppercase tracking-[0.3em] block mb-2">
+          Itinerary
         </span>
-        <h2 className="font-serif text-4xl text-slate-800 font-bold tracking-tight">
-          Three Sacred Celebrations
+        <h2 className="font-serif text-4xl text-slate-900 font-bold tracking-tight">
+          Weekend schedule
         </h2>
-        <div className="flex items-center justify-center space-x-3 mt-4 mb-4">
-          <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-[#C29D70]"></div>
-          <span className="text-xs text-[#BF3B52] font-semibold">✿ Itinerary Guide ✿</span>
-          <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#C29D70]"></div>
-        </div>
-        <p className="text-xs text-slate-500 leading-relaxed">
-          Kindly take note of the respective dress codes, venues, and timestamps for each event. Seating pre-registration is required.
+        <p className="mt-4 text-sm text-slate-500 leading-relaxed font-medium">
+          Review the ceremony, service, and reception flow in a calm, modern layout.
         </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {events.map((event, idx) => (
-          <div 
-            key={idx} 
-            className="bg-white border-2 border-[#C29D70]/20 rounded-3xl hover:border-[#BF3B52]/40 card-shadow transition-all duration-300 flex flex-col justify-between overflow-hidden group double-gold-border"
-          >
-            {/* Elegant Header Accent */}
-            <div className="h-2 w-full bg-[#BF3B52] duration-300 transition-all opacity-20 group-hover:opacity-100"></div>
-            
-            <div className="p-8 flex-grow">
-              {/* Event Card Badge */}
-              <div className="text-[10px] text-[#BF3B52] font-sans tracking-[0.2em] uppercase font-extrabold mb-3 border-b border-rose-50 pb-2 flex items-center justify-between select-none">
-                <span>Part {idx + 1} • Celebration</span>
-                <svg viewBox="0 0 16 16" fill="currentColor" className="w-3 h-3 text-[#C29D70]">
-                  <path d="M8 0l1.5 4.5H14l-3.7 2.7 1.4 4.3L8 9l-3.7 2.5 1.4-4.3L2 4.5h4.5z"/>
-                </svg>
-              </div>
-
-              <h3 className="font-serif text-xl font-bold text-slate-800 leading-snug mb-3">
-                {event.title}
-              </h3>
+        {events.map((event, idx) => {
+          const staggerClass = idx === 0 ? 'animate-stagger-1' : idx === 1 ? 'animate-stagger-2' : 'animate-stagger-3';
+          return (
+            <article
+              key={idx}
+              className={`bg-[#FAF8F5] border border-[#1E293B]/10 rounded-[1.5rem] relative hover-lift ${staggerClass}`}
+            >
+              <div className="absolute inset-2 border border-[#580F6E]/10 pointer-events-none" style={{ borderRadius: '1.25rem' }} />
+              <div className="h-1.5 w-full bg-[#580F6E] rounded-t-[1.5rem] relative z-10"></div>
               
-              <p className="text-xs text-slate-500 mb-6 leading-relaxed font-medium">
-                {event.subtitle}
-              </p>
-
-              {/* Details List */}
-              <div className="space-y-4 mb-2">
-                <div className="flex items-start text-xs text-slate-700">
-                  <span className="text-[#C29D70] mr-3 mt-0.5"><CalendarSVG /></span>
-                  <div>
-                    <span className="font-bold text-slate-800 tracking-wide">Date</span>
-                    <span className="mt-0.5 font-sans text-slate-600 block">{event.date}</span>
-                  </div>
+              <div className="p-8 flex flex-col gap-6 relative z-10">
+                <div className="text-[10px] uppercase tracking-[0.2em] text-[#580F6E] font-bold">
+                  Part {idx + 1}
                 </div>
+                <h3 className="font-serif text-xl font-bold text-slate-900 leading-tight">
+                  {event.title}
+                </h3>
+                <p className="text-xs md:text-sm text-slate-500 leading-relaxed font-medium">
+                  {event.subtitle}
+                </p>
 
-                <div className="flex items-start text-xs text-slate-700">
-                  <span className="text-[#C29D70] mr-3 mt-0.5"><ClockSVG /></span>
-                  <div>
-                    <span className="font-bold text-slate-800 tracking-wide">Reception &amp; Time</span>
-                    <span className="mt-0.5 font-sans text-slate-600 block">{event.time}</span>
+                <div className="space-y-4">
+                  <div className="flex gap-3 text-sm text-slate-700">
+                    <span className="text-[#580F6E] mt-1"><CalendarSVG /></span>
+                    <div>
+                      <p className="font-semibold text-slate-900 text-xs uppercase tracking-wider">Date</p>
+                      <p className="text-slate-500 text-xs font-semibold mt-0.5">{event.date}</p>
+                    </div>
                   </div>
-                </div>
-
-                <div className="flex items-start text-xs text-slate-700">
-                  <span className="text-[#C29D70] mr-3 mt-0.5"><PinSVG /></span>
-                  <div>
-                    <span className="font-bold text-slate-800 tracking-wide">Venue Location</span>
-                    <span className="mt-0.5 block font-semibold text-slate-800">{event.venue}</span>
-                    <span className="text-slate-500 text-[11px] font-sans mt-0.5 block">{event.location}</span>
+                  <div className="flex gap-3 text-sm text-slate-700">
+                    <span className="text-[#580F6E] mt-1"><ClockSVG /></span>
+                    <div>
+                      <p className="font-semibold text-slate-900 text-xs uppercase tracking-wider">Time</p>
+                      <p className="text-slate-500 text-xs font-semibold mt-0.5">{event.time}</p>
+                    </div>
                   </div>
-                </div>
-
-                <div className="flex items-start text-xs text-slate-700 pt-2">
-                  <span className="text-[#BF3B52] mr-3 mt-0.5"><DiamondSVG /></span>
-                  <div>
-                    <span className="font-bold text-[#BF3B52] tracking-wide block">Dress Code</span>
-                    <span className="mt-0.5 text-slate-800 italic font-sans text-[11px] leading-relaxed font-semibold block">
-                      {event.dressCode}
-                    </span>
+                  <div className="flex gap-3 text-sm text-slate-700">
+                    <span className="text-[#580F6E] mt-1"><PinSVG /></span>
+                    <div>
+                      <p className="font-semibold text-slate-900 text-xs uppercase tracking-wider">Venue</p>
+                      <p className="text-slate-500 text-xs font-semibold mt-0.5">{event.venue}</p>
+                      <p className="text-slate-400 text-[10px] uppercase tracking-wider mt-1">{event.location}</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-3 text-sm text-slate-700 pt-2 border-t border-slate-100">
+                    <span className="text-[#580F6E] mt-1"><HangerSVG /></span>
+                    <div>
+                      <p className="font-semibold text-[#580F6E] uppercase text-[9px] tracking-[0.15em]">Dress Code</p>
+                      <p className="text-slate-600 italic text-xs mt-1 leading-relaxed font-medium">{event.dressCode}</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            {/* Google Maps Anchor Link */}
-            <div className="px-8 pb-8">
-              <a 
-                href={event.mapUrl} 
-                target="_blank" 
-                rel="noreferrer" 
-                className="block text-center py-3 border border-[#C29D70] text-[#BF3B52] hover:bg-[#BF3B52] hover:text-white hover:border-[#BF3B52] transition duration-300 font-sans text-[10px] uppercase font-bold tracking-[0.2em] rounded-full shadow-xs cursor-pointer bg-stone-50/50"
-              >
-                Navigate Google Maps
-              </a>
-            </div>
-          </div>
-        ))}
+              <div className="px-8 pb-8 relative z-10">
+                <a
+                  href={event.mapUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block rounded-full border border-[#580F6E]/25 bg-white py-3 text-center text-[10px] font-bold uppercase tracking-[0.2em] text-[#580F6E] transition hover:bg-[#580F6E] hover:text-white"
+                >
+                  Open map
+                </a>
+              </div>
+            </article>
+          );
+        })}
       </div>
     </section>
   );

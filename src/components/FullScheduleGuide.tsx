@@ -8,41 +8,48 @@ const CompassSVG = () => (
   </svg>
 );
 const CloseSVG = () => (
-  <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+  <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
     <line x1="18" y1="6" x2="6" y2="18"/>
     <line x1="6" y1="6" x2="18" y2="18"/>
   </svg>
 );
 const PinSVG = () => (
-  <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M10 2C7.24 2 5 4.24 5 7c0 4.5 5 11 5 11s5-6.5 5-11c0-2.76-2.24-5-5-5z"/>
-    <circle cx="10" cy="7" r="1.8"/>
+  <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+    <circle cx="12" cy="10" r="3" />
   </svg>
 );
 const CarSVG = () => (
-  <svg viewBox="0 0 20 20" fill="none" className="w-3.5 h-3.5 mr-1" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M3 10l1.5-4h11L17 10"/>
-    <rect x="2" y="10" width="16" height="5" rx="1.5"/>
-    <circle cx="6" cy="16" r="1.5" fill="currentColor"/>
-    <circle cx="14" cy="16" r="1.5" fill="currentColor"/>
+  <svg viewBox="0 0 24 24" fill="none" className="w-3.5 h-3.5 mr-1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" />
+    <circle cx="7" cy="17" r="2" />
+    <circle cx="15" cy="17" r="2" />
+  </svg>
+);
+const ClockIconSVG = () => (
+  <svg viewBox="0 0 24 24" fill="none" className="w-3.5 h-3.5 mr-1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <polyline points="12 6 12 12 16 14" />
   </svg>
 );
 const ShieldSVG = () => (
-  <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.5 4.5-1.35 8-6.25 8-11.5V6L12 2z" fill="currentColor" opacity="0.15"/>
+  <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.5 4.5-1.35 8-6.25 8-11.5V6L12 2z" fill="currentColor" fillOpacity="0.1" />
     <path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.5 4.5-1.35 8-6.25 8-11.5V6L12 2z"/>
-    <path d="M9 12l2 2 4-4" strokeWidth="2"/>
+    <path d="M9 12l2 2 4-4" strokeWidth="1.5"/>
   </svg>
 );
 const ShirtSVG = () => (
-  <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4 mr-2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H6v10a2 2 0 002 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/>
+  <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4 mr-2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 7a3 3 0 1 0-3-3" />
+    <path d="M12 7L4 15.5a1.5 1.5 0 0 0 1 2.5h14a1.5 1.5 0 0 0 1-2.5L12 7z" />
+    <path d="M12 13.5 C 11.5 12.5, 10.5 12.5, 10.5 13.5 C 10.5 14.5, 12 15.5, 12 15.5 C 12 15.5, 13.5 14.5, 13.5 13.5 C 13.5 12.5, 12.5 12.5, 12 13.5 Z" fill="currentColor" stroke="none" />
   </svg>
 );
 const InfoSVG = () => (
-  <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4 mr-2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+  <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4 mr-2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
     <circle cx="12" cy="12" r="10"/>
-    <line x1="12" y1="8" x2="12" y2="8" strokeWidth="3"/>
+    <line x1="12" y1="8" x2="12" y2="8" strokeWidth="2"/>
     <line x1="12" y1="12" x2="12" y2="16"/>
   </svg>
 );
@@ -109,20 +116,20 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fade-in select-none">
-      <div className="relative w-full max-w-4xl bg-[#FAF4F0] border-2 border-[#C29D70] rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] double-gold-border animate-scale-up">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md select-none">
+      <div className="relative w-full max-w-4xl bg-white border border-[#580F6E]/10 rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
         
         {/* MODAL HEADER */}
-        <div className="flex items-center justify-between px-6 py-5 bg-[#BF3B52] text-white border-b border-[#C29D70]">
+        <div className="flex items-center justify-between px-6 py-5 bg-[#580F6E] text-white border-b border-[#580F6E]/20">
           <div className="flex items-center space-x-3">
             <div>
               <h2 className="font-serif text-xl font-bold tracking-tight">Schedule &amp; Visitor Guide</h2>
-              <p className="text-[10px] uppercase tracking-widest text-[#FAF4F0]/85 font-mono mt-0.5">Holy Matrimony Information Center</p>
+              <p className="text-[10px] uppercase tracking-widest text-white/80 font-mono mt-0.5">Event details for guests</p>
             </div>
           </div>
           <button 
             onClick={onClose} 
-            className="p-1.5 hover:bg-white/10 rounded-full transition duration-200 cursor-pointer"
+            className="p-1.5 hover:bg-white/15 rounded-full transition duration-200 cursor-pointer"
             aria-label="Close Guide"
           >
             <CloseSVG />
@@ -130,67 +137,67 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
         </div>
 
         {/* DIALOG TABS */}
-        <div className="border-b border-[#C29D70]/20 bg-white px-6 py-3.5 flex items-center overflow-x-auto space-x-2 scrollbar-none">
+        <div className="border-b border-[#580F6E]/10 bg-white px-6 py-3.5 flex items-center overflow-x-auto space-x-2 scrollbar-none">
           <button
             onClick={() => setActiveTab("timeline")}
-            className={`px-5 py-2 text-xs font-sans font-extrabold uppercase tracking-widest rounded-full transition-all shrink-0 cursor-pointer ${
+            className={`flex items-center gap-1.5 px-5 py-2.5 text-xs font-sans font-extrabold uppercase tracking-widest rounded-full transition-all shrink-0 cursor-pointer ${
               activeTab === "timeline"
-                ? "bg-[#BF3B52] text-white"
-                : "text-slate-600 hover:text-[#BF3B52] hover:bg-[#BF3B52]/5"
+                ? "bg-[#580F6E] text-white"
+                : "text-slate-600 hover:text-[#580F6E] hover:bg-[#580F6E]/10"
             }`}
           >
-            ⏰ Timelines
+            <ClockIconSVG /> Timelines
           </button>
           <button
             onClick={() => setActiveTab("logistics")}
-            className={`px-5 py-2 text-xs font-sans font-extrabold uppercase tracking-widest rounded-full transition-all shrink-0 cursor-pointer ${
+            className={`flex items-center gap-1.5 px-5 py-2.5 text-xs font-sans font-extrabold uppercase tracking-widest rounded-full transition-all shrink-0 cursor-pointer ${
               activeTab === "logistics"
-                ? "bg-[#BF3B52] text-white"
-                : "text-slate-600 hover:text-[#BF3B52] hover:bg-[#BF3B52]/5"
+                ? "bg-[#580F6E] text-white"
+                : "text-slate-600 hover:text-[#580F6E] hover:bg-[#580F6E]/10"
             }`}
           >
-            🚗 Parking &amp; Venues
+            <CarSVG /> Parking &amp; Venues
           </button>
           <button
             onClick={() => setActiveTab("attire")}
-            className={`px-5 py-2 text-xs font-sans font-extrabold uppercase tracking-widest rounded-full transition-all shrink-0 cursor-pointer ${
+            className={`flex items-center gap-1.5 px-5 py-2.5 text-xs font-sans font-extrabold uppercase tracking-widest rounded-full transition-all shrink-0 cursor-pointer ${
               activeTab === "attire"
-                ? "bg-[#BF3B52] text-white"
-                : "text-slate-600 hover:text-[#BF3B52] hover:bg-[#BF3B52]/5"
+                ? "bg-[#580F6E] text-white"
+                : "text-slate-600 hover:text-[#580F6E] hover:bg-[#580F6E]/10"
             }`}
           >
-            🌟 Attire &amp; Etiquette
+            <ShirtSVG /> Attire &amp; Etiquette
           </button>
         </div>
 
         {/* MODAL MAIN CONTENT AREA */}
-        <div className="p-6 md:p-8 overflow-y-auto flex-grow bg-[#FAF4F0]/40">
+        <div className="p-6 md:p-8 overflow-y-auto flex-grow bg-[#FAF8F5]">
           
           {/* TAB 1: DETAILED TIMELINES */}
           {activeTab === "timeline" && (
-            <div className="space-y-12 animate-fade-in pb-4">
-              <div className="p-4 bg-[#BF3B52]/5 border-l-4 border-[#BF3B52] rounded-r-2xl border-y border-r border-[#C29D70]/10">
-                <p className="text-xs text-[#BF3B52] font-sans font-extrabold uppercase tracking-wider leading-relaxed block mb-1">
-                  ⏱️ Timeline Notice
+            <div className="space-y-12 pb-4">
+              <div className="p-4 bg-[#580F6E]/10 border-l-4 border-[#580F6E] rounded-3xl">
+                <p className="text-xs text-[#580F6E] font-sans font-extrabold uppercase tracking-wider leading-relaxed block mb-1">
+                  Timeline Notice
                 </p>
                 <p className="text-xs text-slate-600 leading-relaxed font-sans font-medium">
-                  We are operating on a strict schedule. Guests are kindly urged to strive for punctuality so that we can witness all solemn sacraments and cultural celebrations comfortably.
+                  Please arrive early when possible. We hope your day is relaxed, smooth, and beautiful from start to finish.
                 </p>
               </div>
 
               {timelineEvents.map((event, idx) => (
-                <div key={idx} className="bg-white border-2 border-[#C29D70]/20 rounded-2xl p-6 shadow-sm double-gold-border">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-rose-50 pb-4 mb-6">
+                <div key={idx} className="bg-white border border-[#580F6E]/10 rounded-3xl p-6 shadow-sm">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[#E5E7EB] pb-4 mb-6">
                     <div>
-                      <span className="text-[10px] font-sans text-[#BF3B52] font-extrabold uppercase tracking-wider">
-                        Part {idx + 1} Ceremony
+                      <span className="text-[10px] font-sans text-[#580F6E] font-extrabold uppercase tracking-wider">
+                        Event {idx + 1}
                       </span>
-                      <h3 className="font-serif text-lg font-bold text-slate-800 mt-0.5">
+                      <h3 className="font-serif text-lg font-bold text-slate-900 mt-0.5">
                         {event.title}
                       </h3>
                     </div>
                     <div className="mt-2 sm:mt-0 text-left sm:text-right">
-                      <span className="inline-block bg-[#BF3B52]/10 text-[#BF3B52] text-[10px] font-sans font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-[#C29D70]/30 animate-pulse">
+                      <span className="inline-block bg-[#580F6E]/10 text-[#580F6E] text-[10px] font-sans font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-[#580F6E]/20">
                         {event.date}
                       </span>
                       <p className="text-[11px] font-sans text-slate-500 mt-1 font-medium">{event.venue}</p>
@@ -198,22 +205,19 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
                   </div>
 
                   {/* Render steps list */}
-                  <div className="relative pl-6 border-l border-rose-100 space-y-6">
+                  <div className="relative pl-6 border-l border-[#E5E7EB] space-y-6">
                     {event.steps.map((step, sIdx) => (
                       <div key={sIdx} className="relative">
-                        {/* Circle bullet representation with dynamic colors */}
-                        <div className="absolute -left-[30px] top-1 w-4 h-4 rounded-full border-2 border-white bg-[#BF3B52] shadow-xs flex items-center justify-center">
-                          <div className="w-1.5 h-1.5 rounded-full bg-white"></div>
-                        </div>
+                        <div className="absolute -left-[20px] top-1 w-4 h-4 rounded-full bg-[#580F6E] ring-4 ring-white shadow-sm"></div>
                         
                         <div className="grid grid-cols-1 md:grid-cols-4 gap-2 items-start">
                           <div className="md:col-span-1">
-                            <span className="font-mono text-xs font-black text-[#BF3B52]">
+                            <span className="font-mono text-xs font-black text-[#580F6E]">
                               {step.time}
                             </span>
                           </div>
                           <div className="md:col-span-3">
-                            <h4 className="font-sans font-bold text-xs text-slate-800">
+                            <h4 className="font-sans font-semibold text-sm text-slate-900">
                               {step.label}
                             </h4>
                             <p className="text-xs text-slate-500 mt-1 leading-relaxed font-sans">
@@ -231,16 +235,16 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
 
           {/* TAB 2: DETAILED VENUES & PARKING */}
           {activeTab === "logistics" && (
-            <div className="space-y-8 animate-fade-in">
+            <div className="space-y-8">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                
+
                 {/* Traditional Wedding address */}
-                <div className="bg-white border-2 border-[#C29D70]/20 rounded-2xl p-6 shadow-sm flex flex-col justify-between double-gold-border">
+                <div className="bg-white border border-[#580F6E]/10 rounded-3xl p-6 shadow-sm">
                   <div>
-                    <h3 className="font-serif text-base font-bold text-slate-800 pt-2">
+                    <h3 className="font-serif text-base font-bold text-slate-900 pt-2">
                       Traditional Venue
                     </h3>
-                    <div className="w-8 h-[1.5px] bg-[#C29D70] my-3"></div>
+                    <div className="w-8 h-[1.5px] bg-[#580F6E]/70 my-3"></div>
                     <p className="text-xs text-slate-700 leading-relaxed font-sans font-semibold">
                       Elim Top Hotel and suites
                     </p>
@@ -248,9 +252,9 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
                       Bwari, FCT Abuja, Nigeria. Easily accessible along the Bwari-Dutse expressway grid.
                     </p>
                   </div>
-                  
-                  <div className="mt-6 pt-4 border-t border-rose-50">
-                    <h4 className="text-[10px] font-sans font-extrabold text-[#BF3B52] uppercase tracking-widest flex items-center">
+
+                  <div className="mt-6 pt-4 border-t border-[#E5E7EB]">
+                    <h4 className="text-[10px] font-sans font-extrabold text-[#580F6E] uppercase tracking-widest flex items-center">
                       <CarSVG /> Parking Guideline
                     </h4>
                     <p className="text-[11px] text-slate-600 leading-relaxed mt-1.5 font-medium">
@@ -260,12 +264,12 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
                 </div>
 
                 {/* Church Wedding address */}
-                <div className="bg-white border-2 border-[#C29D70]/20 rounded-2xl p-6 shadow-sm flex flex-col justify-between double-gold-border">
+                <div className="bg-white border border-[#580F6E]/10 rounded-3xl p-6 shadow-sm">
                   <div>
-                    <h3 className="font-serif text-base font-bold text-slate-800 pt-2">
+                    <h3 className="font-serif text-base font-bold text-slate-900 pt-2">
                       Deeper Life Bible Church
                     </h3>
-                    <div className="w-8 h-[1.5px] bg-[#C29D70] my-3"></div>
+                    <div className="w-8 h-[1.5px] bg-[#580F6E]/70 my-3"></div>
                     <p className="text-xs text-slate-700 leading-relaxed font-sans font-semibold">
                       Main Sanctuary Bwari
                     </p>
@@ -273,9 +277,9 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
                       Bwari, FCT Abuja, Nigeria. A prominent cathedral sanctuary located within the heart of Bwari municipal zone.
                     </p>
                   </div>
-                  
-                  <div className="mt-6 pt-4 border-t border-rose-50">
-                    <h4 className="text-[10px] font-sans font-extrabold text-[#BF3B52] uppercase tracking-widest flex items-center">
+
+                  <div className="mt-6 pt-4 border-t border-[#E5E7EB]">
+                    <h4 className="text-[10px] font-sans font-extrabold text-[#580F6E] uppercase tracking-widest flex items-center">
                       Parking Guideline
                     </h4>
                     <p className="text-[11px] text-slate-600 leading-relaxed mt-1.5 font-medium">
@@ -285,12 +289,12 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
                 </div>
 
                 {/* Reception venue address */}
-                <div className="bg-white border-2 border-[#C29D70]/20 rounded-2xl p-6 shadow-sm flex flex-col justify-between double-gold-border">
+                <div className="bg-white border border-[#580F6E]/10 rounded-3xl p-6 shadow-sm">
                   <div>
-                    <h3 className="font-serif text-base font-bold text-slate-800 pt-2">
+                    <h3 className="font-serif text-base font-bold text-slate-900 pt-2">
                       Fellowship Hall
                     </h3>
-                    <div className="w-8 h-[1.5px] bg-[#C29D70] my-3"></div>
+                    <div className="w-8 h-[1.5px] bg-[#580F6E]/70 my-3"></div>
                     <p className="text-xs text-slate-700 leading-relaxed font-sans font-semibold">
                       Deeper Life Bible Church Complex
                     </p>
@@ -298,9 +302,9 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
                       Bwari, FCT Abuja, Nigeria. Right next to the main cathedral auditorium inside the church fellowship zone.
                     </p>
                   </div>
-                  
-                  <div className="mt-6 pt-4 border-t border-rose-50">
-                    <h4 className="text-[10px] font-sans font-extrabold text-[#BF3B52] uppercase tracking-widest flex items-center">
+
+                  <div className="mt-6 pt-4 border-t border-[#E5E7EB]">
+                    <h4 className="text-[10px] font-sans font-extrabold text-[#580F6E] uppercase tracking-widest flex items-center">
                       Parking Guideline
                     </h4>
                     <p className="text-[11px] text-slate-600 leading-relaxed mt-1.5 font-medium">
@@ -312,11 +316,11 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
               </div>
 
               {/* Security Banner Info */}
-              <div className="bg-[#BF3B52] text-white p-6 rounded-2xl flex flex-col sm:flex-row items-center gap-4 shadow-sm border border-[#C29D70]">
+              <div className="bg-[#580F6E] text-white p-6 rounded-3xl flex flex-col sm:flex-row items-center gap-4 shadow-sm border border-[#580F6E]/20">
                 <div>
-                  <h4 className="font-serif text-base font-bold text-white tracking-wide">Strict Security Protocols Implemented</h4>
-                  <p className="text-xs text-[#FAF4F0] mt-1 leading-relaxed font-sans font-medium">
-                    Church security patrols and hotel check stations will strictly check everyone at the gates. Please display your approved Gatepass on your dashboard or present your verification token text on your mobile screen.
+                  <h4 className="font-serif text-base font-bold text-white tracking-wide">Secure Arrival & Guest Support</h4>
+                  <p className="text-xs text-white/90 mt-1 leading-relaxed font-sans font-medium">
+                    Staff will be available at each entrance to help guests and ensure a calm, welcoming arrival experience.
                   </p>
                 </div>
               </div>
@@ -325,55 +329,55 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
 
           {/* TAB 3: SPECIFIC RECOMMENDED ATTIRE & DETAILED ETIQUETTE */}
           {activeTab === "attire" && (
-            <div className="space-y-8 animate-fade-in">
+            <div className="space-y-8">
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 
                 {/* Traditional Ceremony Attire Details */}
-                <div className="bg-white border-2 border-[#C29D70]/20 rounded-2xl p-6 shadow-sm double-gold-border">
-                  <span className="text-[10px] font-sans text-[#BF3B52] font-extrabold tracking-widest block mb-1">
+                <div className="bg-white border border-[#580F6E]/10 rounded-3xl p-6 shadow-sm">
+                  <span className="text-[10px] font-sans text-[#580F6E] font-extrabold tracking-widest block mb-1">
                     CULTURAL PRIDE
                   </span>
-                  <h3 className="font-serif text-base font-bold text-slate-800">
+                  <h3 className="font-serif text-base font-bold text-slate-900">
                     Traditional Attire Style
                   </h3>
-                  <div className="w-12 h-[1px] bg-[#C29D70] my-3"></div>
+                  <div className="w-12 h-[1px] bg-[#580F6E]/70 my-3"></div>
                   
                   <div className="space-y-3 text-xs text-slate-700 leading-relaxed">
                     <p className="font-medium text-slate-600">
-                      We celebrate our rich African heritage. Guests are highly encouraged to wear glamorous traditional attire with primary accents in <strong>Purple &amp; Gold</strong>.
+                      We celebrate our heritage with polished looks in tones of magenta, white, and muted sparkle.
                     </p>
-                    <div className="p-4 bg-[#FAF4F0]/60 rounded-xl border border-dashed border-[#C29D70]/40">
-                      <p className="font-bold text-slate-800 text-[11px] uppercase tracking-wider mb-2 font-sans text-[#BF3B52]">Recommended Fabrics &amp; Style:</p>
+                    <div className="p-4 bg-[#FAF8F5] rounded-3xl border border-[#580F6E]/20">
+                      <p className="font-bold text-slate-900 text-[11px] uppercase tracking-wider mb-2 font-sans text-[#580F6E]">Recommended Fabrics &amp; Style:</p>
                       <ul className="list-disc pl-4 space-y-1.5 text-slate-600 font-medium">
-                        <li><strong>Ladies</strong>: Beautiful lace wrappers, embellished traditional gowns, and custom elegant head ties (Gele).</li>
-                        <li><strong>Gentlemen</strong>: Chieftaincy kaftans, majestic Agbada styles, or styled native senator wears with custom caps.</li>
+                        <li><strong>Ladies</strong>: Elegant wrappers, polished gowns, and tasteful headpieces.</li>
+                        <li><strong>Gentlemen</strong>: Neat jackets, tailored native wear, or coordinated traditional outfits.</li>
                       </ul>
                     </div>
                   </div>
                 </div>
 
                 {/* Holy Matrimony & Reception Attire Details */}
-                <div className="bg-white border-2 border-[#C29D70]/20 rounded-2xl p-6 shadow-sm double-gold-border">
-                  <span className="text-[10px] font-sans text-[#BF3B52] font-extrabold tracking-widest block mb-1">
+                <div className="bg-white border border-[#580F6E]/10 rounded-3xl p-6 shadow-sm">
+                  <span className="text-[10px] font-sans text-[#580F6E] font-extrabold tracking-widest block mb-1">
                     ROMANTIC GALA &amp; SACRED REVERENCE
                   </span>
-                  <h3 className="font-serif text-base font-bold text-slate-800">
+                  <h3 className="font-serif text-base font-bold text-slate-900">
                     Church &amp; Reception Attire
                   </h3>
-                  <div className="w-12 h-[1px] bg-[#C29D70] my-3"></div>
+                  <div className="w-12 h-[1px] bg-[#580F6E]/70 my-3"></div>
                   
                   <div className="space-y-3 text-xs text-slate-700 leading-relaxed">
                     <p className="font-medium text-slate-600">
-                      The Church Wedding calls for formal elegance. Our chosen color theme features gorgeous <strong>Magenta purple, White &amp; Gold</strong>.
+                      The church event is elegant and bright. Guests are invited to wear clean, polished looks in magenta and white.
                     </p>
                     
-                    <div className="p-4 bg-[#FAF4F0]/60 rounded-xl border border-dashed border-[#C29D70]/40">
-                      <p className="font-bold text-slate-800 text-[11px] uppercase tracking-wider mb-2 font-sans text-[#BF3B52]">Reverent Church Guidelines &amp; Colors:</p>
+                    <div className="p-4 bg-[#FAF8F5] rounded-3xl border border-[#580F6E]/20">
+                      <p className="font-bold text-slate-900 text-[11px] uppercase tracking-wider mb-2 font-sans text-[#580F6E]">Reverent Church Guidelines &amp; Colors:</p>
                       <ul className="list-disc pl-4 space-y-1.5 text-slate-600 font-medium">
-                        <li><strong>Decorum</strong>: In respect of the sanctuary, guests are requested to wear elegant, modest, and respectful formal wear.</li>
-                        <li><strong>Color Harmony</strong>: Splendid shades of Magenta purple, White, or shimmering Gold are requested.</li>
-                        <li><strong>Suited Perfection</strong>: Gentlemen should don formal suits or crisp, structured traditional native attire.</li>
+                        <li><strong>Decorum</strong>: Please choose formal, respectful attire suitable for the sanctuary.</li>
+                        <li><strong>Color Harmony</strong>: Prefer shades of magenta, white, and polished neutrals.</li>
+                        <li><strong>Suited Perfection</strong>: Gentlemen should wear tailored suits, crisp shirts, or refined native attire.</li>
                       </ul>
                     </div>
                   </div>
@@ -382,29 +386,29 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
               </div>
 
               {/* Etiquette and guidelines card */}
-              <div className="bg-[#BF3B52]/5 border border-[#C29D70]/30 rounded-2xl p-6">
-                <h4 className="font-serif text-sm font-bold text-[#BF3B52]">
-                  Golden Wedding Day Etiquette
+              <div className="bg-[#FAF8F5] border border-[#580F6E]/20 rounded-3xl p-6">
+                <h4 className="font-serif text-sm font-bold text-[#580F6E]">
+                  Wedding Day Etiquette
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 text-[11px] leading-relaxed font-sans text-slate-600 font-medium">
                   <div className="space-y-2">
                     <div className="flex items-start">
-                      <span className="text-[#C29D70] mr-2 mt-0.5 shrink-0 font-bold">&bull;</span>
-                      <p><strong>Approved Digital Pass</strong>: Have your personal QR / token ready to minimize delay at resort security checks.</p>
+                      <span className="text-[#580F6E] mr-2 mt-0.5 shrink-0 font-bold">•</span>
+                      <p><strong>Approved Pass</strong>: Have your RSVP confirmation ready to minimize delay at venue entry.</p>
                     </div>
                     <div className="flex items-start">
-                      <span className="text-[#C29D70] mr-2 mt-0.5 shrink-0 font-bold">&bull;</span>
-                      <p><strong>Ecclesiastical Silence</strong>: Please switch all mobile phones to silent or vibrate mode when entering the sacred church cathedral.</p>
+                      <span className="text-[#580F6E] mr-2 mt-0.5 shrink-0 font-bold">•</span>
+                      <p><strong>Quiet Respect</strong>: Please set phones to silent before the ceremony begins.</p>
                     </div>
                   </div>
                   <div className="space-y-2">
                     <div className="flex items-start">
-                      <span className="text-[#C29D70] mr-2 mt-0.5 shrink-0 font-bold">&bull;</span>
-                      <p><strong>Unplugged Ceremony</strong>: Let the official photographers capture the vows. We request guests enjoy the ceremony offline with eyes and hearts.</p>
+                      <span className="text-[#580F6E] mr-2 mt-0.5 shrink-0 font-bold">•</span>
+                      <p><strong>Present Moment</strong>: Enjoy the ceremony with minimal phone use and cameras held respectfully.</p>
                     </div>
                     <div className="flex items-start">
-                      <span className="text-[#C29D70] mr-2 mt-0.5 shrink-0 font-bold">&bull;</span>
-                      <p><strong>Child Accommodation</strong>: The venue is meticulously seating-planned. Only children explicitly registered in RSVPs can be allocated dining passes.</p>
+                      <span className="text-[#580F6E] mr-2 mt-0.5 shrink-0 font-bold">•</span>
+                      <p><strong>Child Seating</strong>: Only children registered through RSVP can be seated to ensure comfort and planning accuracy.</p>
                     </div>
                   </div>
                 </div>
@@ -416,15 +420,15 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
         </div>
 
         {/* MODAL FOOTER */}
-        <div className="px-6 py-4 bg-zinc-50 border-t border-[#C29D70]/20 flex items-center justify-between">
-          <p className="text-[10px] text-zinc-400 font-sans font-bold">
-            Holy Matrimony • Tobi &amp; Ayomide • 2026
+        <div className="px-6 py-4 bg-slate-50 border-t border-[#580F6E]/10 flex items-center justify-between">
+          <p className="text-[10px] text-slate-500 font-sans font-bold">
+            Tobi &amp; Ayomide • 2026
           </p>
           <button 
             onClick={onClose}
-            className="px-6 py-2.5 bg-[#BF3B52] hover:bg-[#9E2B3E] text-white font-sans text-[10px] uppercase tracking-widest font-extrabold transition duration-300 rounded-full shadow-sm cursor-pointer border border-[#C29D70]/40"
+            className="px-6 py-2.5 bg-[#580F6E] hover:bg-[#9B27BE] text-white font-sans text-[10px] uppercase tracking-widest font-extrabold transition duration-300 rounded-full shadow-sm cursor-pointer border border-[#580F6E]/20"
           >
-            I Acknowledge
+            Got it
           </button>
         </div>
 

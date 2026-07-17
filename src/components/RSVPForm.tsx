@@ -2,25 +2,26 @@ import React, { useState } from "react";
 
 // Bespoke SVG icons
 const QuillSVG = () => (
-  <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M17 3C15 3 4 12 4 20l3-1c0-4 6-10 12-14-2 2-4 6-4 10l3 1" />
-    <path d="M4 20l4-4" />
+  <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z" />
+    <line x1="16" y1="8" x2="2" y2="22" />
+    <line x1="17.5" y1="15" x2="9" y2="15" />
   </svg>
 );
 const SpinnerSVG = () => (
   <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4 animate-spin mr-2" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-    <circle cx="12" cy="12" r="10" strokeOpacity="0.2"/>
+    <circle cx="12" cy="12" r="10" strokeOpacity="0.2" />
     <path d="M12 2a10 10 0 0 1 10 10" />
   </svg>
 );
 const CelebrationSVG = () => (
-  <svg viewBox="0 0 24 24" fill="none" className="w-8 h-8" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M5.5 14.5L3 21l6.5-2.5"/>
-    <path d="M3 21L14 10"/>
-    <path d="M14 3l7 7"/>
-    <path d="M18 5l3-2-2 3"/>
-    <path d="M10 8l2-5 2 5"/>
-    <path d="M16 14l5 2-5 2"/>
+  <svg viewBox="0 0 24 24" fill="none" className="w-8 h-8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="9.5" cy="13.5" r="4.5" />
+    <circle cx="9.5" cy="13.5" r="3.2" fill="currentColor" fillOpacity="0.15" />
+    <circle cx="14.5" cy="11.5" r="4.5" />
+    <circle cx="14.5" cy="11.5" r="3.2" fill="currentColor" fillOpacity="0.15" />
+    <path d="M14.5 7 L15.5 5 L16.5 7 L15.5 9 Z" fill="currentColor" stroke="none" />
+    <path d="M7 6 L7.5 4.5 L8 6 L7.5 7.5 Z" fill="currentColor" stroke="none" />
   </svg>
 );
 const CheckSVG = () => (
@@ -78,7 +79,7 @@ export function RSVPForm() {
       if (!response.ok) {
         const text = await response.text(); // read as text first
         console.log("Raw response:", text);  // see what's actually coming back
-        
+
         let errorMessage = `HTTP ${response.status}: ${text}`;
         try {
           const parsed = JSON.parse(text);
@@ -110,157 +111,133 @@ export function RSVPForm() {
   };
 
   return (
-    <section id="rsvp-section" className="py-24 px-6 bg-white border-t border-b border-[#C29D70]/20 select-none">
+    <section id="rsvp-section" className="py-24 px-6 bg-white border-t border-b border-[#4A0E4E]/10 select-none">
       <div className="max-w-xl mx-auto">
-        
-        {/* Header Block */}
-        <div className="text-center mb-12 animate-fade-in">
-          <div className="inline-flex p-3 bg-[#BF3B52]/5 text-[#BF3B52] rounded-full mb-3 shadow-inner">
+        <div className="text-center mb-12">
+          <div className="inline-flex p-3 bg-[#580F6E]/10 text-[#580F6E] rounded-full mb-3">
             <QuillSVG />
           </div>
-          <span className="text-xs text-[#C29D70] font-sans font-extrabold tracking-[0.25em] uppercase block mb-1">
-            Kindly RSVP
+          <span className="text-xs text-[#4A0E4E] font-semibold uppercase tracking-[0.3em] block mb-1">
+            RSVP
           </span>
-          <h2 className="font-serif text-3xl text-slate-800 md:text-4xl tracking-tight font-bold">
+          <h2 className="font-serif text-3xl text-slate-900 md:text-4xl tracking-tight font-bold">
             Confirm Attendance
           </h2>
-          <div className="w-12 h-[1px] bg-[#C29D70] mx-auto mt-3 mb-3"></div>
-          <p className="text-xs text-slate-500 leading-relaxed max-w-md mx-auto font-medium">
-            Please respond by submitting your details below so we can prepare for your presence.
+          <div className="w-12 h-[1px] bg-[#580F6E] mx-auto mt-3 mb-3"></div>
+          <p className="text-sm text-slate-500 leading-relaxed max-w-md mx-auto font-medium">
+            Please respond with your details so we can prepare for your arrival.
           </p>
         </div>
 
-        {/* Form area */}
         {success ? (
-          /* Animated success panel */
-          <div className="border-2 border-[#C29D70]/30 bg-[#FAF4F0] rounded-3xl p-8 text-center card-shadow duration-500 transform scale-100 animate-fade-in double-gold-border">
-            <div className="w-16 h-16 bg-[#BF3B52] text-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-md animate-bounce border border-[#C29D70]/40">
+          <div className="rounded-3xl p-8 text-center shadow-sm border border-[#4A0E4E]/15 bg-[#FAF8F5]">
+            <div className="w-16 h-16 bg-[#580F6E] text-white rounded-full flex items-center justify-center mx-auto mb-6 shadow">
               <CelebrationSVG />
             </div>
-            
-            <h3 className="font-serif text-2xl text-slate-800 mb-2 font-bold">
+            <h3 className="font-serif text-2xl text-slate-900 mb-2 font-bold">
               Response Received, {submittedName}!
             </h3>
-            
-            <p className="text-xs font-sans text-[#BF3B52] uppercase tracking-widest mb-4 font-extrabold">
-              ✨ Thank You for Responding ✨
+            <p className="text-sm text-slate-600 leading-relaxed max-w-sm mx-auto mb-6">
+              Thank you for letting us know. Your RSVP is recorded and we look forward to celebrating together.
             </p>
-
-            <div className="h-[1px] bg-[#C29D70]/25 my-4 max-w-xs mx-auto"></div>
-
-            <p className="text-xs text-slate-600 leading-relaxed max-w-sm mx-auto mb-6 font-medium">
-              Thank you for letting us know! We have successfully received your RSVP response. We look forward to celebrating this beautiful day together.
-            </p>
-
-            <button 
+            <button
               onClick={() => setSuccess(false)}
-              className="px-6 py-3 border border-[#BF3B52] text-[#BF3B52] hover:bg-[#BF3B52] hover:text-white hover:border-[#BF3B52] text-xs uppercase font-sans font-bold tracking-widest transition duration-300 rounded-full cursor-pointer bg-white"
+              className="px-6 py-3 bg-white border border-[#580F6E] text-[#580F6E] rounded-full font-semibold text-xs uppercase tracking-[0.2em] transition hover:bg-[#580F6E] hover:text-white"
             >
               Submit Another RSVP
             </button>
           </div>
         ) : (
-          /* Active form */
           <form onSubmit={handleSubmit} className="space-y-6">
-            
             {error && (
-              <div className="p-4 bg-red-50 border-l-4 border-red-500 text-red-950 text-xs rounded-r-xl leading-relaxed">
-                <span className="font-semibold block mb-0.5">Please check constraints:</span>
+              <div className="p-4 bg-red-50 border-l-4 border-red-500 text-red-900 text-sm rounded-r-xl leading-relaxed">
+                <span className="font-semibold block mb-1">Please check constraints:</span>
                 {error}
               </div>
             )}
 
-            {/* Guest Name input */}
             <div className="space-y-1.5">
-              <label htmlFor="name-input" className="block text-xs font-sans font-bold text-slate-700 uppercase tracking-widest">
-                Full Legal Name <span className="text-red-500">*</span>
+              <label htmlFor="name-input" className="block text-xs font-semibold text-slate-700 uppercase tracking-[0.25em]">
+                Full Name <span className="text-red-500">*</span>
               </label>
-              <input 
+              <input
                 id="name-input"
-                type="text" 
-                required 
+                type="text"
+                required
                 placeholder="e.g. Uzoma Nze"
                 value={formData.name}
-                onChange={(e) => setFormData({...formData, name: e.target.value})}
-                className="w-full bg-[#FAF4F0]/50 border border-[#C29D70]/40 focus:border-[#BF3B52] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#BF3B52] px-4 py-3 text-sm text-slate-800 transition-colors rounded-xl shadow-xs"
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                className="w-full bg-[#FAF8F5] border border-[#4A0E4E]/15 focus:border-[#580F6E] focus:outline-none focus:ring-1 focus:ring-[#580F6E] px-4 py-3 text-sm text-slate-900 rounded-2xl transition"
               />
             </div>
 
-            {/* Contact Details Email & WhatsApp */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-1.5">
-                <label htmlFor="email-input" className="block text-xs font-sans font-bold text-slate-700 uppercase tracking-widest">
+                <label htmlFor="email-input" className="block text-xs font-semibold text-slate-700 uppercase tracking-[0.25em]">
                   Email Address <span className="text-red-500">*</span>
                 </label>
-                <input 
+                <input
                   id="email-input"
-                  type="email" 
-                  required 
+                  type="email"
+                  required
                   placeholder="e.g. name@domain.com"
                   value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  className="w-full bg-[#FAF4F0]/50 border border-[#C29D70]/40 focus:border-[#BF3B52] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#BF3B52] px-4 py-3 text-sm text-slate-800 transition-colors rounded-xl shadow-xs"
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="w-full bg-[#FAF8F5] border border-[#4A0E4E]/15 focus:border-[#580F6E] focus:outline-none focus:ring-1 focus:ring-[#580F6E] px-4 py-3 text-sm text-slate-900 rounded-2xl transition"
                 />
               </div>
-
               <div className="space-y-1.5">
-                <label htmlFor="phone-input" className="block text-xs font-sans font-bold text-slate-700 uppercase tracking-widest">
+                <label htmlFor="phone-input" className="block text-xs font-semibold text-slate-700 uppercase tracking-[0.25em]">
                   WhatsApp Phone <span className="text-red-500">*</span>
                 </label>
-                <input 
+                <input
                   id="phone-input"
-                  type="tel" 
-                  required 
+                  type="tel"
+                  required
                   placeholder="e.g. +234 803 111 2222"
                   value={formData.phone}
-                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                  className="w-full bg-[#FAF4F0]/50 border border-[#C29D70]/40 focus:border-[#BF3B52] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#BF3B52] px-4 py-3 text-sm text-slate-800 transition-colors rounded-xl shadow-xs"
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  className="w-full bg-[#FAF8F5] border border-[#4A0E4E]/15 focus:border-[#580F6E] focus:outline-none focus:ring-1 focus:ring-[#580F6E] px-4 py-3 text-sm text-slate-900 rounded-2xl transition"
                 />
               </div>
             </div>
 
-            {/* Event Checkboxes */}
             <div className="space-y-3 pt-2">
-              <label className="block text-xs font-sans font-bold text-slate-700 uppercase tracking-widest">
-                Select Events You Are Attending <span className="text-red-500">*</span>
+              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-[0.25em]">
+                Select events you are attending <span className="text-red-500">*</span>
               </label>
-              
               <div className="grid grid-cols-1 gap-3">
                 {[
-                  { value: "传统", label: "Part 1 • Traditional Marriage (Journey Aligned) - Sept 11", val: "traditional" },
-                  { value: "教堂", label: "Part 2 • Church Wedding Ceremony - Sept 12", val: "church" },
-                  { value: "招待", label: "Part 3 • Thanksgiving & Fellowship - Sept 12", val: "reception" }
+                  { value: "traditional", label: "Part 1 • Traditional Marriage - Sept 11" },
+                  { value: "church", label: "Part 2 • Church Wedding Ceremony - Sept 12" },
+                  { value: "reception", label: "Part 3 • Thanksgiving & Fellowship - Sept 12" },
                 ].map((item) => {
-                  const isChecked = formData.events.includes(item.val);
+                  const isChecked = formData.events.includes(item.value);
                   return (
-                    <div 
-                      key={item.val} 
-                      onClick={() => handleCheckboxChange(item.val)}
-                      className={`flex items-start p-3 border-2 cursor-pointer hover:bg-[#BF3B52]/5 transition duration-200 rounded-xl select-none ${
-                        isChecked ? 'border-[#BF3B52] bg-[#BF3B52]/5' : 'border-[#C29D70]/20 bg-[#FAF4F0]/30'
-                      }`}
+                    <button
+                      key={item.value}
+                      type="button"
+                      onClick={() => handleCheckboxChange(item.value)}
+                      className={`w-full text-left p-3 rounded-2xl border transition duration-200 flex items-center gap-3 ${isChecked ? "border-[#580F6E] bg-[#FAF8F5]" : "border-[#4A0E4E]/15 bg-white"
+                        }`}
                     >
-                      <div className={`mt-0.5 w-4 h-4 rounded-lg border flex items-center justify-center mr-3 shrink-0 ${
-                        isChecked ? 'border-[#BF3B52] bg-[#BF3B52] text-white' : 'border-[#C29D70]/40'
-                      }`}>
-                        {isChecked && <CheckSVG />}
-                      </div>
-                      <span className="text-xs text-slate-800 font-semibold">
-                        {item.label}
+                      <span className={`inline-flex w-5 h-5 shrink-0 items-center justify-center rounded-lg text-white ${isChecked ? "bg-[#580F6E]" : "bg-slate-200"
+                        }`}>
+                        {isChecked ? <CheckSVG /> : null}
                       </span>
-                    </div>
+                      <span className="text-sm text-slate-900">{item.label}</span>
+                    </button>
                   );
                 })}
               </div>
             </div>
 
-            {/* Submit Button */}
             <div className="pt-3">
-              <button 
+              <button
                 id="submit-rsvp-btn"
                 type="submit"
                 disabled={loading}
-                className="w-full py-4 bg-[#BF3B52] hover:bg-[#9E2B3E] disabled:bg-[#BF3B52]/60 duration-300 text-white font-sans text-xs uppercase font-bold tracking-[0.2em] transition-all shadow-md rounded-full flex items-center justify-center cursor-pointer border border-[#C29D70]/40"
+                className="w-full py-4 bg-[#580F6E] hover:bg-[#4A0E4E] disabled:bg-[#580F6E]/60 text-white font-semibold text-xs uppercase tracking-[0.2em] rounded-full transition"
               >
                 {loading ? (
                   <>
@@ -272,10 +249,8 @@ export function RSVPForm() {
                 )}
               </button>
             </div>
-
           </form>
         )}
-
       </div>
     </section>
   );

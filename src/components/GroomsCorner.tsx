@@ -61,21 +61,22 @@ export function GroomsCorner() {
   ];
 
   return (
-    <section className="py-20 px-6 max-w-7xl mx-auto border-t border-[#C29D70]/20 select-none">
+    <section className="py-20 px-6 max-w-7xl mx-auto border-t border-[#580F6E]/15 bg-white select-none">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         
-        {/* Left Column: Groom's Profile Card styled as premium Velvet & Gold frame */}
-        <div className="lg:col-span-5 bg-[#5C1624] text-white p-8 md:p-10 rounded-3xl relative overflow-hidden card-shadow border-2 border-[#C29D70] double-gold-border">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-[#BF3B52]/10 rounded-full blur-2xl -mr-12 -mt-12"></div>
+        {/* Groom profile */}
+        <div className="lg:col-span-5 bg-[#FAF8F5] text-slate-900 p-8 md:p-10 relative overflow-hidden border border-[#1E293B]/10 hover-lift animate-fade-left" style={{borderRadius: '1rem'}}>
+          {/* Decorative inset line */}
+          <div className="absolute inset-3 border border-[#580F6E]/12 pointer-events-none" style={{borderRadius: '0.75rem'}} />
           
-          <h3 className="font-serif text-3xl font-bold text-white mb-1 tracking-tight">
+          <h3 className="font-serif text-2xl font-bold text-slate-900 mb-1 tracking-tight">
             The Groom's Commitment
           </h3>
-          <div className="w-16 h-[2px] bg-[#C29D70] mb-6"></div>
+          <div className="w-12 h-[1px] bg-[#580F6E] mb-6"></div>
           
           {/* Groom portrait photo */}
-          <div className="flex items-center space-x-4 mb-6">
-            <div className="w-16 h-16 rounded-full overflow-hidden border border-[#C29D70]/40 shadow-inner shrink-0 bg-white/15">
+          <div className="flex items-center space-x-4 mb-6 relative">
+            <div className="w-16 h-16 rounded-xl overflow-hidden border border-[#580F6E]/25 shrink-0 bg-white">
               <img 
                 referrerPolicy="no-referrer"
                 src={groomPortrait} 
@@ -84,33 +85,33 @@ export function GroomsCorner() {
               />
             </div>
             <div>
-              <h4 className="font-serif text-lg font-bold text-white leading-tight">
+              <h4 className="font-serif text-lg font-bold text-slate-900 leading-tight">
                 Jerry Tobi
               </h4>
-              <p className="text-xs text-[#C29D70] font-sans tracking-widest uppercase mt-1 font-extrabold">
+              <p className="text-[10px] text-[#580F6E] font-sans tracking-widest uppercase mt-1 font-bold">
                 The Groom • Man of Faith
               </p>
             </div>
           </div>
 
-          <div className="bg-[#420E19] border-l-4 border-[#C29D70] p-4 mb-6 rounded-r-2xl border-y border-r border-[#C29D70]/10">
-            <p className="font-serif text-sm italic text-stone-200 leading-relaxed">
+          <div className="bg-white border-l-2 border-[#580F6E] p-4 mb-6 rounded-r-xl border border-slate-100">
+            <p className="font-serif text-sm italic text-slate-700 leading-relaxed">
               "He who finds a wife finds a good thing and obtains favor from the Lord."
             </p>
-            <p className="font-sans text-[10px] font-bold text-[#C29D70] uppercase mt-2 text-right tracking-[0.2em]">
+            <p className="font-sans text-[9px] font-bold text-[#580F6E] uppercase mt-2 text-right tracking-[0.2em]">
               — Proverbs 18:22
             </p>
           </div>
 
-          <p className="text-xs md:text-sm text-stone-300 leading-relaxed font-sans">
+          <p className="text-xs md:text-sm text-slate-500 leading-relaxed font-sans relative">
             I am grateful to God for bringing Ayomide into my life. As we begin this journey together, we look forward to building a Christ-centered home that will honor God, serve people, and impact generations.
           </p>
         </div>
 
         {/* Right Column: Groomsmen Grid with headings */}
-        <div className="lg:col-span-7">
-          <div className="mb-8 animate-fade-in">
-            <span className="text-xs text-[#C29D70] font-sans font-extrabold tracking-[0.25em] uppercase block mb-1">
+        <div className="lg:col-span-7 animate-fade-right">
+          <div className="mb-8">
+            <span className="text-[10px] text-[#580F6E] font-sans font-bold tracking-[0.25em] uppercase block mb-1">
               Guard of Honor
             </span>
             <h3 className="font-serif text-3xl text-slate-800 font-bold tracking-tight">
@@ -124,20 +125,24 @@ export function GroomsCorner() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {groomsmen.map((man, idx) => {
               const IconComp = man.icon;
+              const staggerClass = idx === 0 ? 'animate-stagger-1' : idx === 1 ? 'animate-stagger-2' : idx === 2 ? 'animate-stagger-3' : 'animate-stagger-4';
               return (
                 <div 
                   key={idx} 
-                  className="bg-white border-2 border-[#C29D70]/20 p-6 rounded-3xl hover:border-[#BF3B52]/40 transition duration-300 card-shadow double-gold-border"
+                  className={`bg-[#FAF8F5] border border-[#1E293B]/10 p-6 relative hover-lift ${staggerClass}`}
+                  style={{borderRadius: '1rem'}}
                 >
-                  <div className="flex items-start space-x-4">
-                    <div className="p-3 bg-[#BF3B52]/5 text-[#BF3B52] rounded-2xl">
-                      <IconComp className="w-5 h-5 text-[#BF3B52]" />
+                  {/* Decorative inset line */}
+                  <div className="absolute inset-2 border border-[#580F6E]/8 pointer-events-none" style={{borderRadius: '0.8rem'}} />
+                  <div className="flex items-start space-x-4 relative">
+                    <div className="p-3 bg-white text-[#580F6E] border border-slate-100 rounded-xl">
+                      <IconComp className="w-5 h-5 text-[#580F6E]" />
                     </div>
                     <div>
                       <h4 className="font-serif font-bold text-slate-800 text-base leading-tight">
                         {man.name}
                       </h4>
-                      <p className="text-xs text-[#BF3B52] font-sans font-bold tracking-wider mt-1">
+                      <p className="text-[10px] text-[#580F6E] font-sans font-bold tracking-wider mt-1">
                         {man.role}
                       </p>
                       <p className="text-xs text-slate-500 mt-2 leading-relaxed">
