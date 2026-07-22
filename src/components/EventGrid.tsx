@@ -68,18 +68,18 @@ export function EventGrid() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-4xl mx-auto items-stretch">
         {events.map((event, idx) => {
           const staggerClass = idx === 0 ? 'animate-stagger-1' : idx === 1 ? 'animate-stagger-2' : 'animate-stagger-3';
           return (
             <article
               key={idx}
-              className={`bg-[#FAF8F5] border border-[#1E293B]/10 rounded-[1.5rem] relative hover-lift ${staggerClass}`}
+              className={`bg-[#FAF8F5] border border-[#1E293B]/10 rounded-[1.5rem] relative hover-lift ${staggerClass} flex flex-col`}
             >
               <div className="absolute inset-2 border border-[#580F6E]/10 pointer-events-none" style={{ borderRadius: '1.25rem' }} />
               <div className="h-1.5 w-full bg-[#580F6E] rounded-t-[1.5rem] relative z-10"></div>
               
-              <div className="p-8 flex flex-col gap-6 relative z-10">
+              <div className="p-8 flex flex-col gap-6 relative z-10 flex-1">
                 <div className="text-[10px] uppercase tracking-[0.2em] text-[#580F6E] font-bold">
                   Part {idx + 1}
                 </div>
@@ -90,7 +90,7 @@ export function EventGrid() {
                   {event.subtitle}
                 </p>
 
-                <div className="space-y-4">
+                <div className="space-y-4 flex-1">
                   <div className="flex gap-3 text-sm text-slate-700">
                     <span className="text-[#580F6E] mt-1"><CalendarSVG /></span>
                     <div>
