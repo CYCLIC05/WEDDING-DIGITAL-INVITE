@@ -98,20 +98,6 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
         { time: "11:00 AM", label: "Signing of Certificates & Thanksgiving", desc: "The newly married couple signs the wedding register, followed by special thanksgiving offerings." },
         { time: "11:45 AM", label: "Recessional & Photographs", desc: "First walk as husband and wife, followed immediately by professional group photographs in the church gardens." }
       ]
-    },
-    {
-      title: "Thanksgiving & Fellowship Reception",
-      date: "Saturday, Sept 12, 2026",
-      venue: "Fellowship Hall, Deeper Life Bible Church",
-      location: "Bwari, Abuja",
-      steps: [
-        { time: "12:30 PM", label: "Fellowship Hall Doors Open", desc: "Pre-reception lounge opens with light refreshments in the church fellowship hall." },
-        { time: "1:00 PM", label: "Grand Entry of the New Couple", desc: "The bridal train makes its high-energy entry, ushering in Mr. and Mrs. Jerry Tobi." },
-        { time: "1:45 PM", label: "Thanksgiving Feast & Toasting", desc: "Opening of the exquisite buffet dinner, accompanied by toasts from the groom's and bride's families." },
-        { time: "3:00 PM", label: "Cake Cutting & First Waltz", desc: "The official cutting of the wedding cake and the couple's celebratory waltz." },
-        { time: "3:45 PM", label: "Cultural Dance & Rejoicing", desc: "Celebrating our diverse union with beautiful cultural dance performances and rejoicing." },
-        { time: "4:30 PM", label: "Closing Prayers & Royal Send-off", desc: "Concluding prayers and departure of the bride and groom under a canopy of love." }
-      ]
     }
   ];
 
@@ -313,16 +299,6 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
                   </div>
                 </div>
 
-              </div>
-
-              {/* Security Banner Info */}
-              <div className="bg-[#580F6E] text-white p-6 rounded-3xl flex flex-col sm:flex-row items-center gap-4 shadow-sm border border-[#580F6E]/20">
-                <div>
-                  <h4 className="font-serif text-base font-bold text-white tracking-wide">Secure Arrival & Guest Support</h4>
-                  <p className="text-xs text-white/90 mt-1 leading-relaxed font-sans font-medium">
-                    Staff will be available at each entrance to help guests and ensure a calm, welcoming arrival experience.
-                  </p>
-                </div>
               </div>
             </div>
           )}

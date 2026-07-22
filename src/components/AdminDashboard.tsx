@@ -81,6 +81,8 @@ export function AdminDashboard() {
   } | null>(null);
 
   const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
+  const [confirmDeleteAll, setConfirmDeleteAll] = useState(false);
+  const [deletingAll, setDeletingAll] = useState(false);
   const [confirmingSend, setConfirmingSend] = useState(false);
   const [emailSendErrors, setEmailSendErrors] = useState<{ recipient: string; error: string }[]>([]);
 
@@ -99,6 +101,17 @@ export function AdminDashboard() {
       verifyPasscode(savedCode);
     }
   }, []);
+
+  // Auto-refresh: Poll for new registrations every 5 seconds when authorized
+  useEffect(() => {
+    if (!isAuthorized) return;
+    
+    const pollInterval = setInterval(() => {
+      fetchRSVPs("");
+    }, 5000); // Refresh every 5 seconds
+
+    return () => clearInterval(pollInterval);
+  }, [isAuthorized]);
 
   const verifyPasscode = async (codeToVerify: string) => {
     setAuthError("");
@@ -163,6 +176,47 @@ export function AdminDashboard() {
     localStorage.removeItem("wedding_admin_passcode");
     setIsAuthorized(false);
     setRsvps([]);
+  };
+
+  const handleDeleteAll = async () => {
+    const code = localStorage.getItem("wedding_admin_passcode") || "";
+    if (!code) return;
+
+    setDeletingAll(true);
+    try {
+      const res = await fetch("/api/delete-all", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${code}`
+        }
+      });
+
+      if (!res.ok) {
+        const text = await res.text();
+        let errorMessage = `HTTP ${res.status}: ${text}`;
+        try {
+          const parsed = JSON.parse(text);
+          if (parsed && parsed.error) {
+            errorMessage = parsed.error;
+          }
+        } catch (e) {}
+        throw new Error(errorMessage);
+      }
+
+      const data = await res.json();
+      if (data.success) {
+        setRsvps([]);
+        setConfirmDeleteAll(false);
+        alert("All registrations have been deleted successfully.");
+      } else {
+        throw new Error(data.error || "Failed to delete registrations.");
+      }
+    } catch (err: any) {
+      alert(`Delete all error: ${err.message || "Could not complete operation."}`);
+    } finally {
+      setDeletingAll(false);
+    }
   };
 
   const handleSendTestEmail = async () => {
@@ -456,6 +510,34 @@ export function AdminDashboard() {
                 <RefreshCw className={`w-3.5 h-3.5 mr-1.5 ${loadingList ? "animate-spin" : ""}`} />
                 {loadingList ? "Syncing..." : "Reload logs"}
               </button>
+
+              {/* Delete All Button */}
+              {confirmDeleteAll ? (
+                <div className="flex items-center gap-1 bg-red-50 border border-red-200 p-1 rounded-sm">
+                  <span className="text-[9px] text-red-800 font-bold uppercase tracking-wider px-1">Delete ALL?</span>
+                  <button
+                    onClick={handleDeleteAll}
+                    disabled={deletingAll}
+                    className="px-2 py-1 bg-red-600 hover:bg-red-700 disabled:bg-red-400 text-white rounded-xs text-[10px] font-bold font-mono transition cursor-pointer"
+                  >
+                    {deletingAll ? "Deleting..." : "Yes, Delete All"}
+                  </button>
+                  <button
+                    onClick={() => setConfirmDeleteAll(false)}
+                    className="px-2 py-1 bg-zinc-200 hover:bg-zinc-300 text-zinc-700 rounded-xs text-[10px] font-bold font-mono transition cursor-pointer"
+                  >
+                    No
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={() => setConfirmDeleteAll(true)}
+                  className="px-4 py-2 bg-red-50 hover:bg-red-100 border border-red-200 text-red-700 text-xs font-mono font-bold uppercase tracking-wider transition rounded-xs flex items-center"
+                >
+                  <Trash className="w-3.5 h-3.5 mr-1.5" />
+                  Delete All
+                </button>
+              )}
 
               {/* Logout button */}
               <button 

@@ -210,7 +210,6 @@ export function RSVPForm() {
                 {[
                   { value: "traditional", label: "Part 1 • Traditional Marriage - Sept 11" },
                   { value: "church", label: "Part 2 • Church Wedding Ceremony - Sept 12" },
-                  { value: "reception", label: "Part 3 • Thanksgiving & Fellowship - Sept 12" },
                 ].map((item) => {
                   const isChecked = formData.events.includes(item.value);
                   return (

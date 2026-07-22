@@ -38,21 +38,27 @@ function getTransporter(): nodemailer.Transporter {
  * @param to Recipient's email address
  * @param subject Subject of the email
  * @param htmlBody HTML body content of the email
+ * @param attachments Optional array of nodemailer attachments
  */
 export async function sendSmtpEmail(
   to: string,
   subject: string,
-  htmlBody: string
+  htmlBody: string,
+  attachments?: any[]
 ): Promise<{ messageId: string }> {
   const activeTransporter = getTransporter();
   const fromUser = process.env.GMAIL_USER || process.env.SMTP_USER || "";
 
-  const mailOptions = {
+  const mailOptions: any = {
     from: `"Tobi & Ayomide's Royal Wedding" <${fromUser}>`,
     to: to,
     subject: subject,
     html: htmlBody,
   };
+
+  if (attachments) {
+    mailOptions.attachments = attachments;
+  }
 
   try {
     const info = await activeTransporter.sendMail(mailOptions);

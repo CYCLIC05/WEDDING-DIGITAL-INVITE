@@ -52,16 +52,6 @@ export function EventGrid() {
       dressCode: "Magenta purple, White & Gold (Formal & Elegant)",
       subtitle: "The sacred exchanging of vows before the Altar, the Church, and Almighty God.",
     },
-    {
-      title: "Thanksgiving & Fellowship",
-      date: "Saturday, Sept 12, 2026",
-      time: "Following Church Wedding",
-      venue: "Deeper Life Bible Church (Fellowship Hall), Bwari",
-      location: "Bwari, FCT Abuja, Nigeria",
-      mapUrl: "https://maps.google.com/?q=Deeper+Life+Bible+Church+Bwari+Abuja",
-      dressCode: "Magenta purple, White & Gold",
-      subtitle: "Rejoicing together in fellowship, sharing a feast of love and thanks to God.",
-    },
   ];
 
   return (
@@ -78,7 +68,7 @@ export function EventGrid() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
         {events.map((event, idx) => {
           const staggerClass = idx === 0 ? 'animate-stagger-1' : idx === 1 ? 'animate-stagger-2' : 'animate-stagger-3';
           return (

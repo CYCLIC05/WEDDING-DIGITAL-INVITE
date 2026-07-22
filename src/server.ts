@@ -74,7 +74,7 @@ const resendKey = cleanCredentials(process.env.RESEND_API_KEY || "re_mock_key");
 const resend = new Resend(resendKey);
 
 const app = express();
-const PORT = 3000;
+const PORT = Number(process.env.PORT || 3000);
 
 // Enable trust proxy for correct client IP detection behind proxies (Railway, Render, Cloud Run, PM2, Docker)
 app.set("trust proxy", 1);
@@ -800,12 +800,29 @@ app.post("/api/send-invitation", requireAdmin, async (req, res) => {
     let smtpError = "";
 
     if (action === "approve") {
+      let attachments: any[] = [];
+      try {
+        const pdfPath = path.join(process.cwd(), "data", "invitation.pdf");
+        const pdfBuffer = await fs.readFile(pdfPath);
+        attachments = [
+          {
+            filename: "Tobi_and_Ayomide_Wedding_Invitation.pdf",
+            content: pdfBuffer,
+            contentType: "application/pdf"
+          }
+        ];
+        console.log(`[PDF Loaded] Successfully read invitation.pdf, attaching to email.`);
+      } catch (pdfErr) {
+        console.error("❌ Failed to read invitation PDF file for attachment:", pdfErr);
+      }
+
       if (isSmtpConfigured()) {
         try {
           const info = await sendSmtpEmail(
             updatedRecord.email,
             `✨ Tobi & Ayomide's Wedding Official Entry Gatepass [Code: ${shortToken}]`,
-            emailHtml
+            emailHtml,
+            attachments
           );
           isEmailSent = true;
           smtpMessageId = info.messageId;
@@ -824,7 +841,11 @@ app.post("/api/send-invitation", requireAdmin, async (req, res) => {
             from: "Royal Union <wedding@resend.dev>",
             to: updatedRecord.email,
             subject: `✨ Tobi & Ayomide's Wedding Official Entry Gatepass [Code: ${shortToken}]`,
-            html: emailHtml
+            html: emailHtml,
+            attachments: attachments.map(att => ({
+              filename: att.filename,
+              content: att.content,
+            }))
           });
 
           isEmailSent = true;

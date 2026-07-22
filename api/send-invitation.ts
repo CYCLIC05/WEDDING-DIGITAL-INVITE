@@ -1,5 +1,7 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { getSupabase, getResend, checkAdminAuth, setCors, eventLabel, isSmtpConfigured, sendSmtpEmail } from "./_lib.js";
+import fs from "fs/promises";
+import path from "path";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   setCors(res);
@@ -100,12 +102,29 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       </div>`;
 
     if (action === "approve") {
+      let attachments: any[] = [];
+      try {
+        const pdfPath = path.join(process.cwd(), "data", "invitation.pdf");
+        const pdfBuffer = await fs.readFile(pdfPath);
+        attachments = [
+          {
+            filename: "Tobi_and_Ayomide_Wedding_Invitation.pdf",
+            content: pdfBuffer,
+            contentType: "application/pdf"
+          }
+        ];
+        console.log(`[PDF Loaded] Successfully read invitation.pdf, attaching to email.`);
+      } catch (pdfErr) {
+        console.error("❌ Failed to read invitation PDF file for attachment:", pdfErr);
+      }
+
       if (isSmtpConfigured()) {
         try {
           const info = await sendSmtpEmail(
             record.email,
             `✨ Tobi & Ayomide's Wedding Official Entry Gatepass [Code: ${shortToken}]`,
-            gatepassHtml
+            gatepassHtml,
+            attachments
           );
           isEmailSent = true;
           smtpMessageId = info.messageId;
@@ -126,6 +145,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             to: record.email,
             subject: `✨ Tobi & Ayomide's Wedding — Official Entry Gatepass [${shortToken}]`,
             html: gatepassHtml,
+            attachments: attachments.map(att => ({
+              filename: att.filename,
+              content: att.content,
+            }))
           });
           isEmailSent = true;
           resendId = sent?.data?.id || "unknown";
@@ -146,6 +169,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       emailMethod,
       smtpError,
       simulatedEmailCode: shortToken,
+      simulatedEmailHtml: gatepassHtml,
     });
 
   } catch (err: any) {

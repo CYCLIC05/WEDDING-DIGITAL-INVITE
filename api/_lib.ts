@@ -70,7 +70,7 @@ function checkAdminAuth(req: any): boolean {
 
 function setCors(res: any) {
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Admin-Passcode");
 }
 
@@ -107,16 +107,20 @@ function getTransporter(): nodemailer.Transporter {
 async function sendSmtpEmail(
   to: string,
   subject: string,
-  htmlBody: string
+  htmlBody: string,
+  attachments?: any[]
 ): Promise<{ messageId: string }> {
   const activeTransporter = getTransporter();
   const fromUser = process.env.GMAIL_USER || process.env.SMTP_USER || "";
-  const mailOptions = {
+  const mailOptions: any = {
     from: `"Tobi & Ayomide's Royal Wedding" <${fromUser}>`,
     to: to,
     subject: subject,
     html: htmlBody,
   };
+  if (attachments) {
+    mailOptions.attachments = attachments;
+  }
   const info = await activeTransporter.sendMail(mailOptions);
   return { messageId: info.messageId };
 }
