@@ -74,7 +74,7 @@ export function EventGrid() {
           return (
             <article
               key={idx}
-              className={`bg-[#FAF8F5] border border-[#1E293B]/10 rounded-[1.5rem] relative hover-lift ${staggerClass} flex flex-col`}
+              className={`bg-[#FAF9F6] border border-[#1E293B]/10 rounded-[1.5rem] relative hover-lift ${staggerClass} flex flex-col`}
             >
               <div className="absolute inset-2 border border-[#580F6E]/10 pointer-events-none" style={{ borderRadius: '1.25rem' }} />
               <div className="h-1.5 w-full bg-[#580F6E] rounded-t-[1.5rem] relative z-10"></div>

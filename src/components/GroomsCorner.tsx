@@ -65,7 +65,7 @@ export function GroomsCorner() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         
         {/* Groom profile */}
-        <div className="lg:col-span-5 bg-[#FAF8F5] text-slate-900 p-8 md:p-10 relative overflow-hidden border border-[#1E293B]/10 hover-lift animate-fade-left" style={{borderRadius: '1rem'}}>
+        <div className="lg:col-span-5 bg-[#FAF9F6] text-slate-900 p-8 md:p-10 relative overflow-hidden border border-[#1E293B]/10 hover-lift animate-fade-left" style={{borderRadius: '1rem'}}>
           {/* Decorative inset line */}
           <div className="absolute inset-3 border border-[#580F6E]/12 pointer-events-none" style={{borderRadius: '0.75rem'}} />
           
@@ -129,7 +129,7 @@ export function GroomsCorner() {
               return (
                 <div 
                   key={idx} 
-                  className={`bg-[#FAF8F5] border border-[#1E293B]/10 p-6 relative hover-lift ${staggerClass}`}
+                  className={`bg-[#FAF9F6] border border-[#1E293B]/10 p-6 relative hover-lift ${staggerClass}`}
                   style={{borderRadius: '1rem'}}
                 >
                   {/* Decorative inset line */}

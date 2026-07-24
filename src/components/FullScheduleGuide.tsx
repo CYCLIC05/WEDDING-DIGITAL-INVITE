@@ -157,7 +157,7 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
         </div>
 
         {/* MODAL MAIN CONTENT AREA */}
-        <div className="p-6 md:p-8 overflow-y-auto flex-grow bg-[#FAF8F5]">
+        <div className="p-6 md:p-8 overflow-y-auto flex-grow bg-[#FAF9F6]">
           
           {/* TAB 1: DETAILED TIMELINES */}
           {activeTab === "timeline" && (
@@ -323,7 +323,7 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
                     <p className="font-medium text-slate-600">
                       We celebrate our heritage with polished looks in tones of magenta, white, and muted sparkle.
                     </p>
-                    <div className="p-4 bg-[#FAF8F5] rounded-3xl border border-[#580F6E]/20">
+                    <div className="p-4 bg-[#FAF9F6] rounded-3xl border border-[#580F6E]/20">
                       <p className="font-bold text-slate-900 text-[11px] uppercase tracking-wider mb-2 font-sans text-[#580F6E]">Recommended Fabrics &amp; Style:</p>
                       <ul className="list-disc pl-4 space-y-1.5 text-slate-600 font-medium">
                         <li><strong>Ladies</strong>: Elegant wrappers, polished gowns, and tasteful headpieces.</li>
@@ -348,7 +348,7 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
                       The church event is elegant and bright. Guests are invited to wear clean, polished looks in magenta and white.
                     </p>
                     
-                    <div className="p-4 bg-[#FAF8F5] rounded-3xl border border-[#580F6E]/20">
+                    <div className="p-4 bg-[#FAF9F6] rounded-3xl border border-[#580F6E]/20">
                       <p className="font-bold text-slate-900 text-[11px] uppercase tracking-wider mb-2 font-sans text-[#580F6E]">Reverent Church Guidelines &amp; Colors:</p>
                       <ul className="list-disc pl-4 space-y-1.5 text-slate-600 font-medium">
                         <li><strong>Decorum</strong>: Please choose formal, respectful attire suitable for the sanctuary.</li>
@@ -362,7 +362,7 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
               </div>
 
               {/* Etiquette and guidelines card */}
-              <div className="bg-[#FAF8F5] border border-[#580F6E]/20 rounded-3xl p-6">
+              <div className="bg-[#FAF9F6] border border-[#580F6E]/20 rounded-3xl p-6">
                 <h4 className="font-serif text-sm font-bold text-[#580F6E]">
                   Wedding Day Etiquette
                 </h4>
@@ -402,7 +402,7 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
           </p>
           <button 
             onClick={onClose}
-            className="px-6 py-2.5 bg-[#580F6E] hover:bg-[#9B27BE] text-white font-sans text-[10px] uppercase tracking-widest font-extrabold transition duration-300 rounded-full shadow-sm cursor-pointer border border-[#580F6E]/20"
+            className="px-6 py-2.5 bg-[#580F6E] hover:bg-[#8B1A9A] text-white font-sans text-[10px] uppercase tracking-widest font-extrabold transition duration-300 rounded-full shadow-sm cursor-pointer border border-[#580F6E]/20"
           >
             Got it
           </button>

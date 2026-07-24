@@ -111,67 +111,67 @@ const WeddingBouquetSVG = ({ className = "" }: { className?: string }) => (
     <path d="M120 182 Q134 168 130 156 Q124 172 120 182Z" fill="#4A7C59" opacity="0.7"/>
     <path d="M100 175 Q93 185 96 195 Q100 183 100 175Z" fill="#5A8C6A" opacity="0.65"/>
 
-    {/* ── Ribbon bow at base ── */}
-    <path d="M85 190 Q78 182 82 176 Q90 186 85 190Z" fill="#C084FC" opacity="0.5"/>
-    <path d="M115 190 Q122 182 118 176 Q110 186 115 190Z" fill="#C084FC" opacity="0.5"/>
-    <ellipse cx="100" cy="190" rx="8" ry="5" fill="#A855F7" opacity="0.55"/>
-    <path d="M96 190 Q100 198 104 190" stroke="#7E22CE" strokeWidth="1.2" fill="none" strokeLinecap="round"/>
+    {/* ── Ribbon bow at base (dusty rose/pink) ── */}
+    <path d="M85 190 Q78 182 82 176 Q90 186 85 190Z" fill="#C4A0D8" opacity="0.5"/>
+    <path d="M115 190 Q122 182 118 176 Q110 186 115 190Z" fill="#C4A0D8" opacity="0.5"/>
+    <ellipse cx="100" cy="190" rx="8" ry="5" fill="#9E6BB5" opacity="0.55"/>
+    <path d="M96 190 Q100 198 104 190" stroke="#580F6E" strokeWidth="1.2" fill="none" strokeLinecap="round"/>
 
     {/* ── Centre large rose (deep purple) ── */}
     <circle cx="100" cy="72" r="22" fill="#580F6E" opacity="0.12"/>
-    <ellipse cx="100" cy="80" rx="18" ry="10" fill="#7E22CE" opacity="0.85"/>
-    <ellipse cx="100" cy="74" rx="14" ry="9" fill="#6B21A8" opacity="0.9"/>
-    <ellipse cx="100" cy="68" rx="10" ry="7" fill="#581C87" opacity="0.95"/>
-    <ellipse cx="100" cy="63" rx="7" ry="5" fill="#4C1D95"/>
-    <path d="M86 78 Q88 68 100 65 Q88 72 86 78Z" fill="#A855F7" opacity="0.35"/>
-    <path d="M114 78 Q112 68 100 65 Q112 72 114 78Z" fill="#A855F7" opacity="0.35"/>
-    <path d="M100 88 Q88 82 85 72 Q96 80 100 88Z" fill="#9333EA" opacity="0.3"/>
-    <path d="M100 88 Q112 82 115 72 Q104 80 100 88Z" fill="#9333EA" opacity="0.3"/>
-    <circle cx="100" cy="62" r="4" fill="#DDD6FE" opacity="0.6"/>
+    <ellipse cx="100" cy="80" rx="18" ry="10" fill="#7B1FA2" opacity="0.85"/>
+    <ellipse cx="100" cy="74" rx="14" ry="9" fill="#6A1791" opacity="0.9"/>
+    <ellipse cx="100" cy="68" rx="10" ry="7" fill="#580F6E" opacity="0.95"/>
+    <ellipse cx="100" cy="63" rx="7" ry="5" fill="#3D0A4F"/>
+    <path d="M86 78 Q88 68 100 65 Q88 72 86 78Z" fill="#DCC4EC" opacity="0.35"/>
+    <path d="M114 78 Q112 68 100 65 Q112 72 114 78Z" fill="#DCC4EC" opacity="0.35"/>
+    <path d="M100 88 Q88 82 85 72 Q96 80 100 88Z" fill="#580F6E" opacity="0.3"/>
+    <path d="M100 88 Q112 82 115 72 Q104 80 100 88Z" fill="#580F6E" opacity="0.3"/>
+    <circle cx="100" cy="62" r="4" fill="#E9D5FF" opacity="0.6"/>
 
     {/* ── Left medium rose (medium purple) ── */}
-    <ellipse cx="68" cy="90" rx="14" ry="8" fill="#9333EA" opacity="0.8"/>
-    <ellipse cx="68" cy="85" rx="10" ry="7" fill="#7C3AED" opacity="0.9"/>
+    <ellipse cx="68" cy="90" rx="14" ry="8" fill="#7B1FA2" opacity="0.8"/>
+    <ellipse cx="68" cy="85" rx="10" ry="7" fill="#6A1791" opacity="0.9"/>
     <ellipse cx="68" cy="80" rx="7" ry="5" fill="#6D28D9"/>
-    <path d="M58 88 Q60 80 68 77 Q58 83 58 88Z" fill="#C4B5FD" opacity="0.3"/>
-    <path d="M78 88 Q76 80 68 77 Q78 83 78 88Z" fill="#C4B5FD" opacity="0.3"/>
-    <circle cx="68" cy="79" r="3" fill="#EDE9FE" opacity="0.55"/>
+    <path d="M58 88 Q60 80 68 77 Q58 83 58 88Z" fill="#DCC4EC" opacity="0.3"/>
+    <path d="M78 88 Q76 80 68 77 Q78 83 78 88Z" fill="#DCC4EC" opacity="0.3"/>
+    <circle cx="68" cy="79" r="3" fill="#E9D5FF" opacity="0.55"/>
 
     {/* ── Right medium rose (violet) ── */}
-    <ellipse cx="132" cy="90" rx="14" ry="8" fill="#9333EA" opacity="0.8"/>
-    <ellipse cx="132" cy="85" rx="10" ry="7" fill="#7C3AED" opacity="0.9"/>
+    <ellipse cx="132" cy="90" rx="14" ry="8" fill="#7B1FA2" opacity="0.8"/>
+    <ellipse cx="132" cy="85" rx="10" ry="7" fill="#6A1791" opacity="0.9"/>
     <ellipse cx="132" cy="80" rx="7" ry="5" fill="#6D28D9"/>
-    <path d="M122 88 Q124 80 132 77 Q122 83 122 88Z" fill="#C4B5FD" opacity="0.3"/>
-    <path d="M142 88 Q140 80 132 77 Q142 83 142 88Z" fill="#C4B5FD" opacity="0.3"/>
-    <circle cx="132" cy="79" r="3" fill="#EDE9FE" opacity="0.55"/>
+    <path d="M122 88 Q124 80 132 77 Q122 83 122 88Z" fill="#DCC4EC" opacity="0.3"/>
+    <path d="M142 88 Q140 80 132 77 Q142 83 142 88Z" fill="#DCC4EC" opacity="0.3"/>
+    <circle cx="132" cy="79" r="3" fill="#E9D5FF" opacity="0.55"/>
 
     {/* ── Far-left small bud (lavender) ── */}
-    <ellipse cx="48" cy="105" rx="10" ry="6" fill="#C084FC" opacity="0.75"/>
-    <ellipse cx="48" cy="101" rx="7" ry="5" fill="#A855F7" opacity="0.85"/>
-    <ellipse cx="48" cy="97" rx="4.5" ry="3.5" fill="#9333EA"/>
-    <circle cx="48" cy="96" r="2" fill="#F3E8FF" opacity="0.5"/>
+    <ellipse cx="48" cy="105" rx="10" ry="6" fill="#C4A0D8" opacity="0.75"/>
+    <ellipse cx="48" cy="101" rx="7" ry="5" fill="#9E6BB5" opacity="0.85"/>
+    <ellipse cx="48" cy="97" rx="4.5" ry="3.5" fill="#580F6E"/>
+    <circle cx="48" cy="96" r="2" fill="#F0EAFA" opacity="0.5"/>
 
     {/* ── Far-right small bud (lavender) ── */}
-    <ellipse cx="152" cy="105" rx="10" ry="6" fill="#C084FC" opacity="0.75"/>
-    <ellipse cx="152" cy="101" rx="7" ry="5" fill="#A855F7" opacity="0.85"/>
-    <ellipse cx="152" cy="97" rx="4.5" ry="3.5" fill="#9333EA"/>
-    <circle cx="152" cy="96" r="2" fill="#F3E8FF" opacity="0.5"/>
+    <ellipse cx="152" cy="105" rx="10" ry="6" fill="#C4A0D8" opacity="0.75"/>
+    <ellipse cx="152" cy="101" rx="7" ry="5" fill="#9E6BB5" opacity="0.85"/>
+    <ellipse cx="152" cy="97" rx="4.5" ry="3.5" fill="#580F6E"/>
+    <circle cx="152" cy="96" r="2" fill="#F0EAFA" opacity="0.5"/>
 
     {/* ── Upper-left tiny bud ── */}
-    <ellipse cx="78" cy="52" rx="7" ry="4.5" fill="#D8B4FE" opacity="0.7"/>
-    <ellipse cx="78" cy="48" rx="5" ry="3.5" fill="#C084FC" opacity="0.85"/>
-    <circle cx="78" cy="47" r="2" fill="#F5F3FF" opacity="0.5"/>
+    <ellipse cx="78" cy="52" rx="7" ry="4.5" fill="#E9D5FF" opacity="0.7"/>
+    <ellipse cx="78" cy="48" rx="5" ry="3.5" fill="#C4A0D8" opacity="0.85"/>
+    <circle cx="78" cy="47" r="2" fill="#F0EAFA" opacity="0.5"/>
 
     {/* ── Upper-right tiny bud ── */}
-    <ellipse cx="122" cy="52" rx="7" ry="4.5" fill="#D8B4FE" opacity="0.7"/>
-    <ellipse cx="122" cy="48" rx="5" ry="3.5" fill="#C084FC" opacity="0.85"/>
-    <circle cx="122" cy="47" r="2" fill="#F5F3FF" opacity="0.5"/>
+    <ellipse cx="122" cy="52" rx="7" ry="4.5" fill="#E9D5FF" opacity="0.7"/>
+    <ellipse cx="122" cy="48" rx="5" ry="3.5" fill="#C4A0D8" opacity="0.85"/>
+    <circle cx="122" cy="47" r="2" fill="#F0EAFA" opacity="0.5"/>
 
     {/* ── Tiny accent dots / pollen ── */}
     <circle cx="62" cy="68" r="1.5" fill="#E9D5FF" opacity="0.6"/>
     <circle cx="138" cy="68" r="1.5" fill="#E9D5FF" opacity="0.6"/>
-    <circle cx="55" cy="80" r="1.2" fill="#DDD6FE" opacity="0.5"/>
-    <circle cx="145" cy="80" r="1.2" fill="#DDD6FE" opacity="0.5"/>
+    <circle cx="55" cy="80" r="1.2" fill="#DCC4EC" opacity="0.5"/>
+    <circle cx="145" cy="80" r="1.2" fill="#DCC4EC" opacity="0.5"/>
   </svg>
 );
 
@@ -182,6 +182,7 @@ import { AdminDashboard } from "./components/AdminDashboard.tsx";
 import purpleRoses from "./assets/images/purple_watercolor_roses.png";
 import { FullScheduleGuide } from "./components/FullScheduleGuide.tsx";
 import { CoupleAbout } from "./components/CoupleAbout.tsx";
+import { GiftingRegistry } from "./components/GiftingRegistry.tsx";
 
 export default function App() {
   const [loading] = useState(false);
@@ -328,6 +329,7 @@ export default function App() {
                   <a href="#couple-section" className="hover:text-[#580F6E] transition-colors duration-200">Couple</a>
                   <button onClick={() => setIsGuideOpen(true)} className="hover:text-[#580F6E] transition-colors duration-200">Guide</button>
                   <a href="#itinerary" className="hover:text-[#580F6E] transition-colors duration-200">Itinerary</a>
+                  <a href="#gifting-section" className="hover:text-[#580F6E] transition-colors duration-200">Registry</a>
                 </nav>
                 <button
                   onClick={() => changeView("admin")}
@@ -340,7 +342,7 @@ export default function App() {
             ) : (
               <button
                 onClick={() => changeView("guest")}
-                className="px-4 py-2 rounded-full border border-[#580F6E] text-[#580F6E] hover:bg-[#FAF8F5] transition text-[10px] uppercase tracking-[0.2em] font-bold"
+                className="px-4 py-2 rounded-full border border-[#580F6E] text-[#580F6E] hover:bg-[#FAF8FF] transition text-[10px] uppercase tracking-[0.2em] font-bold"
               >
                 ← Return to Invite
               </button>
@@ -379,6 +381,13 @@ export default function App() {
                 Itinerary
               </a>
               <a
+                href="#gifting-section"
+                onClick={() => setIsFloatingMenuOpen(false)}
+                className="flex items-center justify-center px-4 py-2.5 rounded-full bg-white border border-slate-200 shadow-lg text-[10px] uppercase tracking-[0.2em] font-bold text-slate-600 hover:text-[#580F6E] hover:border-[#580F6E] transition"
+              >
+                Registry
+              </a>
+              <a
                 href="#rsvp-section"
                 onClick={() => setIsFloatingMenuOpen(false)}
                 className="flex items-center justify-center px-5 py-2.5 rounded-full bg-[#580F6E] text-white shadow-lg text-[10px] uppercase tracking-[0.22em] font-bold hover:bg-[#4A0E4E] transition"
@@ -410,17 +419,17 @@ export default function App() {
               className="relative max-w-5xl mx-auto mb-10 select-none overflow-hidden"
               style={{
                 borderRadius: '1.5rem',
-                background: 'linear-gradient(160deg, #FDFBFF 0%, #F7F0FF 40%, #FBF8FF 70%, #FDFBFF 100%)',
-                border: '1px solid rgba(139,92,246,0.15)',
+                background: 'linear-gradient(160deg, #FAF8FF 0%, #F0EAFA 40%, #FAF8FF 70%, #FAF8FF 100%)',
+                border: '1px solid rgba(88,15,110,0.12)',
                 boxShadow: '0 8px 48px rgba(88,15,110,0.10), 0 2px 12px rgba(88,15,110,0.06)',
               }}
             >
               {/* ── Top accent line ── */}
-              <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: 'linear-gradient(90deg, transparent, #580F6E 30%, #A855F7 50%, #580F6E 70%, transparent)' }} />
-              <div className="absolute bottom-0 left-0 right-0 h-[2px]" style={{ background: 'linear-gradient(90deg, transparent, #580F6E 30%, #A855F7 50%, #580F6E 70%, transparent)' }} />
+              <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: 'linear-gradient(90deg, transparent, #580F6E 30%, #9E2B3E 50%, #580F6E 70%, transparent)' }} />
+              <div className="absolute bottom-0 left-0 right-0 h-[2px]" style={{ background: 'linear-gradient(90deg, transparent, #580F6E 30%, #9E2B3E 50%, #580F6E 70%, transparent)' }} />
 
               {/* ── Inset double border ── */}
-              <div className="absolute inset-4 pointer-events-none z-0" style={{ border: '1px solid rgba(139,92,246,0.12)', borderRadius: '1.1rem' }} />
+              <div className="absolute inset-4 pointer-events-none z-0" style={{ border: '1px solid rgba(88,15,110,0.10)', borderRadius: '1.1rem' }} />
 
               {/* ── TOP-LEFT corner roses ── */}
               <img
@@ -445,7 +454,7 @@ export default function App() {
               >
                 <span
                   className="font-serif text-[20rem] leading-none font-light"
-                  style={{ color: 'rgba(88,15,110,0.025)', userSelect: 'none', marginTop: '-2rem' }}
+                  style={{ color: 'rgba(88,15,110,0.04)', userSelect: 'none', marginTop: '-2rem' }}
                 >
                   &amp;
                 </span>
@@ -500,7 +509,7 @@ export default function App() {
                 </div>
 
                 {/* Countdown tiles */}
-                <div className="animate-fade-up delay-600 mt-9 inline-grid grid-cols-4" style={{ border: '1px solid rgba(88,15,110,0.12)', background: 'rgba(250,248,255,0.8)', backdropFilter: 'blur(4px)' }}>
+                <div className="animate-fade-up delay-600 mt-9 inline-grid grid-cols-4" style={{ border: '1px solid rgba(88,15,110,0.12)', background: 'rgba(240,234,250,0.6)', backdropFilter: 'blur(4px)' }}>
                   {([
                     { label: "Days",  value: timeLeft.days },
                     { label: "Hours", value: timeLeft.hours },
@@ -555,6 +564,49 @@ export default function App() {
                     <span>Confirm Attendance</span>
                   </a>
 
+                  <a
+                    href="#gifting-section"
+                    style={{
+                      padding: '13px 30px',
+                      background: 'rgba(255,255,255,0.7)',
+                      color: '#580F6E',
+                      fontFamily: 'inherit',
+                      fontSize: '10px',
+                      fontWeight: 700,
+                      letterSpacing: '0.28em',
+                      textTransform: 'uppercase',
+                      border: '1.5px solid rgba(88,15,110,0.4)',
+                      boxShadow: '0 2px 12px rgba(88,15,110,0.08)',
+                      transition: 'all 0.3s ease',
+                      cursor: 'pointer',
+                      borderRadius: '2px',
+                      textDecoration: 'none',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                    }}
+                    onMouseEnter={e => {
+                      (e.currentTarget as HTMLElement).style.background = '#F0EAFA';
+                      (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 18px rgba(88,15,110,0.16)';
+                      (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
+                    }}
+                    onMouseLeave={e => {
+                      (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.7)';
+                      (e.currentTarget as HTMLElement).style.boxShadow = '0 2px 12px rgba(88,15,110,0.08)';
+                      (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
+                    }}
+                  >
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <svg viewBox="0 0 24 24" fill="none" width="11" height="11" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="20 12 20 22 4 22 4 12" />
+                        <rect x="2" y="7" width="20" height="5" />
+                        <line x1="12" y1="22" x2="12" y2="7" />
+                        <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z" fill="currentColor" fillOpacity="0.1" />
+                        <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" fill="currentColor" fillOpacity="0.1" />
+                      </svg>
+                      Gifting
+                    </span>
+                  </a>
+
                   <button
                     onClick={() => setIsGuideOpen(true)}
                     style={{
@@ -573,7 +625,7 @@ export default function App() {
                       borderRadius: '2px',
                     }}
                     onMouseEnter={e => {
-                      (e.currentTarget as HTMLElement).style.background = '#FAF4FC';
+                      (e.currentTarget as HTMLElement).style.background = '#F0EAFA';
                       (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 18px rgba(88,15,110,0.16)';
                       (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
                     }}
@@ -610,7 +662,7 @@ export default function App() {
                     { delay: "0.5s", left: "63%", scale: 0.5, dur: "3.8s" },
                     { delay: "2.2s", left: "28%", scale: 0.7, dur: "3.0s" },
                   ].map(({ delay, left, scale, dur }, i) => (
-                    <span key={`h${i}`} style={{ position: 'absolute', bottom: 0, left, fontSize: `${Math.round(18 * scale)}px`, animation: `floatUp ${dur} ${delay} ease-in infinite`, color: '#9333EA', opacity: 0.5 * scale + 0.15 }}>
+                    <span key={`h${i}`} style={{ position: 'absolute', bottom: 0, left, fontSize: `${Math.round(18 * scale)}px`, animation: `floatUp ${dur} ${delay} ease-in infinite`, color: '#580F6E', opacity: 0.5 * scale + 0.15 }}>
                       ♡
                     </span>
                   ))}
@@ -619,7 +671,7 @@ export default function App() {
                     { size: 24, delay: "1.4s", left: "54%", dur: "2.8s" },
                     { size: 44, delay: "2.0s", left: "38%", dur: "3.6s" },
                   ].map(({ size, delay, left, dur }, i) => (
-                    <span key={`r${i}`} style={{ position: 'absolute', bottom: 0, left, width: size, height: size, border: '1.5px solid #A855F7', borderRadius: '50%', opacity: 0.12, animation: `floatUp ${dur} ${delay} ease-in infinite` }} />
+                    <span key={`r${i}`} style={{ position: 'absolute', bottom: 0, left, width: size, height: size, border: '1.5px solid #9E6BB5', borderRadius: '50%', opacity: 0.12, animation: `floatUp ${dur} ${delay} ease-in infinite` }} />
                   ))}
                   <style>{`
                     @keyframes floatUp {
@@ -645,7 +697,7 @@ export default function App() {
 
               {/* Guest Guide editorial banner */}
               <div className="max-w-3xl mx-auto px-6 mt-4 animate-fade-up">
-                <div className="relative overflow-hidden border border-[#1E293B]/10 hover-lift bg-[#FAF8F5]" style={{borderRadius: '1rem'}}>
+                <div className="relative overflow-hidden border border-[#1E293B]/10 hover-lift bg-[#FAF9F6]" style={{borderRadius: '1rem'}}>
                   {/* Solid deep purple left stripe */}
                   <div className="absolute left-0 top-0 bottom-0 w-[6px] bg-[#580F6E]" />
                   <div className="pl-10 pr-8 py-8 text-left">
@@ -668,6 +720,9 @@ export default function App() {
                 </div>
               </div>
             </div>
+
+            {/* LOVE GIFT & REGISTRY SECTION */}
+            <GiftingRegistry />
 
             {/* DIGITAL RSVP CAPTURE FORM SECTION */}
             <RSVPForm />

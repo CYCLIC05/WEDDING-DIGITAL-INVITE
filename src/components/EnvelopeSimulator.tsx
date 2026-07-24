@@ -93,7 +93,7 @@ export function EnvelopeSimulator({
         </div>
 
         {/* Informative message */}
-        <div className={`p-4 border-b border-[#C29D70]/20 text-[11px] font-semibold leading-relaxed font-mono flex flex-col gap-2.5 ${smtpError ? "bg-amber-50 text-amber-900" : "bg-[#C29D70]/5 text-[#580F6E]"}`}>
+        <div className={`p-4 border-b border-[#C29D70]/20 text-[11px] font-semibold leading-relaxed font-mono flex flex-col gap-2.5 ${smtpError ? "bg-cyan-50 text-[#0F172A]" : "bg-[#C29D70]/5 text-[#580F6E]"}`}>
           <div className="flex items-start">
             <InfoSVG className={`w-4 h-4 mr-2 shrink-0 mt-0.5 ${smtpError ? "text-amber-600" : "text-[#580F6E]"}`} />
             <div>
@@ -105,18 +105,18 @@ export function EnvelopeSimulator({
           <div className="mt-2 pl-6 space-y-1.5 border-t border-dashed border-rose-150 pt-2 text-[10px]">
             <div>• Preferred Mailer: <span className="font-bold underline">Gmail SMTP (Nodemailer)</span></div>
             {emailMethod === "smtp" && (
-              <div className="text-emerald-700 font-bold">✓ SUCCESS: Mail sent successfully via Gmail SMTP (Nodemailer).</div>
+              <div className="text-[#0F172A] font-bold">✓ SUCCESS: Mail sent successfully via Gmail SMTP (Nodemailer).</div>
             )}
             {(emailMethod === "resend" || emailMethod === "none") && smtpError && (
-              <div className="text-rose-700 bg-rose-50/70 p-3 rounded-md border border-rose-100/50 leading-relaxed font-sans text-xs">
-                <div className="font-mono text-[10px] font-bold text-rose-800 flex items-center gap-1 mb-1">
+              <div className="text-cyan-700 bg-cyan-50/70 p-3 rounded-md border border-cyan-100/50 leading-relaxed font-sans text-xs">
+                <div className="font-mono text-[10px] font-bold text-cyan-800 flex items-center gap-1 mb-1">
                   <span>✗ SMTP Error occurred during Nodemailer dispatch</span>
                 </div>
-                <div className="font-mono text-[11px] bg-white p-1.5 rounded border border-rose-100 overflow-x-auto whitespace-pre-wrap select-text mb-2">
+                <div className="font-mono text-[11px] bg-white p-1.5 rounded border border-cyan-100 overflow-x-auto whitespace-pre-wrap select-text mb-2">
                   {smtpError}
                 </div>
                 {smtpError.includes("Application-specific password required") && (
-                  <div className="text-zinc-700 text-xs bg-amber-50 border border-amber-200 p-2.5 rounded leading-relaxed">
+                  <div className="text-zinc-700 text-xs bg-cyan-50 border border-amber-200 p-2.5 rounded leading-relaxed">
                     💡 <strong>How to Resolve:</strong> Gmail requires an <strong>App Password</strong>. Please follow these steps:
                     <ol className="list-decimal pl-5 mt-1.5 space-y-1 font-semibold text-zinc-800">
                       <li>Go to your Google Account Settings (<a href="https://myaccount.google.com" target="_blank" rel="noreferrer" className="text-blue-700 underline hover:text-blue-900">myaccount.google.com</a>)</li>
@@ -131,7 +131,7 @@ export function EnvelopeSimulator({
               </div>
             )}
             {emailMethod === "resend" && (
-              <div className="text-emerald-700 font-bold mt-1">
+              <div className="text-[#0F172A] font-bold mt-1">
                 ✓ Resend Fallback: Dispatch succeeded using Resend fallback client (ID: {code}).
               </div>
             )}
@@ -163,7 +163,7 @@ export function EnvelopeSimulator({
               <div className="pt-4 z-10">
                 <button
                   onClick={() => setOpened(true)}
-                  className="px-6 py-2.5 bg-[#580F6E] hover:bg-[#9E2B3E] font-bold font-mono text-[11px] uppercase tracking-wider text-white transition duration-200 rounded-full flex items-center justify-center mx-auto border border-[#C29D70]/40 cursor-pointer"
+                  className="px-6 py-2.5 bg-[#580F6E] hover:bg-[#4A0E4E] font-bold font-mono text-[11px] uppercase tracking-wider text-white transition duration-200 rounded-full flex items-center justify-center mx-auto border border-[#C29D70]/40 cursor-pointer"
                 >
                   <SendSVG /> Open Invitation
                 </button>
@@ -203,7 +203,7 @@ export function EnvelopeSimulator({
               setOpened(false);
               onClose();
             }}
-            className="px-5 py-2.5 bg-[#580F6E] hover:bg-[#9E2B3E] text-white text-xs uppercase tracking-wider font-bold transition duration-200 rounded-full cursor-pointer border border-[#C29D70]/30"
+            className="px-5 py-2.5 bg-[#580F6E] hover:bg-[#4A0E4E] text-white text-xs uppercase tracking-wider font-bold transition duration-200 rounded-full cursor-pointer border border-[#C29D70]/30"
           >
             Acknowledge Gatepass
           </button>

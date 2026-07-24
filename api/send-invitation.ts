@@ -61,29 +61,29 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     let smtpError = "";
 
     const gatepassHtml = `
-      <div style="font-family:'Georgia',serif;background:#FAF9F6;padding:40px;border:12px solid #580F6E;outline:3px double #580F6E;max-width:600px;margin:20px auto;color:#111827;border-radius:4px;">
+      <div style="font-family:'Georgia',serif;background:#FAF9F6;padding:40px;border:12px solid #0E7490;outline:3px double #0E7490;max-width:600px;margin:20px auto;color:#111827;border-radius:4px;">
         <div style="text-align:center;margin-bottom:24px;">
-          <div style="font-size:11px;text-transform:uppercase;letter-spacing:3px;color:#580F6E;font-weight:bold;">Official Gatepass</div>
+          <div style="font-size:11px;text-transform:uppercase;letter-spacing:3px;color:#0E7490;font-weight:bold;">Official Gatepass</div>
         </div>
-        <h2 style="font-size:28px;color:#580F6E;text-align:center;font-weight:normal;margin-bottom:4px;">Tobi &amp; Ayomide</h2>
-        <p style="font-size:13px;font-style:italic;color:#580F6E;text-align:center;margin-top:0;margin-bottom:28px;letter-spacing:1px;">— Proverbs 18:22 —</p>
-        <div style="background:#fff;padding:28px;border:1px solid rgba(88,15,110,0.2);border-radius:2px;text-align:left;margin:20px 0;">
+        <h2 style="font-size:28px;color:#0E7490;text-align:center;font-weight:normal;margin-bottom:4px;">Tobi &amp; Ayomide</h2>
+        <p style="font-size:13px;font-style:italic;color:#0E7490;text-align:center;margin-top:0;margin-bottom:28px;letter-spacing:1px;">— Proverbs 18:22 —</p>
+        <div style="background:#fff;padding:28px;border:1px solid rgba(14,116,144,0.2);border-radius:2px;text-align:left;margin:20px 0;">
           <p style="font-size:18px;color:#111827;font-weight:bold;margin:0 0 12px;">Dear ${record.name},</p>
           <p style="font-size:15px;line-height:1.6;color:#1F2937;margin-bottom:20px;">
             We are overjoyed to confirm your seating reservation. Please find your secure gatepass credentials below.
           </p>
-          <div style="background:#FAF9F6;border-left:4px solid #580F6E;padding:16px;margin:20px 0;border-radius:2px;">
+          <div style="background:#FAF9F6;border-left:4px solid #0E7490;padding:16px;margin:20px 0;border-radius:2px;">
             <table style="width:100%;font-size:14px;border-collapse:collapse;">
                <tr>
-                <td style="color:#580F6E;font-weight:bold;width:45%;padding:6px 0;font-family:sans-serif;font-size:12px;">VERIFICATION CODE:</td>
-                <td style="color:#580F6E;font-family:monospace;font-weight:bold;font-size:18px;letter-spacing:1.5px;padding:6px 0;">${shortToken}</td>
+                <td style="color:#0E7490;font-weight:bold;width:45%;padding:6px 0;font-family:sans-serif;font-size:12px;">VERIFICATION CODE:</td>
+                <td style="color:#0E7490;font-family:monospace;font-weight:bold;font-size:18px;letter-spacing:1.5px;padding:6px 0;">${shortToken}</td>
               </tr>
               <tr>
-                <td style="color:#580F6E;font-weight:bold;padding:6px 0;font-family:sans-serif;font-size:12px;">CONFIRMED SEATING:</td>
+                <td style="color:#0E7490;font-weight:bold;padding:6px 0;font-family:sans-serif;font-size:12px;">CONFIRMED SEATING:</td>
                 <td style="color:#111827;font-weight:bold;font-size:15px;padding:6px 0;">${seating}</td>
               </tr>
               <tr>
-                <td style="color:#580F6E;font-weight:bold;padding:6px 0;font-family:sans-serif;font-size:12px;">EVENTS:</td>
+                <td style="color:#0E7490;font-weight:bold;padding:6px 0;font-family:sans-serif;font-size:12px;">EVENTS:</td>
                 <td style="color:#1F2937;font-size:13px;line-height:1.4;padding:6px 0;">${eventLabels}</td>
                </tr>
             </table>
@@ -92,9 +92,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             * Kindly present a digital or printed copy of this pass at all security check stations.
           </p>
         </div>
-        <p style="font-size:13px;line-height:1.6;color:#111827;text-align:center;max-width:480px;margin:30px auto;padding:15px;border-top:1px dotted rgba(88,15,110,0.4);border-bottom:1px dotted rgba(88,15,110,0.4);">
+        <p style="font-size:13px;line-height:1.6;color:#111827;text-align:center;max-width:480px;margin:30px auto;padding:15px;border-top:1px dotted rgba(14,116,144,0.4);border-bottom:1px dotted rgba(14,116,144,0.4);">
           "He who finds a wife finds a good thing and obtains favor from the Lord."<br/>
-          <strong style="color:#580F6E;font-size:12px;display:block;margin-top:8px;">— Proverbs 18:22</strong>
+          <strong style="color:#0E7490;font-size:12px;display:block;margin-top:8px;">— Proverbs 18:22</strong>
         </p>
         <div style="font-size:10px;color:#6B7280;text-transform:uppercase;letter-spacing:2px;margin-top:24px;text-align:center;">
           Tobi &amp; Ayomide's Covenant Wedding • Abuja, Nigeria

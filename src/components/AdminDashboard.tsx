@@ -432,9 +432,9 @@ export function AdminDashboard() {
       
       {!isAuthorized ? (
         /* Login Screen protected layout */
-        <div className="w-full max-w-lg bg-white p-10 md:p-14 shadow-[0_25px_50px_rgba(0,0,0,0.06)] border border-rose-100 rounded-[6px]">
+        <div className="w-full max-w-lg bg-white p-10 md:p-14 shadow-[0_25px_50px_rgba(0,0,0,0.06)] border border-cyan-100 rounded-[6px]">
           <div className="text-center mb-10 flex flex-col items-center">
-            <div className="inline-flex p-5.5 bg-rose-50 rounded-full mb-6">
+            <div className="inline-flex p-5.5 bg-cyan-50 rounded-full mb-6">
               <Lock className="w-8 h-8 text-[#580F6E]" strokeWidth={1.5} />
             </div>
             <h2 className="font-serif text-[32px] md:text-4xl text-[#580F6E] font-bold tracking-tight">
@@ -470,7 +470,7 @@ export function AdminDashboard() {
             <button 
               type="submit"
               disabled={verifying}
-              className="w-full py-4 bg-[#580F6E] hover:bg-[#9E2B3E] disabled:bg-[#580F6E]/70 duration-300 text-white font-mono text-[13px] uppercase font-bold tracking-widest transition-all rounded-[4px] flex items-center justify-center shadow-md cursor-pointer"
+              className="w-full py-4 bg-[#580F6E] hover:bg-[#4A0E4E] disabled:bg-[#580F6E]/70 duration-300 text-white font-mono text-[13px] uppercase font-bold tracking-widest transition-all rounded-[4px] flex items-center justify-center shadow-md cursor-pointer"
             >
               {verifying ? (
                 <>
@@ -488,14 +488,14 @@ export function AdminDashboard() {
         <div>
           
           {/* Header Dashboard section */}
-          <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-amber-900/10 pb-6 mb-8 gap-4">
+          <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-cyan-100 pb-6 mb-8 gap-4">
             <div>
-              <div className="flex items-center space-x-2 text-xs text-amber-800 font-mono font-bold tracking-widest uppercase mb-1">
+              <div className="flex items-center space-x-2 text-xs text-cyan-800 font-mono font-bold tracking-widest uppercase mb-1">
                 <span>Nigeria Wedding Hub</span>
                 <span>•</span>
-                <span className="text-emerald-950 flex items-center"><Unlock className="w-3.5 h-3.5 mr-1" /> Authenticated Console</span>
+                <span className="text-[#0F172A] flex items-center"><Unlock className="w-3.5 h-3.5 mr-1" /> Authenticated Console</span>
               </div>
-              <h1 className="font-serif text-3xl font-medium text-emerald-950 tracking-tight">
+              <h1 className="font-serif text-3xl font-medium text-[#0F172A] tracking-tight">
                 Tobi &amp; Ayomide's RSVP Registry
               </h1>
             </div>
@@ -505,7 +505,7 @@ export function AdminDashboard() {
               <button 
                 onClick={() => fetchRSVPs("")}
                 disabled={loadingList}
-                className="px-4 py-2 border border-amber-900/15 hover:bg-white text-emerald-950 text-xs font-mono font-bold uppercase tracking-wider transition rounded-xs flex items-center"
+                className="px-4 py-2 border border-amber-900/15 hover:bg-white text-[#0F172A] text-xs font-mono font-bold uppercase tracking-wider transition rounded-xs flex items-center"
               >
                 <RefreshCw className={`w-3.5 h-3.5 mr-1.5 ${loadingList ? "animate-spin" : ""}`} />
                 {loadingList ? "Syncing..." : "Reload logs"}
@@ -542,7 +542,7 @@ export function AdminDashboard() {
               {/* Logout button */}
               <button 
                 onClick={handleLogout}
-                className="px-4 py-2 bg-amber-700/10 hover:bg-amber-700/20 text-amber-900 text-xs font-mono font-bold uppercase tracking-wider transition rounded-xs flex items-center"
+                className="px-4 py-2 bg-cyan-50 hover:bg-cyan-100 text-[#0F172A] text-xs font-mono font-bold uppercase tracking-wider transition rounded-xs flex items-center"
               >
                 <LogOut className="w-3.5 h-3.5 mr-1.5" />
                 Logout
@@ -554,22 +554,22 @@ export function AdminDashboard() {
           <div className="space-y-6">
 
               {/* GMAIL INTEGRATION CONTROLLER */}
-              <div className="bg-white border border-rose-100 p-6 rounded-sm shadow-xs flex flex-col lg:flex-row items-stretch gap-6">
+              <div className="bg-white border border-cyan-100 p-6 rounded-sm shadow-xs flex flex-col lg:flex-row items-stretch gap-6">
                 {/* SMTP Server Configuration card */}
                 <div className="flex-1 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-rose-50 pb-6 lg:pb-0 lg:pr-6 gap-4">
                   <div className="flex items-start space-x-3.5">
-                    <div className={`p-2.5 rounded-full shrink-0 ${smtpConfigured ? "bg-emerald-50 text-emerald-700" : "bg-amber-50 text-amber-700"}`}>
+                    <div className={`p-2.5 rounded-full shrink-0 ${smtpConfigured ? "bg-slate-50 text-[#0F172A]" : "bg-cyan-50 text-cyan-700"}`}>
                       <Database className="w-5.5 h-5.5" />
                     </div>
                     <div className="flex-1">
-                      <h4 className="font-serif text-base font-bold text-emerald-950 flex flex-wrap items-center gap-2">
+                      <h4 className="font-serif text-base font-bold text-[#0F172A] flex flex-wrap items-center gap-2">
                         <span>Backend SMTP Mailer Service</span>
                         {smtpConfigured ? (
                           <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-bold bg-green-100 text-green-800 font-mono tracking-wider">
                             ✓ ACTIVE (GMAIL)
                           </span>
                         ) : (
-                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-bold bg-amber-100 text-amber-800 font-mono tracking-wider">
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-bold bg-amber-100 text-cyan-800 font-mono tracking-wider">
                             UNCONFIGURED
                           </span>
                         )}
@@ -581,7 +581,7 @@ export function AdminDashboard() {
                           </>
                         ) : (
                           <>
-                            To enable automated direct confirmation emails on registration approval, please define <code className="font-mono text-[10px] bg-zinc-100 px-1 py-0.5 text-rose-700">GMAIL_USER</code> and <code className="font-mono text-[10px] bg-zinc-100 px-1 py-0.5 text-rose-700">GMAIL_PASS</code> in your project environment secrets.
+                            To enable automated direct confirmation emails on registration approval, please define <code className="font-mono text-[10px] bg-zinc-100 px-1 py-0.5 text-cyan-700">GMAIL_USER</code> and <code className="font-mono text-[10px] bg-zinc-100 px-1 py-0.5 text-cyan-700">GMAIL_PASS</code> in your project environment secrets.
                           </>
                         )}
                       </p>
@@ -589,7 +589,7 @@ export function AdminDashboard() {
                       {/* Interactive SMTP Tester */}
                       {smtpConfigured && (
                         <div className="mt-4 pt-3.5 border-t border-rose-50/50">
-                          <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-rose-800 block mb-2">
+                          <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-cyan-800 block mb-2">
                             ✉ Outbound SMTP Diagnostics &amp; Testing
                           </span>
                           <div className="flex items-center gap-2">
@@ -598,31 +598,31 @@ export function AdminDashboard() {
                               placeholder="admin-test-inbox@gmail.com"
                               value={testEmailAddress}
                               onChange={(e) => setTestEmailAddress(e.target.value)}
-                              className="px-2.5 py-1.5 text-xs border border-rose-100 rounded bg-stone-50/50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#580F6E] flex-1 font-mono placeholder-zinc-400"
+                              className="px-2.5 py-1.5 text-xs border border-cyan-100 rounded bg-stone-50/50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#580F6E] flex-1 font-mono placeholder-zinc-400"
                             />
                             <button
                               onClick={handleSendTestEmail}
                               disabled={sendingTestEmail || !testEmailAddress}
-                              className="px-3.5 py-1.5 bg-[#580F6E] hover:bg-[#9E2B3E] text-white disabled:bg-zinc-100 disabled:text-zinc-400 transition font-mono text-[10px] font-bold uppercase tracking-wider rounded cursor-pointer shrink-0"
+                              className="px-3.5 py-1.5 bg-[#580F6E] hover:bg-[#4A0E4E] text-white disabled:bg-zinc-100 disabled:text-zinc-400 transition font-mono text-[10px] font-bold uppercase tracking-wider rounded cursor-pointer shrink-0"
                             >
                               {sendingTestEmail ? "Sending..." : "Test SMTP"}
                             </button>
                           </div>
 
                           {testEmailResult && (
-                            <div className={`mt-3 p-3 rounded text-xs leading-relaxed font-sans ${testEmailResult.success ? "bg-emerald-50 text-emerald-900 border border-emerald-200" : "bg-amber-50 text-amber-950 border border-amber-200"}`}>
+                            <div className={`mt-3 p-3 rounded text-xs leading-relaxed font-sans ${testEmailResult.success ? "bg-slate-50 text-[#0F172A] border border-emerald-200" : "bg-cyan-50 text-amber-950 border border-amber-200"}`}>
                               <p className="font-bold font-mono text-[10px] uppercase flex items-center gap-1.5">
                                 {testEmailResult.success ? (
-                                  <span className="text-emerald-700 font-bold">✓ SMTP TEST COMPLETED</span>
+                                  <span className="text-[#0F172A] font-bold">✓ SMTP TEST COMPLETED</span>
                                 ) : (
-                                  <span className="text-rose-800 font-bold">✗ SMTP DIAGNOSTIC FAILURE</span>
+                                  <span className="text-cyan-800 font-bold">✗ SMTP DIAGNOSTIC FAILURE</span>
                                 )}
                               </p>
                               <p className="mt-1 font-semibold text-zinc-900">{testEmailResult.message}</p>
                               {testEmailResult.errorDetails && (
                                 <div className="mt-2 text-[11px]">
-                                  <span className="font-mono font-bold block text-rose-800 mb-0.5">Error logs captured:</span>
-                                  <pre className="font-mono text-[10px] bg-white border border-rose-100 p-2 rounded overflow-x-auto whitespace-pre-wrap select-text max-h-40">
+                                  <span className="font-mono font-bold block text-cyan-800 mb-0.5">Error logs captured:</span>
+                                  <pre className="font-mono text-[10px] bg-white border border-cyan-100 p-2 rounded overflow-x-auto whitespace-pre-wrap select-text max-h-40">
                                     {testEmailResult.errorDetails}
                                   </pre>
                                   {testEmailResult.errorDetails.includes("Application-specific password required") && (
@@ -634,7 +634,7 @@ export function AdminDashboard() {
                                         <li>Under <strong>How you sign in to Google</strong>, click on <strong>2-Step Verification</strong> (ensure it is enabled)</li>
                                         <li>Scroll to the very bottom and select <strong>App Passwords</strong></li>
                                         <li>Enter "Wedding Mailer" as app name, click <strong>Create</strong>, and copy the generated 16-character passcode</li>
-                                        <li>Replace your <code className="bg-zinc-100 px-1 py-0.5 rounded text-rose-700 font-mono font-bold">GMAIL_PASS</code> environment secret with this passcode.</li>
+                                        <li>Replace your <code className="bg-zinc-100 px-1 py-0.5 rounded text-cyan-700 font-mono font-bold">GMAIL_PASS</code> environment secret with this passcode.</li>
                                       </ol>
                                     </div>
                                   )}
@@ -651,11 +651,11 @@ export function AdminDashboard() {
                 {/* OAuth Client Connection card */}
                 <div className="flex-1 flex flex-col justify-between gap-3">
                   <div className="flex items-start space-x-3.5">
-                    <div className={`p-2.5 rounded-full shrink-0 ${googleUser ? "bg-emerald-50 text-emerald-700" : "bg-zinc-50 text-zinc-400"}`}>
+                    <div className={`p-2.5 rounded-full shrink-0 ${googleUser ? "bg-slate-50 text-[#0F172A]" : "bg-zinc-50 text-zinc-400"}`}>
                       <Mail className="w-5.5 h-5.5" />
                     </div>
                     <div className="flex-1">
-                      <h4 className="font-serif text-base font-bold text-emerald-950 flex flex-wrap items-center gap-2">
+                      <h4 className="font-serif text-base font-bold text-[#0F172A] flex flex-wrap items-center gap-2">
                         <span>Admin Personal Gmail Workspace</span>
                         {googleUser ? (
                           <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-bold bg-green-100 text-green-800 font-mono tracking-wider">
@@ -716,37 +716,37 @@ export function AdminDashboard() {
               {/* METRICS ROW COUNTERS */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 
-                <div className="bg-white border border-amber-900/10 p-5 rounded-xs shadow-xs">
-                  <span className="text-[10px] font-mono font-bold tracking-widest text-[#B45309] uppercase block mb-1">
+                <div className="bg-white border border-cyan-100 p-5 rounded-xs shadow-xs">
+                  <span className="text-[10px] font-mono font-bold tracking-widest text-[#580F6E] uppercase block mb-1">
                     Total Submissions
                   </span>
                   <div className="flex items-baseline space-x-1.5">
-                    <span className="text-3xl font-bold text-emerald-950 font-serif">{metrics.total}</span>
+                    <span className="text-3xl font-bold text-[#0F172A] font-serif">{metrics.total}</span>
                     <span className="text-zinc-400 text-xs">requests</span>
                   </div>
                 </div>
 
-                <div className="bg-white border border-amber-900/10 p-5 rounded-xs shadow-xs border-l-4 border-l-amber-500">
-                  <span className="text-[10px] font-mono font-bold tracking-widest text-amber-700 uppercase block mb-1">
+                <div className="bg-white border border-cyan-100 p-5 rounded-xs shadow-xs border-l-4 border-l-[#BCA374]">
+                  <span className="text-[10px] font-mono font-bold tracking-widest text-cyan-700 uppercase block mb-1">
                     Registered
                   </span>
                   <div className="flex items-baseline space-x-1.5">
-                    <span className="text-3xl font-bold text-amber-700 font-serif">{metrics.registered}</span>
+                    <span className="text-3xl font-bold text-cyan-700 font-serif">{metrics.registered}</span>
                     <span className="text-zinc-400 text-xs">guests</span>
                   </div>
                 </div>
 
-                <div className="bg-white border border-amber-900/10 p-5 rounded-xs shadow-xs border-l-4 border-l-emerald-800">
+                <div className="bg-white border border-cyan-100 p-5 rounded-xs shadow-xs border-l-4 border-l-[#580F6E]">
                   <span className="text-[10px] font-mono font-bold tracking-widest text-emerald-800 uppercase block mb-1">
                     Passes Issued
                   </span>
                   <div className="flex items-baseline space-x-1.5">
-                    <span className="text-3xl font-bold text-emerald-900 font-serif">{metrics.approved}</span>
+                    <span className="text-3xl font-bold text-[#0F172A] font-serif">{metrics.approved}</span>
                     <span className="text-zinc-400 text-xs">verified</span>
                   </div>
                 </div>
 
-                <div className="bg-white border border-amber-900/10 p-5 rounded-xs shadow-xs border-l-4 border-l-red-500">
+                <div className="bg-white border border-cyan-100 p-5 rounded-xs shadow-xs border-l-4 border-l-rose-400">
                   <span className="text-[10px] font-mono font-bold tracking-widest text-red-700 uppercase block mb-1">
                     Declined Requests
                   </span>
@@ -759,13 +759,13 @@ export function AdminDashboard() {
               </div>
 
               {/* SEARCH, SEATING CHOOSER & FILTERS AREA */}
-              <div className="bg-white border border-amber-900/10 p-6 rounded-xs shadow-xs space-y-4">
+              <div className="bg-white border border-cyan-100 p-6 rounded-xs shadow-xs space-y-4">
                 
                 <div className="flex flex-col lg:flex-row gap-4 items-end">
                   
                   {/* Free Search input */}
                   <div className="w-full lg:flex-grow space-y-1.5">
-                    <label htmlFor="search-input" className="block text-xs font-mono font-bold text-emerald-950 uppercase tracking-widest">
+                    <label htmlFor="search-input" className="block text-xs font-mono font-bold text-[#0F172A] uppercase tracking-widest">
                       Search Attendees (Name / Email / Phone)
                     </label>
                     <div className="relative">
@@ -783,7 +783,7 @@ export function AdminDashboard() {
 
                   {/* Status checklist dropdown */}
                   <div className="w-full sm:w-1/3 lg:w-48 space-y-1.5">
-                    <label htmlFor="status-select" className="block text-xs font-mono font-bold text-emerald-950 uppercase tracking-widest">
+                    <label htmlFor="status-select" className="block text-xs font-mono font-bold text-[#0F172A] uppercase tracking-widest">
                       Filter Status
                     </label>
                     <select
@@ -801,7 +801,7 @@ export function AdminDashboard() {
 
                   {/* Event Checklist filter */}
                   <div className="w-full sm:w-1/3 lg:w-56 space-y-1.5">
-                    <label htmlFor="event-select" className="block text-xs font-mono font-bold text-emerald-950 uppercase tracking-widest">
+                    <label htmlFor="event-select" className="block text-xs font-mono font-bold text-[#0F172A] uppercase tracking-widest">
                       Filter Event Destination
                     </label>
                     <select
@@ -823,18 +823,18 @@ export function AdminDashboard() {
                 <div className="border-t border-zinc-100 pt-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
                   <div className="flex flex-wrap items-center gap-4">
                     <div className="flex items-center space-x-2 text-[11px] font-mono text-zinc-500">
-                      <Info className="w-4 h-4 text-amber-700 shrink-0" />
+                      <Info className="w-4 h-4 text-cyan-700 shrink-0" />
                       <span>Seating assignment allocated for newly approved invitations:</span>
                     </div>
                     
                     <div className="flex items-center space-x-2">
-                      <span className="text-xs font-bold text-emerald-950 font-mono uppercase">Assign Seat:</span>
+                      <span className="text-xs font-bold text-[#0F172A] font-mono uppercase">Assign Seat:</span>
                       <input 
                         type="text" 
                         value={seatingSelection}
                         onChange={(e) => setSeatingSelection(e.target.value)}
                         placeholder="e.g. Table 5 • Imperial Row"
-                        className="bg-zinc-50 border border-zinc-200 hover:bg-zinc-100 focus:bg-white px-3 py-1.5 text-xs font-bold text-emerald-900 rounded-xs focus:outline-none"
+                        className="bg-zinc-50 border border-zinc-200 hover:bg-zinc-100 focus:bg-white px-3 py-1.5 text-xs font-bold text-[#0F172A] rounded-xs focus:outline-none"
                       />
                     </div>
                   </div>
@@ -862,7 +862,7 @@ export function AdminDashboard() {
               </div>
 
               {/* DATATABLE LIST */}
-              <div className="bg-white border border-amber-900/10 rounded-xs shadow-xs overflow-hidden">
+              <div className="bg-white border border-cyan-100 rounded-xs shadow-xs overflow-hidden">
                 {listError && (
                   <div className="p-4 bg-red-50 text-red-950 text-xs font-semibold m-4 rounded-xs border-l-4 border-red-700">
                     {listError}
@@ -879,7 +879,7 @@ export function AdminDashboard() {
                   <div className="overflow-x-auto">
                     <table className="w-full text-left border-collapse">
                       <thead>
-                        <tr className="bg-emerald-950/5 text-[10px] font-mono font-bold text-emerald-950 uppercase tracking-wider border-b border-zinc-200">
+                        <tr className="bg-emerald-950/5 text-[10px] font-mono font-bold text-[#0F172A] uppercase tracking-wider border-b border-zinc-200">
                           <th className="py-4 px-4 w-12 text-center">#</th>
                           <th className="py-4 px-6">Guest / Contact Channels</th>
                           <th className="py-4 px-4">Targeted Events</th>
@@ -902,15 +902,20 @@ export function AdminDashboard() {
                               
                               {/* Guest Identity */}
                               <td className="py-4 px-6">
-                                <span className="font-bold text-emerald-950 text-sm block">
+                                <span className="font-bold text-[#0F172A] text-sm block">
                                   {row.name}
                                 </span>
                                 <span className="text-[11px] text-zinc-500 font-mono block mt-0.5">
-                                  {row.email}
+                                  {row.email.includes("@tobiayomide2026.com") ? "No Email Provided" : row.email}
                                 </span>
                                 <span className="text-[11px] text-zinc-500 font-mono block">
                                   {row.phone}
                                 </span>
+                                {row.dietary_notes && (
+                                  <span className="inline-block mt-1.5 text-[10.5px] font-sans font-bold bg-[#580F6E]/5 text-[#580F6E] px-2 py-0.5 rounded-xs border border-[#580F6E]/10">
+                                    {row.dietary_notes}
+                                  </span>
+                                )}
                               </td>
 
                               {/* Target Events checklist */}
@@ -922,7 +927,7 @@ export function AdminDashboard() {
                                     if (e === "church") label = "Church";
                                     if (e === "reception") label = "Reception";
                                     return (
-                                      <span key={e} className="px-2 py-0.5 bg-emerald-950/5 text-emerald-900 text-[9px] font-mono uppercase font-bold rounded-xs">
+                                      <span key={e} className="px-2 py-0.5 bg-emerald-950/5 text-[#0F172A] text-[9px] font-mono uppercase font-bold rounded-xs">
                                         {label}
                                       </span>
                                     );
@@ -975,9 +980,9 @@ export function AdminDashboard() {
                                           htmlContent: "" // Simulator component will deal with generating or holding
                                         });
                                       }}
-                                      className="px-3 py-1.5 border border-emerald-900 hover:bg-emerald-950/5 text-emerald-950 font-mono text-[10px] font-bold uppercase tracking-wider transition rounded-xs flex items-center"
+                                      className="px-3 py-1.5 border border-emerald-900 hover:bg-emerald-950/5 text-[#0F172A] font-mono text-[10px] font-bold uppercase tracking-wider transition rounded-xs flex items-center"
                                     >
-                                      <Mail className="w-3.5 h-3.5 mr-1 text-emerald-900" />
+                                      <Mail className="w-3.5 h-3.5 mr-1 text-[#0F172A]" />
                                       View Pass
                                     </button>
                                   )}
@@ -1003,7 +1008,7 @@ export function AdminDashboard() {
                                       setEmailBody(`<h3>Tobi &amp; Ayomide's Wedding Celebration</h3>\n<p>Dear ${row.name},</p>\n<p>We are writing to you regarding your registration for our destination wedding in Abuja...</p>\n<p>With love,<br/>Tobi &amp; Ayomide</p>`);
                                       setIsComposeModalOpen(true);
                                     }}
-                                    className="p-1.5 border border-amber-200 text-amber-700 hover:bg-amber-50 hover:border-amber-300 transition rounded-xs flex items-center cursor-pointer"
+                                    className="p-1.5 border border-amber-200 text-cyan-700 hover:bg-cyan-50 hover:border-amber-300 transition rounded-xs flex items-center cursor-pointer"
                                   >
                                     <Send className="w-3.5 h-3.5" />
                                   </button>
@@ -1106,7 +1111,7 @@ export function AdminDashboard() {
           {/* COMPOSE GMAIL MODAL */}
           {isComposeModalOpen && (
             <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-              <div className="bg-white border border-rose-100 rounded-sm shadow-2xl w-full max-w-3xl overflow-hidden max-h-[90vh] flex flex-col">
+              <div className="bg-white border border-cyan-100 rounded-sm shadow-2xl w-full max-w-3xl overflow-hidden max-h-[90vh] flex flex-col">
                 {/* Modal Header */}
                 <div className="bg-emerald-950 text-white px-6 py-4 flex items-center justify-between">
                   <div className="flex items-center space-x-2">
@@ -1130,11 +1135,11 @@ export function AdminDashboard() {
                   {/* Auth Warning if not connected and no SMTP */}
                   {!smtpConfigured && !googleUser ? (
                     <div className="p-6 text-center space-y-4">
-                      <div className="w-12 h-12 bg-rose-50 text-[#580F6E] rounded-full flex items-center justify-center mx-auto">
+                      <div className="w-12 h-12 bg-cyan-50 text-[#580F6E] rounded-full flex items-center justify-center mx-auto">
                         <Lock className="w-6 h-6" />
                       </div>
                       <div>
-                        <h4 className="font-serif text-lg font-bold text-emerald-950">Email Delivery System Unconfigured</h4>
+                        <h4 className="font-serif text-lg font-bold text-[#0F172A]">Email Delivery System Unconfigured</h4>
                         <p className="text-xs text-zinc-500 mt-1 max-w-md mx-auto leading-relaxed">
                           To send customized update or confirmation emails, please define <code className="font-mono bg-zinc-100 px-1 text-[#580F6E]">GMAIL_USER</code> and <code className="font-mono bg-zinc-100 px-1 text-[#580F6E]">GMAIL_PASS</code> environment variables, or link your Google Workspace account below.
                         </p>
@@ -1147,7 +1152,7 @@ export function AdminDashboard() {
                             alert(`Google Auth failed: ${err.message || err}`);
                           }
                         }}
-                        className="px-5 py-2.5 bg-[#580F6E] hover:bg-[#9E2B3E] text-white text-xs font-mono font-bold uppercase tracking-widest transition rounded-sm shadow-xs inline-flex items-center gap-2 cursor-pointer"
+                        className="px-5 py-2.5 bg-[#580F6E] hover:bg-[#4A0E4E] text-white text-xs font-mono font-bold uppercase tracking-widest transition rounded-sm shadow-xs inline-flex items-center gap-2 cursor-pointer"
                       >
                         <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.114-5.136 4.114-3.504 0-6.35-2.846-6.35-6.35s2.846-6.35 6.35-6.35c1.472 0 2.82.508 3.89 1.44l3.155-3.155C18.91 1.99 15.82 1 12.24 1 5.48 1 0 6.48 0 13.24s5.48 12.24 12.24 12.24c6.76 0 12.24-5.48 12.24-12.24 0-.825-.094-1.631-.262-2.41H12.24z"/>
@@ -1158,11 +1163,11 @@ export function AdminDashboard() {
                   ) : emailProgress && emailProgress.current >= emailProgress.total ? (
                     /* Progress Complete Screen */
                     <div className="p-8 text-center space-y-4">
-                      <div className="w-14 h-14 bg-emerald-50 text-emerald-700 rounded-full flex items-center justify-center mx-auto">
+                      <div className="w-14 h-14 bg-slate-50 text-[#0F172A] rounded-full flex items-center justify-center mx-auto">
                         <CheckCircle className="w-8 h-8" />
                       </div>
                       <div className="space-y-1">
-                        <h4 className="font-serif text-xl font-bold text-emerald-950">Emails Dispatched Successfully!</h4>
+                        <h4 className="font-serif text-xl font-bold text-[#0F172A]">Emails Dispatched Successfully!</h4>
                         <p className="text-xs text-zinc-500 max-w-md mx-auto">
                           Successfully completed dispatch using the{" "}
                           <strong>
@@ -1178,7 +1183,7 @@ export function AdminDashboard() {
                         </div>
                         <div className="flex justify-between">
                           <span className="text-zinc-500">Successful:</span>
-                          <span className="font-bold text-emerald-700">{emailProgress.successCount}</span>
+                          <span className="font-bold text-[#0F172A]">{emailProgress.successCount}</span>
                         </div>
                         <div className="flex justify-between">
                           <span className="text-zinc-500">Failed / Skips:</span>
@@ -1188,19 +1193,19 @@ export function AdminDashboard() {
 
                       {/* Display of outbound failures if any occurred */}
                       {emailSendErrors.length > 0 && (
-                        <div className="mt-4 p-3.5 bg-rose-50 border border-rose-100 rounded text-left text-xs max-w-md mx-auto space-y-2">
-                          <span className="font-mono font-bold text-rose-800 block uppercase tracking-wider text-[10px]">
+                        <div className="mt-4 p-3.5 bg-cyan-50 border border-cyan-100 rounded text-left text-xs max-w-md mx-auto space-y-2">
+                          <span className="font-mono font-bold text-cyan-800 block uppercase tracking-wider text-[10px]">
                             ⚠️ Outbound Mail Failures ({emailSendErrors.length}):
                           </span>
                           <div className="max-h-40 overflow-y-auto space-y-2 font-mono text-[11px] text-zinc-700 leading-normal pr-1">
                             {emailSendErrors.map((err, idx) => (
-                              <div key={idx} className="border-b border-rose-100/50 pb-1.5 last:border-b-0 last:pb-0">
+                              <div key={idx} className="border-b border-cyan-100/50 pb-1.5 last:border-b-0 last:pb-0">
                                 <span className="font-bold text-zinc-900">{err.recipient}:</span>
-                                <div className="text-red-600 bg-white border border-rose-100 p-1.5 rounded mt-1 overflow-x-auto whitespace-pre-wrap select-text">
+                                <div className="text-red-600 bg-white border border-cyan-100 p-1.5 rounded mt-1 overflow-x-auto whitespace-pre-wrap select-text">
                                   {err.error}
                                 </div>
                                 {err.error.includes("Application-specific password required") && (
-                                  <div className="mt-2 bg-amber-50 border border-amber-200 p-2.5 rounded font-sans text-zinc-800 text-[11px] font-medium leading-relaxed">
+                                  <div className="mt-2 bg-cyan-50 border border-amber-200 p-2.5 rounded font-sans text-zinc-800 text-[11px] font-medium leading-relaxed">
                                     💡 <strong>Gmail Passcode Required:</strong> Gmail blocks custom programmatic SMTP requests with your standard account password. To resolve:<br/>
                                     1. Go to <a href="https://myaccount.google.com" target="_blank" rel="noreferrer" className="text-blue-700 underline hover:text-blue-900 font-bold">Google Account Security Settings</a>.<br/>
                                     2. Turn on <strong>2-Step Verification</strong>.<br/>
@@ -1221,7 +1226,7 @@ export function AdminDashboard() {
                             setEmailProgress(null);
                             setEmailSendErrors([]);
                           }}
-                          className="px-5 py-2.5 bg-[#580F6E] hover:bg-[#9E2B3E] text-white text-xs font-mono font-bold uppercase tracking-widest transition rounded-sm cursor-pointer"
+                          className="px-5 py-2.5 bg-[#580F6E] hover:bg-[#4A0E4E] text-white text-xs font-mono font-bold uppercase tracking-widest transition rounded-sm cursor-pointer"
                         >
                           Return to Console
                         </button>
@@ -1230,7 +1235,7 @@ export function AdminDashboard() {
                   ) : confirmingSend ? (
                     /* High-Fidelity Custom Confirmation Screen */
                     <div className="p-8 text-center space-y-5">
-                      <div className="w-14 h-14 bg-amber-50 text-amber-600 rounded-full flex items-center justify-center mx-auto border border-amber-200">
+                      <div className="w-14 h-14 bg-cyan-50 text-amber-600 rounded-full flex items-center justify-center mx-auto border border-amber-200">
                         <Info className="w-8 h-8" />
                       </div>
                       <div className="space-y-1">
@@ -1321,7 +1326,7 @@ export function AdminDashboard() {
                             
                             setSendingEmails(false);
                           }}
-                          className="px-5 py-2.5 bg-[#580F6E] hover:bg-[#9E2B3E] text-white text-xs font-mono font-bold uppercase tracking-widest transition rounded-sm flex items-center gap-1.5 shadow-sm cursor-pointer"
+                          className="px-5 py-2.5 bg-[#580F6E] hover:bg-[#4A0E4E] text-white text-xs font-mono font-bold uppercase tracking-widest transition rounded-sm flex items-center gap-1.5 shadow-sm cursor-pointer"
                         >
                           <Send className="w-3.5 h-3.5" />
                           Confirm &amp; Dispatch
@@ -1333,7 +1338,7 @@ export function AdminDashboard() {
                     <div className="p-8 text-center space-y-4">
                       <Loader2 className="w-10 h-10 animate-spin text-[#580F6E] mx-auto" />
                       <div className="space-y-1">
-                        <h4 className="font-serif text-lg font-bold text-emerald-950">
+                        <h4 className="font-serif text-lg font-bold text-[#0F172A]">
                           Sending Emails...
                         </h4>
                         <p className="text-xs text-zinc-500">
@@ -1378,7 +1383,7 @@ export function AdminDashboard() {
                             }}
                             className={`p-3.5 border rounded-sm flex items-start space-x-3 cursor-pointer transition ${
                               emailSendMethod === "smtp" 
-                                ? "bg-emerald-50/40 border-emerald-600 text-emerald-950" 
+                                ? "bg-slate-50/40 border-emerald-600 text-[#0F172A]" 
                                 : smtpConfigured 
                                   ? "border-zinc-200 hover:bg-zinc-50/50" 
                                   : "opacity-50 cursor-not-allowed bg-zinc-50 border-zinc-200"
@@ -1410,7 +1415,7 @@ export function AdminDashboard() {
                             }}
                             className={`p-3.5 border rounded-sm flex items-start space-x-3 cursor-pointer transition ${
                               emailSendMethod === "client" 
-                                ? "bg-emerald-50/40 border-emerald-600 text-emerald-950" 
+                                ? "bg-slate-50/40 border-emerald-600 text-[#0F172A]" 
                                 : googleUser 
                                   ? "border-zinc-200 hover:bg-zinc-50/50" 
                                   : "opacity-50 cursor-not-allowed bg-zinc-50 border-zinc-200"
@@ -1494,7 +1499,7 @@ export function AdminDashboard() {
                         </div>
                         <div className="p-6 bg-[#FAF9F6] max-h-48 overflow-y-auto">
                           <div 
-                            className="bg-white border border-rose-100 p-6 shadow-sm rounded-sm font-serif max-w-xl mx-auto text-[#4C0519]"
+                            className="bg-white border border-cyan-100 p-6 shadow-sm rounded-sm font-serif max-w-xl mx-auto text-[#4C0519]"
                             dangerouslySetInnerHTML={{ __html: emailBody.replace(/\[Guest Name\]/g, selectedRsvpsForEmail[0]?.name || "Guest") }}
                           />
                         </div>
@@ -1531,7 +1536,7 @@ export function AdminDashboard() {
 
                           setConfirmingSend(true);
                         }}
-                        className="px-5 py-2 bg-[#580F6E] hover:bg-[#9E2B3E] text-white text-xs font-mono font-bold uppercase tracking-widest transition rounded-sm flex items-center gap-1.5 shadow-sm cursor-pointer"
+                        className="px-5 py-2 bg-[#580F6E] hover:bg-[#4A0E4E] text-white text-xs font-mono font-bold uppercase tracking-widest transition rounded-sm flex items-center gap-1.5 shadow-sm cursor-pointer"
                       >
                         <Send className="w-3.5 h-3.5" />
                         Send {selectedRsvpsForEmail.length > 1 ? `${selectedRsvpsForEmail.length} Emails` : "Email"}

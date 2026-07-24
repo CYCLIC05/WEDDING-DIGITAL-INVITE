@@ -200,7 +200,7 @@ export function CoupleAbout() {
   const couple = DEFAULT_COUPLE_DATA;
 
   return (
-    <section id="couple-section" className="relative select-none overflow-hidden" style={{ background: '#F7F3EE' }}>
+    <section id="couple-section" className="relative select-none overflow-hidden" style={{ background: '#FAF9F6' }}>
 
       {/* Background cross-hatch texture pattern */}
       <div
@@ -279,8 +279,8 @@ export function CoupleAbout() {
             {/* Portrait with elegant frame */}
             <div className="relative w-64 h-64 mx-auto portrait-hover">
               <div
-                className="absolute inset-[9%] rounded-3xl overflow-hidden border border-[#580F6E]/15 bg-[#FAF8F5] z-10"
-                style={{ boxShadow: '0 24px 60px -16px rgba(88,15,110,0.22)' }}
+                className="absolute inset-[9%] rounded-3xl overflow-hidden border border-[#580F6E]/15 bg-[#FAF9F6] z-10"
+                style={{ boxShadow: '0 24px 60px -16px rgba(14,116,144,0.22)' }}
               >
                 <img
                   referrerPolicy="no-referrer"
@@ -341,8 +341,8 @@ export function CoupleAbout() {
             {/* Portrait with elegant frame */}
             <div className="relative w-64 h-64 mx-auto portrait-hover">
               <div
-                className="absolute inset-[9%] rounded-3xl overflow-hidden border border-[#580F6E]/15 bg-[#FAF8F5] z-10"
-                style={{ boxShadow: '0 24px 60px -16px rgba(88,15,110,0.22)' }}
+                className="absolute inset-[9%] rounded-3xl overflow-hidden border border-[#580F6E]/15 bg-[#FAF9F6] z-10"
+                style={{ boxShadow: '0 24px 60px -16px rgba(14,116,144,0.22)' }}
               >
                 <img
                   referrerPolicy="no-referrer"
