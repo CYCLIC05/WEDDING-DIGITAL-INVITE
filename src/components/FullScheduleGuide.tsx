@@ -206,7 +206,7 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
                             <h4 className="font-sans font-semibold text-sm text-slate-900">
                               {step.label}
                             </h4>
-                            <p className="text-xs text-slate-500 mt-1 leading-relaxed font-sans">
+                            <p className="font-serif text-base text-slate-500 mt-1 leading-relaxed">
                               {step.desc}
                             </p>
                           </div>
@@ -231,10 +231,10 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
                       Traditional Venue
                     </h3>
                     <div className="w-8 h-[1.5px] bg-[#580F6E]/70 my-3"></div>
-                    <p className="text-xs text-slate-700 leading-relaxed font-sans font-semibold">
+                    <p className="font-serif text-base text-slate-700 leading-relaxed font-semibold">
                       Elim Top Hotel and suites
                     </p>
-                    <p className="text-xs text-slate-500 leading-relaxed font-sans mt-2">
+                    <p className="font-serif text-base text-slate-500 leading-relaxed mt-2">
                       Bwari, FCT Abuja, Nigeria. Easily accessible along the Bwari-Dutse expressway grid.
                     </p>
                   </div>
@@ -243,7 +243,7 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
                     <h4 className="text-[10px] font-sans font-extrabold text-[#580F6E] uppercase tracking-widest flex items-center">
                       <CarSVG /> Parking Guideline
                     </h4>
-                    <p className="text-[11px] text-slate-600 leading-relaxed mt-1.5 font-medium">
+                    <p className="font-serif text-base text-slate-600 leading-relaxed mt-1.5">
                       Hotel-supervised private parking is available within the secure hotel gates. Guests are requested to display their approved RSVP Gatepass at the gates.
                     </p>
                   </div>
@@ -256,10 +256,10 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
                       Deeper Life Bible Church
                     </h3>
                     <div className="w-8 h-[1.5px] bg-[#580F6E]/70 my-3"></div>
-                    <p className="text-xs text-slate-700 leading-relaxed font-sans font-semibold">
+                    <p className="font-serif text-base text-slate-700 leading-relaxed font-semibold">
                       Main Sanctuary Bwari
                     </p>
-                    <p className="text-xs text-slate-500 leading-relaxed font-sans mt-2">
+                    <p className="font-serif text-base text-slate-500 leading-relaxed mt-2">
                       Bwari, FCT Abuja, Nigeria. A prominent cathedral sanctuary located within the heart of Bwari municipal zone.
                     </p>
                   </div>
@@ -268,7 +268,7 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
                     <h4 className="text-[10px] font-sans font-extrabold text-[#580F6E] uppercase tracking-widest flex items-center">
                       Parking Guideline
                     </h4>
-                    <p className="text-[11px] text-slate-600 leading-relaxed mt-1.5 font-medium">
+                    <p className="font-serif text-base text-slate-600 leading-relaxed mt-1.5">
                       Paved church parking is provided inside the secure church compound. Professional traffic marshals will assist with seating vehicular arrivals.
                     </p>
                   </div>
@@ -281,10 +281,10 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
                       Fellowship Hall
                     </h3>
                     <div className="w-8 h-[1.5px] bg-[#580F6E]/70 my-3"></div>
-                    <p className="text-xs text-slate-700 leading-relaxed font-sans font-semibold">
+                    <p className="font-serif text-base text-slate-700 leading-relaxed font-semibold">
                       Deeper Life Bible Church Complex
                     </p>
-                    <p className="text-xs text-slate-500 leading-relaxed font-sans mt-2">
+                    <p className="font-serif text-base text-slate-500 leading-relaxed mt-2">
                       Bwari, FCT Abuja, Nigeria. Right next to the main cathedral auditorium inside the church fellowship zone.
                     </p>
                   </div>
@@ -293,7 +293,7 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
                     <h4 className="text-[10px] font-sans font-extrabold text-[#580F6E] uppercase tracking-widest flex items-center">
                       Parking Guideline
                     </h4>
-                    <p className="text-[11px] text-slate-600 leading-relaxed mt-1.5 font-medium">
+                    <p className="font-serif text-base text-slate-600 leading-relaxed mt-1.5">
                       Same-site parking as the church wedding. Safe and convenient foot transfer from the main auditorium to the fellowship hall.
                     </p>
                   </div>

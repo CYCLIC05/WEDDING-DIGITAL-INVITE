@@ -8,10 +8,12 @@ const HeartSVG = ({ className = "w-3.5 h-3.5" }: { className?: string }) => (
 
 export function GroomsCorner() {
   return (
-    <section id="groom-section" className="relative py-20 px-6 max-w-7xl mx-auto border-t border-[#580F6E]/15 bg-white select-none overflow-hidden">
+    <section id="groom-section" className="relative py-20 px-6 max-w-7xl mx-auto border-t border-[#580F6E]/15 bg-white diagonal-pattern select-none overflow-hidden">
+      {/* Cross-hatch texture */}
+      <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 16 L32 16 M16 0 L16 32' stroke='%23580F6E' stroke-width='0.4' stroke-opacity='0.04'/%3E%3C/svg%3E")`, backgroundSize: '32px 32px' }} />
       {/* Background roses */}
-      <img src="/src/assets/images/purple_watercolor_roses.png" className="pointer-events-none select-none absolute top-0 left-0 opacity-15" style={{ width: '260px', height: 'auto', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
-      <img src="/src/assets/images/purple_watercolor_roses.png" className="pointer-events-none select-none absolute bottom-0 right-0 opacity-15" style={{ width: '260px', height: 'auto', transform: 'rotate(180deg)', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
+      <img src="/src/assets/images/purple_watercolor_roses.png" className="pointer-events-none select-none absolute top-0 left-0 opacity-[0.12] z-0" style={{ width: '260px', height: 'auto', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
+      <img src="/src/assets/images/purple_watercolor_roses.png" className="pointer-events-none select-none absolute bottom-0 right-0 opacity-[0.12] z-0" style={{ width: '260px', height: 'auto', transform: 'rotate(180deg)', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
       <div className="max-w-3xl mx-auto text-center">
 
         {/* ── GROOM'S CORNER ── */}
@@ -29,7 +31,7 @@ export function GroomsCorner() {
 
         {/* Groom's message */}
         <div className="rounded-[1.75rem] border border-[#580F6E]/10 bg-[#FAF9F6] p-8 md:p-10 shadow-sm mb-8 text-left">
-          <p className="font-serif text-base md:text-lg leading-8 text-slate-700 italic">
+          <p className="font-serif text-base md:text-lg leading-8 text-slate-700">
             "I am grateful to God for bringing Ayomide into my life. As we begin this journey together, we look forward to building a Christ-centered home that will honor God, serve people, and impact generations."
           </p>
           <div className="mt-6 flex items-center gap-3">
@@ -48,10 +50,10 @@ export function GroomsCorner() {
           <p className="text-[10px] uppercase tracking-[0.35em] text-[#580F6E] font-bold mb-2">Best Man / Chief Groomsman</p>
           <h3 className="font-serif text-xl text-slate-900 font-bold">Mr. Akintayo O. Popoola</h3>
           <p className="text-[10px] font-sans text-slate-500 uppercase tracking-[0.3em] mt-2 mb-4">Relationship: Friend, Brother &amp; Business Partner</p>
-          <p className="font-serif text-base text-slate-700 leading-8 italic">
+          <p className="font-serif text-base md:text-lg leading-8 text-slate-700">
             Akintayo is an economist, investment banker, husband, and trusted friend who has been part of Jerry's journey for many years.
           </p>
-          <p className="font-serif text-base text-slate-700 leading-8 mt-4 italic">
+          <p className="font-serif text-base md:text-lg leading-8 text-slate-700 mt-4">
             "Jerry is my gee from university days, and I am happy and honored to stand with him on this special occasion."
           </p>
         </div>
@@ -71,7 +73,7 @@ export function GroomsCorner() {
 
         {/* Bride's message */}
         <div className="rounded-[1.75rem] border border-[#580F6E]/10 bg-[#FAF9F6] p-8 md:p-10 shadow-sm mb-8 text-center">
-          <p className="font-serif text-base md:text-lg leading-8 text-slate-700 italic">
+          <p className="font-serif text-base md:text-lg leading-8 text-slate-700">
             "A covenant journey with my beloved."
           </p>
           <div className="mt-6 flex items-center justify-center gap-3">
@@ -90,7 +92,7 @@ export function GroomsCorner() {
           <p className="text-[10px] uppercase tracking-[0.35em] text-[#580F6E] font-bold mb-2">Best Lady</p>
           <h3 className="font-serif text-xl text-slate-900 font-bold">Esther Kikelomo Oyewale</h3>
           <p className="text-[10px] font-sans text-slate-500 uppercase tracking-[0.3em] mt-2 mb-4">Relationship: Sister</p>
-          <p className="font-serif text-base text-slate-700 leading-8">
+          <p className="font-serif text-base md:text-lg leading-8 text-slate-700">
             "From your best sister in the world, it's a thing of joy to stand beside you on this day. We have come a long way to be here. I'm filled with mixed emotions because I wouldn't have someone to disturb and borrow from on a daily. All the clothes, shoe, perfume and even soap 🤲🏿😩🥲 thank you. Anyways, I'd be visiting you once in a while on this occasion of need. I love you 😉"
           </p>
         </div>

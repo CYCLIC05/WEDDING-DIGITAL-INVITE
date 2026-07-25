@@ -78,6 +78,15 @@ const FlowerSVG = ({ className = "" }: { className?: string }) => (
 /**
  * Small decorative sprig / bud — used in pairs flanking the divider line.
  */
+const SectionDivider = () => (
+  <div className="flex items-center justify-center gap-4 py-8 select-none pointer-events-none" aria-hidden="true">
+    <div className="h-px w-20 bg-gradient-to-r from-transparent via-[#580F6E]/25 to-[#580F6E]/25" />
+    <BlossomSVG className="w-4 h-4 text-[#580F6E] opacity-30" />
+    <HeartSVG className="w-3 h-3 text-[#580F6E] opacity-40 animate-heart-pulse" />
+    <BlossomSVG className="w-4 h-4 text-[#580F6E] opacity-30" />
+    <div className="h-px w-20 bg-gradient-to-r from-[#580F6E]/25 via-[#580F6E]/25 to-transparent" />
+  </div>
+);
 const SprigSVG = ({ className = "", style }: { className?: string; style?: React.CSSProperties }) => (
   <svg className={className} style={style} viewBox="0 0 30 50" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M15 48 Q14 36 15 8" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
@@ -712,45 +721,25 @@ export default function App() {
 
             {/* THE MATCHING PORTRAITS AND CUSTOMIZABLE ABOUT SECTION */}
             <CoupleAbout />
+            <SectionDivider />
             <GroomsCorner />
-
-
+            <SectionDivider />
 
             {/* THREE-EVENT WEDDING GRID SECTION */}
-            <div id="itinerary" className="relative bg-white pb-16 overflow-hidden">
+            <div id="itinerary" className="relative bg-white dot-pattern pb-16 overflow-hidden">
+              {/* Cross-hatch texture */}
+              <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 16 L32 16 M16 0 L16 32' stroke='%23580F6E' stroke-width='0.4' stroke-opacity='0.04'/%3E%3C/svg%3E")`, backgroundSize: '32px 32px' }} />
               {/* Background roses */}
               <img src={purpleRoses} className="pointer-events-none select-none absolute top-0 right-0 opacity-15" style={{ width: '280px', height: 'auto', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
               <img src={purpleRoses} className="pointer-events-none select-none absolute bottom-0 left-0 opacity-15" style={{ width: '280px', height: 'auto', transform: 'rotate(180deg)', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
               <EventGrid />
 
-              {/* Guest Guide editorial banner */}
-              <div className="max-w-3xl mx-auto px-6 mt-4 animate-fade-up">
-                <div className="relative overflow-hidden border border-[#1E293B]/10 hover-lift bg-[#FAF9F6]" style={{borderRadius: '1rem'}}>
-                  {/* Solid deep purple left stripe */}
-                  <div className="absolute left-0 top-0 bottom-0 w-[6px] bg-[#580F6E]" />
-                  <div className="pl-10 pr-8 py-8 text-left">
-                    <span className="inline-block mb-2 text-[10px] font-bold uppercase tracking-[0.35em] text-[#580F6E]">
-                      Guest Guide
-                    </span>
-                    <h3 className="font-serif text-2xl font-bold text-slate-900 mb-2 leading-tight">
-                      Need directions, timings or dress guidance?
-                    </h3>
-                    <p className="text-sm text-slate-500 leading-relaxed max-w-lg mb-6">
-                      Everything in one place — venue details, parking notes, the full schedule and dress code for each event.
-                    </p>
-                    <button
-                      onClick={() => setIsGuideOpen(true)}
-                      className="px-7 py-3 border-2 border-[#580F6E] text-[#580F6E] font-bold text-[11px] uppercase tracking-[0.28em] hover:bg-[#580F6E] hover:text-white transition-all duration-300"
-                    >
-                      Open Guest Guide
-                    </button>
-                  </div>
-                </div>
-              </div>
             </div>
+            <SectionDivider />
 
             {/* LOVE GIFT & REGISTRY SECTION */}
             <GiftingRegistry />
+            <SectionDivider />
 
             {/* DIGITAL RSVP CAPTURE FORM SECTION */}
             <RSVPForm />
@@ -760,7 +749,9 @@ export default function App() {
       </main>
 
       {/* CORE FOOTER BRAND */}
-      <footer className="relative bg-white text-slate-700 pt-8 pb-16 px-6 border-t border-slate-100 select-none overflow-hidden">
+      <footer className="relative bg-white diagonal-pattern text-slate-700 pt-8 pb-16 px-6 border-t border-slate-100 select-none overflow-hidden">
+        {/* Cross-hatch texture */}
+        <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 16 L32 16 M16 0 L16 32' stroke='%23580F6E' stroke-width='0.4' stroke-opacity='0.04'/%3E%3C/svg%3E")`, backgroundSize: '32px 32px' }} />
         {/* Background roses */}
         <img src={purpleRoses} className="pointer-events-none select-none absolute top-0 left-0 opacity-15" style={{ width: '240px', height: 'auto', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
         <img src={purpleRoses} className="pointer-events-none select-none absolute bottom-0 right-0 opacity-15" style={{ width: '240px', height: 'auto', transform: 'rotate(180deg)', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
@@ -771,7 +762,7 @@ export default function App() {
 
           <h4 className="font-serif text-2xl text-slate-900 font-medium">To God be all the Glory</h4>
 
-          <div className="text-slate-500 text-sm leading-relaxed max-w-md mx-auto italic space-y-6">
+          <div className="text-slate-500 font-serif text-base leading-relaxed max-w-md mx-auto italic space-y-6">
             <div>
               "Therefore what God has joined together, let no one separate." <br />
               <strong className="text-[#580F6E] not-italic font-sans text-[10px] uppercase tracking-widest mt-2 block">— Matthew 19:6</strong>

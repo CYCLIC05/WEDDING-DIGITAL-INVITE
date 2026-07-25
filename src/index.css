@@ -43,6 +43,23 @@ body {
 .accent-border { border-color: #580F6E; }
 .accent-bg { background-color: #FAF5FF; }
 
+/* Subtle dot pattern background for sections */
+.dot-pattern {
+  background-image: radial-gradient(circle, rgba(88,15,110,0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Subtle diagonal line pattern */
+.diagonal-pattern {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 20px,
+    rgba(88,15,110,0.02) 20px,
+    rgba(88,15,110,0.02) 21px
+  );
+}
+
 /* â”€â”€â”€ SECTION DIVIDER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .section-divider {
   position: relative;

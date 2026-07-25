@@ -47,7 +47,7 @@ export function GiftingRegistry() {
     },
     {
       title: 'Car',
-      description: 'A meaningful gift for future travel, errands, and family use.',
+      description: 'A car for ease of movement and family use.',
       image: carImg,
       alt: 'Car gift idea',
     },
@@ -109,7 +109,7 @@ export function GiftingRegistry() {
             Your presence is the greatest gift
           </h2>
           <div className="w-12 h-[1px] bg-[#580F6E] mx-auto mt-3 mb-3"></div>
-          <p className="text-sm text-slate-500 leading-relaxed max-w-2xl mx-auto font-medium">
+          <p className="font-serif text-base leading-relaxed text-slate-500 max-w-2xl mx-auto">
             For those who desire to bless our new home, we welcome any expression of generosity. Below are the most meaningful ways to celebrate with us.
           </p>
         </div>
