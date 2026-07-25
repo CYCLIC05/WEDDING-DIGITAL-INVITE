@@ -757,7 +757,7 @@ export default function App() {
       </main>
 
       {/* CORE FOOTER BRAND */}
-      <footer className="bg-white text-slate-700 py-16 px-6 border-t border-slate-100 select-none">
+      <footer className="bg-white text-slate-700 pt-8 pb-16 px-6 border-t border-slate-100 select-none">
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <div className="inline-flex w-12 h-12 bg-[#580F6E] text-white text-xl font-bold font-serif rounded-full items-center justify-center">
             †
@@ -765,10 +765,20 @@ export default function App() {
 
           <h4 className="font-serif text-2xl text-slate-900 font-medium">To God be all the Glory</h4>
 
-          <p className="text-slate-500 text-sm leading-relaxed max-w-md mx-auto italic">
-            "Therefore what God has joined together, let no one separate." <br />
-            <strong className="text-[#580F6E] not-italic font-sans text-xs uppercase tracking-widest mt-2 block">— Matthew 19:6</strong>
-          </p>
+          <div className="text-slate-500 text-sm leading-relaxed max-w-md mx-auto italic space-y-6">
+            <div>
+              "Therefore what God has joined together, let no one separate." <br />
+              <strong className="text-[#580F6E] not-italic font-sans text-[10px] uppercase tracking-widest mt-2 block">— Matthew 19:6</strong>
+            </div>
+            <div>
+              "Two are better than one..." <br />
+              <strong className="text-[#580F6E] not-italic font-sans text-[10px] uppercase tracking-widest mt-2 block">— Ecclesiastes 4:9-10</strong>
+            </div>
+            <div>
+              "Love is patient, love is kind..." <br />
+              <strong className="text-[#580F6E] not-italic font-sans text-[10px] uppercase tracking-widest mt-2 block">— 1 Corinthians 13:4-7</strong>
+            </div>
+          </div>
 
           <div className="w-12 h-[1px] bg-slate-200 mx-auto"></div>
 

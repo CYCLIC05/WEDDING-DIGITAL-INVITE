@@ -263,7 +263,7 @@ export function CoupleAbout() {
           </div>
 
           <p className="font-serif italic text-sm text-slate-500 max-w-md mx-auto leading-relaxed">
-            "We love because He first loved us." — A quiet reflection of our journey, devotion, and commitment.
+            "He who finds a wife finds a good thing and obtains favor from the Lord." — Proverbs 18:22
           </p>
         </div>
 
@@ -388,8 +388,8 @@ export function CoupleAbout() {
           </div>
 
           <div className="max-w-4xl mx-auto space-y-8 text-left">
-            <p className="font-serif text-base md:text-lg leading-8 text-slate-700">
-              “He who finds a wife finds a good thing and obtains favor from the Lord.” – Proverbs 18:22
+            <p className="font-serif text-base md:text-lg leading-8 text-slate-700 text-center">
+              “There is no fear in love. But perfect love drives out fear.” – 1 John 4:18
             </p>
 
             <p className="font-serif text-base md:text-lg leading-8 text-slate-700">
@@ -411,102 +411,11 @@ export function CoupleAbout() {
               </div>
             </div>
 
-            <div className="rounded-[1.5rem] border border-[#580F6E]/10 bg-[#FFFDF9] p-7 md:p-8">
-              <p className="font-sans text-[10px] uppercase tracking-[0.4em] text-[#580F6E] font-bold mb-6">
-                Scripture Theme
-              </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm md:text-base text-slate-700">
-                <div className="space-y-4">
-                  <div>
-                    <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-[#580F6E] font-bold mb-1">
-                      Hero Scripture
-                    </p>
-                    <p className="font-serif font-semibold text-[#1E293B]">Proverbs 18:22</p>
-                    <p className="font-serif italic leading-7 mt-1">
-                      “He who finds a wife finds a good thing and obtains favor from the Lord.”
-                    </p>
-                  </div>
-                  <div>
-                    <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-[#580F6E] font-bold mb-1">
-                      Heart Scripture
-                    </p>
-                    <p className="font-serif font-semibold text-[#1E293B]">1 John 4:18</p>
-                    <p className="font-serif italic leading-7 mt-1">
-                      “There is no fear in love. But perfect love drives out fear.”
-                    </p>
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  <div>
-                    <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-[#580F6E] font-bold mb-1">
-                      Closing Scripture
-                    </p>
-                    <p className="font-serif font-semibold text-[#1E293B]">Ecclesiastes 4:9-10</p>
-                    <p className="font-serif italic leading-7 mt-1">
-                      “Two are better than one…”
-                    </p>
-                  </div>
-                  <div>
-                    <p className="font-serif font-semibold text-[#1E293B]">1 Corinthians 13:4-7</p>
-                    <p className="font-serif italic leading-7 mt-1">
-                      “Love is patient, love is kind…”
-                    </p>
-                  </div>
-                  <div>
-                    <p className="font-serif font-semibold text-[#1E293B]">Matthew 19:6</p>
-                    <p className="font-serif italic leading-7 mt-1">
-                      “Therefore what God has joined together, let no one separate.”
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
 
-        <div className="mt-20 max-w-3xl mx-auto rounded-[2rem] border border-[#580F6E]/10 bg-white/90 p-8 md:p-10 shadow-[0_20px_60px_-24px_rgba(88,15,110,0.25)] backdrop-blur-sm">
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <span className="text-[10px] uppercase tracking-[0.35em] text-[#580F6E] font-bold">Bride’s Corner</span>
-              <h3 className="font-serif text-3xl text-slate-900 font-bold">Special Message</h3>
-              <p className="text-sm text-slate-600 leading-relaxed max-w-xl mx-auto">
-                “A covenant journey with my beloved.”
-              </p>
-            </div>
 
-            <div className="rounded-[1.75rem] border border-[#E5E7EB] bg-[#FAF9F6] p-6 md:p-8 shadow-sm">
-              <div>
-                <p className="text-[10px] uppercase tracking-[0.35em] text-[#580F6E] font-bold mb-2">Best Lady</p>
-                <h4 className="font-serif text-xl text-slate-900 font-bold">
-                  Esther Kikelomo Oyewale
-                </h4>
-                <p className="text-xs text-slate-500 uppercase tracking-[0.3em] mt-2">Relationship: Sister</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-20 rounded-[1.75rem] border border-[#580F6E]/10 bg-[#FAF9F6] p-8 md:p-10 shadow-sm">
-          <p className="text-[10px] uppercase tracking-[0.4em] text-[#580F6E] font-bold mb-3">
-            Special Note
-          </p>
-          <p className="font-serif text-base md:text-lg leading-8 text-slate-700">
-            Your prayers, love, and support mean so much to us. We look forward to celebrating this special occasion with you as we begin our journey together.
-          </p>
-          <div className="mt-6 text-slate-700">
-            <p className="font-serif text-base md:text-lg leading-7 mb-2">
-              With Love,
-            </p>
-            <p className="font-serif text-base md:text-lg leading-7 font-semibold mb-1">
-              Jerry Tobi &amp; Ayomide
-            </p>
-            <p className="font-serif text-sm text-slate-500 uppercase tracking-[0.3em]">
-              September 2026
-            </p>
-          </div>
-        </div>
 
       </div>
 

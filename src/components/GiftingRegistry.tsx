@@ -123,7 +123,7 @@ export function GiftingRegistry() {
                   ))}
               </div>
             </div>
-            <div className="rounded-3xl border border-[#4A0E4E]/15 bg-white p-8 shadow-sm">
+            <div className="rounded-3xl border border-[#4A0E4E]/15 bg-white p-8 shadow-sm text-center">
               <h3 className="font-serif text-xl text-slate-900 font-bold mb-4">Naira Contribution</h3>
               <div className="space-y-4 text-slate-700 text-sm font-medium">
                 <div>
@@ -134,13 +134,13 @@ export function GiftingRegistry() {
                   <p className="text-[10px] uppercase tracking-[0.35em] text-slate-400 font-bold mb-2">Account Name</p>
                   <p className="text-base text-slate-900">Oyewale Patience Ayomide</p>
                 </div>
-                <div className="relative">
+                <div>
                   <p className="text-[10px] uppercase tracking-[0.35em] text-slate-400 font-bold mb-2">Account Number</p>
-                  <div className="flex items-center justify-between gap-3 bg-[#FAF9F6] border border-[#4A0E4E]/15 rounded-2xl px-4 py-3">
+                  <div className="flex items-center justify-center bg-[#FAF9F6] border border-[#4A0E4E]/15 rounded-2xl px-4 py-3 relative">
                     <p className="text-base font-black text-[#580F6E]">3136722099</p>
                     <button
                       onClick={() => handleCopy("3136722099", false)}
-                      className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white p-2 text-slate-500 hover:border-[#580F6E] hover:text-[#580F6E] transition"
+                      className="absolute right-4 inline-flex items-center justify-center rounded-full border border-slate-200 bg-white p-2 text-slate-500 hover:border-[#580F6E] hover:text-[#580F6E] transition"
                       title="Copy Naira account number"
                     >
                       {copiedNaira ? <span className="text-[11px] font-semibold">Copied!</span> : <CopySVG />}
@@ -150,7 +150,7 @@ export function GiftingRegistry() {
               </div>
             </div>
 
-            <div className="rounded-3xl border border-[#4A0E4E]/15 bg-white p-8 shadow-sm">
+            <div className="rounded-3xl border border-[#4A0E4E]/15 bg-white p-8 shadow-sm text-center">
               <h3 className="font-serif text-xl text-slate-900 font-bold mb-4">USD Contribution</h3>
               <div className="space-y-4 text-slate-700 text-sm font-medium">
                 <div>
@@ -161,13 +161,13 @@ export function GiftingRegistry() {
                   <p className="text-[10px] uppercase tracking-[0.35em] text-slate-400 font-bold mb-2">Account Name</p>
                   <p className="text-base text-slate-900">Olanrewaju Tobi J</p>
                 </div>
-                <div className="relative">
+                <div>
                   <p className="text-[10px] uppercase tracking-[0.35em] text-slate-400 font-bold mb-2">Account Number</p>
-                  <div className="flex items-center justify-between gap-3 bg-[#FAF9F6] border border-[#4A0E4E]/15 rounded-2xl px-4 py-3">
+                  <div className="flex items-center justify-center bg-[#FAF9F6] border border-[#4A0E4E]/15 rounded-2xl px-4 py-3 relative">
                     <p className="text-base font-black text-[#580F6E]">6073750027</p>
                     <button
                       onClick={() => handleCopy("6073750027", true)}
-                      className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white p-2 text-slate-500 hover:border-[#580F6E] hover:text-[#580F6E] transition"
+                      className="absolute right-4 inline-flex items-center justify-center rounded-full border border-slate-200 bg-white p-2 text-slate-500 hover:border-[#580F6E] hover:text-[#580F6E] transition"
                       title="Copy USD account number"
                     >
                       {copiedUsd ? <span className="text-[11px] font-semibold">Copied!</span> : <CopySVG />}
