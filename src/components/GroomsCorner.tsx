@@ -44,16 +44,13 @@ export function GroomsCorner() {
         <div className="rounded-[1.75rem] border border-[#E5E7EB] bg-white p-6 md:p-8 shadow-sm text-left">
           <p className="text-[10px] uppercase tracking-[0.35em] text-[#580F6E] font-bold mb-2">Best Man / Chief Groomsman</p>
           <h3 className="font-serif text-xl text-slate-900 font-bold">Mr. Akintayo O. Popoola</h3>
-          <p className="text-xs text-slate-500 uppercase tracking-[0.3em] mt-2 mb-4">Relationship: Friend, Brother &amp; Business Partner</p>
-          <p className="font-serif text-sm text-slate-600 leading-relaxed mb-4">
+          <p className="font-serif text-base text-slate-500 uppercase tracking-[0.3em] mt-2 mb-4">Relationship: Friend, Brother &amp; Business Partner</p>
+          <p className="font-serif text-base text-slate-700 leading-8">
             Akintayo is an economist, investment banker, husband, and trusted friend who has been part of Jerry's journey for many years.
           </p>
-          <div className="border-t border-[#580F6E]/10 pt-4 mt-4">
-            <p className="text-[10px] uppercase tracking-[0.35em] text-[#580F6E] font-bold mb-2">Tribute from Akintayo</p>
-            <p className="font-serif text-sm italic text-slate-700 leading-relaxed">
-              "Jerry is my gee from university days, and I am happy and honored to stand with him on this special occasion."
-            </p>
-          </div>
+          <p className="font-serif text-base text-slate-700 leading-8 mt-4">
+            "Jerry is my gee from university days, and I am happy and honored to stand with him on this special occasion."
+          </p>
         </div>
 
         {/* ── BRIDE'S CORNER ── */}
@@ -67,20 +64,32 @@ export function GroomsCorner() {
           </div>
           <p className="text-[10px] text-[#580F6E] uppercase tracking-[0.35em] font-bold mb-2">Bride's Corner</p>
           <h2 className="font-serif text-3xl text-slate-900 font-bold">Special Message</h2>
-          <p className="font-serif text-sm text-slate-500 mt-3 italic">"A covenant journey with my beloved."</p>
+        </div>
+
+        {/* Bride's message */}
+        <div className="rounded-[1.75rem] border border-[#580F6E]/10 bg-[#FAF9F6] p-8 md:p-10 shadow-sm mb-8 text-left">
+          <p className="font-serif text-base md:text-lg leading-8 text-slate-700 italic">
+            "A covenant journey with my beloved."
+          </p>
+          <div className="mt-6 flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-[#580F6E]/10 flex items-center justify-center">
+              <span className="font-serif text-sm font-bold text-[#580F6E]">AO</span>
+            </div>
+            <div>
+              <p className="font-serif text-sm font-semibold text-slate-900">Ayomide</p>
+              <p className="text-[10px] text-slate-500 uppercase tracking-wider">The Bride</p>
+            </div>
+          </div>
         </div>
 
         {/* Best Lady card */}
         <div className="rounded-[1.75rem] border border-[#E5E7EB] bg-white p-6 md:p-8 shadow-sm text-left">
           <p className="text-[10px] uppercase tracking-[0.35em] text-[#580F6E] font-bold mb-2">Best Lady</p>
           <h3 className="font-serif text-xl text-slate-900 font-bold">Esther Kikelomo Oyewale</h3>
-          <p className="text-xs text-slate-500 uppercase tracking-[0.3em] mt-2 mb-4">Relationship: Sister</p>
-          <div className="border-t border-[#580F6E]/10 pt-4 mt-4">
-            <p className="text-[10px] uppercase tracking-[0.35em] text-[#580F6E] font-bold mb-2">Tribute from Esther</p>
-            <p className="font-serif text-sm italic text-slate-700 leading-relaxed">
-              "From your best sister in the world, it's a thing of joy to stand beside you on this day. We have come a long way to be here. I'm filled with mixed emotions because I wouldn't have someone to disturb and borrow from on a daily. All the clothes, shoe, perfume and even soap 🤲🏿😩🥲 thank you. Anyways, I'd be visiting you once in a while on this occasion of need. I love you 😉"
-            </p>
-          </div>
+          <p className="font-serif text-base text-slate-500 uppercase tracking-[0.3em] mt-2 mb-4">Relationship: Sister</p>
+          <p className="font-serif text-base text-slate-700 leading-8">
+            "From your best sister in the world, it's a thing of joy to stand beside you on this day. We have come a long way to be here. I'm filled with mixed emotions because I wouldn't have someone to disturb and borrow from on a daily. All the clothes, shoe, perfume and even soap 🤲🏿😩🥲 thank you. Anyways, I'd be visiting you once in a while on this occasion of need. I love you 😉"
+          </p>
         </div>
 
         {/* ── SPECIAL NOTE ── */}
