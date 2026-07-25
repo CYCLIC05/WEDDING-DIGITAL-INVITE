@@ -78,8 +78,8 @@ const FlowerSVG = ({ className = "" }: { className?: string }) => (
 /**
  * Small decorative sprig / bud — used in pairs flanking the divider line.
  */
-const SprigSVG = ({ className = "" }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 30 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+const SprigSVG = ({ className = "", style }: { className?: string; style?: React.CSSProperties }) => (
+  <svg className={className} style={style} viewBox="0 0 30 50" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M15 48 Q14 36 15 8" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
     <ellipse cx="15" cy="14" rx="4" ry="9" fill="currentColor" opacity="0.7"/>
     <path d="M15 30 Q6 24 4 16 Q10 22 15 30Z" fill="currentColor" opacity="0.4"/>
@@ -182,6 +182,7 @@ import { AdminDashboard } from "./components/AdminDashboard.tsx";
 import purpleRoses from "./assets/images/purple_watercolor_roses.png";
 import { FullScheduleGuide } from "./components/FullScheduleGuide.tsx";
 import { CoupleAbout } from "./components/CoupleAbout.tsx";
+import { GroomsCorner } from "./components/GroomsCorner.tsx";
 import { GiftingRegistry } from "./components/GiftingRegistry.tsx";
 
 export default function App() {
@@ -327,6 +328,7 @@ export default function App() {
               <>
                 <nav className="flex items-center gap-6 text-[10px] uppercase tracking-[0.28em] text-slate-500 font-bold">
                   <a href="#couple-section" className="hover:text-[#580F6E] transition-colors duration-200">Couple</a>
+                  <a href="#groom-section" className="hover:text-[#580F6E] transition-colors duration-200">Groom</a>
                   <button onClick={() => setIsGuideOpen(true)} className="hover:text-[#580F6E] transition-colors duration-200">Guide</button>
                   <a href="#itinerary" className="hover:text-[#580F6E] transition-colors duration-200">Itinerary</a>
                   <a href="#gifting-section" className="hover:text-[#580F6E] transition-colors duration-200">Registry</a>
@@ -363,6 +365,13 @@ export default function App() {
                 className="flex items-center justify-center px-4 py-2.5 rounded-full bg-white border border-slate-200 shadow-lg text-[10px] uppercase tracking-[0.2em] font-bold text-slate-600 hover:text-[#580F6E] hover:border-[#580F6E] transition"
               >
                 Couple
+              </a>
+              <a
+                href="#groom-section"
+                onClick={() => setIsFloatingMenuOpen(false)}
+                className="flex items-center justify-center px-4 py-2.5 rounded-full bg-white border border-slate-200 shadow-lg text-[10px] uppercase tracking-[0.2em] font-bold text-slate-600 hover:text-[#580F6E] hover:border-[#580F6E] transition"
+              >
+                Groom
               </a>
               <button
                 onClick={() => {
@@ -434,16 +443,31 @@ export default function App() {
               {/* ── TOP-LEFT corner roses ── */}
               <img
                 src={purpleRoses}
-                className="absolute top-0 left-0 pointer-events-none z-0 select-none opacity-85"
-                style={{ width: '280px', height: 'auto', marginTop: '-10px', marginLeft: '-20px' }}
+                className="absolute top-0 left-0 pointer-events-none z-0 select-none"
+                style={{
+                  width: '240px',
+                  height: 'auto',
+                  marginTop: '-8px',
+                  marginLeft: '-12px',
+                  opacity: 0.68,
+                  filter: 'brightness(0.96) saturate(0.85) drop-shadow(0 14px 32px rgba(88,15,110,0.08))',
+                }}
                 alt=""
               />
 
               {/* ── BOTTOM-RIGHT corner roses ── */}
               <img
                 src={purpleRoses}
-                className="absolute bottom-0 right-0 pointer-events-none z-0 select-none opacity-85 transform rotate-180"
-                style={{ width: '280px', height: 'auto', marginBottom: '-10px', marginRight: '-20px' }}
+                className="absolute bottom-0 right-0 pointer-events-none z-0 select-none"
+                style={{
+                  width: '240px',
+                  height: 'auto',
+                  marginBottom: '-8px',
+                  marginRight: '-12px',
+                  opacity: 0.68,
+                  transform: 'rotate(180deg)',
+                  filter: 'brightness(0.96) saturate(0.85) drop-shadow(0 14px 32px rgba(88,15,110,0.08))',
+                }}
                 alt=""
               />
 
@@ -463,9 +487,9 @@ export default function App() {
               {/* ── Main content ── */}
               <div className="relative z-10 px-16 md:px-28 pt-16 pb-14 md:pt-20 md:pb-16 text-center">
 
-                {/* Please join us header */}
+                {/* Invitation header */}
                 <p className="animate-shimmer-reveal font-sans text-[9px] uppercase tracking-[0.6em] text-slate-400 font-semibold">
-                  Please join us for
+                  Join us for
                 </p>
 
                 {/* Wedding of label */}
@@ -477,7 +501,7 @@ export default function App() {
 
                 {/* The Names */}
                 <h1
-                  className="animate-hero-entrance font-script text-[4.8rem] md:text-[7.5rem] text-[#1E293B] leading-[0.85] mt-4"
+                  className="animate-hero-entrance font-script text-[4.8rem] md:text-[7.5rem] text-[#580F6E] leading-[0.85] mt-4"
                   style={{ letterSpacing: '0.01em' }}
                 >
                   Tobi &amp; Ayomide
@@ -688,6 +712,7 @@ export default function App() {
 
             {/* THE MATCHING PORTRAITS AND CUSTOMIZABLE ABOUT SECTION */}
             <CoupleAbout />
+            <GroomsCorner />
 
 
 

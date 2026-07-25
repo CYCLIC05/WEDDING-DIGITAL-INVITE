@@ -1,9 +1,9 @@
-import type { VercelRequest, VercelResponse } from "@vercel/node";
+import type { Request, Response } from "express";
 import { getSupabase, getResend, checkAdminAuth, setCors, eventLabel, isSmtpConfigured, sendSmtpEmail } from "./_lib.js";
-import fs from "fs/promises";
-import path from "path";
+import { promises as fs } from "fs";
+import * as path from "path";
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req: Request, res: Response) {
   setCors(res);
   if (req.method === "OPTIONS") return res.status(204).end();
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });

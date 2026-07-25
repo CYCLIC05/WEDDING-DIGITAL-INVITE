@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-labelledby="dispenserTitle" preserveAspectRatio="xMidYMid meet">
+  <title id="dispenserTitle">Dispenser icon</title>
+  <rect x="22" y="14" width="76" height="86" rx="14" ry="14" fill="#f8fafc" stroke="#667085" stroke-width="6" />
+  <rect x="40" y="30" width="40" height="18" rx="6" ry="6" fill="#e2e8f0" />
+  <rect x="34" y="62" width="52" height="24" rx="8" ry="8" fill="#f8fafc" />
+  <circle cx="54" cy="70" r="4" fill="#475569" />
+  <circle cx="66" cy="70" r="4" fill="#475569" />
+  <path d="M42 46h36" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round" />
+  <path d="M42 70h36" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round" />
+</svg>

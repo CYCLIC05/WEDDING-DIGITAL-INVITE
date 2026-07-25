@@ -74,29 +74,29 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
 
   const timelineEvents = [
     {
-      title: "J.A. – Journey Aligned (Traditional Marriage)",
-      date: "Friday, Sept 11, 2026",
-      venue: "Elim Top Hotel and suites, Bwari",
-      location: "Bwari, Abuja",
+      title: "EVENT 1: J.A. – Journey Aligned (Traditional Marriage)",
+      date: "Friday, 11th September 2026",
+      venue: "Bwari, FCT Abuja",
+      location: "Elim Top Hotel and suites",
+      dressCode: "Mangenta and White (Head Gear)",
+      description: "A beautiful gathering of families, friends, and loved ones as both families formally unite and celebrate the traditional marriage rites.",
       steps: [
-        { time: "2:00 PM", label: "Guest Arrival & Welcome Reception", desc: "Guests are welcomed with beautiful traditional melodies and ushering into the main hall." },
-        { time: "2:30 PM", label: "Opening Prayers & Family Introductions", desc: "Formal presentation and opening of the traditional ceremony under the guidance of family elders." },
-        { time: "3:15 PM", label: "Cultural Presentation & Wine Search", desc: "The bride, Ayomide, searches for her groom, Tobi, to present him with the traditional cup of palm wine." },
-        { time: "4:30 PM", label: "Presentation of Gifts & Celebratory Dance", desc: "Opening of the dance floor for celebrations, congratulations, and the presentation of family gifts." },
-        { time: "5:30 PM", label: "Feasting & Traditional Buffet", desc: "Closing prayers followed by the serving of delicious local and continental delicacies." }
+        { time: "2:00 PM", label: "Traditional Marriage Ceremony", desc: "Guests are welcomed to a joyful traditional marriage celebration with music, prayers, and family rituals." },
+        { time: "3:00 PM", label: "Ceremony Highlights", desc: "Ceremonial blessings, family introductions, and cultural exchanges that honor both families." },
+        { time: "4:00 PM", label: "Blessings & Reception", desc: "A closing moment of thanksgiving and joyful fellowship with refreshments and traditional treats." }
       ]
     },
     {
-      title: "Church Wedding Ceremony",
-      date: "Saturday, Sept 12, 2026",
-      venue: "Deeper Life Bible Church, Bwari",
-      location: "Bwari, Abuja",
+      title: "EVENT 2: J.A. – Journey Aligned Church Wedding",
+      date: "Saturday, 12th September 2026",
+      venue: "Deeper Life Bible Church",
+      location: "Deeper Life Junction, Bwari, FCT Abuja (901101)",
+      dressCode: "White Native and a Touch of Gold/magenta",
+      description: "A solemn and joyful worship service where we will exchange our marriage vows before God and witnesses.",
       steps: [
-        { time: "8:30 AM", label: "Guest Seating & Prelude of Hymns", desc: "Doors open for guest seating. Attendees are kindly requested to be seated early as the service starts on time." },
-        { time: "9:00 AM", label: "Arrival of Bridal Party & Processional", desc: "The bridal train enters, ushering in the grand entrance of the bride, Ayomide." },
-        { time: "9:30 AM", label: "Covenant Sermon & Holy Matrimony Vows", desc: "A beautiful, solemn service before the Altar, including scripture readings, exchange of vows, and rings." },
-        { time: "11:00 AM", label: "Signing of Certificates & Thanksgiving", desc: "The newly married couple signs the wedding register, followed by special thanksgiving offerings." },
-        { time: "11:45 AM", label: "Recessional & Photographs", desc: "First walk as husband and wife, followed immediately by professional group photographs in the church gardens." }
+        { time: "9:00 AM", label: "Church Service Begins", desc: "Guests are invited to arrive early for worship and to take their seats before the service begins." },
+        { time: "9:30 AM", label: "Wedding Ceremony", desc: "A worshipful ceremony to exchange vows, rings, and blessings in the presence of family and God." },
+        { time: "10:30 AM", label: "Signing & Thanksgiving", desc: "The couple signs the marriage register followed by prayers of gratitude and celebration." }
       ]
     }
   ];

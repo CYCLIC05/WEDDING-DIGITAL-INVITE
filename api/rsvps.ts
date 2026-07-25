@@ -1,7 +1,7 @@
-import type { VercelRequest, VercelResponse } from "@vercel/node";
+import type { Request, Response } from "express";
 import { getSupabase, checkAdminAuth, setCors, isSmtpConfigured } from "./_lib.js";
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req: Request, res: Response) {
   setCors(res);
   if (req.method === "OPTIONS") return res.status(204).end();
 

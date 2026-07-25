@@ -289,7 +289,7 @@ export function RSVPForm() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-1.5">
-                <label htmlFor="phone-input" className="block text-xs font-semibold text-slate-700 uppercase tracking-[0.25em]">
+                <label htmlFor="phone-input" className="block text-xs font-semibold text-slate-700 uppercase tracking-[0.25em] min-h-[2.75rem] leading-5">
                   WhatsApp Phone <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -303,7 +303,7 @@ export function RSVPForm() {
                 />
               </div>
               <div className="space-y-1.5">
-                <label htmlFor="location-input" className="block text-xs font-semibold text-slate-700 uppercase tracking-[0.25em]">
+                <label htmlFor="location-input" className="block text-xs font-semibold text-slate-700 uppercase tracking-[0.25em] min-h-[2.75rem] leading-5">
                   Traveling From (Location) <span className="text-red-500">*</span>
                 </label>
                 <input

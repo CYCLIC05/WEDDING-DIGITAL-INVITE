@@ -1,6 +1,6 @@
 import { Resend } from "resend";
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
-import nodemailer from "nodemailer";
+import * as nodemailer from "nodemailer";
 
 let supabaseClient: SupabaseClient | null = null;
 let transporter: nodemailer.Transporter | null = null;

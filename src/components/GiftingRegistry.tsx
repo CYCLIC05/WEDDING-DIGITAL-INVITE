@@ -29,18 +29,39 @@ const CopySVG = () => (
   </svg>
 );
 
-export function GiftingRegistry() {
-  const [copiedPalmPay, setCopiedPalmPay] = useState(false);
-  const [copiedOPay, setCopiedOPay] = useState(false);
 
-  const handleCopy = (text: string, isOPay: boolean) => {
+
+export function GiftingRegistry() {
+  const [copiedNaira, setCopiedNaira] = useState(false);
+  const [copiedUsd, setCopiedUsd] = useState(false);
+
+  const giftItems = [
+    {
+      title: 'Car',
+      description: 'A meaningful gift for future travel, errands, and family use.',
+    },
+    {
+      title: 'Refrigerator / Deep freezer',
+      description: 'A practical gift for storing food and keeping the kitchen ready.',
+    },
+    {
+      title: 'Kitchen Appliances',
+      description: 'Useful appliances to make cooking and daily life easier at home.',
+    },
+    {
+      title: 'Dispenser',
+      description: 'A convenient gift for serving beverages at home and gatherings.',
+    },
+  ];
+
+  const handleCopy = (text: string, isUsd: boolean) => {
     navigator.clipboard.writeText(text);
-    if (isOPay) {
-      setCopiedOPay(true);
-      setTimeout(() => setCopiedOPay(false), 2000);
+    if (isUsd) {
+      setCopiedUsd(true);
+      setTimeout(() => setCopiedUsd(false), 2000);
     } else {
-      setCopiedPalmPay(true);
-      setTimeout(() => setCopiedPalmPay(false), 2000);
+      setCopiedNaira(true);
+      setTimeout(() => setCopiedNaira(false), 2000);
     }
   };
 
@@ -61,65 +82,82 @@ export function GiftingRegistry() {
             <GiftSVG />
           </div>
           <span className="text-xs text-[#4A0E4E] font-semibold uppercase tracking-[0.3em] block mb-1">
-            Registry &amp; Love Gift
+            Gifting
           </span>
           <h2 className="font-serif text-3xl text-slate-900 md:text-4xl tracking-tight font-bold">
-            Honoring the Couple
+            Your presence is the greatest gift
           </h2>
           <div className="w-12 h-[1px] bg-[#580F6E] mx-auto mt-3 mb-3"></div>
-          <p className="text-sm text-slate-500 leading-relaxed max-w-md mx-auto font-medium">
-            Your love, presence, and prayers are the greatest gifts we could ask for. However, if you wish to bless us with a gift, we have provided options below.
+          <p className="text-sm text-slate-500 leading-relaxed max-w-2xl mx-auto font-medium">
+            For those who desire to bless our new home, we welcome any expression of generosity. Below are the most meaningful ways to celebrate with us.
           </p>
         </div>
 
-        <div className="flex justify-center max-w-md mx-auto items-stretch">
-          {/* Card 1: Bank Transfer details */}
-          <div className="w-full bg-white border border-[#4A0E4E]/15 rounded-3xl p-8 shadow-sm flex flex-col justify-between hover-lift relative overflow-hidden">
-            <div className="absolute inset-2 border border-[#580F6E]/5 pointer-events-none" style={{ borderRadius: '1.25rem' }} />
-            <div className="h-1 w-full bg-[#580F6E] absolute top-0 left-0"></div>
-
-            <div className="space-y-6 relative z-10">
-              <div className="flex items-center gap-3">
-                <div className="p-2 bg-[#580F6E]/10 text-[#580F6E] rounded-full">
-                  <BankSVG />
+        <div className="grid gap-8 lg:grid-cols-[1.2fr,0.8fr] items-start">
+          <div className="space-y-6">
+            <div className="rounded-3xl border border-[#4A0E4E]/15 bg-white p-8 shadow-sm">
+              <h3 className="font-serif text-xl text-slate-900 font-bold mb-6">Gift Ideas</h3>
+              <div className="grid gap-4 sm:grid-cols-2">
+                  {giftItems.map((item) => (
+                    <div key={item.title} className="rounded-3xl border border-[#E5E7EB] bg-white shadow-sm">
+                      <div className="p-4">
+                        <p className="font-semibold text-slate-900">{item.title}</p>
+                        <p className="text-xs text-slate-500 mt-2">{item.description}</p>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </div>
+            <div className="rounded-3xl border border-[#4A0E4E]/15 bg-white p-8 shadow-sm">
+              <h3 className="font-serif text-xl text-slate-900 font-bold mb-4">Naira Contribution</h3>
+              <div className="space-y-4 text-slate-700 text-sm font-medium">
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.35em] text-slate-400 font-bold mb-2">Bank</p>
+                  <p className="text-base text-[#580F6E] font-semibold">First Bank</p>
                 </div>
                 <div>
-                  <h3 className="font-serif text-lg font-bold text-slate-900">Bank Transfer</h3>
-                  <p className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Naira Payments</p>
+                  <p className="text-[10px] uppercase tracking-[0.35em] text-slate-400 font-bold mb-2">Account Name</p>
+                  <p className="text-base text-slate-900">Oyewale Patience Ayomide</p>
+                </div>
+                <div className="relative">
+                  <p className="text-[10px] uppercase tracking-[0.35em] text-slate-400 font-bold mb-2">Account Number</p>
+                  <div className="flex items-center justify-between gap-3 bg-[#FAF9F6] border border-[#4A0E4E]/15 rounded-2xl px-4 py-3">
+                    <p className="text-base font-black text-[#580F6E]">3136722099</p>
+                    <button
+                      onClick={() => handleCopy("3136722099", false)}
+                      className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white p-2 text-slate-500 hover:border-[#580F6E] hover:text-[#580F6E] transition"
+                      title="Copy Naira account number"
+                    >
+                      {copiedNaira ? <span className="text-[11px] font-semibold">Copied!</span> : <CopySVG />}
+                    </button>
+                  </div>
                 </div>
               </div>
+            </div>
 
-              <div className="space-y-4 pt-2">
-                {/* PalmPay Account */}
-                <div className="bg-[#FAF9F6] p-4 rounded-2xl border border-[#4A0E4E]/5 relative">
-                  <p className="text-[9px] uppercase tracking-wider text-slate-400 font-bold">PalmPay</p>
-                  <p className="text-sm font-serif font-semibold text-slate-800 mt-1">PalmPay</p>
-                  <p className="text-base font-black font-mono text-[#580F6E] tracking-wide mt-0.5">9160036915</p>
-                  <p className="text-xs text-slate-600 font-medium">Oyewale Samuel</p>
-
-                  <button
-                    onClick={() => handleCopy("9160036915", false)}
-                    className="absolute right-4 bottom-4 p-2 border border-slate-200 text-slate-500 hover:text-[#580F6E] hover:border-[#580F6E] rounded-full transition cursor-pointer bg-white"
-                    title="Copy Account Number"
-                  >
-                    {copiedPalmPay ? <span className="text-[9px] font-bold px-1 font-sans text-[#580F6E]">Copied!</span> : <CopySVG />}
-                  </button>
+            <div className="rounded-3xl border border-[#4A0E4E]/15 bg-white p-8 shadow-sm">
+              <h3 className="font-serif text-xl text-slate-900 font-bold mb-4">USD Contribution</h3>
+              <div className="space-y-4 text-slate-700 text-sm font-medium">
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.35em] text-slate-400 font-bold mb-2">Bank</p>
+                  <p className="text-base text-[#580F6E]">FCMB</p>
                 </div>
-
-                {/* OPay Account */}
-                <div className="bg-[#FAF9F6] p-4 rounded-2xl border border-[#4A0E4E]/5 relative">
-                  <p className="text-[9px] uppercase tracking-wider text-slate-400 font-bold">OPay</p>
-                  <p className="text-sm font-serif font-semibold text-slate-800 mt-1">OPay</p>
-                  <p className="text-base font-black font-mono text-[#580F6E] tracking-wide mt-0.5">9160036915</p>
-                  <p className="text-xs text-slate-600 font-medium">Oyewale Samuel</p>
-
-                  <button
-                    onClick={() => handleCopy("9160036915", true)}
-                    className="absolute right-4 bottom-4 p-2 border border-slate-200 text-slate-500 hover:text-[#580F6E] hover:border-[#580F6E] rounded-full transition cursor-pointer bg-white"
-                    title="Copy Account Number"
-                  >
-                    {copiedOPay ? <span className="text-[9px] font-bold px-1 font-sans text-[#580F6E]">Copied!</span> : <CopySVG />}
-                  </button>
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.35em] text-slate-400 font-bold mb-2">Account Name</p>
+                  <p className="text-base text-slate-900">Olanrewaju Tobi J</p>
+                </div>
+                <div className="relative">
+                  <p className="text-[10px] uppercase tracking-[0.35em] text-slate-400 font-bold mb-2">Account Number</p>
+                  <div className="flex items-center justify-between gap-3 bg-[#FAF9F6] border border-[#4A0E4E]/15 rounded-2xl px-4 py-3">
+                    <p className="text-base font-black text-[#580F6E]">6073750027</p>
+                    <button
+                      onClick={() => handleCopy("6073750027", true)}
+                      className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white p-2 text-slate-500 hover:border-[#580F6E] hover:text-[#580F6E] transition"
+                      title="Copy USD account number"
+                    >
+                      {copiedUsd ? <span className="text-[11px] font-semibold">Copied!</span> : <CopySVG />}
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
