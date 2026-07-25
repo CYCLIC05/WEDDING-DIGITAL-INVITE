@@ -3,7 +3,7 @@ import carImg from "../assets/images/car.jpg";
 import fridgeImg from "../assets/images/refriderator.jpg";
 import appliancesImg from "../assets/images/Home appliances.jpg";
 import dispenserImg from "../assets/images/Dispenser.jpg";
-import vacationImg from "../assets/images/vacation location.jpg";
+import vacationImg from "../assets/images/maldives_vacation.png";
 
 // Inline SVGs for Gifting Registry
 const GiftSVG = () => (
@@ -40,6 +40,12 @@ export function GiftingRegistry() {
 
   const giftItems = [
     {
+      title: 'Vacation / Honeymoon',
+      description: 'Help us create lasting memories on our first journey as husband and wife in the Maldives.',
+      image: vacationImg,
+      alt: 'Maldives honeymoon vacation',
+    },
+    {
       title: 'Car',
       description: 'A meaningful gift for future travel, errands, and family use.',
       image: carImg,
@@ -62,12 +68,6 @@ export function GiftingRegistry() {
       description: 'A convenient gift for serving beverages at home and gatherings.',
       image: dispenserImg,
       alt: 'Water dispenser gift idea',
-    },
-    {
-      title: 'Vacation / Honeymoon',
-      description: 'Help us create lasting memories on our first journey as husband and wife.',
-      image: vacationImg,
-      alt: 'Vacation location gift idea',
     },
   ];
 
