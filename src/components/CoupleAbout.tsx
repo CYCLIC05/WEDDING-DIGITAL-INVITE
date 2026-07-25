@@ -247,11 +247,11 @@ export function CoupleAbout() {
 
         {/* Section Header — editorial stationery style */}
         <div className="text-center mb-20 relative animate-fade-up">
-          <p className="font-sans text-[9px] uppercase tracking-[0.5em] text-[#C2185B] font-bold mb-5 opacity-70">
-            ✦ &ensp; The Hearts Behind the Vows &ensp; ✦
+          <p className="font-sans text-[9px] uppercase tracking-[0.5em] text-slate-900 font-bold mb-5 opacity-70">
+            <span className="text-black">✦</span> &ensp; The Hearts Behind the Vows &ensp; <span className="text-black">✦</span>
           </p>
 
-          <h2 className="font-script text-6xl md:text-7xl text-[#1E293B] leading-none">
+          <h2 className="font-script text-6xl md:text-7xl text-[#580F6E] leading-none">
             The Covenant Hearts
           </h2>
 
@@ -376,7 +376,9 @@ export function CoupleAbout() {
           </div>
 
           <div className="max-w-4xl mx-auto space-y-8 text-left">
-
+            <p className="font-serif text-base md:text-lg leading-8 text-slate-700 text-center">
+              “There is no fear in love. But perfect love drives out fear.” – 1 John 4:18
+            </p>
 
 
 
