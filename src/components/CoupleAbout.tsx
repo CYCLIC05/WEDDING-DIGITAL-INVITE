@@ -294,7 +294,7 @@ export function CoupleAbout() {
 
             {/* Script Name Display */}
             <div className="mt-8 flex flex-col items-center">
-              <h3 className="font-script text-6xl text-[#1E293B] leading-none">
+              <h3 className="font-script text-6xl text-[#580F6E] leading-none">
                 {couple.groomName}
               </h3>
             </div>
@@ -350,7 +350,7 @@ export function CoupleAbout() {
 
             {/* Script Name Display */}
             <div className="mt-8 flex flex-col items-center">
-              <h3 className="font-script text-6xl text-[#1E293B] leading-none">
+              <h3 className="font-script text-6xl text-[#580F6E] leading-none">
                 {couple.brideName}
               </h3>
             </div>

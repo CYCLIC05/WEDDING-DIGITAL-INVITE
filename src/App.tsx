@@ -325,22 +325,13 @@ export default function App() {
           {/* Clean Static Navigation & Utility Link */}
           <div className="flex items-center gap-6">
             {view === "guest" ? (
-              <>
-                <nav className="flex items-center gap-6 text-[10px] uppercase tracking-[0.28em] text-slate-500 font-bold">
-                  <a href="#couple-section" className="hover:text-[#580F6E] transition-colors duration-200">Couple</a>
-                  <a href="#groom-section" className="hover:text-[#580F6E] transition-colors duration-200">Groom</a>
-                  <button onClick={() => setIsGuideOpen(true)} className="hover:text-[#580F6E] transition-colors duration-200">Guide</button>
-                  <a href="#itinerary" className="hover:text-[#580F6E] transition-colors duration-200">Itinerary</a>
-                  <a href="#gifting-section" className="hover:text-[#580F6E] transition-colors duration-200">Registry</a>
-                </nav>
-                <button
-                  onClick={() => changeView("admin")}
-                  title="Admin Dashboard"
-                  className="p-2 border border-slate-200 text-slate-400 hover:text-[#580F6E] hover:border-[#580F6E] rounded-full transition-all duration-200"
-                >
-                  <KeySVG />
-                </button>
-              </>
+              <button
+                onClick={() => changeView("admin")}
+                title="Admin Dashboard"
+                className="p-2 border border-slate-200 text-slate-400 hover:text-[#580F6E] hover:border-[#580F6E] rounded-full transition-all duration-200"
+              >
+                <KeySVG />
+              </button>
             ) : (
               <button
                 onClick={() => changeView("guest")}
@@ -407,13 +398,22 @@ export default function App() {
           )}
 
           {/* Main Floating Trigger Button */}
-          <button
-            onClick={() => setIsFloatingMenuOpen(!isFloatingMenuOpen)}
-            className="flex items-center justify-center w-12 h-12 rounded-full bg-[#580F6E] text-white shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 border border-[#580F6E]/10"
-            title="Navigate Invite"
-          >
-            <BlossomSVG className={`w-5 h-5 transition-transform duration-300 ${isFloatingMenuOpen ? 'rotate-45' : ''}`} />
-          </button>
+          <div className="relative">
+            {/* Pulsing Outer Rings */}
+            {!isFloatingMenuOpen && (
+              <>
+                <span className="absolute inset-0 rounded-full bg-[#580F6E]/40 animate-ping pointer-events-none" />
+                <span className="absolute -inset-2 rounded-full bg-[#580F6E]/10 animate-pulse pointer-events-none" style={{ animationDuration: '2.5s' }} />
+              </>
+            )}
+            <button
+              onClick={() => setIsFloatingMenuOpen(!isFloatingMenuOpen)}
+              className="relative flex items-center justify-center w-16 h-16 rounded-full bg-[#580F6E] text-white shadow-2xl hover:bg-[#4A0E4E] hover:scale-110 active:scale-95 transition-all duration-300 border border-[#580F6E]/10 z-10"
+              title="Navigate Invite"
+            >
+              <BlossomSVG className={`w-7 h-7 transition-transform duration-300 ${isFloatingMenuOpen ? 'rotate-45' : ''}`} />
+            </button>
+          </div>
         </div>
       )}
 
