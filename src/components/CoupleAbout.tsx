@@ -297,12 +297,6 @@ export function CoupleAbout() {
               <h3 className="font-script text-6xl text-[#1E293B] leading-none">
                 {couple.groomName}
               </h3>
-              <div className="my-3 text-[#580F6E] animate-heart-pulse" style={{ animationDuration: '3s' }}>
-                <HeartSVG className="w-3 h-3" />
-              </div>
-              <p className="text-[12px] text-slate-500 max-w-xs leading-relaxed px-2 font-medium italic font-serif">
-                "{couple.groomAbout}"
-              </p>
             </div>
           </div>
 
@@ -359,12 +353,6 @@ export function CoupleAbout() {
               <h3 className="font-script text-6xl text-[#1E293B] leading-none">
                 {couple.brideName}
               </h3>
-              <div className="my-3 text-[#580F6E] animate-heart-pulse" style={{ animationDuration: '3.4s' }}>
-                <HeartSVG className="w-3 h-3" />
-              </div>
-              <p className="text-[12px] text-slate-500 max-w-xs leading-relaxed px-2 font-medium italic font-serif">
-                "{couple.brideAbout}"
-              </p>
             </div>
           </div>
 
@@ -392,24 +380,7 @@ export function CoupleAbout() {
               “There is no fear in love. But perfect love drives out fear.” – 1 John 4:18
             </p>
 
-            <p className="font-serif text-base md:text-lg leading-8 text-slate-700">
-              By God’s grace, we are delighted to invite you to join us as we celebrate the beginning of our forever journey together. We thank God for His love, guidance, and faithfulness that brought us together and look forward to sharing this special moment with our family, friends, mentors, and loved ones.
-            </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="rounded-2xl border border-[#580F6E]/10 bg-[#FAF9F6] p-6">
-                <p className="font-sans text-[10px] uppercase tracking-[0.35em] text-[#580F6E] font-bold mb-2">
-                  Wedding Year
-                </p>
-                <p className="font-serif text-2xl text-[#1E293B]">2026</p>
-              </div>
-              <div className="rounded-2xl border border-[#580F6E]/10 bg-[#FAF9F6] p-6">
-                <p className="font-sans text-[10px] uppercase tracking-[0.35em] text-[#580F6E] font-bold mb-2">
-                  Wedding Weekend
-                </p>
-                <p className="font-serif text-2xl text-[#1E293B]">September 11th – 12th, 2026</p>
-              </div>
-            </div>
 
 
           </div>

@@ -44,7 +44,7 @@ export function GroomsCorner() {
         <div className="rounded-[1.75rem] border border-[#E5E7EB] bg-white p-6 md:p-8 shadow-sm text-left">
           <p className="text-[10px] uppercase tracking-[0.35em] text-[#580F6E] font-bold mb-2">Best Man / Chief Groomsman</p>
           <h3 className="font-serif text-xl text-slate-900 font-bold">Mr. Akintayo O. Popoola</h3>
-          <p className="font-serif text-base text-slate-500 uppercase tracking-[0.3em] mt-2 mb-4">Relationship: Friend, Brother &amp; Business Partner</p>
+          <p className="text-[10px] font-sans text-slate-500 uppercase tracking-[0.3em] mt-2 mb-4">Relationship: Friend, Brother &amp; Business Partner</p>
           <p className="font-serif text-base text-slate-700 leading-8">
             Akintayo is an economist, investment banker, husband, and trusted friend who has been part of Jerry's journey for many years.
           </p>
@@ -67,11 +67,11 @@ export function GroomsCorner() {
         </div>
 
         {/* Bride's message */}
-        <div className="rounded-[1.75rem] border border-[#580F6E]/10 bg-[#FAF9F6] p-8 md:p-10 shadow-sm mb-8 text-left">
+        <div className="rounded-[1.75rem] border border-[#580F6E]/10 bg-[#FAF9F6] p-8 md:p-10 shadow-sm mb-8 text-center">
           <p className="font-serif text-base md:text-lg leading-8 text-slate-700 italic">
             "A covenant journey with my beloved."
           </p>
-          <div className="mt-6 flex items-center gap-3">
+          <div className="mt-6 flex items-center justify-center gap-3">
             <div className="w-10 h-10 rounded-full bg-[#580F6E]/10 flex items-center justify-center">
               <span className="font-serif text-sm font-bold text-[#580F6E]">AO</span>
             </div>
@@ -83,29 +83,16 @@ export function GroomsCorner() {
         </div>
 
         {/* Best Lady card */}
-        <div className="rounded-[1.75rem] border border-[#E5E7EB] bg-white p-6 md:p-8 shadow-sm text-left">
+        <div className="rounded-[1.75rem] border border-[#E5E7EB] bg-white p-6 md:p-8 shadow-sm text-center">
           <p className="text-[10px] uppercase tracking-[0.35em] text-[#580F6E] font-bold mb-2">Best Lady</p>
           <h3 className="font-serif text-xl text-slate-900 font-bold">Esther Kikelomo Oyewale</h3>
-          <p className="font-serif text-base text-slate-500 uppercase tracking-[0.3em] mt-2 mb-4">Relationship: Sister</p>
+          <p className="text-[10px] font-sans text-slate-500 uppercase tracking-[0.3em] mt-2 mb-4">Relationship: Sister</p>
           <p className="font-serif text-base text-slate-700 leading-8">
             "From your best sister in the world, it's a thing of joy to stand beside you on this day. We have come a long way to be here. I'm filled with mixed emotions because I wouldn't have someone to disturb and borrow from on a daily. All the clothes, shoe, perfume and even soap 🤲🏿😩🥲 thank you. Anyways, I'd be visiting you once in a while on this occasion of need. I love you 😉"
           </p>
         </div>
 
-        {/* ── SPECIAL NOTE ── */}
-        <div className="mt-20 rounded-[1.75rem] border border-[#580F6E]/10 bg-[#FAF9F6] p-8 md:p-10 shadow-sm text-center">
-          <p className="text-[10px] uppercase tracking-[0.4em] text-[#580F6E] font-bold mb-3">
-            Special Note
-          </p>
-          <p className="font-serif text-base md:text-lg leading-8 text-slate-700">
-            Your prayers, love, and support mean so much to us. We look forward to celebrating this special occasion with you as we begin our journey together.
-          </p>
-          <div className="mt-6 text-slate-700">
-            <p className="font-serif text-base md:text-lg leading-7 mb-2">With Love,</p>
-            <p className="font-serif text-base md:text-lg leading-7 font-semibold mb-1">Jerry Tobi &amp; Ayomide</p>
-            <p className="font-serif text-sm text-slate-500 uppercase tracking-[0.3em]">September 2026</p>
-          </div>
-        </div>
+
 
       </div>
     </section>
