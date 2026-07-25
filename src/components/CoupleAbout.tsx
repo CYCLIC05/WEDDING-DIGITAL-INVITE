@@ -211,6 +211,10 @@ export function CoupleAbout() {
         }}
       />
 
+      {/* Background roses */}
+      <img src="/src/assets/images/purple_watercolor_roses.png" className="pointer-events-none select-none absolute top-0 right-0 opacity-[0.12] z-0" style={{ width: '280px', height: 'auto', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
+      <img src="/src/assets/images/purple_watercolor_roses.png" className="pointer-events-none select-none absolute bottom-0 left-0 opacity-[0.12] z-0" style={{ width: '280px', height: 'auto', transform: 'rotate(180deg)', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
+
       {/* ── Full-height left floral spray ── */}
       <div className="absolute left-0 top-0 h-full w-52 pointer-events-none z-0 opacity-90 hidden lg:block" style={{ paddingTop: '2rem' }}>
         <FloralSprayLeft />
