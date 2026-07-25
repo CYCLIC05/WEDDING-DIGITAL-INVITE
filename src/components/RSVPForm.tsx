@@ -154,10 +154,10 @@ export function RSVPForm() {
                 <CelebrationSVG />
               </div>
               <h3 className="font-serif text-2xl text-slate-900 mb-2 font-bold">
-                Registration Confirmed!
+                RSVP Received
               </h3>
               <p className="text-xs text-slate-600 leading-relaxed max-w-sm mx-auto mb-6">
-                Thank you, {submittedName}. Your RSVP is recorded. Below is your admittance pass. Please <strong>screenshot or copy this pass</strong> to show at the gate for entry.
+                Thank you, {submittedName}. Your RSVP has been submitted and is pending approval. Below is your temporary pass code for event planning purposes.
               </p>
 
               {/* BEAUTIFUL DIGITAL PASS */}
@@ -191,7 +191,7 @@ export function RSVPForm() {
                     <div>
                       <span className="block text-[9px] uppercase tracking-wider text-slate-400 font-bold">Pass Status</span>
                       <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-extrabold tracking-wider uppercase bg-[#580F6E]/10 text-[#580F6E] mt-0.5">
-                        Registered
+                        Pending
                       </span>
                     </div>
                   </div>

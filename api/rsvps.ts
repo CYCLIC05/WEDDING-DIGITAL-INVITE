@@ -79,7 +79,7 @@ export default async function handler(req: Request, res: Response) {
         phone: phone.trim(),
         events: events.map((v) => String(v).trim()),
         dietary_notes: dietary_notes ? String(dietary_notes).trim() : "",
-        status: "registered"
+        status: "pending" // aligns with rsvps table check constraint
       };
 
       const { data: insertedRecord, error: insertError } = await supabase

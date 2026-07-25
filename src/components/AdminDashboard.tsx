@@ -409,7 +409,7 @@ export function AdminDashboard() {
 
   const metrics = {
     total: rsvps.length,
-    registered: rsvps.filter((r) => r.status === "registered" || r.status === "pending").length,
+    pending: rsvps.filter((r) => r.status === "pending" || r.status === "registered").length,
     approved: rsvps.filter((r) => r.status === "approved").length,
     declined: rsvps.filter((r) => r.status === "declined").length,
   };
@@ -421,7 +421,7 @@ export function AdminDashboard() {
       item.phone.includes(searchTerm);
     
     const matchesStatus = statusFilter === "all" || item.status === statusFilter ||
-      (statusFilter === "registered" && (item.status === "registered" || item.status === "pending"));
+      (statusFilter === "pending" && (item.status === "pending" || item.status === "registered"));
     const matchesEvent = eventFilter === "all" || item.events.includes(eventFilter);
 
     return matchesSearch && matchesStatus && matchesEvent;
@@ -943,7 +943,7 @@ export function AdminDashboard() {
                                     ? "bg-red-100 text-red-800"
                                     : "bg-blue-100 text-blue-800"
                                 }`}>
-                                  {row.status === "pending" ? "registered" : row.status}
+                                  {row.status === "pending" ? "Pending" : row.status === "approved" ? "Approved" : "Declined"}
                                 </span>
                               </td>
 
