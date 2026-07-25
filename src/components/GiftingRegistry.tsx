@@ -58,10 +58,10 @@ export function GiftingRegistry() {
       alt: 'Refrigerator gift idea',
     },
     {
-      title: 'Kitchen Appliances',
+      title: 'Home Appliances',
       description: 'Useful appliances to make cooking and daily life easier at home.',
       image: appliancesImg,
-      alt: 'Kitchen appliances gift idea',
+      alt: 'Home appliances gift idea',
     },
     {
       title: 'Dispenser',
