@@ -247,7 +247,7 @@ export function CoupleAbout() {
 
         {/* Section Header — editorial stationery style */}
         <div className="text-center mb-20 relative animate-fade-up">
-          <p className="font-sans text-[9px] uppercase tracking-[0.5em] text-[#580F6E] font-bold mb-5 opacity-70">
+          <p className="font-sans text-[9px] uppercase tracking-[0.5em] text-[#C2185B] font-bold mb-5 opacity-70">
             ✦ &ensp; The Hearts Behind the Vows &ensp; ✦
           </p>
 

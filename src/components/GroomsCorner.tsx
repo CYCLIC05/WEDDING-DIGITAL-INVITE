@@ -45,10 +45,10 @@ export function GroomsCorner() {
           <p className="text-[10px] uppercase tracking-[0.35em] text-[#580F6E] font-bold mb-2">Best Man / Chief Groomsman</p>
           <h3 className="font-serif text-xl text-slate-900 font-bold">Mr. Akintayo O. Popoola</h3>
           <p className="text-[10px] font-sans text-slate-500 uppercase tracking-[0.3em] mt-2 mb-4">Relationship: Friend, Brother &amp; Business Partner</p>
-          <p className="font-serif text-base text-slate-700 leading-8">
+          <p className="font-serif text-base text-slate-700 leading-8 italic">
             Akintayo is an economist, investment banker, husband, and trusted friend who has been part of Jerry's journey for many years.
           </p>
-          <p className="font-serif text-base text-slate-700 leading-8 mt-4">
+          <p className="font-serif text-base text-slate-700 leading-8 mt-4 italic">
             "Jerry is my gee from university days, and I am happy and honored to stand with him on this special occasion."
           </p>
         </div>
