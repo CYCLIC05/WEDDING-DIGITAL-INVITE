@@ -376,9 +376,6 @@ export function CoupleAbout() {
           </div>
 
           <div className="max-w-4xl mx-auto space-y-8 text-left">
-            <p className="font-serif text-base md:text-lg leading-8 text-slate-700 text-center">
-              “There is no fear in love. But perfect love drives out fear.” – 1 John 4:18
-            </p>
 
 
 

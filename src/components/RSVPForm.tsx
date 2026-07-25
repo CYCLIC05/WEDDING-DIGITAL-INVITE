@@ -378,20 +378,7 @@ export function RSVPForm() {
               </div>
             </div>
 
-            {/* ── SPECIAL NOTE ── */}
-            <div className="mt-4 rounded-[1.75rem] border border-[#580F6E]/10 bg-[#FAF9F6] p-8 md:p-10 shadow-sm text-center">
-              <p className="text-[10px] uppercase tracking-[0.4em] text-[#580F6E] font-bold mb-3">
-                Special Note
-              </p>
-              <p className="font-serif text-base md:text-lg leading-8 text-slate-700">
-                Your prayers, love, and support mean so much to us. We look forward to celebrating this special occasion with you as we begin our journey together.
-              </p>
-              <div className="mt-6 text-slate-700">
-                <p className="font-serif text-base md:text-lg leading-7 mb-2">With Love,</p>
-                <p className="font-serif text-base md:text-lg leading-7 font-semibold mb-1">Jerry Tobi &amp; Ayomide</p>
-                <p className="font-serif text-sm text-slate-500 uppercase tracking-[0.3em]">September 2026</p>
-              </div>
-            </div>
+
 
             <div className="pt-3">
               <button

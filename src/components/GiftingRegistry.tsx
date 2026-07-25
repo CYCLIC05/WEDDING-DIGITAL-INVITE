@@ -3,6 +3,7 @@ import carImg from "../assets/images/car.jpg";
 import fridgeImg from "../assets/images/refriderator.jpg";
 import appliancesImg from "../assets/images/Home appliances.jpg";
 import dispenserImg from "../assets/images/Dispenser.jpg";
+import vacationImg from "../assets/images/vacation location.jpg";
 
 // Inline SVGs for Gifting Registry
 const GiftSVG = () => (
@@ -61,6 +62,12 @@ export function GiftingRegistry() {
       description: 'A convenient gift for serving beverages at home and gatherings.',
       image: dispenserImg,
       alt: 'Water dispenser gift idea',
+    },
+    {
+      title: 'Vacation / Honeymoon',
+      description: 'Help us create lasting memories on our first journey as husband and wife.',
+      image: vacationImg,
+      alt: 'Vacation location gift idea',
     },
   ];
 
@@ -178,6 +185,22 @@ export function GiftingRegistry() {
             </div>
           </div>
         </div>
+
+        {/* ── SPECIAL NOTE ── */}
+        <div className="mt-10 rounded-[1.75rem] border border-[#580F6E]/10 bg-white p-8 md:p-10 shadow-sm text-center">
+          <p className="text-[10px] uppercase tracking-[0.4em] text-[#580F6E] font-bold mb-3">
+            Special Note
+          </p>
+          <p className="font-serif text-base md:text-lg leading-8 text-slate-700">
+            Your prayers, love, and support mean so much to us. We look forward to celebrating this special occasion with you as we begin our journey together.
+          </p>
+          <div className="mt-6 text-slate-700">
+            <p className="font-serif text-base md:text-lg leading-7 mb-2">With Love,</p>
+            <p className="font-serif text-base md:text-lg leading-7 font-semibold mb-1">Jerry Tobi &amp; Ayomide</p>
+            <p className="font-serif text-sm text-slate-500 uppercase tracking-[0.3em]">September 2026</p>
+          </div>
+        </div>
+
       </div>
     </section>
   );
