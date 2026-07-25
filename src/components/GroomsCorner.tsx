@@ -8,7 +8,10 @@ const HeartSVG = ({ className = "w-3.5 h-3.5" }: { className?: string }) => (
 
 export function GroomsCorner() {
   return (
-    <section id="groom-section" className="py-20 px-6 max-w-7xl mx-auto border-t border-[#580F6E]/15 bg-white select-none">
+    <section id="groom-section" className="relative py-20 px-6 max-w-7xl mx-auto border-t border-[#580F6E]/15 bg-white select-none overflow-hidden">
+      {/* Background roses */}
+      <img src="/src/assets/images/purple_watercolor_roses.png" className="pointer-events-none select-none absolute top-0 left-0 opacity-15" style={{ width: '260px', height: 'auto', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
+      <img src="/src/assets/images/purple_watercolor_roses.png" className="pointer-events-none select-none absolute bottom-0 right-0 opacity-15" style={{ width: '260px', height: 'auto', transform: 'rotate(180deg)', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
       <div className="max-w-3xl mx-auto text-center">
 
         {/* ── GROOM'S CORNER ── */}

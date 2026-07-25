@@ -129,7 +129,10 @@ export function RSVPForm() {
   };
 
   return (
-    <section id="rsvp-section" className="py-24 px-6 bg-white border-t border-b border-[#4A0E4E]/10 select-none">
+    <section id="rsvp-section" className="relative py-24 px-6 bg-white border-t border-b border-[#4A0E4E]/10 select-none overflow-hidden">
+      {/* Background roses */}
+      <img src="/src/assets/images/purple_watercolor_roses.png" className="pointer-events-none select-none absolute top-0 right-0 opacity-15" style={{ width: '280px', height: 'auto', transform: 'rotate(0deg)', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
+      <img src="/src/assets/images/purple_watercolor_roses.png" className="pointer-events-none select-none absolute bottom-0 left-0 opacity-15" style={{ width: '280px', height: 'auto', transform: 'rotate(180deg)', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
       <div className="max-w-xl mx-auto">
         <div className="text-center mb-12">
           <div className="inline-flex p-3 bg-[#580F6E]/10 text-[#580F6E] rounded-full mb-3">

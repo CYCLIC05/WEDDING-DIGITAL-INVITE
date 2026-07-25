@@ -717,7 +717,10 @@ export default function App() {
 
 
             {/* THREE-EVENT WEDDING GRID SECTION */}
-            <div id="itinerary" className="bg-white pb-16">
+            <div id="itinerary" className="relative bg-white pb-16 overflow-hidden">
+              {/* Background roses */}
+              <img src={purpleRoses} className="pointer-events-none select-none absolute top-0 right-0 opacity-15" style={{ width: '280px', height: 'auto', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
+              <img src={purpleRoses} className="pointer-events-none select-none absolute bottom-0 left-0 opacity-15" style={{ width: '280px', height: 'auto', transform: 'rotate(180deg)', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
               <EventGrid />
 
               {/* Guest Guide editorial banner */}
@@ -757,7 +760,10 @@ export default function App() {
       </main>
 
       {/* CORE FOOTER BRAND */}
-      <footer className="bg-white text-slate-700 pt-8 pb-16 px-6 border-t border-slate-100 select-none">
+      <footer className="relative bg-white text-slate-700 pt-8 pb-16 px-6 border-t border-slate-100 select-none overflow-hidden">
+        {/* Background roses */}
+        <img src={purpleRoses} className="pointer-events-none select-none absolute top-0 left-0 opacity-15" style={{ width: '240px', height: 'auto', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
+        <img src={purpleRoses} className="pointer-events-none select-none absolute bottom-0 right-0 opacity-15" style={{ width: '240px', height: 'auto', transform: 'rotate(180deg)', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <div className="inline-flex w-12 h-12 bg-[#580F6E] text-white text-xl font-bold font-serif rounded-full items-center justify-center">
             †

@@ -292,12 +292,7 @@ export function CoupleAbout() {
               <SquareElegantFrame className="absolute inset-0 w-full h-full z-20 pointer-events-none" />
             </div>
 
-            {/* Script Name Display */}
-            <div className="mt-8 flex flex-col items-center">
-              <h3 className="font-script text-6xl text-[#1E293B] leading-none">
-                {couple.groomName}
-              </h3>
-            </div>
+
           </div>
 
           {/* MIDDLE — heart & dashed connectors */}
@@ -348,12 +343,7 @@ export function CoupleAbout() {
               <SquareElegantFrame className="absolute inset-0 w-full h-full z-20 pointer-events-none" />
             </div>
 
-            {/* Script Name Display */}
-            <div className="mt-8 flex flex-col items-center">
-              <h3 className="font-script text-6xl text-[#1E293B] leading-none">
-                {couple.brideName}
-              </h3>
-            </div>
+
           </div>
 
         </div>
