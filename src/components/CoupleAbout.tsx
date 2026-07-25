@@ -292,7 +292,12 @@ export function CoupleAbout() {
               <SquareElegantFrame className="absolute inset-0 w-full h-full z-20 pointer-events-none" />
             </div>
 
-
+            {/* Script Name Display */}
+            <div className="mt-8 flex flex-col items-center">
+              <h3 className="font-script text-6xl text-[#1E293B] leading-none">
+                {couple.groomName}
+              </h3>
+            </div>
           </div>
 
           {/* MIDDLE — heart & dashed connectors */}
@@ -343,7 +348,12 @@ export function CoupleAbout() {
               <SquareElegantFrame className="absolute inset-0 w-full h-full z-20 pointer-events-none" />
             </div>
 
-
+            {/* Script Name Display */}
+            <div className="mt-8 flex flex-col items-center">
+              <h3 className="font-script text-6xl text-[#1E293B] leading-none">
+                {couple.brideName}
+              </h3>
+            </div>
           </div>
 
         </div>
@@ -353,10 +363,7 @@ export function CoupleAbout() {
             <p className="font-sans text-[9px] uppercase tracking-[0.45em] text-[#580F6E] font-bold mb-4 opacity-70">
               ✦ Our Love Story ✦
             </p>
-            <h3 className="font-script text-4xl md:text-5xl text-[#1E293B] leading-none">
-              Tobi &amp; Ayomide
-            </h3>
-            <div className="flex items-center justify-center gap-3 mt-5 mb-2">
+            <div className="flex items-center justify-center gap-3 mt-2 mb-2">
               <div className="h-px w-16 bg-[#580F6E] opacity-20" />
               <div className="text-[#580F6E]">
                 <HeartSVG className="w-3 h-3" />
