@@ -193,10 +193,13 @@ import { FullScheduleGuide } from "./components/FullScheduleGuide.tsx";
 import { CoupleAbout } from "./components/CoupleAbout.tsx";
 import { GroomsCorner } from "./components/GroomsCorner.tsx";
 import { GiftingRegistry } from "./components/GiftingRegistry.tsx";
+import { EnvelopeIntro } from "./components/EnvelopeIntro.tsx";
+import { ScrollReveal } from "./components/ScrollReveal.tsx";
 
 export default function App() {
   const [loading] = useState(false);
   const [view, setView] = useState<"guest" | "admin">("guest");
+  const [introComplete, setIntroComplete] = useState(false);
   const [isGuideOpen, setIsGuideOpen] = useState(false);
   const [isFloatingMenuOpen, setIsFloatingMenuOpen] = useState(false);
   const [timeLeft, setTimeLeft] = useState({
@@ -313,6 +316,11 @@ export default function App() {
 
   return (
     <div className="bg-white text-slate-900 font-sans min-h-screen flex flex-col justify-between relative overflow-x-hidden selection:bg-[#580F6E] selection:text-white">
+
+      {/* ─── ENVELOPE INTRO SCREEN ─── */}
+      {!introComplete && (
+        <EnvelopeIntro onComplete={() => setIntroComplete(true)} />
+      )}
 
       {/* ─── ELEGANT STATIC STATIONERY HEADER (Scrolls away naturally) ─── */}
       <header className="w-full max-w-6xl mx-auto px-6 py-6 border-b border-slate-100 select-none animate-fade-up">
@@ -433,6 +441,7 @@ export default function App() {
           <div className="pb-12">
 
             {/* ─── HERO — Floral Corner Design ─── */}
+            <ScrollReveal direction="up" duration={900}>
             <section
               className="relative max-w-5xl mx-auto mb-10 select-none overflow-hidden"
               style={{
@@ -718,14 +727,20 @@ export default function App() {
 
               </div>
             </section>
+            </ScrollReveal>
 
             {/* THE MATCHING PORTRAITS AND CUSTOMIZABLE ABOUT SECTION */}
-            <CoupleAbout />
+            <ScrollReveal direction="up" delay={100}>
+              <CoupleAbout />
+            </ScrollReveal>
             <SectionDivider />
-            <GroomsCorner />
+            <ScrollReveal direction="left" delay={150}>
+              <GroomsCorner />
+            </ScrollReveal>
             <SectionDivider />
 
             {/* THREE-EVENT WEDDING GRID SECTION */}
+            <ScrollReveal direction="up" delay={100}>
             <div id="itinerary" className="relative bg-white dot-pattern pb-16 overflow-hidden">
               {/* Cross-hatch texture */}
               <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 16 L32 16 M16 0 L16 32' stroke='%23580F6E' stroke-width='0.4' stroke-opacity='0.04'/%3E%3C/svg%3E")`, backgroundSize: '32px 32px' }} />
@@ -735,20 +750,26 @@ export default function App() {
               <EventGrid />
 
             </div>
+            </ScrollReveal>
             <SectionDivider />
 
             {/* LOVE GIFT & REGISTRY SECTION */}
-            <GiftingRegistry />
+            <ScrollReveal direction="right" delay={100}>
+              <GiftingRegistry />
+            </ScrollReveal>
             <SectionDivider />
 
             {/* DIGITAL RSVP CAPTURE FORM SECTION */}
-            <RSVPForm />
+            <ScrollReveal direction="scale" delay={150}>
+              <RSVPForm />
+            </ScrollReveal>
 
           </div>
         )}
       </main>
 
       {/* CORE FOOTER BRAND */}
+      <ScrollReveal direction="up" delay={100}>
       <footer className="relative bg-white diagonal-pattern text-slate-700 pt-8 pb-16 px-6 border-t border-slate-100 select-none overflow-hidden">
         {/* Cross-hatch texture */}
         <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 16 L32 16 M16 0 L16 32' stroke='%23580F6E' stroke-width='0.4' stroke-opacity='0.04'/%3E%3C/svg%3E")`, backgroundSize: '32px 32px' }} />
@@ -784,6 +805,7 @@ export default function App() {
           </div>
         </div>
       </footer>
+      </ScrollReveal>
 
       {/* DETAILED WEDDING GUIDE OVERLAY */}
       <FullScheduleGuide isOpen={isGuideOpen} onClose={() => setIsGuideOpen(false)} />
