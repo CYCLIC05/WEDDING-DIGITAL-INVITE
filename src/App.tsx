@@ -324,19 +324,16 @@ export default function App() {
 
       {/* ─── ELEGANT STATIC STATIONERY HEADER (Scrolls away naturally) ─── */}
       <header className="w-full max-w-6xl mx-auto px-6 py-6 border-b border-slate-100 select-none animate-fade-up">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex flex-col items-center gap-3">
           {/* Circular Royal Monogram */}
           <div
             onClick={() => changeView("guest")}
-            className="flex items-center gap-3.5 cursor-pointer group"
+            className="flex items-center gap-3 cursor-pointer group"
           >
             <div className="flex items-center justify-center w-11 h-11 rounded-full bg-[#580F6E] text-white font-serif italic font-bold text-base shadow-sm group-hover:bg-[#4A0E4E] transition-colors duration-300">
               T&amp;A
             </div>
-            <div>
-              <span className="text-xs font-bold text-slate-800 tracking-[0.2em] uppercase">Tobi &amp; Ayomide</span>
-              <span className="block text-[9px] text-[#580F6E] font-medium tracking-[0.25em] uppercase mt-0.5">Journey Aligned</span>
-            </div>
+            <span className="text-[9px] text-[#580F6E] font-medium tracking-[0.25em] uppercase">Journey Aligned</span>
           </div>
 
           {/* Clean Static Navigation & Utility Link */}
