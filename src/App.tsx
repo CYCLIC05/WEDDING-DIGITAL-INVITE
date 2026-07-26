@@ -378,15 +378,6 @@ export default function App() {
               >
                 Groom
               </a>
-              <button
-                onClick={() => {
-                  setIsGuideOpen(true);
-                  setIsFloatingMenuOpen(false);
-                }}
-                className="flex items-center justify-center px-4 py-2.5 rounded-full bg-white border border-slate-200 shadow-lg text-[10px] uppercase tracking-[0.2em] font-bold text-slate-600 hover:text-[#580F6E] hover:border-[#580F6E] transition"
-              >
-                Guide
-              </button>
               <a
                 href="#itinerary"
                 onClick={() => setIsFloatingMenuOpen(false)}
@@ -679,7 +670,7 @@ export default function App() {
                         <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
                         <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
                       </svg>
-                      View Schedule
+                      View Guide
                     </span>
                   </button>
 
