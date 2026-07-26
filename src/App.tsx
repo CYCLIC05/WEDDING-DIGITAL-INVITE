@@ -335,7 +335,7 @@ export default function App() {
             </div>
             <div>
               <span className="text-xs font-bold text-slate-800 tracking-[0.2em] uppercase">Tobi &amp; Ayomide</span>
-              <span className="block text-[9px] text-[#580F6E] font-medium tracking-[0.25em] uppercase mt-0.5">The Covenant Union</span>
+              <span className="block text-[9px] text-[#580F6E] font-medium tracking-[0.25em] uppercase mt-0.5">Journey Aligned</span>
             </div>
           </div>
 

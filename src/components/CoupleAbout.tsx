@@ -266,7 +266,7 @@ export function CoupleAbout() {
             <div className="h-px w-24 bg-[#580F6E] opacity-20" />
           </div>
 
-          <p className="font-serif italic text-sm text-slate-500 max-w-md mx-auto leading-relaxed">
+          <p className="italic text-sm text-slate-500 max-w-md mx-auto leading-relaxed">
             "He who finds a wife finds a good thing and obtains favor from the Lord." — Proverbs 18:22
           </p>
         </div>
@@ -377,8 +377,8 @@ export function CoupleAbout() {
           </div>
 
           <div className="max-w-4xl mx-auto space-y-8 text-left">
-            <p className="font-serif text-base md:text-lg leading-8 text-slate-700 text-center">
-              “There is no fear in love. But perfect love drives out fear.” – 1 John 4:18
+            <p className="text-base md:text-lg leading-8 text-slate-700 text-center">
+              "There is no fear in love. But perfect love drives out fear." – 1 John 4:18
             </p>
 
 

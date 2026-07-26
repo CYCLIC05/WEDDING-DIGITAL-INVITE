@@ -147,7 +147,7 @@ export function RSVPForm() {
             Confirm Attendance
           </h2>
           <div className="w-12 h-[1px] bg-[#580F6E] mx-auto mt-3 mb-3"></div>
-          <p className="font-serif text-base leading-relaxed text-slate-500 max-w-md mx-auto">
+          <p className="text-base leading-relaxed text-slate-500 max-w-md mx-auto">
             Please respond with your details so we can prepare for your arrival.
           </p>
         </div>
@@ -161,7 +161,7 @@ export function RSVPForm() {
               <h3 className="font-serif text-2xl text-slate-900 mb-2 font-bold">
                 RSVP Received
               </h3>
-              <p className="font-serif text-base leading-relaxed text-slate-600 max-w-sm mx-auto mb-6">
+              <p className="text-base leading-relaxed text-slate-600 max-w-sm mx-auto mb-6">
                 Thank you, {submittedName}. Your RSVP has been submitted and is pending approval. Below is your temporary pass code for event planning purposes.
               </p>
 
@@ -219,7 +219,7 @@ export function RSVPForm() {
 
                 {/* Verse Footer */}
                 <div className="mt-6 pt-4 border-t border-dashed border-[#580F6E]/20 text-center">
-                  <p className="text-[10px] italic text-slate-500 font-serif leading-relaxed">
+                  <p className="text-[10px] italic text-slate-500 leading-relaxed">
                     "Therefore what God has joined together, let no one separate."
                   </p>
                   <span className="block text-[9px] text-[#580F6E] uppercase font-bold tracking-wider mt-1">— Matthew 19:6</span>

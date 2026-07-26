@@ -109,7 +109,7 @@ export function GiftingRegistry() {
             Your presence is the greatest gift
           </h2>
           <div className="w-12 h-[1px] bg-[#580F6E] mx-auto mt-3 mb-3"></div>
-          <p className="font-serif text-base leading-relaxed text-slate-500 max-w-2xl mx-auto">
+          <p className="text-base leading-relaxed text-slate-500 max-w-2xl mx-auto">
             For those who desire to bless our new home, we welcome any expression of generosity. Below are the most meaningful ways to celebrate with us.
           </p>
         </div>
@@ -195,13 +195,13 @@ export function GiftingRegistry() {
           <p className="text-[10px] uppercase tracking-[0.4em] text-[#580F6E] font-bold mb-3">
             Special Note
           </p>
-          <p className="font-serif text-base md:text-lg leading-8 text-slate-700">
+          <p className="text-base md:text-lg leading-8 text-slate-700">
             Your prayers, love, and support mean so much to us. We look forward to celebrating this special occasion with you as we begin our journey together.
           </p>
           <div className="mt-6 text-slate-700">
-            <p className="font-serif text-base md:text-lg leading-7 mb-2">With Love,</p>
-            <p className="font-serif text-base md:text-lg leading-7 font-semibold mb-1">Jerry Tobi &amp; Ayomide</p>
-            <p className="font-serif text-sm text-slate-500 uppercase tracking-[0.3em]">September 2026</p>
+            <p className="text-base md:text-lg leading-7 mb-2">With Love,</p>
+            <p className="text-base md:text-lg leading-7 font-semibold mb-1">Jerry Tobi &amp; Ayomide</p>
+            <p className="text-sm text-slate-500 uppercase tracking-[0.3em]">September 2026</p>
           </div>
         </div>
 

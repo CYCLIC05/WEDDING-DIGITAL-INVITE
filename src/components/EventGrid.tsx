@@ -83,7 +83,7 @@ export function EventGrid() {
                 <h3 className="font-serif text-xl font-bold text-slate-900 leading-tight">
                   {event.title}
                 </h3>
-                <p className="font-serif text-base md:text-lg text-slate-700 leading-8">
+                <p className="text-base md:text-lg text-slate-700 leading-8">
                   {event.subtitle}
                 </p>
 
@@ -114,7 +114,7 @@ export function EventGrid() {
                     <span className="text-[#580F6E] mt-1"><HangerSVG /></span>
                     <div>
                       <p className="font-semibold text-[#580F6E] uppercase text-[9px] tracking-[0.15em]">Dress Code</p>
-                      <p className="text-slate-600 italic font-serif text-base mt-1 leading-relaxed">{event.dressCode}</p>
+                      <p className="text-slate-600 italic text-base mt-1 leading-relaxed">{event.dressCode}</p>
                     </div>
                   </div>
                 </div>
