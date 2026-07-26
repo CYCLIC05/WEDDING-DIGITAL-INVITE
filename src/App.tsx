@@ -186,7 +186,6 @@ const WeddingBouquetSVG = ({ className = "" }: { className?: string }) => (
 
 // ──────────────────────────────────────────────────────────────────────────────
 import { EventGrid } from "./components/EventGrid.tsx";
-import { RSVPForm } from "./components/RSVPForm.tsx";
 import { AdminDashboard } from "./components/AdminDashboard.tsx";
 import purpleRoses from "./assets/images/purple_watercolor_roses.png";
 import { FullScheduleGuide } from "./components/FullScheduleGuide.tsx";
@@ -758,11 +757,6 @@ export default function App() {
               <GiftingRegistry />
             </ScrollReveal>
             <SectionDivider />
-
-            {/* DIGITAL RSVP CAPTURE FORM SECTION */}
-            <ScrollReveal direction="scale" delay={150}>
-              <RSVPForm />
-            </ScrollReveal>
 
           </div>
         )}
