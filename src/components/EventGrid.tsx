@@ -40,7 +40,7 @@ export function EventGrid() {
       location: "Elim Top Hotel and suites",
       mapUrl: "https://maps.google.com/?q=Elim+Top+Hotel+Bwari+Abuja",
       dressCode: "Mangenta and White (Head Gear)",
-      subtitle: "A beautiful gathering of families, friends, and loved ones as both families formally unite and celebrate the traditional marriage rites.",
+      subtitle: "The beautiful blessing and joining in accordance with our sacred heritage.",
     },
     {
       title: "EVENT 2: J.A. – Journey Aligned Church Wedding",
@@ -50,19 +50,24 @@ export function EventGrid() {
       location: "Deeper Life Junction, Bwari, FCT Abuja (901101)",
       mapUrl: "https://maps.google.com/?q=Deeper+Life+Junction+Bwari+Abuja",
       dressCode: "White Native and a Touch of Gold/magenta",
-      subtitle: "A solemn and joyful worship service where we will exchange our marriage vows before God and witnesses.",
+      subtitle: "The sacred exchanging of vows before the Altar, the Church, and Almighty God.",
     },
   ];
 
   return (
     <section className="py-20 px-6 max-w-7xl mx-auto">
-      <div className="text-center max-w-2xl mx-auto mb-16 select-none animate-fade-up">
-        <span className="text-[10px] text-[#580F6E] font-bold uppercase tracking-[0.3em] block mb-2">
-          Itinerary
-        </span>
-        <h2 className="font-serif text-4xl text-slate-900 font-bold tracking-tight">
-          Weekend schedule
+      <div className="text-center max-w-2xl mx-auto mb-14 select-none animate-fade-up">
+        <div className="inline-flex items-center justify-center gap-3 text-[#580F6E] text-xs md:text-sm font-semibold tracking-wide mb-2">
+          <span className="h-px w-8 bg-[#580F6E]/30" />
+          <span>✿ Itinerary Guide ✿</span>
+          <span className="h-px w-8 bg-[#580F6E]/30" />
+        </div>
+        <h2 className="font-serif text-3xl md:text-4xl text-slate-900 font-bold tracking-tight mb-3">
+          Wedding Schedule
         </h2>
+        <p className="text-sm md:text-base text-slate-600 font-sans leading-relaxed max-w-xl mx-auto">
+          Kindly take note of the respective dress codes, venues, and timestamps for each event. Seating pre-registration is required.
+        </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-4xl mx-auto items-stretch">
@@ -71,21 +76,30 @@ export function EventGrid() {
           return (
             <article
               key={idx}
-              className={`bg-[#FAF9F6] border border-[#1E293B]/10 rounded-[1.5rem] relative hover-lift ${staggerClass} flex flex-col`}
+              className={`bg-[#FAF9F6] border border-[#580F6E]/40 rounded-[1.5rem] relative hover-lift ${staggerClass} flex flex-col overflow-hidden shadow-sm`}
             >
-              <div className="absolute inset-2 border border-[#580F6E]/10 pointer-events-none" style={{ borderRadius: '1.25rem' }} />
-              <div className="h-1.5 w-full bg-[#580F6E] rounded-t-[1.5rem] relative z-10"></div>
+              {/* Inner thin purple line creating double border */}
+              <div className="absolute inset-1.5 border border-[#580F6E]/25 rounded-[1.25rem] pointer-events-none z-10" />
+              
+              {/* Double thin purple top lines */}
+              <div className="w-full flex flex-col gap-[2px] pt-1 px-1 relative z-10">
+                <div className="h-[2px] w-full bg-[#580F6E]/80 rounded-full" />
+                <div className="h-[1px] w-full bg-[#580F6E]/40 rounded-full" />
+              </div>
               
               <div className="p-8 flex flex-col gap-6 relative z-10 flex-1">
                 <div className="text-[10px] uppercase tracking-[0.2em] text-[#580F6E] font-bold">
                   Part {idx + 1}
                 </div>
-                <h3 className="font-serif text-xl font-bold text-slate-900 leading-tight">
-                  {event.title}
-                </h3>
-                <p className="text-base md:text-lg text-slate-700 leading-8">
-                  {event.subtitle}
-                </p>
+                <div>
+                  <h3 className="font-serif text-xl font-bold text-slate-900 leading-tight">
+                    {event.title}
+                  </h3>
+                  <p className="text-xs text-slate-600 font-sans mt-2 leading-relaxed">
+                    {event.subtitle}
+                  </p>
+                </div>
+
 
                 <div className="space-y-4 flex-1">
                   <div className="flex gap-3 text-sm text-slate-700">
@@ -114,7 +128,7 @@ export function EventGrid() {
                     <span className="text-[#580F6E] mt-1"><HangerSVG /></span>
                     <div>
                       <p className="font-semibold text-[#580F6E] uppercase text-[9px] tracking-[0.15em]">Dress Code</p>
-                      <p className="text-slate-600 italic text-base mt-1 leading-relaxed">{event.dressCode}</p>
+                    <p className="font-sans text-slate-500 text-xs font-semibold mt-0.5 leading-relaxed">{event.dressCode}</p>
                     </div>
                   </div>
                 </div>

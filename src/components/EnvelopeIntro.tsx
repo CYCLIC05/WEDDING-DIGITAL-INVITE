@@ -390,7 +390,7 @@ export function EnvelopeIntro({ onComplete }: EnvelopeIntroProps) {
               </div>
 
               <p className="text-[9px] text-slate-500 tracking-wider uppercase font-medium">
-                11 &amp; 12 September 2026
+                11th &amp; 12th September 2026
               </p>
               <p className="text-[8px] text-slate-400 tracking-wider uppercase mt-0.5">
                 Abuja, Nigeria

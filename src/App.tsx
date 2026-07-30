@@ -322,30 +322,46 @@ export default function App() {
         <EnvelopeIntro onComplete={() => setIntroComplete(true)} />
       )}
 
-      {/* ─── ELEGANT STATIC STATIONERY HEADER (Scrolls away naturally) ─── */}
-      <header className="w-full max-w-6xl mx-auto px-6 py-6 border-b border-slate-100 select-none animate-fade-up">
-        <div className="flex flex-col items-center gap-3">
-          {/* Circular Royal Monogram */}
+      {/* ─── ELEGANT STICKY HEADER NAVIGATION BAR ─── */}
+      <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-xs select-none transition-all duration-300">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+          {/* Circular Royal Monogram & Brand */}
           <div
-            onClick={() => changeView("guest")}
+            onClick={() => {
+              changeView("guest");
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
             className="flex items-center gap-3 cursor-pointer group"
           >
-            <div className="flex items-center justify-center w-11 h-11 rounded-full bg-[#580F6E] text-white font-serif italic font-bold text-base shadow-sm group-hover:bg-[#4A0E4E] transition-colors duration-300">
+            <div className="flex items-center justify-center w-9 h-9 rounded-full bg-[#580F6E] text-white font-serif italic font-bold text-sm shadow-sm group-hover:bg-[#4A0E4E] transition-colors duration-300">
               T&amp;A
             </div>
-            <span className="text-[9px] text-[#580F6E] font-medium tracking-[0.25em] uppercase">Journey Aligned</span>
+            <div className="hidden sm:flex flex-col">
+              <span className="font-serif text-sm font-bold text-slate-900 leading-none flex items-center gap-1">
+                Tobi <HeartSVG className="w-3 h-3 text-[#580F6E] inline" /> Ayomide
+              </span>
+              <span className="text-[8px] text-[#580F6E] font-bold tracking-[0.2em] uppercase mt-0.5">Journey Aligned</span>
+            </div>
           </div>
 
-          {/* Clean Static Navigation & Utility Link */}
-          <div className="flex items-center gap-6">
+          {/* Right Action Utility Buttons */}
+          <div className="flex items-center gap-3">
             {view === "guest" ? (
-              <button
-                onClick={() => changeView("admin")}
-                title="Admin Dashboard"
-                className="p-2 border border-slate-200 text-slate-400 hover:text-[#580F6E] hover:border-[#580F6E] rounded-full transition-all duration-200"
-              >
-                <KeySVG />
-              </button>
+              <>
+                <a
+                  href="#rsvp-section"
+                  className="px-4 py-1.5 rounded-full bg-[#580F6E] text-white text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-[#4A0E4E] shadow-sm transition whitespace-nowrap"
+                >
+                  RSVP
+                </a>
+                <button
+                  onClick={() => changeView("admin")}
+                  title="Admin Dashboard"
+                  className="p-2 border border-slate-200 text-slate-400 hover:text-[#580F6E] hover:border-[#580F6E] rounded-full transition-all duration-200"
+                >
+                  <KeySVG />
+                </button>
+              </>
             ) : (
               <button
                 onClick={() => changeView("guest")}
@@ -377,6 +393,13 @@ export default function App() {
                 className="flex items-center justify-center px-4 py-2.5 rounded-full bg-white border border-slate-200 shadow-lg text-[10px] uppercase tracking-[0.2em] font-bold text-slate-600 hover:text-[#580F6E] hover:border-[#580F6E] transition"
               >
                 Groom
+              </a>
+              <a
+                href="#bride-section"
+                onClick={() => setIsFloatingMenuOpen(false)}
+                className="flex items-center justify-center px-4 py-2.5 rounded-full bg-white border border-slate-200 shadow-lg text-[10px] uppercase tracking-[0.2em] font-bold text-slate-600 hover:text-[#580F6E] hover:border-[#580F6E] transition"
+              >
+                Bride
               </a>
               <a
                 href="#itinerary"
@@ -431,32 +454,31 @@ export default function App() {
             {/* ─── HERO — Floral Corner Design ─── */}
             <ScrollReveal direction="up" duration={900}>
             <section
-              className="relative max-w-5xl mx-auto mb-10 select-none overflow-hidden"
+              className="relative max-w-3xl mx-auto my-4 select-none overflow-hidden"
               style={{
-                borderRadius: '1.5rem',
+                borderRadius: '1.25rem',
                 background: 'linear-gradient(160deg, #FAF8FF 0%, #F0EAFA 40%, #FAF8FF 70%, #FAF8FF 100%)',
                 border: '1px solid rgba(88,15,110,0.12)',
-                boxShadow: '0 8px 48px rgba(88,15,110,0.10), 0 2px 12px rgba(88,15,110,0.06)',
+                boxShadow: '0 8px 48px rgba(88,15,110,0.08), 0 2px 12px rgba(88,15,110,0.04)',
               }}
             >
-              {/* ── Top accent line ── */}
+              {/* ── Top & Bottom accent lines ── */}
               <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: 'linear-gradient(90deg, transparent, #580F6E 30%, #9E2B3E 50%, #580F6E 70%, transparent)' }} />
               <div className="absolute bottom-0 left-0 right-0 h-[2px]" style={{ background: 'linear-gradient(90deg, transparent, #580F6E 30%, #9E2B3E 50%, #580F6E 70%, transparent)' }} />
 
               {/* ── Inset double border ── */}
-              <div className="absolute inset-4 pointer-events-none z-0" style={{ border: '1px solid rgba(88,15,110,0.10)', borderRadius: '1.1rem' }} />
+              <div className="absolute inset-3 sm:inset-4 pointer-events-none z-0" style={{ border: '1px solid rgba(88,15,110,0.10)', borderRadius: '0.9rem' }} />
 
               {/* ── TOP-LEFT corner roses ── */}
               <img
                 src={purpleRoses}
-                className="absolute top-0 left-0 pointer-events-none z-0 select-none"
+                className="absolute top-0 left-0 pointer-events-none z-0 select-none opacity-60"
                 style={{
-                  width: '240px',
+                  width: '180px',
                   height: 'auto',
-                  marginTop: '-8px',
-                  marginLeft: '-12px',
-                  opacity: 0.68,
-                  filter: 'brightness(0.96) saturate(0.85) drop-shadow(0 14px 32px rgba(88,15,110,0.08))',
+                  marginTop: '-6px',
+                  marginLeft: '-8px',
+                  filter: 'brightness(0.96) saturate(0.85) drop-shadow(0 10px 24px rgba(88,15,110,0.08))',
                 }}
                 alt=""
               />
@@ -464,82 +486,78 @@ export default function App() {
               {/* ── BOTTOM-RIGHT corner roses ── */}
               <img
                 src={purpleRoses}
-                className="absolute bottom-0 right-0 pointer-events-none z-0 select-none"
+                className="absolute bottom-0 right-0 pointer-events-none z-0 select-none opacity-60"
                 style={{
-                  width: '240px',
+                  width: '180px',
                   height: 'auto',
-                  marginBottom: '-8px',
-                  marginRight: '-12px',
-                  opacity: 0.68,
+                  marginBottom: '-6px',
+                  marginRight: '-8px',
                   transform: 'rotate(180deg)',
-                  filter: 'brightness(0.96) saturate(0.85) drop-shadow(0 14px 32px rgba(88,15,110,0.08))',
+                  filter: 'brightness(0.96) saturate(0.85) drop-shadow(0 10px 24px rgba(88,15,110,0.08))',
                 }}
                 alt=""
               />
 
-              {/* ── Large decorative & watermark ── */}
+              {/* ── Large decorative watermark ── */}
               <div
                 className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 select-none"
                 aria-hidden="true"
               >
                 <span
-                  className="font-serif text-[20rem] leading-none font-light"
-                  style={{ color: 'rgba(88,15,110,0.04)', userSelect: 'none', marginTop: '-2rem' }}
+                  className="font-serif text-[12rem] sm:text-[16rem] leading-none font-light"
+                  style={{ color: 'rgba(88,15,110,0.035)', userSelect: 'none', marginTop: '-1rem' }}
                 >
                   &amp;
                 </span>
               </div>
 
               {/* ── Main content ── */}
-              <div className="relative z-10 px-16 md:px-28 pt-16 pb-14 md:pt-20 md:pb-16 text-center">
+              <div className="relative z-10 px-6 sm:px-12 md:px-16 pt-10 pb-10 sm:pt-12 sm:pb-12 md:pt-14 md:pb-14 text-center">
 
                 {/* Invitation header */}
-                <p className="animate-shimmer-reveal font-sans text-[9px] uppercase tracking-[0.6em] text-slate-400 font-semibold">
+                <p className="animate-shimmer-reveal font-sans text-[10px] sm:text-xs uppercase tracking-[0.45em] text-slate-500 font-bold">
                   Join us for
                 </p>
 
                 {/* Wedding of label */}
-                <div className="mt-5 space-y-0.5">
-                  <p className="font-serif italic text-sm text-slate-400" style={{ letterSpacing: '0.15em' }}>the</p>
-                  <p className="font-sans text-[10px] uppercase tracking-[0.55em] text-[#580F6E] font-bold">Wedding</p>
-                  <p className="font-serif italic text-sm text-slate-400" style={{ letterSpacing: '0.15em' }}>of</p>
+                <div className="mt-3 sm:mt-4 space-y-0.5">
+                  <p className="font-serif italic text-xs sm:text-sm text-slate-400" style={{ letterSpacing: '0.15em' }}>the</p>
+                  <p className="font-sans text-[10px] sm:text-xs uppercase tracking-[0.45em] text-[#580F6E] font-extrabold">Wedding</p>
+                  <p className="font-serif italic text-xs sm:text-sm text-slate-400" style={{ letterSpacing: '0.15em' }}>of</p>
                 </div>
 
                 {/* The Names */}
                 <h1
-                  className="animate-hero-entrance font-script text-[4.8rem] md:text-[7.5rem] text-[#580F6E] leading-[0.85] mt-4"
+                  className="animate-hero-entrance font-script text-4xl sm:text-6xl md:text-[4.8rem] text-[#580F6E] leading-[0.95] mt-3 sm:mt-4"
                   style={{ letterSpacing: '0.01em' }}
                 >
                   Tobi &amp; Ayomide
                 </h1>
 
                 {/* Subtitle */}
-                <p className="animate-fade-up delay-300 font-sans text-[10px] uppercase tracking-[0.45em] text-slate-500 font-semibold mt-6">
+                <p className="animate-fade-up delay-300 font-sans text-[10px] sm:text-xs uppercase tracking-[0.35em] text-slate-600 font-semibold mt-4 sm:mt-5 max-w-md mx-auto">
                   Invite you to the celebration of their marriage
                 </p>
 
                 {/* Ornamental divider */}
-                <div className="animate-fade-up delay-400 flex items-center justify-center gap-4 mt-7" aria-hidden="true">
-                  <SprigSVG className="w-4 h-7 text-[#580F6E] opacity-35" style={{ transform: 'scaleX(-1) rotate(15deg)', marginBottom: '-4px' }} />
-                  <div className="h-px w-16" style={{ background: 'linear-gradient(90deg, transparent, rgba(88,15,110,0.3), transparent)' }} />
-                  <HeartSVG className="w-3.5 h-3.5 text-[#580F6E] animate-heart-pulse" />
-                  <div className="h-px w-16" style={{ background: 'linear-gradient(90deg, transparent, rgba(88,15,110,0.3), transparent)' }} />
-                  <SprigSVG className="w-4 h-7 text-[#580F6E] opacity-35" style={{ transform: 'rotate(15deg)', marginBottom: '-4px' }} />
+                <div className="animate-fade-up delay-400 flex items-center justify-center gap-3.5 mt-5 sm:mt-6" aria-hidden="true">
+                  <SprigSVG className="w-3.5 h-6 text-[#580F6E] opacity-35" style={{ transform: 'scaleX(-1) rotate(15deg)', marginBottom: '-3px' }} />
+                  <div className="h-px w-12 sm:w-16" style={{ background: 'linear-gradient(90deg, transparent, rgba(88,15,110,0.3), transparent)' }} />
+                  <HeartSVG className="w-3 h-3 text-[#580F6E] animate-heart-pulse" />
+                  <div className="h-px w-12 sm:w-16" style={{ background: 'linear-gradient(90deg, transparent, rgba(88,15,110,0.3), transparent)' }} />
+                  <SprigSVG className="w-3.5 h-6 text-[#580F6E] opacity-35" style={{ transform: 'rotate(15deg)', marginBottom: '-3px' }} />
                 </div>
 
                 {/* Date & Venue */}
-                <div className="animate-fade-up delay-500 mt-7 space-y-2">
-                  <p className="font-sans font-bold text-xs md:text-[13px] text-[#1E293B] uppercase tracking-[0.45em]">
-                    Friday 11 September, 2026
+                <div className="animate-fade-up delay-500 mt-5 sm:mt-6 space-y-1">
+                  <p className="font-sans font-extrabold text-xs sm:text-sm md:text-base text-[#1E293B] uppercase tracking-[0.38em]">
+                    11th &amp; 12th September, 2026
                   </p>
-                  <p className="font-sans font-bold text-xs md:text-[13px] text-[#1E293B] uppercase tracking-[0.45em]">
-                    Saturday 12 September, 2026
-                  </p>
-                  <p className="font-sans text-[10px] text-slate-400 tracking-[0.35em] uppercase mt-1">Abuja · Nigeria</p>
+                  <p className="font-sans text-[10px] sm:text-xs text-slate-500 tracking-[0.3em] uppercase font-medium">Abuja · Nigeria</p>
                 </div>
 
                 {/* Countdown tiles */}
-                <div className="animate-fade-up delay-600 mt-9 inline-grid grid-cols-4" style={{ border: '1px solid rgba(88,15,110,0.12)', background: 'rgba(240,234,250,0.6)', backdropFilter: 'blur(4px)' }}>
+                <div className="animate-fade-up delay-600 mt-6 sm:mt-7 inline-grid grid-cols-4 rounded-sm overflow-hidden" style={{ border: '1px solid rgba(88,15,110,0.15)', background: 'rgba(240,234,250,0.7)', backdropFilter: 'blur(4px)' }}>
                   {([
                     { label: "Days",  value: timeLeft.days },
                     { label: "Hours", value: timeLeft.hours },
@@ -548,44 +566,44 @@ export default function App() {
                   ] as const).map(({ label, value }, i) => (
                     <div
                       key={label}
-                      className={`flex flex-col items-center justify-center px-5 py-4 ${i < 3 ? 'border-r' : ''}`}
-                      style={{ borderColor: 'rgba(88,15,110,0.10)' }}
+                      className={`flex flex-col items-center justify-center px-3.5 sm:px-5 py-2.5 sm:py-3 ${i < 3 ? 'border-r' : ''}`}
+                      style={{ borderColor: 'rgba(88,15,110,0.12)' }}
                     >
-                      <span className="text-3xl md:text-4xl font-black text-[#580F6E] tabular-nums font-mono leading-none">
+                      <span className="text-xl sm:text-2xl md:text-3xl font-black text-[#580F6E] tabular-nums font-mono leading-none">
                         {String(value).padStart(2, "0")}
                       </span>
-                      <span className="text-[9px] uppercase tracking-[0.28em] text-slate-400 font-bold mt-1.5">{label}</span>
+                      <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.22em] text-slate-500 font-bold mt-1">{label}</span>
                     </div>
                   ))}
                 </div>
 
                 {/* CTAs */}
-                <div className="animate-fade-up delay-700 mt-10 flex flex-wrap items-center justify-center gap-5">
+                <div className="animate-fade-up delay-700 mt-7 sm:mt-8 flex flex-wrap items-center justify-center gap-3.5">
                   <a
                     href="#rsvp-section"
-                    className="group relative inline-flex items-center justify-center gap-2.5 overflow-hidden"
+                    className="group relative inline-flex items-center justify-center gap-2 overflow-hidden"
                     style={{
-                      padding: '14px 36px',
+                      padding: '12px 28px',
                       background: 'linear-gradient(135deg, #580F6E 0%, #3D0A4F 60%, #580F6E 100%)',
                       backgroundSize: '200% 200%',
                       color: '#fff',
                       fontFamily: 'inherit',
                       fontSize: '10px',
                       fontWeight: 800,
-                      letterSpacing: '0.32em',
+                      letterSpacing: '0.28em',
                       textTransform: 'uppercase',
                       border: '1px solid rgba(88,15,110,0.5)',
-                      boxShadow: '0 4px 20px rgba(88,15,110,0.28), inset 0 1px 0 rgba(255,255,255,0.08)',
+                      boxShadow: '0 4px 18px rgba(88,15,110,0.22), inset 0 1px 0 rgba(255,255,255,0.08)',
                       transition: 'all 0.35s ease',
                       textDecoration: 'none',
-                      borderRadius: '2px',
+                      borderRadius: '4px',
                     }}
                     onMouseEnter={e => {
-                      (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 32px rgba(88,15,110,0.42)';
+                      (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 28px rgba(88,15,110,0.38)';
                       (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
                     }}
                     onMouseLeave={e => {
-                      (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 20px rgba(88,15,110,0.28), inset 0 1px 0 rgba(255,255,255,0.08)';
+                      (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 18px rgba(88,15,110,0.22), inset 0 1px 0 rgba(255,255,255,0.08)';
                       (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
                     }}
                   >
@@ -597,81 +615,69 @@ export default function App() {
                   <a
                     href="#gifting-section"
                     style={{
-                      padding: '13px 30px',
-                      background: 'rgba(255,255,255,0.7)',
+                      padding: '11px 24px',
+                      background: 'rgba(255,255,255,0.85)',
                       color: '#580F6E',
                       fontFamily: 'inherit',
                       fontSize: '10px',
                       fontWeight: 700,
-                      letterSpacing: '0.28em',
+                      letterSpacing: '0.24em',
                       textTransform: 'uppercase',
-                      border: '1.5px solid rgba(88,15,110,0.4)',
-                      boxShadow: '0 2px 12px rgba(88,15,110,0.08)',
+                      border: '1.5px solid rgba(88,15,110,0.35)',
+                      boxShadow: '0 2px 10px rgba(88,15,110,0.06)',
                       transition: 'all 0.3s ease',
-                      cursor: 'pointer',
-                      borderRadius: '2px',
                       textDecoration: 'none',
-                      display: 'inline-flex',
-                      alignItems: 'center',
+                      borderRadius: '4px',
                     }}
                     onMouseEnter={e => {
-                      (e.currentTarget as HTMLElement).style.background = '#F0EAFA';
-                      (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 18px rgba(88,15,110,0.16)';
+                      (e.currentTarget as HTMLElement).style.background = 'rgba(240,234,250,0.9)';
+                      (e.currentTarget as HTMLElement).style.borderColor = 'rgba(88,15,110,0.6)';
                       (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
                     }}
                     onMouseLeave={e => {
-                      (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.7)';
-                      (e.currentTarget as HTMLElement).style.boxShadow = '0 2px 12px rgba(88,15,110,0.08)';
+                      (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.85)';
+                      (e.currentTarget as HTMLElement).style.borderColor = 'rgba(88,15,110,0.35)';
                       (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
                     }}
                   >
-                    <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <svg viewBox="0 0 24 24" fill="none" width="11" height="11" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <polyline points="20 12 20 22 4 22 4 12" />
-                        <rect x="2" y="7" width="20" height="5" />
-                        <line x1="12" y1="22" x2="12" y2="7" />
-                        <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z" fill="currentColor" fillOpacity="0.1" />
-                        <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" fill="currentColor" fillOpacity="0.1" />
-                      </svg>
-                      Gifting
-                    </span>
+                    Send Love Gift
                   </a>
-
                   <button
                     onClick={() => setIsGuideOpen(true)}
                     style={{
-                      padding: '13px 30px',
-                      background: 'rgba(255,255,255,0.7)',
+                      padding: '11px 24px',
+                      background: 'rgba(255,255,255,0.85)',
                       color: '#580F6E',
                       fontFamily: 'inherit',
                       fontSize: '10px',
                       fontWeight: 700,
-                      letterSpacing: '0.28em',
+                      letterSpacing: '0.24em',
                       textTransform: 'uppercase',
-                      border: '1.5px solid rgba(88,15,110,0.4)',
-                      boxShadow: '0 2px 12px rgba(88,15,110,0.08)',
+                      border: '1.5px solid rgba(88,15,110,0.35)',
+                      boxShadow: '0 2px 10px rgba(88,15,110,0.06)',
                       transition: 'all 0.3s ease',
                       cursor: 'pointer',
-                      borderRadius: '2px',
+                      borderRadius: '4px',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px',
                     }}
                     onMouseEnter={e => {
-                      (e.currentTarget as HTMLElement).style.background = '#F0EAFA';
-                      (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 18px rgba(88,15,110,0.16)';
+                      (e.currentTarget as HTMLElement).style.background = 'rgba(240,234,250,0.9)';
+                      (e.currentTarget as HTMLElement).style.borderColor = 'rgba(88,15,110,0.6)';
                       (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
                     }}
                     onMouseLeave={e => {
-                      (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.7)';
-                      (e.currentTarget as HTMLElement).style.boxShadow = '0 2px 12px rgba(88,15,110,0.08)';
+                      (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.85)';
+                      (e.currentTarget as HTMLElement).style.borderColor = 'rgba(88,15,110,0.35)';
                       (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
                     }}
                   >
-                    <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-                      </svg>
-                      View Guide
-                    </span>
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                      <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                    </svg>
+                    <span>View Guide</span>
                   </button>
 
                   <style>{`
@@ -727,6 +733,12 @@ export default function App() {
             </ScrollReveal>
             <SectionDivider />
 
+            {/* LOVE GIFT & REGISTRY SECTION */}
+            <ScrollReveal direction="right" delay={100}>
+              <GiftingRegistry />
+            </ScrollReveal>
+            <SectionDivider />
+
             {/* THREE-EVENT WEDDING GRID SECTION */}
             <ScrollReveal direction="up" delay={100}>
             <div id="itinerary" className="relative bg-white dot-pattern pb-16 overflow-hidden">
@@ -738,12 +750,6 @@ export default function App() {
               <EventGrid />
 
             </div>
-            </ScrollReveal>
-            <SectionDivider />
-
-            {/* LOVE GIFT & REGISTRY SECTION */}
-            <ScrollReveal direction="right" delay={100}>
-              <GiftingRegistry />
             </ScrollReveal>
             <SectionDivider />
 
