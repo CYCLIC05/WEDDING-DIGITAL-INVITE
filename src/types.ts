@@ -11,7 +11,7 @@ export interface RSVP {
   phone: string;
   events: string[];
   dietary_notes?: string;
-  status: 'pending' | 'approved' | 'declined';
+  status: 'pending' | 'approved' | 'declined' | 'registered';
 }
 
 export interface RSVPResponse {

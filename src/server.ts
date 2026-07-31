@@ -543,7 +543,7 @@ app.post("/api/rsvps", submitRSVPLimiter, async (req, res) => {
               Events Selected: ${guestEventLabels}
             </div>
 
-            <div class="date" style="margin-top: 15px;">11 &ndash; 12 . 09 . 2026</div>
+            <div class="date" style="margin-top: 15px;">11th &ndash; 12th . 09 . 2026</div>
             <div class="venue">Bwari, FCT Abuja</div>
           </div>
         </div>

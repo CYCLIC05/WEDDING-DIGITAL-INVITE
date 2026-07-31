@@ -77,7 +77,7 @@ export function RSVPForm() {
       email: formData.email.trim() ? formData.email.trim() : dummyEmail,
       phone: formData.phone,
       events: formData.events,
-      dietary_notes: `Location: ${formData.location.trim() || "Abuja"} | Hotel Needed: ${formData.needsHotel === "yes" ? "Yes" : "No"}`
+      dietary_notes: `Location: ${formData.location.trim() || "Abuja"}`
     };
 
     try {
@@ -269,7 +269,9 @@ export function RSVPForm() {
             </div>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6 bg-white border border-[#580F6E]/40 rounded-[2rem] p-8 md:p-10 shadow-sm relative overflow-hidden">
+            <div className="absolute inset-1.5 border border-[#580F6E]/25 rounded-[1.75rem] pointer-events-none" />
+            <div className="relative z-10 space-y-6">
             {error && (
               <div className="p-4 bg-red-50 border-l-4 border-red-500 text-red-900 text-sm rounded-r-xl leading-relaxed">
                 <span className="font-semibold block mb-1">Please check constraints:</span>
@@ -323,35 +325,18 @@ export function RSVPForm() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-1.5">
-                <label htmlFor="hotel-select" className="block text-xs font-semibold text-slate-700 uppercase tracking-[0.25em]">
-                  Do you require hotel? <span className="text-red-500">*</span>
-                </label>
-                <select
-                  id="hotel-select"
-                  required
-                  value={formData.needsHotel}
-                  onChange={(e) => setFormData({ ...formData, needsHotel: e.target.value as "yes" | "no" })}
-                  className="w-full bg-[#FAF9F6] border border-[#4A0E4E]/15 focus:border-[#580F6E] focus:outline-none focus:ring-1 focus:ring-[#580F6E] px-4 py-3.5 text-sm text-slate-900 rounded-2xl transition"
-                >
-                  <option value="no">No, I will sort my accommodation</option>
-                  <option value="yes">Yes, I require hotel accommodation</option>
-                </select>
-              </div>
-              <div className="space-y-1.5">
-                <label htmlFor="email-input" className="block text-xs font-semibold text-slate-700 uppercase tracking-[0.25em]">
-                  Email Address <span className="text-slate-400 font-normal">(Optional)</span>
-                </label>
-                <input
-                  id="email-input"
-                  type="email"
-                  placeholder="e.g. name@domain.com"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full bg-[#FAF9F6] border border-[#4A0E4E]/15 focus:border-[#580F6E] focus:outline-none focus:ring-1 focus:ring-[#580F6E] px-4 py-3 text-sm text-slate-900 rounded-2xl transition"
-                />
-              </div>
+            <div className="space-y-1.5">
+              <label htmlFor="email-input" className="block text-xs font-semibold text-slate-700 uppercase tracking-[0.25em]">
+                Email Address <span className="text-slate-400 font-normal">(Optional)</span>
+              </label>
+              <input
+                id="email-input"
+                type="email"
+                placeholder="e.g. name@domain.com"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                className="w-full bg-[#FAF9F6] border border-[#4A0E4E]/15 focus:border-[#580F6E] focus:outline-none focus:ring-1 focus:ring-[#580F6E] px-4 py-3 text-sm text-slate-900 rounded-2xl transition"
+              />
             </div>
 
             <div className="space-y-3 pt-2">
@@ -360,8 +345,8 @@ export function RSVPForm() {
               </label>
               <div className="grid grid-cols-1 gap-3">
                 {[
-                  { value: "traditional", label: "Part 1 • Traditional Marriage - Sept 11" },
-                  { value: "church", label: "Part 2 • Church Wedding Ceremony - Sept 12" },
+                  { value: "traditional", label: "Part 1 • Traditional Marriage - Sept 11th" },
+                  { value: "church", label: "Part 2 • Church Wedding Ceremony - Sept 12th" },
                 ].map((item) => {
                   const isChecked = formData.events.includes(item.value);
                   return (
@@ -401,6 +386,7 @@ export function RSVPForm() {
                   "Confirm RSVP"
                 )}
               </button>
+            </div>
             </div>
           </form>
         )}

@@ -409,7 +409,8 @@ export function AdminDashboard() {
 
   const metrics = {
     total: rsvps.length,
-    pending: rsvps.filter((r) => r.status === "pending" || r.status === "registered").length,
+    pending: rsvps.filter((r) => r.status === "pending").length,
+    registered: rsvps.filter((r) => r.status === "pending" || r.status === "registered").length,
     approved: rsvps.filter((r) => r.status === "approved").length,
     declined: rsvps.filter((r) => r.status === "declined").length,
   };

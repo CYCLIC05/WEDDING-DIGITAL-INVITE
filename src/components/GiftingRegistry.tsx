@@ -134,24 +134,32 @@ export function GiftingRegistry() {
                   ))}
               </div>
             </div>
-            <div className="rounded-3xl border border-[#4A0E4E]/15 bg-white p-8 shadow-sm text-center">
-              <h3 className="font-serif text-xl text-slate-900 font-bold mb-4">Naira Contribution</h3>
-              <div className="space-y-4 text-slate-700 text-sm font-medium">
+          </div>
+
+         <div className="grid gap-6 sm:grid-cols-2">
+            <div
+              className="relative overflow-hidden rounded-3xl border border-[#580F6E]/30 p-8 shadow-[0_20px_50px_-20px_rgba(88,15,110,0.5)] text-center"
+              style={{ background: 'linear-gradient(155deg, #580F6E 0%, #6B189C 45%, #3E0A52 100%)' }}
+            >
+              <div className="pointer-events-none absolute -top-14 -right-8 w-44 h-44 rounded-full bg-white/10 blur-3xl" />
+              <div className="pointer-events-none absolute -bottom-16 -left-8 w-48 h-48 rounded-full bg-[#9B4DCA]/20 blur-3xl" />
+              <h3 className="relative font-serif text-xl text-white font-bold mb-4">Naira Contribution</h3>
+              <div className="relative space-y-4 text-white/80 text-sm font-medium">
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.35em] text-slate-400 font-bold mb-2">Bank</p>
-                  <p className="text-base text-[#580F6E] font-semibold">First Bank</p>
+                  <p className="text-[10px] uppercase tracking-[0.35em] text-white/50 font-bold mb-2">Bank</p>
+                  <p className="text-base text-white font-semibold">First Bank</p>
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.35em] text-slate-400 font-bold mb-2">Account Name</p>
-                  <p className="text-base text-slate-900">Oyewale Patience Ayomide</p>
+                  <p className="text-[10px] uppercase tracking-[0.35em] text-white/50 font-bold mb-2">Account Name</p>
+                  <p className="text-base text-white">Oyewale Patience Ayomide</p>
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.35em] text-slate-400 font-bold mb-2">Account Number</p>
-                  <div className="flex items-center justify-center bg-[#FAF9F6] border border-[#4A0E4E]/15 rounded-2xl px-4 py-3 relative">
-                    <p className="text-base font-black text-[#580F6E]">3136722099</p>
+                  <p className="text-[10px] uppercase tracking-[0.35em] text-white/50 font-bold mb-2">Account Number</p>
+                  <div className="flex items-center justify-center bg-white/10 border border-white/20 rounded-2xl px-4 py-3 relative backdrop-blur-sm">
+                    <p className="text-base font-black text-white">3136722099</p>
                     <button
                       onClick={() => handleCopy("3136722099", false)}
-                      className="absolute right-4 inline-flex items-center justify-center rounded-full border border-slate-200 bg-white p-2 text-slate-500 hover:border-[#580F6E] hover:text-[#580F6E] transition"
+                      className="absolute right-4 inline-flex items-center justify-center rounded-full border border-white/30 bg-white/10 p-2 text-white hover:bg-white hover:text-[#580F6E] transition"
                       title="Copy Naira account number"
                     >
                       {copiedNaira ? <span className="text-[11px] font-semibold">Copied!</span> : <CopySVG />}
@@ -161,24 +169,29 @@ export function GiftingRegistry() {
               </div>
             </div>
 
-            <div className="rounded-3xl border border-[#4A0E4E]/15 bg-white p-8 shadow-sm text-center">
-              <h3 className="font-serif text-xl text-slate-900 font-bold mb-4">USD Contribution</h3>
-              <div className="space-y-4 text-slate-700 text-sm font-medium">
+            <div
+              className="relative overflow-hidden rounded-3xl border border-[#580F6E]/30 p-8 shadow-[0_20px_50px_-20px_rgba(88,15,110,0.5)] text-center"
+              style={{ background: 'linear-gradient(155deg, #580F6E 0%, #6B189C 45%, #3E0A52 100%)' }}
+            >
+              <div className="pointer-events-none absolute -top-14 -right-8 w-44 h-44 rounded-full bg-white/10 blur-3xl" />
+              <div className="pointer-events-none absolute -bottom-16 -left-8 w-48 h-48 rounded-full bg-[#9B4DCA]/20 blur-3xl" />
+              <h3 className="relative font-serif text-xl text-white font-bold mb-4">USD Contribution</h3>
+              <div className="relative space-y-4 text-white/80 text-sm font-medium">
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.35em] text-slate-400 font-bold mb-2">Bank</p>
-                  <p className="text-base text-[#580F6E]">FCMB</p>
+                  <p className="text-[10px] uppercase tracking-[0.35em] text-white/50 font-bold mb-2">Bank</p>
+                  <p className="text-base text-white">FCMB</p>
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.35em] text-slate-400 font-bold mb-2">Account Name</p>
-                  <p className="text-base text-slate-900">Olanrewaju Tobi J</p>
+                  <p className="text-[10px] uppercase tracking-[0.35em] text-white/50 font-bold mb-2">Account Name</p>
+                  <p className="text-base text-white">Olanrewaju Tobi J</p>
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.35em] text-slate-400 font-bold mb-2">Account Number</p>
-                  <div className="flex items-center justify-center bg-[#FAF9F6] border border-[#4A0E4E]/15 rounded-2xl px-4 py-3 relative">
-                    <p className="text-base font-black text-[#580F6E]">6073750027</p>
+                  <p className="text-[10px] uppercase tracking-[0.35em] text-white/50 font-bold mb-2">Account Number</p>
+                  <div className="flex items-center justify-center bg-white/10 border border-white/20 rounded-2xl px-4 py-3 relative backdrop-blur-sm">
+                    <p className="text-base font-black text-white">6073750027</p>
                     <button
                       onClick={() => handleCopy("6073750027", true)}
-                      className="absolute right-4 inline-flex items-center justify-center rounded-full border border-slate-200 bg-white p-2 text-slate-500 hover:border-[#580F6E] hover:text-[#580F6E] transition"
+                      className="absolute right-4 inline-flex items-center justify-center rounded-full border border-white/30 bg-white/10 p-2 text-white hover:bg-white hover:text-[#580F6E] transition"
                       title="Copy USD account number"
                     >
                       {copiedUsd ? <span className="text-[11px] font-semibold">Copied!</span> : <CopySVG />}
@@ -189,7 +202,6 @@ export function GiftingRegistry() {
             </div>
           </div>
         </div>
-
         {/* ── SPECIAL NOTE ── */}
         <div className="mt-10 rounded-[1.75rem] border border-[#580F6E]/10 bg-white p-8 md:p-10 shadow-sm text-center">
           <p className="text-[10px] uppercase tracking-[0.4em] text-[#580F6E] font-bold mb-3">
@@ -198,10 +210,27 @@ export function GiftingRegistry() {
           <p className="text-base md:text-lg leading-8 text-slate-700">
             Your prayers, love, and support mean so much to us. We look forward to celebrating this special occasion with you as we begin our journey together.
           </p>
-          <div className="mt-6 text-slate-700">
-            <p className="text-base md:text-lg leading-7 mb-2">With Love,</p>
-            <p className="text-base md:text-lg leading-7 font-semibold mb-1">Jerry Tobi &amp; Ayomide</p>
-            <p className="text-sm text-slate-500 uppercase tracking-[0.3em]">September 2026</p>
+          <div className="mt-6 text-slate-700 flex flex-col items-center">
+            {/* Heart Icon with dashed border and ampersand */}
+            <div className="relative w-12 h-12 mb-3 flex items-center justify-center animate-heart-pulse">
+              <svg viewBox="0 0 100 90" className="w-12 h-12 drop-shadow-sm">
+                <path
+                  d="M 50 88 C 20 60 0 40 0 25 C 0 10 12 0 27 0 C 37 0 46 6 50 14 C 54 6 63 0 73 0 C 88 0 100 10 100 25 C 100 40 80 60 50 88 Z"
+                  fill="#580F6E"
+                />
+                <path
+                  d="M 50 80 C 23 55 7 37 7 24 C 7 14 16 6 28 6 C 36 6 44 11 48 18 L 50 21 L 52 18 C 56 11 64 6 72 6 C 84 6 93 14 93 24 C 93 37 77 55 50 80 Z"
+                  fill="none"
+                  stroke="#E9D5FF"
+                  strokeWidth="3"
+                  strokeDasharray="4 3"
+                />
+              </svg>
+              <span className="absolute font-serif italic text-white text-xs font-bold select-none">&amp;</span>
+            </div>
+            <p className="text-base md:text-lg leading-7 mb-2 text-slate-600 font-serif italic">With Love,</p>
+            <p className="text-base md:text-lg leading-7 font-bold text-slate-900 mb-1">Jerry Tobi ❤️ Ayomide</p>
+            <p className="text-xs md:text-sm text-slate-500 uppercase tracking-[0.35em] font-medium">September 2026</p>
           </div>
         </div>
 

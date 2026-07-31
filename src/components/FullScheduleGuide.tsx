@@ -79,7 +79,7 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
       venue: "Bwari, FCT Abuja",
       location: "Elim Top Hotel and suites",
       dressCode: "Mangenta and White (Head Gear)",
-      description: "A beautiful gathering of families, friends, and loved ones as both families formally unite and celebrate the traditional marriage rites.",
+      description: "The beautiful blessing and joining in accordance with our sacred heritage.",
       steps: [
         { time: "2:00 PM", label: "Traditional Marriage Ceremony", desc: "Guests are welcomed to a joyful traditional marriage celebration with music, prayers, and family rituals." },
         { time: "3:00 PM", label: "Ceremony Highlights", desc: "Ceremonial blessings, family introductions, and cultural exchanges that honor both families." },
@@ -92,7 +92,7 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
       venue: "Deeper Life Bible Church",
       location: "Deeper Life Junction, Bwari, FCT Abuja (901101)",
       dressCode: "White Native and a Touch of Gold/magenta",
-      description: "A solemn and joyful worship service where we will exchange our marriage vows before God and witnesses.",
+      description: "The sacred exchanging of vows before the Altar, the Church, and Almighty God.",
       steps: [
         { time: "9:00 AM", label: "Church Service Begins", desc: "Guests are invited to arrive early for worship and to take their seats before the service begins." },
         { time: "9:30 AM", label: "Wedding Ceremony", desc: "A worshipful ceremony to exchange vows, rings, and blessings in the presence of family and God." },
@@ -164,15 +164,17 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
             <div className="space-y-12 pb-4">
               <div className="p-4 bg-[#580F6E]/10 border-l-4 border-[#580F6E] rounded-3xl">
                 <p className="text-xs text-[#580F6E] font-sans font-extrabold uppercase tracking-wider leading-relaxed block mb-1">
-                  Timeline Notice
+                  ✿ Itinerary Guide ✿
                 </p>
-                <p className="text-xs text-slate-600 leading-relaxed font-sans font-medium">
-                  Please arrive early when possible. We hope your day is relaxed, smooth, and beautiful from start to finish.
+                <p className="text-xs text-slate-700 leading-relaxed font-sans font-medium">
+                  Kindly take note of the respective dress codes, venues, and timestamps for each event. Seating pre-registration is required.
                 </p>
               </div>
 
               {timelineEvents.map((event, idx) => (
-                <div key={idx} className="bg-white border border-[#580F6E]/10 rounded-3xl p-6 shadow-sm">
+                <div key={idx} className="bg-white border border-[#580F6E]/40 rounded-3xl p-6 shadow-sm relative overflow-hidden">
+                  <div className="absolute inset-1.5 border border-[#580F6E]/25 rounded-[1.35rem] pointer-events-none z-10" />
+                  <div className="relative z-10">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[#E5E7EB] pb-4 mb-6">
                     <div>
                       <span className="text-[10px] font-sans text-[#580F6E] font-extrabold uppercase tracking-wider">
@@ -181,6 +183,9 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
                       <h3 className="font-serif text-lg font-bold text-slate-900 mt-0.5">
                         {event.title}
                       </h3>
+                      <p className="text-xs text-slate-600 mt-1 font-medium leading-relaxed max-w-lg">
+                        {event.description}
+                      </p>
                     </div>
                     <div className="mt-2 sm:mt-0 text-left sm:text-right">
                       <span className="inline-block bg-[#580F6E]/10 text-[#580F6E] text-[10px] font-sans font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-[#580F6E]/20">
@@ -213,6 +218,7 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
                         </div>
                       </div>
                     ))}
+                  </div>
                   </div>
                 </div>
               ))}
