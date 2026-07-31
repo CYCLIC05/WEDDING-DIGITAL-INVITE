@@ -110,7 +110,7 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
           <div className="flex items-center space-x-3">
             <div>
               <h2 className="font-serif text-xl font-bold tracking-tight">Schedule &amp; Visitor Guide</h2>
-              <p className="text-[10px] uppercase tracking-widest text-white/80 font-mono mt-0.5">Event details for guests</p>
+              <p className="text-[10px] uppercase tracking-widest text-white/80 font-sans mt-0.5">Event details for guests</p>
             </div>
           </div>
           <button 
@@ -175,24 +175,20 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
                 <div key={idx} className="bg-white border border-[#580F6E]/40 rounded-3xl p-6 shadow-sm relative overflow-hidden">
                   <div className="absolute inset-1.5 border border-[#580F6E]/25 rounded-[1.35rem] pointer-events-none z-10" />
                   <div className="relative z-10">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[#E5E7EB] pb-4 mb-6">
-                    <div>
-                      <span className="text-[10px] font-sans text-[#580F6E] font-extrabold uppercase tracking-wider">
-                        Event {idx + 1}
-                      </span>
-                      <h3 className="font-serif text-lg font-bold text-slate-900 mt-0.5">
-                        {event.title}
-                      </h3>
-                      <p className="text-xs text-slate-600 mt-1 font-medium leading-relaxed max-w-lg">
-                        {event.description}
-                      </p>
-                    </div>
-                    <div className="mt-2 sm:mt-0 text-left sm:text-right">
-                      <span className="inline-block bg-[#580F6E]/10 text-[#580F6E] text-[10px] font-sans font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-[#580F6E]/20">
-                        {event.date}
-                      </span>
-                      <p className="text-[11px] font-sans text-slate-500 mt-1 font-medium">{event.venue}</p>
-                    </div>
+                  <div className="border-b border-[#E5E7EB] pb-4 mb-6 text-center">
+                    <span className="text-[10px] font-sans text-[#580F6E] font-extrabold uppercase tracking-wider">
+                      Event {idx + 1}
+                    </span>
+                    <h3 className="font-sans text-lg font-extrabold text-slate-900 mt-1 leading-snug tracking-tight">
+                      {event.title}
+                    </h3>
+                    <p className="text-xs text-slate-600 mt-1 font-medium leading-relaxed max-w-xl mx-auto">
+                      {event.description}
+                    </p>
+                    <span className="inline-block mt-3 bg-[#580F6E]/10 text-[#580F6E] text-[10px] font-sans font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-[#580F6E]/20">
+                      {event.date}
+                    </span>
+                    <p className="text-[11px] font-sans text-slate-500 mt-1 font-medium">{event.venue}</p>
                   </div>
 
                   {/* Render steps list */}
@@ -203,7 +199,7 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
                         
                         <div className="grid grid-cols-1 md:grid-cols-4 gap-2 items-start">
                           <div className="md:col-span-1">
-                            <span className="font-mono text-xs font-black text-[#580F6E]">
+                            <span className="font-serif text-lg font-bold text-[#580F6E]">
                               {step.time}
                             </span>
                           </div>

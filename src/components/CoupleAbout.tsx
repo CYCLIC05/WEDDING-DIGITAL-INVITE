@@ -362,40 +362,30 @@ export function CoupleAbout() {
 
         </div>
 
-        <div
-          className="relative mt-24 rounded-[2rem] border border-[#580F6E]/30 p-8 md:p-12 overflow-hidden shadow-[0_28px_70px_-24px_rgba(88,15,110,0.45)]"
-          style={{
-            background: "linear-gradient(155deg, #580F6E 0%, #6B189C 45%, #3E0A52 100%)",
-          }}
-        >
-          {/* Soft ambient glows for depth, echoing the site's card treatment */}
-          <div className="pointer-events-none absolute -top-16 -right-10 w-56 h-56 rounded-full bg-white/10 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-20 -left-10 w-64 h-64 rounded-full bg-[#9B4DCA]/20 blur-3xl" />
-
-          {/* Faint dotted lace texture to echo the site's decorative language */}
+        <div className="relative mt-24 rounded-[2rem] border border-[#E5E7EB] bg-white p-8 md:p-12 overflow-hidden shadow-sm">
           <div
-            className="pointer-events-none absolute inset-0 opacity-[0.07]"
+            className="pointer-events-none absolute inset-0 opacity-[0.05]"
             style={{
-              backgroundImage: "radial-gradient(#FFFFFF 1px, transparent 1px)",
+              backgroundImage: "radial-gradient(#9CA3AF 1px, transparent 1px)",
               backgroundSize: "16px 16px",
             }}
           />
 
           <div className="relative text-center mb-8">
-            <p className="font-sans text-[9px] uppercase tracking-[0.45em] text-white font-bold mb-4 opacity-90">
+            <p className="font-sans text-[9px] uppercase tracking-[0.45em] text-slate-900 font-bold mb-4 opacity-90">
               ✦ Our Love Story ✦
             </p>
             <div className="flex items-center justify-center gap-3 mt-2 mb-2">
-              <div className="h-px w-16 bg-white opacity-30" />
-              <div className="text-white">
+              <div className="h-px w-16 bg-slate-300 opacity-60" />
+              <div className="text-slate-400">
                 <HeartSVG className="w-3 h-3" />
               </div>
-              <div className="h-px w-16 bg-white opacity-30" />
+              <div className="h-px w-16 bg-slate-300 opacity-60" />
             </div>
           </div>
 
           <div className="relative max-w-4xl mx-auto space-y-8 text-left">
-            <p className="text-base md:text-lg leading-8 text-white/90 text-center italic">
+            <p className="text-base md:text-lg leading-8 text-slate-600 text-center italic">
               "There is no fear in love. But perfect love drives out fear." – 1 John 4:18
             </p>
           </div>

@@ -196,6 +196,38 @@ import { GiftingRegistry } from "./components/GiftingRegistry.tsx";
 import { EnvelopeIntro } from "./components/EnvelopeIntro.tsx";
 import { ScrollReveal } from "./components/ScrollReveal.tsx";
 
+/** Thin gradient reading-progress bar pinned to the very top of the page. */
+function ScrollProgress() {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const el = document.documentElement;
+      const max = el.scrollHeight - el.clientHeight;
+      setProgress(max > 0 ? Math.min(1, window.scrollY / max) : 0);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
+  return (
+    <div className="fixed top-0 left-0 right-0 h-1 z-[60] pointer-events-none select-none">
+      <div
+        className="h-full origin-left transition-transform duration-150 ease-out"
+        style={{
+          transform: `scaleX(${progress})`,
+          background: "linear-gradient(90deg, #580F6E 0%, #9B4DCA 60%, #D4AF37 100%)",
+        }}
+      />
+    </div>
+  );
+}
+
 export default function App() {
   const [loading] = useState(false);
   const [view, setView] = useState<"guest" | "admin">("guest");
@@ -291,9 +323,9 @@ export default function App() {
       const d = Math.floor(difference / (1000 * 60 * 60 * 24));
       const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-      const s = Math.floor((difference % (1000 * 60)) / 1005);
+      const s = Math.floor((difference % (1000 * 60)) / 1000);
 
-      setTimeLeft({ days: d, hours: h, minutes: m, seconds: s === 60 ? 59 : s });
+      setTimeLeft({ days: d, hours: h, minutes: m, seconds: s });
     };
 
     updateTimer();
@@ -316,6 +348,9 @@ export default function App() {
 
   return (
     <div className="bg-white text-slate-900 font-sans min-h-screen flex flex-col justify-between relative overflow-x-hidden selection:bg-[#580F6E] selection:text-white">
+
+      {/* ─── SCROLL READING PROGRESS BAR ─── */}
+      <ScrollProgress />
 
       {/* ─── ENVELOPE INTRO SCREEN ─── */}
       {!introComplete && (
@@ -569,7 +604,7 @@ export default function App() {
                       className={`flex flex-col items-center justify-center px-3.5 sm:px-5 py-2.5 sm:py-3 ${i < 3 ? 'border-r' : ''}`}
                       style={{ borderColor: 'rgba(88,15,110,0.12)' }}
                     >
-                      <span className="text-xl sm:text-2xl md:text-3xl font-black text-[#580F6E] tabular-nums font-mono leading-none">
+                      <span className="text-xl sm:text-2xl md:text-3xl font-black text-[#580F6E] tabular-nums font-sans leading-none">
                         {String(value).padStart(2, "0")}
                       </span>
                       <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.22em] text-slate-500 font-bold mt-1">{label}</span>
@@ -596,7 +631,7 @@ export default function App() {
                       boxShadow: '0 4px 18px rgba(88,15,110,0.22), inset 0 1px 0 rgba(255,255,255,0.08)',
                       transition: 'all 0.35s ease',
                       textDecoration: 'none',
-                      borderRadius: '4px',
+                      borderRadius: '999px',
                     }}
                     onMouseEnter={e => {
                       (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 28px rgba(88,15,110,0.38)';
@@ -627,7 +662,7 @@ export default function App() {
                       boxShadow: '0 2px 10px rgba(88,15,110,0.06)',
                       transition: 'all 0.3s ease',
                       textDecoration: 'none',
-                      borderRadius: '4px',
+                      borderRadius: '999px',
                     }}
                     onMouseEnter={e => {
                       (e.currentTarget as HTMLElement).style.background = 'rgba(240,234,250,0.9)';
@@ -657,7 +692,7 @@ export default function App() {
                       boxShadow: '0 2px 10px rgba(88,15,110,0.06)',
                       transition: 'all 0.3s ease',
                       cursor: 'pointer',
-                      borderRadius: '4px',
+                      borderRadius: '999px',
                       display: 'inline-flex',
                       alignItems: 'center',
                       gap: '6px',

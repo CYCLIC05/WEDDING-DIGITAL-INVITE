@@ -41,6 +41,9 @@ export function EventGrid() {
       mapUrl: "https://maps.google.com/?q=Elim+Top+Hotel+Bwari+Abuja",
       dressCode: "Mangenta and White (Head Gear)",
       subtitle: "The beautiful blessing and joining in accordance with our sacred heritage.",
+      calendarStart: "20260911T140000",
+      calendarEnd: "20260911T160000",
+      calendarLocation: "Elim Top Hotel and suites, Bwari, FCT Abuja",
     },
     {
       title: "EVENT 2: J.A. – Journey Aligned Church Wedding",
@@ -51,8 +54,23 @@ export function EventGrid() {
       mapUrl: "https://maps.google.com/?q=Deeper+Life+Junction+Bwari+Abuja",
       dressCode: "White Native and a Touch of Gold/magenta",
       subtitle: "The sacred exchanging of vows before the Altar, the Church, and Almighty God.",
+      calendarStart: "20260912T090000",
+      calendarEnd: "20260912T103000",
+      calendarLocation: "Deeper Life Bible Church, Deeper Life Junction, Bwari, FCT Abuja",
     },
   ];
+
+  const getCalendarUrl = (event: (typeof events)[number]) => {
+    const params = new URLSearchParams({
+      action: "TEMPLATE",
+      text: `Tobi & Ayomide's Wedding — ${event.title.replace("EVENT 1: ", "").replace("EVENT 2: ", "")}`,
+      dates: `${event.calendarStart}/${event.calendarEnd}`,
+      details: `${event.subtitle}\n\nDress code: ${event.dressCode}`,
+      location: event.calendarLocation,
+      sf: "true",
+    });
+    return `https://calendar.google.com/calendar/render?${params.toString()}`;
+  };
 
   return (
     <section className="py-20 px-6 max-w-7xl mx-auto">
@@ -88,16 +106,18 @@ export function EventGrid() {
               </div>
               
               <div className="p-8 flex flex-col gap-6 relative z-10 flex-1">
-                <div className="text-[10px] uppercase tracking-[0.2em] text-[#580F6E] font-bold">
-                  Part {idx + 1}
-                </div>
-                <div>
-                  <h3 className="font-serif text-xl font-bold text-slate-900 leading-tight">
-                    {event.title}
-                  </h3>
-                  <p className="text-xs text-slate-600 font-sans mt-2 leading-relaxed">
-                    {event.subtitle}
-                  </p>
+                <div className="text-center space-y-3">
+                  <div className="text-[10px] uppercase tracking-[0.2em] text-[#580F6E] font-bold">
+                    Part {idx + 1}
+                  </div>
+                  <div>
+                    <h3 className="font-sans text-lg font-extrabold text-slate-900 leading-snug tracking-tight">
+                      {event.title}
+                    </h3>
+                    <p className="text-xs text-slate-600 font-sans mt-2 leading-relaxed">
+                      {event.subtitle}
+                    </p>
+                  </div>
                 </div>
 
 
@@ -134,14 +154,22 @@ export function EventGrid() {
                 </div>
               </div>
 
-              <div className="px-8 pb-8 relative z-10">
+              <div className="px-8 pb-8 relative z-10 flex flex-col sm:flex-row gap-3">
                 <a
                   href={event.mapUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="block rounded-full border border-[#580F6E]/25 bg-white py-3 text-center text-[10px] font-bold uppercase tracking-[0.2em] text-[#580F6E] transition hover:bg-[#580F6E] hover:text-white"
+                  className="flex-1 rounded-full border border-[#580F6E]/25 bg-white py-3 text-center text-[10px] font-bold uppercase tracking-[0.2em] text-[#580F6E] transition hover:bg-[#580F6E] hover:text-white"
                 >
                   Open map
+                </a>
+                <a
+                  href={getCalendarUrl(event)}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex-1 rounded-full bg-[#580F6E] py-3 text-center text-[10px] font-bold uppercase tracking-[0.2em] text-white transition hover:bg-[#4A0E4E]"
+                >
+                  Add to calendar
                 </a>
               </div>
             </article>
