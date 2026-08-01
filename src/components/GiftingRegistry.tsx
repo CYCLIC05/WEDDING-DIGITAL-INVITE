@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import carImg from "../assets/images/car.jpg";
 import fridgeImg from "../assets/images/refriderator.jpg";
 import appliancesImg from "../assets/images/Home appliances.jpg";
-import dispenserImg from "../assets/images/Dispenser.jpg";
+import dispenserImg from "../assets/images/water_dispenser_gift_1785600680246.jpg";
 import vacationImg from "../assets/images/maldives_vacation.png";
+import nairaCashImg from "../assets/images/naira_cash_gift_1785600651759.jpg";
+import wrappedGiftImg from "../assets/images/wrapped_love_gift_1785600665865.jpg";
 
 // Inline SVGs for Gifting Registry
 const GiftSVG = () => (
@@ -40,33 +42,45 @@ export function GiftingRegistry() {
 
   const giftItems = [
     {
-      title: 'Vacation / Honeymoon',
-      description: 'Help us create lasting memories on our first journey as husband and wife in the Maldives.',
+      title: 'Monetary Cash Blessing',
+      description: 'Cash transfers and direct financial blessings to empower our new beginning together.',
+      image: nairaCashImg,
+      badge: 'Cash Blessing',
+      alt: 'Nigerian Naira cash gift blessing',
+    },
+    {
+      title: 'Wrapped Love Gift Box',
+      description: 'A thoughtfully wrapped present, home decor, or surprise physical gift box for our home.',
+      image: wrappedGiftImg,
+      badge: 'Physical Gift',
+      alt: 'Wrapped love gift box with gold ribbon',
+    },
+    {
+      title: 'Honeymoon & Vacation',
+      description: 'Help us create lasting memories on our first romantic journey as husband and wife in the Maldives.',
       image: vacationImg,
+      badge: 'Honeymoon',
       alt: 'Maldives honeymoon vacation',
     },
     {
-      title: 'Car',
-      description: 'A car for ease of movement and family use.',
+      title: 'Family Automobile',
+      description: 'A car for ease of movement, daily commute, and long-term family convenience.',
       image: carImg,
+      badge: 'Mobility',
       alt: 'Car gift idea',
     },
     {
-      title: 'Refrigerator / Deep freezer',
-      description: 'A practical gift for storing food and keeping the kitchen ready.',
+      title: 'Refrigerator & Deep Freezer',
+      description: 'A practical kitchen appliance for storing food and keeping our home kitchen fully stocked.',
       image: fridgeImg,
+      badge: 'Kitchen Essential',
       alt: 'Refrigerator gift idea',
     },
     {
-      title: 'Home Appliances',
-      description: 'Useful appliances to make cooking and daily life easier at home.',
-      image: appliancesImg,
-      alt: 'Home appliances gift idea',
-    },
-    {
-      title: 'Dispenser',
-      description: 'A convenient gift for serving beverages at home and gatherings.',
+      title: 'Water Dispenser',
+      description: 'A convenient gift for serving cool, refreshing beverages at home and during family gatherings.',
       image: dispenserImg,
+      badge: 'Home Living',
       alt: 'Water dispenser gift idea',
     },
   ];
@@ -83,7 +97,7 @@ export function GiftingRegistry() {
   };
 
   return (
-    <section id="gifting-section" className="py-24 px-6 bg-[#FAF9F6] border-t border-[#580F6E]/10 select-none relative overflow-hidden">
+    <section id="gifting-section" className="py-20 px-4 sm:px-6 bg-[#FAF9F6] border-t border-[#580F6E]/10 select-none relative overflow-hidden">
       {/* Background cross-hatch texture pattern */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -97,104 +111,99 @@ export function GiftingRegistry() {
       <img src="/src/assets/images/purple_watercolor_roses.png" className="pointer-events-none select-none absolute top-0 right-0 opacity-[0.12] z-0" style={{ width: '280px', height: 'auto', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
       <img src="/src/assets/images/purple_watercolor_roses.png" className="pointer-events-none select-none absolute bottom-0 left-0 opacity-[0.12] z-0" style={{ width: '280px', height: 'auto', transform: 'rotate(180deg)', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
 
-      <div className="max-w-4xl mx-auto relative z-10">
-        <div className="text-center mb-16 animate-fade-up">
+      <div className="max-w-5xl mx-auto relative z-10">
+        <div className="text-center mb-12 animate-fade-up">
           <div className="inline-flex p-3 bg-[#580F6E]/10 text-[#580F6E] rounded-full mb-3">
             <GiftSVG />
           </div>
-          <span className="text-xs text-[#4A0E4E] font-semibold uppercase tracking-[0.3em] block mb-1">
-            Gifting
+          <span className="text-xs text-[#4A0E4E] font-extrabold uppercase tracking-[0.3em] block mb-1">
+            Gifting &amp; Registry
           </span>
           <h2 className="font-serif text-3xl text-slate-900 md:text-4xl tracking-tight font-bold">
-            Your presence is the greatest gift
+            Your Presence is the Greatest Gift
           </h2>
-          <div className="w-12 h-[1px] bg-[#580F6E] mx-auto mt-3 mb-3"></div>
-          <p className="text-base leading-relaxed text-slate-500 max-w-2xl mx-auto">
-            For those who desire to bless our new home, we welcome any expression of generosity. Below are the most meaningful ways to celebrate with us.
+          <div className="w-12 h-[1.5px] bg-[#580F6E] mx-auto mt-3 mb-3"></div>
+          <p className="text-sm md:text-base leading-relaxed text-slate-600 max-w-2xl mx-auto">
+            For family &amp; friends who desire to bless our new home, we welcome any expression of generosity. Below are meaningful ways and account details to celebrate with us.
           </p>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-[1.2fr,0.8fr] items-start">
-          <div className="space-y-6">
-            <div className="rounded-3xl border border-[#4A0E4E]/15 bg-white p-8 shadow-sm">
-              <h3 className="font-serif text-xl text-slate-900 font-bold mb-6">Gift Ideas</h3>
-              <div className="grid gap-4 sm:grid-cols-2">
-                  {giftItems.map((item) => (
-                    <div key={item.title} className="overflow-hidden rounded-3xl border border-[#E5E7EB] bg-white shadow-sm">
-                      <img
-                        src={item.image}
-                        alt={item.alt}
-                        className="h-40 w-full object-cover"
-                      />
-                      <div className="p-4">
-                        <p className="font-semibold text-slate-900">{item.title}</p>
-                        <p className="text-xs text-slate-500 mt-2">{item.description}</p>
-                      </div>
-                    </div>
-                  ))}
-              </div>
-            </div>
+        {/* ── BANK CONTRIBUTIONS CARDS ── */}
+        <div className="mb-12">
+          <div className="flex items-center justify-center gap-2 mb-6">
+            <BankSVG />
+            <h3 className="font-serif text-xl sm:text-2xl text-slate-900 font-bold text-center">
+              Direct Account Transfers
+            </h3>
           </div>
 
-         <div className="grid gap-6 sm:grid-cols-2">
+          <div className="grid gap-6 md:grid-cols-2">
+            {/* Naira Contribution */}
             <div
-              className="relative overflow-hidden rounded-3xl border border-[#580F6E]/30 p-8 shadow-[0_20px_50px_-20px_rgba(88,15,110,0.5)] text-center"
+              className="relative overflow-hidden rounded-3xl border border-[#580F6E]/30 p-6 sm:p-8 shadow-xl text-center"
               style={{ background: 'linear-gradient(155deg, #580F6E 0%, #6B189C 45%, #3E0A52 100%)' }}
             >
               <div className="pointer-events-none absolute -top-14 -right-8 w-44 h-44 rounded-full bg-white/10 blur-3xl" />
               <div className="pointer-events-none absolute -bottom-16 -left-8 w-48 h-48 rounded-full bg-[#9B4DCA]/20 blur-3xl" />
-              <h3 className="relative font-serif text-xl text-white font-bold mb-4">Naira Contribution</h3>
-              <div className="relative space-y-4 text-white/80 text-sm font-medium">
+              <div className="inline-block px-3 py-1 bg-white/10 text-white text-[10px] uppercase font-bold tracking-[0.25em] rounded-full mb-3 backdrop-blur-sm">
+                Naira Account
+              </div>
+              <h4 className="relative font-serif text-2xl text-white font-bold mb-4">Naira Contribution</h4>
+              <div className="relative space-y-4 text-white/90 text-sm font-medium max-w-md mx-auto">
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.35em] text-white/50 font-bold mb-2">Bank</p>
+                  <p className="text-[10px] uppercase tracking-[0.35em] text-white/50 font-bold mb-1">Bank Name</p>
                   <p className="text-base text-white font-semibold">First Bank</p>
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.35em] text-white/50 font-bold mb-2">Account Name</p>
-                  <p className="text-base text-white">Oyewale Patience Ayomide</p>
+                  <p className="text-[10px] uppercase tracking-[0.35em] text-white/50 font-bold mb-1">Account Name</p>
+                  <p className="text-base text-white font-medium">Oyewale Patience Ayomide</p>
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.35em] text-white/50 font-bold mb-2">Account Number</p>
-                  <div className="flex items-center justify-center bg-white/10 border border-white/20 rounded-2xl px-4 py-3 relative backdrop-blur-sm">
-                    <p className="text-base font-black text-white">3136722099</p>
+                  <p className="text-[10px] uppercase tracking-[0.35em] text-white/50 font-bold mb-1">Account Number</p>
+                  <div className="flex items-center justify-center bg-white/15 border border-white/25 rounded-2xl px-4 py-3 relative backdrop-blur-md">
+                    <p className="text-lg font-black text-white tracking-wider">3136722099</p>
                     <button
                       onClick={() => handleCopy("3136722099", false)}
-                      className="absolute right-4 inline-flex items-center justify-center rounded-full border border-white/30 bg-white/10 p-2 text-white hover:bg-white hover:text-[#580F6E] transition"
+                      className="absolute right-3 inline-flex items-center justify-center rounded-xl border border-white/30 bg-white/15 px-3 py-1.5 text-xs text-white hover:bg-white hover:text-[#580F6E] transition font-bold"
                       title="Copy Naira account number"
                     >
-                      {copiedNaira ? <span className="text-[11px] font-semibold">Copied!</span> : <CopySVG />}
+                      {copiedNaira ? "Copied!" : <span className="inline-flex items-center gap-1"><CopySVG /> Copy</span>}
                     </button>
                   </div>
                 </div>
               </div>
             </div>
 
+            {/* USD Contribution */}
             <div
-              className="relative overflow-hidden rounded-3xl border border-[#580F6E]/30 p-8 shadow-[0_20px_50px_-20px_rgba(88,15,110,0.5)] text-center"
+              className="relative overflow-hidden rounded-3xl border border-[#580F6E]/30 p-6 sm:p-8 shadow-xl text-center"
               style={{ background: 'linear-gradient(155deg, #580F6E 0%, #6B189C 45%, #3E0A52 100%)' }}
             >
               <div className="pointer-events-none absolute -top-14 -right-8 w-44 h-44 rounded-full bg-white/10 blur-3xl" />
               <div className="pointer-events-none absolute -bottom-16 -left-8 w-48 h-48 rounded-full bg-[#9B4DCA]/20 blur-3xl" />
-              <h3 className="relative font-serif text-xl text-white font-bold mb-4">USD Contribution</h3>
-              <div className="relative space-y-4 text-white/80 text-sm font-medium">
+              <div className="inline-block px-3 py-1 bg-white/10 text-white text-[10px] uppercase font-bold tracking-[0.25em] rounded-full mb-3 backdrop-blur-sm">
+                USD Account
+              </div>
+              <h4 className="relative font-serif text-2xl text-white font-bold mb-4">USD Contribution</h4>
+              <div className="relative space-y-4 text-white/90 text-sm font-medium max-w-md mx-auto">
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.35em] text-white/50 font-bold mb-2">Bank</p>
-                  <p className="text-base text-white">FCMB</p>
+                  <p className="text-[10px] uppercase tracking-[0.35em] text-white/50 font-bold mb-1">Bank Name</p>
+                  <p className="text-base text-white font-semibold">FCMB</p>
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.35em] text-white/50 font-bold mb-2">Account Name</p>
-                  <p className="text-base text-white">Olanrewaju Tobi J</p>
+                  <p className="text-[10px] uppercase tracking-[0.35em] text-white/50 font-bold mb-1">Account Name</p>
+                  <p className="text-base text-white font-medium">Olanrewaju Tobi J</p>
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.35em] text-white/50 font-bold mb-2">Account Number</p>
-                  <div className="flex items-center justify-center bg-white/10 border border-white/20 rounded-2xl px-4 py-3 relative backdrop-blur-sm">
-                    <p className="text-base font-black text-white">6073750027</p>
+                  <p className="text-[10px] uppercase tracking-[0.35em] text-white/50 font-bold mb-1">Account Number</p>
+                  <div className="flex items-center justify-center bg-white/15 border border-white/25 rounded-2xl px-4 py-3 relative backdrop-blur-md">
+                    <p className="text-lg font-black text-white tracking-wider">6073750027</p>
                     <button
                       onClick={() => handleCopy("6073750027", true)}
-                      className="absolute right-4 inline-flex items-center justify-center rounded-full border border-white/30 bg-white/10 p-2 text-white hover:bg-white hover:text-[#580F6E] transition"
+                      className="absolute right-3 inline-flex items-center justify-center rounded-xl border border-white/30 bg-white/15 px-3 py-1.5 text-xs text-white hover:bg-white hover:text-[#580F6E] transition font-bold"
                       title="Copy USD account number"
                     >
-                      {copiedUsd ? <span className="text-[11px] font-semibold">Copied!</span> : <CopySVG />}
+                      {copiedUsd ? "Copied!" : <span className="inline-flex items-center gap-1"><CopySVG /> Copy</span>}
                     </button>
                   </div>
                 </div>
@@ -202,12 +211,58 @@ export function GiftingRegistry() {
             </div>
           </div>
         </div>
+
+        {/* ── GIFT IDEAS & REGISTRY ITEMS GRID ── */}
+        <div className="rounded-3xl border border-[#580F6E]/15 bg-white p-6 sm:p-8 shadow-sm">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-8 pb-4 border-b border-slate-100">
+            <div>
+              <span className="text-[10px] uppercase tracking-[0.3em] font-extrabold text-[#580F6E] block mb-1">
+                Registry Wishlist
+              </span>
+              <h3 className="font-serif text-2xl text-slate-900 font-bold">Gift Ideas &amp; Essentials</h3>
+            </div>
+            <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#580F6E] bg-[#580F6E]/10 px-3.5 py-1.5 rounded-full w-fit">
+              ✿ 6 Wishlist Items
+            </span>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {giftItems.map((item) => (
+              <div
+                key={item.title}
+                className="group relative flex flex-col overflow-hidden rounded-2xl border border-[#580F6E]/15 bg-white shadow-sm hover:shadow-md hover:border-[#580F6E]/40 transition-all duration-300"
+              >
+                <div className="relative h-48 w-full overflow-hidden bg-slate-50">
+                  <img
+                    src={item.image}
+                    alt={item.alt}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <span className="absolute top-3 right-3 px-2.5 py-1 text-[9px] font-extrabold uppercase tracking-wider bg-[#580F6E]/90 backdrop-blur-md text-white rounded-md shadow-sm">
+                    {item.badge}
+                  </span>
+                </div>
+                <div className="p-5 flex flex-col flex-1 justify-between">
+                  <div>
+                    <h4 className="font-serif text-lg font-bold text-slate-900 mb-2 group-hover:text-[#580F6E] transition-colors">
+                      {item.title}
+                    </h4>
+                    <p className="text-xs text-slate-600 leading-relaxed font-sans">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* ── SPECIAL NOTE ── */}
         <div className="mt-10 rounded-[1.75rem] border border-[#580F6E]/10 bg-white p-8 md:p-10 shadow-sm text-center">
           <p className="text-[10px] uppercase tracking-[0.4em] text-[#580F6E] font-bold mb-3">
             Special Note
           </p>
-          <p className="text-base md:text-lg leading-8 text-slate-700">
+          <p className="text-base md:text-lg leading-8 text-slate-700 max-w-2xl mx-auto">
             Your prayers, love, and support mean so much to us. We look forward to celebrating this special occasion with you as we begin our journey together.
           </p>
           <div className="mt-6 text-slate-700 flex flex-col items-center">

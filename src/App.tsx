@@ -556,8 +556,18 @@ export default function App() {
                   <p className="font-sans text-[10px] sm:text-xs text-slate-500 tracking-[0.3em] uppercase font-medium">Abuja · Nigeria</p>
                 </div>
 
+                {/* Countdown Section Header */}
+                <div className="animate-fade-up delay-550 mt-6 sm:mt-7 space-y-1">
+                  <h3 className="font-serif text-xl sm:text-2xl md:text-3xl text-slate-900 font-bold tracking-tight">
+                    Counting Down to the Altar Vows
+                  </h3>
+                  <p className="font-sans text-xs sm:text-sm text-slate-600 font-medium">
+                    Join Tobi &amp; Ayomide as they enter holy covenant.
+                  </p>
+                </div>
+
                 {/* Countdown tiles */}
-                <div className="animate-fade-up delay-600 mt-6 sm:mt-7 inline-grid grid-cols-4 rounded-sm overflow-hidden" style={{ border: '1px solid rgba(88,15,110,0.15)', background: 'rgba(240,234,250,0.7)', backdropFilter: 'blur(4px)' }}>
+                <div className="animate-fade-up delay-600 mt-4 sm:mt-5 inline-grid grid-cols-4 rounded-sm overflow-hidden" style={{ border: '1px solid rgba(88,15,110,0.15)', background: 'rgba(240,234,250,0.7)', backdropFilter: 'blur(4px)' }}>
                   {([
                     { label: "Days",  value: timeLeft.days },
                     { label: "Hours", value: timeLeft.hours },
@@ -750,6 +760,45 @@ export default function App() {
               <EventGrid />
 
             </div>
+            </ScrollReveal>
+            <SectionDivider />
+
+            {/* HOSPITALITY & LOGISTICS HUB CALLOUT CARD */}
+            <ScrollReveal direction="up" delay={120}>
+              <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 my-6">
+                <div 
+                  className="relative bg-white rounded-3xl p-6 sm:p-10 text-center overflow-hidden transition-all duration-300 shadow-xl shadow-[#580F6E]/5"
+                  style={{
+                    border: '1.5px solid rgba(88, 15, 110, 0.18)',
+                  }}
+                >
+                  {/* Top colored accent line */}
+                  <div className="absolute top-0 left-0 right-0 h-1.5 bg-[#580F6E]" />
+
+                  {/* Inner decorative border line matching the design */}
+                  <div className="absolute inset-3 sm:inset-4 rounded-2xl pointer-events-none border border-[#580F6E]/10" />
+
+                  <span className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.25em] text-[#580F6E] block mb-2">
+                    Hospitality &amp; Logistics Hub
+                  </span>
+
+                  <h3 className="font-serif text-2xl sm:text-3xl text-slate-900 font-bold tracking-tight mb-3">
+                    Looking for Detailed Timings &amp; Visitor Parking?
+                  </h3>
+
+                  <p className="text-sm sm:text-base text-slate-600 font-sans leading-relaxed max-w-2xl mx-auto mb-7">
+                    Our digital Guest Center contains full step-by-step timetables, detailed estate addresses, parking guidelines, security gate clearances, and custom attire matching recommendations.
+                  </p>
+
+                  <button
+                    onClick={() => setIsGuideOpen(true)}
+                    className="group inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-[#580F6E] hover:bg-[#430B54] text-white text-xs sm:text-sm font-extrabold uppercase tracking-widest rounded-full transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 cursor-pointer"
+                  >
+                    <span>Open Schedule &amp; Visitor Guide</span>
+                    <span className="text-base leading-none transition-transform group-hover:translate-x-1">→</span>
+                  </button>
+                </div>
+              </div>
             </ScrollReveal>
             <SectionDivider />
 
