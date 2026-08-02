@@ -16,6 +16,15 @@ body {
   font-family: var(--font-sans);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+/* Keep anchored sections clear of the sticky header */
+[id] {
+  scroll-margin-top: 5.5rem;
+}
+
 /* Innovative Double Thin Purple Line Styling */
 .double-purple-frame {
   position: relative;
@@ -408,4 +417,31 @@ body {
   background: #580F6E;
   opacity: 0.4;
   vertical-align: middle;
+}
+
+/* â”€â”€â”€ RSVP CONFETTI CELEBRATION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.confetti-piece {
+  position: absolute;
+  top: -16px;
+  border-radius: 2px;
+  opacity: 0;
+  animation: confettiFall linear infinite;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+@keyframes confettiFall {
+  0%   { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0; }
+  8%   { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg) translateX(30px); opacity: 0; }
+}
+
+@keyframes celebratoryPop {
+  0%   { opacity: 0; transform: scale(0.6) translateY(20px); }
+  60%  { opacity: 1; transform: scale(1.04) translateY(0); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+.animate-celebratory-pop {
+  animation: celebratoryPop 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }

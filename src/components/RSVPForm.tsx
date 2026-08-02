@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 
 // Bespoke SVG icons
 const QuillSVG = () => (
@@ -29,6 +29,45 @@ const CheckSVG = () => (
     <polyline points="1.5,6 4.5,9 10.5,3" />
   </svg>
 );
+
+const CONFETTI_COLORS = ["#580F6E", "#9B4DCA", "#6A1791", "#D4AF37", "#E9D5FF", "#C4A0D8", "#F0E2EF"];
+
+/** Full-screen celebratory confetti rain shown when an RSVP is received. */
+function ConfettiBurst() {
+  const pieces = useMemo(
+    () =>
+      Array.from({ length: 70 }).map((_, i) => ({
+        id: i,
+        left: Math.random() * 100,
+        size: Math.random() * 9 + 4,
+        color: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
+        duration: Math.random() * 2.6 + 2.2,
+        delay: Math.random() * 0.9,
+        circle: Math.random() > 0.5,
+      })),
+    []
+  );
+
+  return (
+    <div className="fixed inset-0 z-[70] pointer-events-none overflow-hidden" aria-hidden="true">
+      {pieces.map((p) => (
+        <span
+          key={p.id}
+          className="confetti-piece"
+          style={{
+            left: `${p.left}%`,
+            width: p.size,
+            height: p.size * 0.55,
+            background: p.color,
+            borderRadius: p.circle ? "50%" : "2px",
+            animationDuration: `${p.duration}s`,
+            animationDelay: `${p.delay}s`,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
 
 export function RSVPForm() {
   const [formData, setFormData] = useState({
@@ -153,7 +192,9 @@ export function RSVPForm() {
         </div>
 
         {success ? (
-          <div className="space-y-8 animate-fade-up">
+          <>
+            <ConfettiBurst />
+            <div className="space-y-8 animate-celebratory-pop">
             <div className="rounded-3xl p-6 md:p-8 text-center shadow-sm border border-[#4A0E4E]/15 bg-[#FAF8FF]">
               <div className="w-12 h-12 bg-[#580F6E] text-white rounded-full flex items-center justify-center mx-auto mb-4 shadow">
                 <CelebrationSVG />
@@ -172,7 +213,7 @@ export function RSVPForm() {
                   <div className="w-10 h-10 rounded-full bg-[#580F6E] text-white font-serif font-black flex items-center justify-center text-sm mx-auto shadow-sm">
                     T&amp;A
                   </div>
-                  <div className="text-[9px] font-mono uppercase tracking-[0.25em] text-[#580F6E] font-extrabold mt-2">
+                  <div className="text-[9px] font-sans uppercase tracking-[0.25em] text-[#580F6E] font-extrabold mt-2">
                     Official Admittance Pass
                   </div>
                   <h4 className="font-serif text-lg text-slate-900 font-bold mt-1">Tobi &amp; Ayomide</h4>
@@ -267,7 +308,8 @@ export function RSVPForm() {
                 </button>
               </div>
             </div>
-          </div>
+            </div>
+          </>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-6 bg-white border border-[#580F6E]/40 rounded-[2rem] p-8 md:p-10 shadow-sm relative overflow-hidden">
             <div className="absolute inset-1.5 border border-[#580F6E]/25 rounded-[1.75rem] pointer-events-none" />

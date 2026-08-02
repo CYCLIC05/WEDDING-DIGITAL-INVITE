@@ -293,3 +293,4 @@ export function GiftingRegistry() {
     </section>
   );
 }
+[full GiftingRegistry.tsx content here]
