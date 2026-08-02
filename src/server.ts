@@ -645,6 +645,61 @@ app.post("/api/rsvps", submitRSVPLimiter, async (req, res) => {
   }
 });
 
+// 2.5. Guest Pass Lookup (Public — lets an approved guest view & download their pass)
+app.post("/api/pass/lookup", async (req, res) => {
+  try {
+    const { email, code } = req.body || {};
+
+    if (!email || typeof email !== "string" || !email.includes("@")) {
+      return res.status(400).json({ error: "Please provide the email address you registered with." });
+    }
+
+    const normalizedEmail = email.toLowerCase().trim();
+
+    let record: any = null;
+    let useLocalFallback = false;
+
+    try {
+      if (supabase && isSupabaseConfigured()) {
+        const { data, error } = await supabase
+          .from("rsvps")
+          .select("*")
+          .eq("email", normalizedEmail)
+          .maybeSingle();
+        if (error) throw error;
+        if (data) record = data;
+      } else {
+        useLocalFallback = true;
+      }
+    } catch (err) {
+      console.warn("[Supabase Pass Lookup Exception - falling back to local file store]:", err);
+      useLocalFallback = true;
+    }
+
+    if (useLocalFallback) {
+      const localRSVPs = await loadLocalRSVPs();
+      record = localRSVPs.find((item: any) => item.email === normalizedEmail) || null;
+    }
+
+    if (!record) {
+      return res.status(404).json({ error: "No RSVP registration was found for this email. Please check and try again." });
+    }
+
+    // Optional extra verification: the 8-character code printed on the pass
+    if (code && typeof code === "string") {
+      const expected = record.id.substring(0, 8).toUpperCase();
+      if (code.trim().toUpperCase() !== expected) {
+        return res.status(403).json({ error: "The verification code provided does not match this registration." });
+      }
+    }
+
+    return res.json({ success: true, data: record });
+  } catch (err: any) {
+    console.error("[Pass Lookup Crash]:", err);
+    return res.status(500).json({ error: "Internal Server Error: Unable to retrieve pass." });
+  }
+});
+
 // 3. Verify Admin Passcode Credentials
 app.post("/api/admin/verify", adminVerifyLimiter, (req, res) => {
   const { passcode } = req.body;

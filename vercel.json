@@ -7,6 +7,7 @@
     { "source": "/api/admin/send-email-smtp", "destination": "/api/admin/send-email-smtp" },
     { "source": "/api/send-invitation", "destination": "/api/send-invitation" },
     { "source": "/api/rsvps", "destination": "/api/rsvps" },
+    { "source": "/api/pass", "destination": "/api/pass" },
     { "source": "/api/delete-all", "destination": "/api/delete-all" },
     { "source": "/api/health", "destination": "/api/health" },
     { "source": "/(.*)", "destination": "/index.html" }

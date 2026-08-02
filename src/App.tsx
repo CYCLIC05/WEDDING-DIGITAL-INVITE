@@ -187,6 +187,7 @@ const WeddingBouquetSVG = ({ className = "" }: { className?: string }) => (
 // ──────────────────────────────────────────────────────────────────────────────
 import { EventGrid } from "./components/EventGrid.tsx";
 import { RSVPForm } from "./components/RSVPForm.tsx";
+import { MyPass } from "./components/MyPass.tsx";
 import { AdminDashboard } from "./components/AdminDashboard.tsx";
 import purpleRoses from "./assets/images/purple_watercolor_roses.png";
 import { FullScheduleGuide } from "./components/FullScheduleGuide.tsx";
@@ -349,6 +350,12 @@ export default function App() {
             {view === "guest" ? (
               <>
                 <a
+                  href="#my-pass-section"
+                  className="px-4 py-1.5 rounded-full border border-[#580F6E] text-[#580F6E] text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-[#FAF8FF] transition whitespace-nowrap"
+                >
+                  My Pass
+                </a>
+                <a
                   href="#rsvp-section"
                   className="px-4 py-1.5 rounded-full bg-[#580F6E] text-white text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-[#4A0E4E] shadow-sm transition whitespace-nowrap"
                 >
@@ -414,6 +421,13 @@ export default function App() {
                 className="flex items-center justify-center px-4 py-2.5 rounded-full bg-white border border-slate-200 shadow-lg text-[10px] uppercase tracking-[0.2em] font-bold text-slate-600 hover:text-[#580F6E] hover:border-[#580F6E] transition"
               >
                 Registry
+              </a>
+              <a
+                href="#my-pass-section"
+                onClick={() => setIsFloatingMenuOpen(false)}
+                className="flex items-center justify-center px-4 py-2.5 rounded-full bg-white border border-slate-200 shadow-lg text-[10px] uppercase tracking-[0.2em] font-bold text-slate-600 hover:text-[#580F6E] hover:border-[#580F6E] transition"
+              >
+                My Pass
               </a>
               <a
                 href="#rsvp-section"
@@ -805,6 +819,12 @@ export default function App() {
             {/* DIGITAL RSVP CAPTURE FORM SECTION */}
             <ScrollReveal direction="scale" delay={150}>
               <RSVPForm />
+            </ScrollReveal>
+            <SectionDivider />
+
+            {/* GUEST PASS RETRIEVAL & DOWNLOAD SECTION */}
+            <ScrollReveal direction="up" delay={150}>
+              <MyPass />
             </ScrollReveal>
 
           </div>

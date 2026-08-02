@@ -116,7 +116,7 @@ export function RSVPForm() {
       email: formData.email.trim() ? formData.email.trim() : dummyEmail,
       phone: formData.phone,
       events: formData.events,
-      dietary_notes: `Location: ${formData.location.trim() || "Abuja"}`
+      dietary_notes: `Location: ${formData.location.trim() || "Abuja"}${formData.needsHotel === "yes" ? " | Accommodation Requested: Yes" : ""}`
     };
 
     try {
@@ -307,6 +307,14 @@ export function RSVPForm() {
                   Register Another Guest
                 </button>
               </div>
+
+              <p className="text-xs text-slate-400 mt-5 leading-relaxed">
+                Once your attendance is approved, your official pass becomes available for viewing and download in the{" "}
+                <a href="#my-pass-section" className="text-[#580F6E] font-bold underline underline-offset-2 hover:text-[#4A0E4E]">
+                  My Wedding Pass
+                </a>{" "}
+                section.
+              </p>
             </div>
             </div>
           </>
@@ -410,7 +418,31 @@ export function RSVPForm() {
               </div>
             </div>
 
-
+            <div className="space-y-3 pt-2">
+              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-[0.25em]">
+                Do you require accommodation for the wedding days? <span className="text-slate-400 font-normal">(For guests traveling from far)</span>
+              </label>
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  { value: "yes" as const, label: "Yes, I need accommodation" },
+                  { value: "no" as const, label: "No, I have arrangements" },
+                ].map((item) => (
+                  <button
+                    key={item.value}
+                    type="button"
+                    onClick={() => setFormData({ ...formData, needsHotel: item.value })}
+                    className={`w-full text-left p-3 rounded-2xl border transition duration-200 flex items-center gap-3 ${formData.needsHotel === item.value ? "border-[#580F6E] bg-[#FAF9F6]" : "border-[#4A0E4E]/15 bg-white"
+                      }`}
+                  >
+                    <span className={`inline-flex w-5 h-5 shrink-0 items-center justify-center rounded-full text-white ${formData.needsHotel === item.value ? "bg-[#580F6E]" : "bg-slate-200"
+                      }`}>
+                      {formData.needsHotel === item.value ? <CheckSVG /> : null}
+                    </span>
+                    <span className="text-sm text-slate-900">{item.label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
 
             <div className="pt-3">
               <button
