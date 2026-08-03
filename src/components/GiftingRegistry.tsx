@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import carImg from "../assets/images/car.jpg";
 import fridgeImg from "../assets/images/refriderator.jpg";
-import appliancesImg from "../assets/images/Home appliances.jpg";
 import dispenserImg from "../assets/images/water_dispenser_gift_1785600680246.jpg";
 import vacationImg from "../assets/images/maldives_vacation.png";
 import nairaCashImg from "../assets/images/naira_cash_gift_1785600651759.jpg";
 import wrappedGiftImg from "../assets/images/wrapped_love_gift_1785600665865.jpg";
+import purpleRoses from "../assets/images/purple_watercolor_roses.png";
 
 // Inline SVGs for Gifting Registry
 const GiftSVG = () => (
@@ -108,8 +108,8 @@ export function GiftingRegistry() {
       />
 
       {/* Background roses */}
-      <img src="/src/assets/images/purple_watercolor_roses.png" className="pointer-events-none select-none absolute top-0 right-0 opacity-[0.12] z-0" style={{ width: '280px', height: 'auto', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
-      <img src="/src/assets/images/purple_watercolor_roses.png" className="pointer-events-none select-none absolute bottom-0 left-0 opacity-[0.12] z-0" style={{ width: '280px', height: 'auto', transform: 'rotate(180deg)', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
+      <img src={purpleRoses} className="pointer-events-none select-none absolute top-0 right-0 opacity-[0.12] z-0" style={{ width: '280px', height: 'auto', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
+      <img src={purpleRoses} className="pointer-events-none select-none absolute bottom-0 left-0 opacity-[0.12] z-0" style={{ width: '280px', height: 'auto', transform: 'rotate(180deg)', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
 
       <div className="max-w-5xl mx-auto relative z-10">
         <div className="text-center mb-12 animate-fade-up">
@@ -293,4 +293,3 @@ export function GiftingRegistry() {
     </section>
   );
 }
-[full GiftingRegistry.tsx content here]
