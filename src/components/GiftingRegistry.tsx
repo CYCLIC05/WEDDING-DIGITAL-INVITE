@@ -140,11 +140,11 @@ export function GiftingRegistry() {
           <div className="grid gap-6 md:grid-cols-2">
             {/* Naira Contribution */}
             <div
-              className="relative overflow-hidden rounded-3xl border border-[#580F6E]/30 p-6 sm:p-8 shadow-xl text-center"
-              style={{ background: 'linear-gradient(155deg, #580F6E 0%, #6B189C 45%, #3E0A52 100%)' }}
+              className="relative overflow-hidden rounded-3xl border border-slate-300/40 p-6 sm:p-8 shadow-xl text-center"
+              style={{ background: 'linear-gradient(155deg, #1F2937 0%, #111827 60%, #0B1220 100%)' }}
             >
               <div className="pointer-events-none absolute -top-14 -right-8 w-44 h-44 rounded-full bg-white/10 blur-3xl" />
-              <div className="pointer-events-none absolute -bottom-16 -left-8 w-48 h-48 rounded-full bg-[#9B4DCA]/20 blur-3xl" />
+              <div className="pointer-events-none absolute -bottom-16 -left-8 w-48 h-48 rounded-full bg-white/10 blur-3xl" />
               <div className="inline-block px-3 py-1 bg-white/10 text-white text-[10px] uppercase font-bold tracking-[0.25em] rounded-full mb-3 backdrop-blur-sm">
                 Naira Account
               </div>
@@ -164,7 +164,7 @@ export function GiftingRegistry() {
                     <p className="text-lg font-black text-white tracking-wider">3136722099</p>
                     <button
                       onClick={() => handleCopy("3136722099", false)}
-                      className="absolute right-3 inline-flex items-center justify-center rounded-xl border border-white/30 bg-white/15 px-3 py-1.5 text-xs text-white hover:bg-white hover:text-[#580F6E] transition font-bold"
+                      className="absolute right-3 inline-flex items-center justify-center rounded-xl border border-white/30 bg-white/15 px-3 py-1.5 text-xs text-white hover:bg-white hover:text-slate-900 transition font-bold"
                       title="Copy Naira account number"
                     >
                       {copiedNaira ? "Copied!" : <span className="inline-flex items-center gap-1"><CopySVG /> Copy</span>}
@@ -176,11 +176,11 @@ export function GiftingRegistry() {
 
             {/* USD Contribution */}
             <div
-              className="relative overflow-hidden rounded-3xl border border-[#580F6E]/30 p-6 sm:p-8 shadow-xl text-center"
-              style={{ background: 'linear-gradient(155deg, #580F6E 0%, #6B189C 45%, #3E0A52 100%)' }}
+              className="relative overflow-hidden rounded-3xl border border-slate-300/40 p-6 sm:p-8 shadow-xl text-center"
+              style={{ background: 'linear-gradient(155deg, #1F2937 0%, #111827 60%, #0B1220 100%)' }}
             >
               <div className="pointer-events-none absolute -top-14 -right-8 w-44 h-44 rounded-full bg-white/10 blur-3xl" />
-              <div className="pointer-events-none absolute -bottom-16 -left-8 w-48 h-48 rounded-full bg-[#9B4DCA]/20 blur-3xl" />
+              <div className="pointer-events-none absolute -bottom-16 -left-8 w-48 h-48 rounded-full bg-white/10 blur-3xl" />
               <div className="inline-block px-3 py-1 bg-white/10 text-white text-[10px] uppercase font-bold tracking-[0.25em] rounded-full mb-3 backdrop-blur-sm">
                 USD Account
               </div>
@@ -200,7 +200,7 @@ export function GiftingRegistry() {
                     <p className="text-lg font-black text-white tracking-wider">6073750027</p>
                     <button
                       onClick={() => handleCopy("6073750027", true)}
-                      className="absolute right-3 inline-flex items-center justify-center rounded-xl border border-white/30 bg-white/15 px-3 py-1.5 text-xs text-white hover:bg-white hover:text-[#580F6E] transition font-bold"
+                      className="absolute right-3 inline-flex items-center justify-center rounded-xl border border-white/30 bg-white/15 px-3 py-1.5 text-xs text-white hover:bg-white hover:text-slate-900 transition font-bold"
                       title="Copy USD account number"
                     >
                       {copiedUsd ? "Copied!" : <span className="inline-flex items-center gap-1"><CopySVG /> Copy</span>}
