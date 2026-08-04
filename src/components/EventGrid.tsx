@@ -50,13 +50,13 @@ export function EventGrid() {
       date: "Saturday, 12th September 2026",
       time: "9:00 AM",
       venue: "Deeper Life Bible Church",
-      location: "Deeper Life Junction, Bwari, FCT Abuja (901101)",
-      mapUrl: "https://maps.google.com/?q=Deeper+Life+Junction+Bwari+Abuja",
+      location: "Deeper Life Bible Church, Bwari, FCT Abuja (901101)",
+      mapUrl: "https://maps.google.com/?q=Deeper+Life+Bible+Church+Bwari+Abuja",
       dressCode: "White Native and a Touch of Gold/magenta",
       subtitle: "The sacred exchanging of vows before the Altar, the Church, and Almighty God.",
       calendarStart: "20260912T090000",
       calendarEnd: "20260912T103000",
-      calendarLocation: "Deeper Life Bible Church, Deeper Life Junction, Bwari, FCT Abuja",
+      calendarLocation: "Deeper Life Bible Church, Bwari, FCT Abuja",
     },
   ];
 

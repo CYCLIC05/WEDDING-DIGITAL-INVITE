@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import carImg from "../assets/images/car.jpg";
 import fridgeImg from "../assets/images/refriderator.jpg";
-import dispenserImg from "../assets/images/water_dispenser_gift_1785600680246.jpg";
+import dispenserImg from "../assets/images/Dispenser.jpg";
 import vacationImg from "../assets/images/maldives_vacation.png";
 import nairaCashImg from "../assets/images/naira_cash_gift_1785600651759.jpg";
 import wrappedGiftImg from "../assets/images/wrapped_love_gift_1785600665865.jpg";
@@ -108,8 +108,8 @@ export function GiftingRegistry() {
       />
 
       {/* Background roses */}
-      <img src={purpleRoses} className="pointer-events-none select-none absolute top-0 right-0 opacity-[0.12] z-0" style={{ width: '280px', height: 'auto', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
-      <img src={purpleRoses} className="pointer-events-none select-none absolute bottom-0 left-0 opacity-[0.12] z-0" style={{ width: '280px', height: 'auto', transform: 'rotate(180deg)', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
+      <img src={purpleRoses} className="pointer-events-none select-none absolute top-0 right-0 opacity-[0.12] z-0" style={{ width: '280px', height: 'auto', mixBlendMode: 'multiply', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
+      <img src={purpleRoses} className="pointer-events-none select-none absolute bottom-0 left-0 opacity-[0.12] z-0" style={{ width: '280px', height: 'auto', transform: 'rotate(180deg)', mixBlendMode: 'multiply', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
 
       <div className="max-w-5xl mx-auto relative z-10">
         <div className="text-center mb-12 animate-fade-up">
@@ -140,31 +140,31 @@ export function GiftingRegistry() {
           <div className="grid gap-6 md:grid-cols-2">
             {/* Naira Contribution */}
             <div
-              className="relative overflow-hidden rounded-3xl border border-slate-300/40 p-6 sm:p-8 shadow-xl text-center"
-              style={{ background: 'linear-gradient(155deg, #1F2937 0%, #111827 60%, #0B1220 100%)' }}
+              className="relative overflow-hidden rounded-3xl border border-[#580F6E]/15 p-6 sm:p-8 shadow-md text-center"
+              style={{ background: '#F4EFFB' }}
             >
-              <div className="pointer-events-none absolute -top-14 -right-8 w-44 h-44 rounded-full bg-white/10 blur-3xl" />
-              <div className="pointer-events-none absolute -bottom-16 -left-8 w-48 h-48 rounded-full bg-white/10 blur-3xl" />
-              <div className="inline-block px-3 py-1 bg-white/10 text-white text-[10px] uppercase font-bold tracking-[0.25em] rounded-full mb-3 backdrop-blur-sm">
+              <div className="pointer-events-none absolute -top-14 -right-8 w-44 h-44 rounded-full bg-[#580F6E]/5 blur-3xl" />
+              <div className="pointer-events-none absolute -bottom-16 -left-8 w-48 h-48 rounded-full bg-[#580F6E]/5 blur-3xl" />
+              <div className="inline-block px-3 py-1 bg-[#580F6E]/10 text-[#580F6E] text-[10px] uppercase font-bold tracking-[0.25em] rounded-full mb-3">
                 Naira Account
               </div>
-              <h4 className="relative font-serif text-2xl text-white font-bold mb-4">Naira Contribution</h4>
-              <div className="relative space-y-4 text-white/90 text-sm font-medium max-w-md mx-auto">
+              <h4 className="relative font-serif text-2xl text-[#580F6E] font-bold mb-4">Naira Contribution</h4>
+              <div className="relative space-y-4 text-slate-800 text-sm font-medium max-w-md mx-auto">
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.35em] text-white/50 font-bold mb-1">Bank Name</p>
-                  <p className="text-base text-white font-semibold">First Bank</p>
+                  <p className="text-[10px] uppercase tracking-[0.35em] text-[#580F6E]/60 font-bold mb-1">Bank Name</p>
+                  <p className="text-base text-slate-900 font-semibold">First Bank</p>
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.35em] text-white/50 font-bold mb-1">Account Name</p>
-                  <p className="text-base text-white font-medium">Oyewale Patience Ayomide</p>
+                  <p className="text-[10px] uppercase tracking-[0.35em] text-[#580F6E]/60 font-bold mb-1">Account Name</p>
+                  <p className="text-base text-slate-900 font-medium">Oyewale Patience Ayomide</p>
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.35em] text-white/50 font-bold mb-1">Account Number</p>
-                  <div className="flex items-center justify-center bg-white/15 border border-white/25 rounded-2xl px-4 py-3 relative backdrop-blur-md">
-                    <p className="text-lg font-black text-white tracking-wider">3136722099</p>
+                  <p className="text-[10px] uppercase tracking-[0.35em] text-[#580F6E]/60 font-bold mb-1">Account Number</p>
+                  <div className="flex items-center justify-center bg-white border border-[#580F6E]/20 rounded-2xl px-4 py-3 relative">
+                    <p className="text-lg font-black text-[#580F6E] tracking-wider">3136722099</p>
                     <button
                       onClick={() => handleCopy("3136722099", false)}
-                      className="absolute right-3 inline-flex items-center justify-center rounded-xl border border-white/30 bg-white/15 px-3 py-1.5 text-xs text-white hover:bg-white hover:text-slate-900 transition font-bold"
+                      className="absolute right-3 inline-flex items-center justify-center rounded-xl border border-[#580F6E]/30 bg-[#580F6E]/10 px-3 py-1.5 text-xs text-[#580F6E] hover:bg-[#580F6E] hover:text-white transition font-bold cursor-pointer"
                       title="Copy Naira account number"
                     >
                       {copiedNaira ? "Copied!" : <span className="inline-flex items-center gap-1"><CopySVG /> Copy</span>}
@@ -176,31 +176,31 @@ export function GiftingRegistry() {
 
             {/* USD Contribution */}
             <div
-              className="relative overflow-hidden rounded-3xl border border-slate-300/40 p-6 sm:p-8 shadow-xl text-center"
-              style={{ background: 'linear-gradient(155deg, #1F2937 0%, #111827 60%, #0B1220 100%)' }}
+              className="relative overflow-hidden rounded-3xl border border-[#580F6E]/15 p-6 sm:p-8 shadow-md text-center"
+              style={{ background: '#F4EFFB' }}
             >
-              <div className="pointer-events-none absolute -top-14 -right-8 w-44 h-44 rounded-full bg-white/10 blur-3xl" />
-              <div className="pointer-events-none absolute -bottom-16 -left-8 w-48 h-48 rounded-full bg-white/10 blur-3xl" />
-              <div className="inline-block px-3 py-1 bg-white/10 text-white text-[10px] uppercase font-bold tracking-[0.25em] rounded-full mb-3 backdrop-blur-sm">
+              <div className="pointer-events-none absolute -top-14 -right-8 w-44 h-44 rounded-full bg-[#580F6E]/5 blur-3xl" />
+              <div className="pointer-events-none absolute -bottom-16 -left-8 w-48 h-48 rounded-full bg-[#580F6E]/5 blur-3xl" />
+              <div className="inline-block px-3 py-1 bg-[#580F6E]/10 text-[#580F6E] text-[10px] uppercase font-bold tracking-[0.25em] rounded-full mb-3">
                 USD Account
               </div>
-              <h4 className="relative font-serif text-2xl text-white font-bold mb-4">USD Contribution</h4>
-              <div className="relative space-y-4 text-white/90 text-sm font-medium max-w-md mx-auto">
+              <h4 className="relative font-serif text-2xl text-[#580F6E] font-bold mb-4">USD Contribution</h4>
+              <div className="relative space-y-4 text-slate-800 text-sm font-medium max-w-md mx-auto">
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.35em] text-white/50 font-bold mb-1">Bank Name</p>
-                  <p className="text-base text-white font-semibold">FCMB</p>
+                  <p className="text-[10px] uppercase tracking-[0.35em] text-[#580F6E]/60 font-bold mb-1">Bank Name</p>
+                  <p className="text-base text-slate-900 font-semibold">FCMB</p>
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.35em] text-white/50 font-bold mb-1">Account Name</p>
-                  <p className="text-base text-white font-medium">Olanrewaju Tobi J</p>
+                  <p className="text-[10px] uppercase tracking-[0.35em] text-[#580F6E]/60 font-bold mb-1">Account Name</p>
+                  <p className="text-base text-slate-900 font-medium">Olanrewaju Tobi J</p>
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.35em] text-white/50 font-bold mb-1">Account Number</p>
-                  <div className="flex items-center justify-center bg-white/15 border border-white/25 rounded-2xl px-4 py-3 relative backdrop-blur-md">
-                    <p className="text-lg font-black text-white tracking-wider">6073750027</p>
+                  <p className="text-[10px] uppercase tracking-[0.35em] text-[#580F6E]/60 font-bold mb-1">Account Number</p>
+                  <div className="flex items-center justify-center bg-white border border-[#580F6E]/20 rounded-2xl px-4 py-3 relative">
+                    <p className="text-lg font-black text-[#580F6E] tracking-wider">6073750027</p>
                     <button
                       onClick={() => handleCopy("6073750027", true)}
-                      className="absolute right-3 inline-flex items-center justify-center rounded-xl border border-white/30 bg-white/15 px-3 py-1.5 text-xs text-white hover:bg-white hover:text-slate-900 transition font-bold"
+                      className="absolute right-3 inline-flex items-center justify-center rounded-xl border border-[#580F6E]/30 bg-[#580F6E]/10 px-3 py-1.5 text-xs text-[#580F6E] hover:bg-[#580F6E] hover:text-white transition font-bold cursor-pointer"
                       title="Copy USD account number"
                     >
                       {copiedUsd ? "Copied!" : <span className="inline-flex items-center gap-1"><CopySVG /> Copy</span>}
@@ -244,7 +244,7 @@ export function GiftingRegistry() {
                 </div>
                 <div className="p-5 flex flex-col flex-1 justify-between">
                   <div>
-                    <h4 className="font-serif text-lg font-bold text-slate-900 mb-2 group-hover:text-[#580F6E] transition-colors">
+                    <h4 className="font-serif text-lg font-bold text-[#580F6E] mb-2 group-hover:text-[#4A0E4E] transition-colors">
                       {item.title}
                     </h4>
                     <p className="text-xs text-slate-600 leading-relaxed font-sans">

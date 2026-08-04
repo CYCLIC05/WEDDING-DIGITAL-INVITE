@@ -471,7 +471,7 @@ export default function App() {
               className="relative max-w-3xl mx-auto my-4 select-none overflow-hidden"
               style={{
                 borderRadius: '1.25rem',
-                background: 'linear-gradient(160deg, #FAF8FF 0%, #F0EAFA 40%, #FAF8FF 70%, #FAF8FF 100%)',
+                background: '#F5F0FA',
                 border: '1px solid rgba(88,15,110,0.12)',
                 boxShadow: '0 8px 48px rgba(88,15,110,0.08), 0 2px 12px rgba(88,15,110,0.04)',
               }}
@@ -492,6 +492,7 @@ export default function App() {
                   height: 'auto',
                   marginTop: '-6px',
                   marginLeft: '-8px',
+                  mixBlendMode: 'multiply',
                   filter: 'brightness(0.96) saturate(0.85) drop-shadow(0 10px 24px rgba(88,15,110,0.08))',
                 }}
                 alt=""
@@ -507,6 +508,7 @@ export default function App() {
                   marginBottom: '-6px',
                   marginRight: '-8px',
                   transform: 'rotate(180deg)',
+                  mixBlendMode: 'multiply',
                   filter: 'brightness(0.96) saturate(0.85) drop-shadow(0 10px 24px rgba(88,15,110,0.08))',
                 }}
                 alt=""
@@ -570,18 +572,10 @@ export default function App() {
                   <p className="font-sans text-[10px] sm:text-xs text-slate-500 tracking-[0.3em] uppercase font-medium">Abuja · Nigeria</p>
                 </div>
 
-                {/* Countdown Section Header */}
-                <div className="animate-fade-up delay-550 mt-6 sm:mt-7 space-y-1">
-                  <h3 className="font-serif text-xl sm:text-2xl md:text-3xl text-slate-900 font-bold tracking-tight">
-                    Counting Down to the Altar Vows
-                  </h3>
-                  <p className="font-sans text-xs sm:text-sm text-slate-600 font-medium">
-                    Join Tobi &amp; Ayomide as they enter holy covenant.
-                  </p>
-                </div>
+
 
                 {/* Countdown tiles */}
-                <div className="animate-fade-up delay-600 mt-4 sm:mt-5 inline-grid grid-cols-4 rounded-sm overflow-hidden" style={{ border: '1px solid rgba(88,15,110,0.15)', background: 'rgba(240,234,250,0.7)', backdropFilter: 'blur(4px)' }}>
+                <div className="animate-fade-up delay-600 mt-5 sm:mt-6 inline-grid grid-cols-4 rounded-sm overflow-hidden" style={{ border: '1px solid rgba(88,15,110,0.15)', background: 'rgba(240,234,250,0.7)', backdropFilter: 'blur(4px)' }}>
                   {([
                     { label: "Days",  value: timeLeft.days },
                     { label: "Hours", value: timeLeft.hours },
@@ -590,13 +584,13 @@ export default function App() {
                   ] as const).map(({ label, value }, i) => (
                     <div
                       key={label}
-                      className={`flex flex-col items-center justify-center px-3.5 sm:px-5 py-2.5 sm:py-3 ${i < 3 ? 'border-r' : ''}`}
+                      className={`flex flex-col items-center justify-center px-2.5 sm:px-3.5 py-2 sm:py-2.5 ${i < 3 ? 'border-r' : ''}`}
                       style={{ borderColor: 'rgba(88,15,110,0.12)' }}
                     >
-                      <span className="text-xl sm:text-2xl md:text-3xl font-black text-[#580F6E] tabular-nums font-mono leading-none">
+                      <span className="text-lg sm:text-xl md:text-2xl font-black text-[#580F6E] tabular-nums font-mono leading-none">
                         {String(value).padStart(2, "0")}
                       </span>
-                      <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.22em] text-slate-500 font-bold mt-1">{label}</span>
+                      <span className="text-[7px] sm:text-[8px] uppercase tracking-[0.22em] text-slate-500 font-bold mt-1">{label}</span>
                     </div>
                   ))}
                 </div>
@@ -769,8 +763,8 @@ export default function App() {
               {/* Cross-hatch texture */}
               <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 16 L32 16 M16 0 L16 32' stroke='%23580F6E' stroke-width='0.4' stroke-opacity='0.04'/%3E%3C/svg%3E")`, backgroundSize: '32px 32px' }} />
               {/* Background roses */}
-              <img src={purpleRoses} className="pointer-events-none select-none absolute top-0 right-0 opacity-15" style={{ width: '280px', height: 'auto', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
-              <img src={purpleRoses} className="pointer-events-none select-none absolute bottom-0 left-0 opacity-15" style={{ width: '280px', height: 'auto', transform: 'rotate(180deg)', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
+              <img src={purpleRoses} className="pointer-events-none select-none absolute top-0 right-0 opacity-15" style={{ width: '280px', height: 'auto', mixBlendMode: 'multiply', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
+              <img src={purpleRoses} className="pointer-events-none select-none absolute bottom-0 left-0 opacity-15" style={{ width: '280px', height: 'auto', transform: 'rotate(180deg)', mixBlendMode: 'multiply', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
               <EventGrid />
 
             </div>
@@ -837,8 +831,8 @@ export default function App() {
         {/* Cross-hatch texture */}
         <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 16 L32 16 M16 0 L16 32' stroke='%23580F6E' stroke-width='0.4' stroke-opacity='0.04'/%3E%3C/svg%3E")`, backgroundSize: '32px 32px' }} />
         {/* Background roses */}
-        <img src={purpleRoses} className="pointer-events-none select-none absolute top-0 left-0 opacity-15" style={{ width: '240px', height: 'auto', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
-        <img src={purpleRoses} className="pointer-events-none select-none absolute bottom-0 right-0 opacity-15" style={{ width: '240px', height: 'auto', transform: 'rotate(180deg)', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
+        <img src={purpleRoses} className="pointer-events-none select-none absolute top-0 left-0 opacity-15" style={{ width: '240px', height: 'auto', mixBlendMode: 'multiply', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
+        <img src={purpleRoses} className="pointer-events-none select-none absolute bottom-0 right-0 opacity-15" style={{ width: '240px', height: 'auto', transform: 'rotate(180deg)', mixBlendMode: 'multiply', filter: 'drop-shadow(0 8px 24px rgba(88,15,110,0.06))' }} alt="" />
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <div className="inline-flex w-12 h-12 bg-[#580F6E] text-white text-xl font-bold font-serif rounded-full items-center justify-center">
             †

@@ -85,19 +85,6 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
         { time: "3:00 PM", label: "Ceremony Highlights", desc: "Ceremonial blessings, family introductions, and cultural exchanges that honor both families." },
         { time: "4:00 PM", label: "Blessings & Reception", desc: "A closing moment of thanksgiving and joyful fellowship with refreshments and traditional treats." }
       ]
-    },
-    {
-      title: "EVENT 2: J.A. – Journey Aligned Church Wedding",
-      date: "Saturday, 12th September 2026",
-      venue: "Deeper Life Bible Church",
-      location: "Deeper Life Junction, Bwari, FCT Abuja (901101)",
-      dressCode: "White Native and a Touch of Gold/magenta",
-      description: "The sacred exchanging of vows before the Altar, the Church, and Almighty God.",
-      steps: [
-        { time: "9:00 AM", label: "Church Service Begins", desc: "Guests are invited to arrive early for worship and to take their seats before the service begins." },
-        { time: "9:30 AM", label: "Wedding Ceremony", desc: "A worshipful ceremony to exchange vows, rings, and blessings in the presence of family and God." },
-        { time: "10:30 AM", label: "Signing & Thanksgiving", desc: "The couple signs the marriage register followed by prayers of gratitude and celebration." }
-      ]
     }
   ];
 
@@ -276,30 +263,6 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
                   </div>
                 </div>
 
-                {/* Reception venue address */}
-                <div className="bg-white border border-[#580F6E]/10 rounded-3xl p-6 shadow-sm">
-                  <div>
-                    <h3 className="font-serif text-base font-bold text-slate-900 pt-2">
-                      Fellowship Hall
-                    </h3>
-                    <div className="w-8 h-[1.5px] bg-[#580F6E]/70 my-3"></div>
-                    <p className="text-base text-slate-700 leading-relaxed font-semibold">
-                      Deeper Life Bible Church Complex
-                    </p>
-                    <p className="text-base text-slate-500 leading-relaxed mt-2">
-                      Bwari, FCT Abuja, Nigeria. Right next to the main cathedral auditorium inside the church fellowship zone.
-                    </p>
-                  </div>
-
-                  <div className="mt-6 pt-4 border-t border-[#E5E7EB]">
-                    <h4 className="text-[10px] font-sans font-extrabold text-[#580F6E] uppercase tracking-widest flex items-center">
-                      Parking Guideline
-                    </h4>
-                    <p className="text-base text-slate-600 leading-relaxed mt-1.5">
-                      Same-site parking as the church wedding. Safe and convenient foot transfer from the main auditorium to the fellowship hall.
-                    </p>
-                  </div>
-                </div>
 
               </div>
             </div>
@@ -317,45 +280,48 @@ export function FullScheduleGuide({ isOpen, onClose }: ScheduleGuideProps) {
                     CULTURAL PRIDE
                   </span>
                   <h3 className="font-serif text-base font-bold text-slate-900">
-                    Traditional Attire Style
+                    Traditional Attire
                   </h3>
                   <div className="w-12 h-[1px] bg-[#580F6E]/70 my-3"></div>
                   
                   <div className="space-y-3 text-xs text-slate-700 leading-relaxed">
                     <p className="font-medium text-slate-600">
-                      We celebrate our heritage with polished looks in tones of magenta, white, and muted sparkle.
+                      We honour our heritage with refined, elegant looks.
+                    </p>
+                    <p className="font-medium text-slate-600">
+                      <strong>Colour harmony:</strong> White clothing with a magenta headpiece.
                     </p>
                     <div className="p-4 bg-[#FAF9F6] rounded-3xl border border-[#580F6E]/20">
-                      <p className="font-bold text-slate-900 text-[11px] uppercase tracking-wider mb-2 font-sans text-[#580F6E]">Recommended Fabrics &amp; Style:</p>
                       <ul className="list-disc pl-4 space-y-1.5 text-slate-600 font-medium">
-                        <li><strong>Ladies</strong>: Elegant wrappers, polished gowns, and tasteful headpieces.</li>
-                        <li><strong>Gentlemen</strong>: Neat jackets, tailored native wear, or coordinated traditional outfits.</li>
+                        <li><strong>Ladies</strong>: Elegant, tailored outfits with graceful headpieces.</li>
+                        <li><strong>Gentlemen</strong>: Agbada, native wear, or senator styles.</li>
                       </ul>
                     </div>
                   </div>
                 </div>
 
-                {/* Holy Matrimony & Reception Attire Details */}
+                {/* Church Wedding Ceremony Attire Details */}
                 <div className="bg-white border border-[#580F6E]/10 rounded-3xl p-6 shadow-sm">
                   <span className="text-[10px] font-sans text-[#580F6E] font-extrabold tracking-widest block mb-1">
-                    ROMANTIC GALA &amp; SACRED REVERENCE
+                    CHURCH WEDDING
                   </span>
                   <h3 className="font-serif text-base font-bold text-slate-900">
-                    Church &amp; Reception Attire
+                    Ceremony Attire
                   </h3>
                   <div className="w-12 h-[1px] bg-[#580F6E]/70 my-3"></div>
                   
                   <div className="space-y-3 text-xs text-slate-700 leading-relaxed">
                     <p className="font-medium text-slate-600">
-                      The church event is elegant and bright. Guests are invited to wear clean, polished looks in magenta and white.
+                      The church ceremony is bright and elegant. Guests are invited to wear clean, polished looks.
                     </p>
-                    
+                    <p className="font-medium text-slate-600">
+                      <strong>Colour harmony:</strong> White clothing with a magenta or gold headpiece.
+                    </p>
                     <div className="p-4 bg-[#FAF9F6] rounded-3xl border border-[#580F6E]/20">
-                      <p className="font-bold text-slate-900 text-[11px] uppercase tracking-wider mb-2 font-sans text-[#580F6E]">Reverent Church Guidelines &amp; Colors:</p>
                       <ul className="list-disc pl-4 space-y-1.5 text-slate-600 font-medium">
                         <li><strong>Decorum</strong>: Please choose formal, respectful attire suitable for the sanctuary.</li>
-                        <li><strong>Color Harmony</strong>: Prefer shades of magenta, white, and polished neutrals.</li>
-                        <li><strong>Suited Perfection</strong>: Gentlemen should wear tailored suits, crisp shirts, or refined native attire.</li>
+                        <li><strong>Ladies</strong>: Modest, graceful clothing.</li>
+                        <li><strong>Gentlemen</strong>: Tailored suits or elegant native attire.</li>
                       </ul>
                     </div>
                   </div>
